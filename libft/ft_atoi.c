@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:15:06 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/24 17:12:06 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/01/24 17:46:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,27 @@ static	int		ft_convert(const char *nbr, int sign)
 int				ft_atoi(const char *nptr)
 {
 	int result;
+	int i;
 
-	if (nptr[0] == '+')
+	i = 0;
+	while (ft_isspace(nptr[i]))
+		i++;
+	if (nptr[i] == '+')
 	{
-		if (ft_isdigit(nptr[1]))
-			result = ft_convert(&nptr[1], 1);
+		if (ft_isdigit(nptr[i + 1]))
+			result = ft_convert(&nptr[i + 1], 1);
 		else
 			return (0);
 	}
-	else if (nptr[0] == '-')
+	else if (nptr[i] == '-')
 	{
-		if (ft_isdigit(nptr[1]))
-			result = ft_convert(&nptr[1], -1);
+		if (ft_isdigit(nptr[i + 1]))
+			result = ft_convert(&nptr[i + 1], -1);
 		else
 			return (0);
 	}
-	else if (ft_isdigit(nptr[0]))
-		result = ft_convert(&nptr[0], 1);
+	else if (ft_isdigit(nptr[i]))
+		result = ft_convert(&nptr[i], 1);
 	else
 		return (0);
 	return (result);
