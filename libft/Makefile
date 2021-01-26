@@ -34,4 +34,8 @@ fclean : clean
 
 re : fclean all
 
+so:
+	$(CC) -c $(CFLAGS) -fPIC $(SRC)
+	gcc -shared -o libft.so $(OBJ)
+
 .PHONY: all clean fclean re
