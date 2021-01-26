@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 17:31:55 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/24 20:28:34 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/01/26 16:35:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int i;
-	int j;
+	size_t i;
+	size_t j;
 
 	if (!little)
 		return ((char*)big);

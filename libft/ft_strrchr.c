@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 20:35:02 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/24 20:45:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/01/26 16:34:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strrchr(const char *s, int c)
 	while (s[length])
 	{
 		if (s[length] == c)
-			return ((char *)s[length]);
+			return (&((char *)s)[length]);
 		length--;
 	}
 	return (NULL);
