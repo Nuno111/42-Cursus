@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:15:02 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/25 12:17:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/01/27 22:22:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlen(const char *s)
 	size_t i;
 
 	i = 0;
-	if (!s)
-		return (i);
 	while (s[i])
 		i++;
 	return (i);

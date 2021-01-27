@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 14:45:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/25 15:14:22 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/01/26 19:24:30 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
 	char	*newstr;
 	size_t	length;

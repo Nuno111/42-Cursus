@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:22:46 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/24 14:22:47 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/01/27 22:48:05 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int		ft_isalnum(int c)
 {
-	return ((ft_isalpha(c) || ft_isdigit(c)) ? 1 : 0);
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

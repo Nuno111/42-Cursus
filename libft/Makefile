@@ -10,8 +10,6 @@ OPT = -c
 
 LIBOPT = ar rcs
 
-OBJ = ft_atoi.o ft_bzero.o
-
 # Matches all .c files.
 SRC = ${wildcard *.c}
 
@@ -36,6 +34,6 @@ re : fclean all
 
 so:
 	$(CC) -c $(CFLAGS) -fPIC $(SRC)
-	gcc -shared -o libft.so $(OBJ)
+	gcc -shared -o libft.so $(DST)
 
 .PHONY: all clean fclean re
