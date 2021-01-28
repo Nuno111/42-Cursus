@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 14:17:41 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/25 14:38:11 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/01/28 00:34:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size)
 	if (!dst || !src || !size)
 		return (dst_length + src_length);
 	i = 0;
-	while (dst[dst_length + i] && src[i] && i <= size)
+	while (src[i] && i < size - 1)
 	{
 		dst[dst_length + i] = src[i];
 		i++;
 	}
-	if (dst[dst_length + i])
-		dst[dst_length + i] = '\0';
+	dst[dst_length + i] = '\0';
 	return (dst_length + i);
 }
