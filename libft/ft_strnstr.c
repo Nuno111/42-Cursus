@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 17:31:55 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/26 16:35:00 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/01/28 02:13:36 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	if (!little)
 		return ((char*)big);
 	i = 0;
-	while (big[i] && i < len)
+	while (big[i])
 	{
 		j = 0;
 		if (big[i] == little[j])
 		{
-			while (big[i + j] == little[j])
+			while (big[i + j] == little[j] && little[j] && j < len)
 				j++;
 			if (little[j] == '\0')
 				return ((char*)&big[i]);
