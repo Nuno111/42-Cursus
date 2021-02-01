@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/27 20:44:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/01 02:59:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strnstr(const char *big, const char *little, size_t len);
+char    *ft_strcat(char *dest, char *src);
 char	*ft_strrchr(const char *s, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_isprint(int c);
