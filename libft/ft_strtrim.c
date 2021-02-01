@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 11:58:16 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/01 12:47:24 by ngregori         ###   ########.fr       */
+/*   Created: 2021/02/01 14:18:12 by ngregori          #+#    #+#             */
+/*   Updated: 2021/02/01 16:17:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t length1;
-	size_t length2;
-	char *arr;
+	size_t end_length;
 
-	length1 = s1 ? ft_strlen(s1) : 0;
-	length2 = s2 ? ft_strlen(s2) : 0;
-	if (!(arr = malloc(sizeof(char) * (length1 + length2) + 1)))
+	if (!s1 || !set)
 		return (NULL);
-	ft_memmove(arr, s1, length1);
-	ft_memmove(&arr[length1], s2, length2 + 1);
-
-	return (arr);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	end_length = ft_strlen(s1);
+	while (*s1 && ft_strrchr(set, *(s1 + end_length)))
+		end_length--;
+	return (ft_substr(s1, 0, end_length + 1));
 }
