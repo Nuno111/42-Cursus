@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/03 22:06:23 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/03 22:24:21 by ngregori         ###   ########.fr       */
+/*   Created: 2021/02/03 22:24:40 by ngregori          #+#    #+#             */
+/*   Updated: 2021/02/03 22:43:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	ft_putstr_fd(char *s, int fd)
 {
-	write(fd, &c, 1);
+		s ? write(fd, s, ft_strlen(s)) : 0;
 }
