@@ -25,7 +25,7 @@ ${NAME}: $(DST)
 	$(CC) $(OPT) $(CFLAGS) $<
 
 clean :
-	rm -f ${DST}
+	rm -f ${DST} *.so *.out
 
 fclean : clean
 	rm -f ${NAME}
