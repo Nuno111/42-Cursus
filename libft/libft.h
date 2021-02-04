@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/04 00:03:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/04 22:11:06 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
+typedef struct s_list
+{
+void			*content;
+struct s_list	*next;
+}				t_list;
+
 
 char	*ft_itoa(int n);
 char	*ft_strdup(const char *s);
