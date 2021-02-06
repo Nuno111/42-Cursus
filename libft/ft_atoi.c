@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:15:06 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/24 17:46:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/06 17:03:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static	int		ft_convert(const char *nbr, int sign)
 {
-	int		i;
-	long	result;
+	int			i;
+	long long	result;
 
 	result = 0;
 	i = 0;
