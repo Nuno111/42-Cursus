@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lstclear.c                                         :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 00:03:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/06 00:57:48 by ngregori         ###   ########.fr       */
+/*   Created: 2021/02/06 12:30:30 by ngregori          #+#    #+#             */
+/*   Updated: 2021/02/06 16:50:07 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstclear(t_list **lst, void (*del)(void*))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	if (*lst && del)
-	{
-		t_list *tmp;
+	t_list *new;
+	t_list *head;
 
-		while (*lst != NULL)
+	if (!f || !lst)
+		return (NULL);
+	head = NULL;
+	while (lst)
+	{
+		if(!(new = ft_lstnew(f(lst->content))))
 		{
-			tmp = *lst;
-			*lst = (*lst)->next;
-			del(tmp);
+			ft_lstclear(&head, del);
+			return (NULL);
 		}
-		lst = NULL;
+		ft_lstadd_back(&head, new);
+		lst = lst->next;
 	}
+	return (head);
 }
+

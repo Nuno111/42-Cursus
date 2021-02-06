@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/05 23:45:14 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:26:42 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,10 @@ size_t	ft_strlen(const char *s);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 t_list  *ft_lstlast(t_list *lst);
+void ft_lstdelone(t_list *lst, void (*del)(void*));
+int		ft_lstsize(t_list *lst);
+t_list *ft_lstnew(void *content);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void ft_lstclear(t_list **lst, void (*del)(void*));
 
 #endif
