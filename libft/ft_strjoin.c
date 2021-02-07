@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:58:16 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/01 12:47:24 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:25:22 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t length1;
-	size_t length2;
-	char *arr;
+	size_t	length1;
+	size_t	length2;
+	char	*arr;
 
 	length1 = s1 ? ft_strlen(s1) : 0;
 	length2 = s2 ? ft_strlen(s2) : 0;
@@ -24,6 +24,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_memmove(arr, s1, length1);
 	ft_memmove(&arr[length1], s2, length2 + 1);
-
 	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 12:12:33 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/06 12:30:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:29:16 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	t_list *tmp;
+
 	if (lst && f)
+	{
+		while (lst)
 		{
-			t_list *tmp;
-			while (lst)
-			{
-				tmp = lst->next;
-				f(lst->content);
-				lst = tmp;
-			}
+			tmp = lst->next;
+			f(lst->content);
+			lst = tmp;
 		}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 22:24:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/03 22:43:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/07 01:24:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-		s ? write(fd, s, ft_strlen(s)) : 0;
+	s ? write(fd, s, ft_strlen(s)) : 0;
 }
