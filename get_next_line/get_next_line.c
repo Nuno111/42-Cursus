@@ -6,30 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/08 18:25:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/08 19:20:49 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_lstclear(t_list **lst)
-{
-	t_list *tmp;
-
-	if (*lst)
-	{
-		while (*lst != NULL)
-		{
-			tmp = *lst;
-			*lst = (*lst)->next;
-			free(tmp->content);
-			free(tmp);
-		}
-		lst = NULL;
-	}
-}
-
-int get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	char newline_found;
 	char eofile;
@@ -44,7 +27,7 @@ int get_next_line(int fd, char **line)
 		curr_node = ft_lstnew(&list, fd, &eofile);
 		if (!curr_node)
 			return (err);
-		if (eof == 'y')
+		if (eofile == 'y')
 			return (eof);
 		if (ft_strchr(curr_node->content, 10))
 			newline_found = 'y';
