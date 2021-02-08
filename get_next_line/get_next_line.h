@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:42:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/07 17:26:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/08 00:21:32 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 #include <fcntl.h>
 
 # define BUFFER_SIZE 16
+# define OK 1
+# define ERR -1
+# define EOF 0
 
 typedef struct                  s_list
 {
@@ -30,8 +33,8 @@ typedef struct                  s_list
         struct s_list   *next;
 }                                               t_list;
 
+t_list	*ft_lstnew(t_list **list, int fd, char *eof);
+char	*ft_strchr(const char *s, int c);
 
-
-int get_next_line(int fd, char **line);
 
 #endif
