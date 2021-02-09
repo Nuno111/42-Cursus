@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:42:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/09 17:24:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/09 20:15:25 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ typedef struct                  s_list
 
 t_list											*ft_lstnew(t_list **list, int fd, char *eofile);
 char											*ft_strchr(const char *s, int c);
-size_t											ft_strlcat(char *dst, const char *src, size_t size);
+char											*ft_strcat(char *dest, char *src);
 int												ft_helper(char **line, t_list *node, t_list **head);
 size_t											ft_get_line_size(t_list *node);
+void											*ft_calloc(size_t nmemb, size_t size);
+void											*ft_memset(void *s, int c, size_t n);
 
 #endif

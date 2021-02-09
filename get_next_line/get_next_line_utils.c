@@ -35,39 +35,35 @@ char		*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-size_t		ft_strlcat(char *dst, const char *src, size_t size)
+char	*ft_strcat(char *dest, char *src)
 {
-	size_t	i;
-	size_t	length;
-	size_t src_length;
+	size_t i;
+	size_t j;
 
-	src_length = 0;
-	while (src[src_length])
-		src_length++;
-	length = 0;
-	while (dst[length] && length < size)
-		length += 1;
-	i = length;
-	while (src[length - i] && length + 1 < size && src[length - i] != '\n')
+	j = 0;
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0' && src[j] != '\n')
 	{
-		dst[length] = src[length - i];
-		length += 1;
+		dest[i] = src[j];
+		i++;
+		j++;
 	}
-	if (i < size)
-		dst[length] = '\0';
-	return (i + src_length);
+	dest[i] = '\0';
+	return (dest);
 }
 
 int		ft_helper(char **line, t_list *node, t_list **head)
 {
 	t_list *tmp;
 
-	*line = malloc(sizeof(char) * ft_get_line_size(node));
+	*line = ft_calloc(ft_get_line_size(node), sizeof(char));
 	if (!*line)
 		return (err);
 	while (node)
 	{
-		ft_strlcat(*line, node->content, BUFFER_SIZE);
+		ft_strcat(*line, node->content);
 		node = node->next;
 	}
 	while (*head != NULL)
@@ -85,10 +81,10 @@ t_list		*ft_lstnew(t_list **list, int fd, char *eofile)
 	t_list *new_node;
 	t_list *tmp;
 
-	new_node = malloc(sizeof(t_list));
+	new_node = ft_calloc(1, sizeof(t_list));
 	if (!new_node)
 		return (NULL);
-	new_node->content = malloc(sizeof(char) * BUFFER_SIZE);
+	new_node->content = ft_calloc(BUFFER_SIZE, sizeof(char));
 	if (!new_node->content)
 		return (NULL);
 	if (read(fd, new_node->content, BUFFER_SIZE) != BUFFER_SIZE)

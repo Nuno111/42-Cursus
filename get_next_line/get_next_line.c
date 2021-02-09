@@ -6,11 +6,40 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/09 18:14:27 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/09 20:14:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t			i;
+	unsigned char	*ptr;
+
+	ptr = s;
+	i = 0;
+	while (i < n)
+	{
+		ptr[i] = (unsigned char)c;
+		i++;
+	}
+	return (ptr);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void *ptr;
+
+	if (!size)
+		return (ptr = malloc(1));
+	if (!nmemb || nmemb * size > 2147483647)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	return (ft_memset(ptr, 0, nmemb * size));
+}
 
 int		get_next_line(int fd, char **line)
 {
