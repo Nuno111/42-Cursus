@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+char		*ft_strchr(const char *s, int c)
 {
 	int i;
 
@@ -16,7 +16,44 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-t_list	*ft_lstnew(t_list **list, int fd, char *eofile)
+size_t		ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	length;
+
+	length = 0;
+	while (dst[length] && length < size)
+		length += 1;
+	i = length;
+	while (src[length - i] && length + 1 < size && src[length - i] != '\n')
+	{
+		dst[length] = src[length - i];
+		length += 1;
+	}
+	if (i < size)
+		dst[length] = '\0';
+	return (i + ft_strlen(src));
+}
+
+void		ft_helper(char **line, t_list *node, t_list **head)
+{
+	t_list *tmp;
+
+	while (node)
+	{
+		ft_strlcat(*line, node->content, BUFFER_SIZE);
+		node = node->next;
+	}
+	while (*head != NULL)
+	{
+		tmp = *head;
+		*head = (*head)->next;
+		free(tmp->content);
+		free(tmp);
+	}
+}
+
+t_list		*ft_lstnew(t_list **list, int fd, char *eofile)
 {
 	t_list *new;
 	t_list *tmp;

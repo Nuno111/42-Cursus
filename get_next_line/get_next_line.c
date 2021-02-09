@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/08 19:20:49 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/09 00:06:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		get_next_line(int fd, char **line)
 		if (ft_strchr(curr_node->content, 10))
 			newline_found = 'y';
 	}
-	ft_transfer_data(line, list);
-	ft_lstclear(&list);
+	ft_helper(line, list, &list);
 	return (ok);
 }
