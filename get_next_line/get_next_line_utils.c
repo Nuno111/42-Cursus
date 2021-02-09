@@ -1,5 +1,24 @@
 #include "get_next_line.h"
 
+size_t		ft_get_line_size(t_list *node)
+{
+	size_t length;
+	size_t i;
+
+	length = 0;
+	while (node)
+	{
+		i = 0;
+		while (node->content[i] != '\n' && node->content[i])
+		{
+			length++;
+			i++;
+		}
+		node = node->next;
+	}
+	return (length);
+}
+
 char		*ft_strchr(const char *s, int c)
 {
 	int i;
@@ -39,10 +58,13 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size)
 	return (i + src_length);
 }
 
-void		ft_helper(char **line, t_list *node, t_list **head)
+int		ft_helper(char **line, t_list *node, t_list **head)
 {
 	t_list *tmp;
 
+	*line = malloc(sizeof(char) * ft_get_line_size(node));
+	if (!*line)
+		return (err);
 	while (node)
 	{
 		ft_strlcat(*line, node->content, BUFFER_SIZE);
@@ -55,30 +77,30 @@ void		ft_helper(char **line, t_list *node, t_list **head)
 		free(tmp->content);
 		free(tmp);
 	}
+	return (ok);
 }
 
 t_list		*ft_lstnew(t_list **list, int fd, char *eofile)
 {
-	t_list *new;
+	t_list *new_node;
 	t_list *tmp;
 
-	new = malloc(sizeof(t_list));
-	if (!new)
+	new_node = malloc(sizeof(t_list));
+	if (!new_node)
 		return (NULL);
-	new->content = malloc(sizeof(char) * BUFFER_SIZE);
-	if (!new->content)
+	new_node->content = malloc(sizeof(char) * BUFFER_SIZE);
+	if (!new_node->content)
 		return (NULL);
-	new->bytes_read = read(fd, new->content, BUFFER_SIZE);
-	if (new->bytes_read != BUFFER_SIZE)
+	if (read(fd, new_node->content, BUFFER_SIZE) != BUFFER_SIZE)
 		*eofile = 'y';
 	if (*list)
 	{
 		tmp = *list;
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->next = new;
+		tmp->next = new_node;
 	}
 	else
-		*list = new;
-	return (new);
+		*list = new_node;
+	return (new_node);
 }

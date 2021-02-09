@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:42:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/09 00:14:58 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/09 17:24:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@
 # define ok 1
 # define err -1
 # define eof 0
-# define BUFFER_SIZE 16
+# define BUFFER_SIZE 4
 
 typedef struct                  s_list
 {
         char                    *content;
-		size_t					bytes_read;
         struct s_list   *next;
 }                                               t_list;
 
 t_list											*ft_lstnew(t_list **list, int fd, char *eofile);
 char											*ft_strchr(const char *s, int c);
 size_t											ft_strlcat(char *dst, const char *src, size_t size);
-void											ft_helper(char **line, t_list *node, t_list **head);
+int												ft_helper(char **line, t_list *node, t_list **head);
+size_t											ft_get_line_size(t_list *node);
 
 #endif
