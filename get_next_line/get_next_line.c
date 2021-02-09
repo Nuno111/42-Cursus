@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/09 00:06:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/09 00:36:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		get_next_line(int fd, char **line)
 	newline_found = 'n';
 	if (!fd || !line)
 		return (err);
-	while (!newline_found)
+	while (newline_found == 'n')
 	{
 		curr_node = ft_lstnew(&list, fd, &eofile);
 		if (!curr_node)
@@ -34,4 +34,14 @@ int		get_next_line(int fd, char **line)
 	}
 	ft_helper(line, list, &list);
 	return (ok);
+}
+
+int	main(void)
+{
+	int fd = open("a.txt", O_RDONLY);
+	char *line[10000];
+
+	get_next_line(fd, line);
+
+	printf("%s", line[0]);
 }

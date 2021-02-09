@@ -20,7 +20,11 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 	size_t	length;
+	size_t src_length;
 
+	src_length = 0;
+	while (src[src_length])
+		src_length++;
 	length = 0;
 	while (dst[length] && length < size)
 		length += 1;
@@ -32,7 +36,7 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size)
 	}
 	if (i < size)
 		dst[length] = '\0';
-	return (i + ft_strlen(src));
+	return (i + src_length);
 }
 
 void		ft_helper(char **line, t_list *node, t_list **head)
@@ -66,7 +70,7 @@ t_list		*ft_lstnew(t_list **list, int fd, char *eofile)
 		return (NULL);
 	new->bytes_read = read(fd, new->content, BUFFER_SIZE);
 	if (new->bytes_read != BUFFER_SIZE)
-		*eofile == 'y';
+		*eofile = 'y';
 	if (*list)
 	{
 		tmp = *list;

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:42:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/09 00:06:19 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/09 00:14:58 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 typedef struct                  s_list
 {
         char                    *content;
-		size_t					*bytes_read;
+		size_t					bytes_read;
         struct s_list   *next;
 }                                               t_list;
 
