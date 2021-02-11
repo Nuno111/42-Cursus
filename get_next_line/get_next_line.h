@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:42:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/11 13:10:57 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/11 16:43:56 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define ok 1
 # define err -1
 # define eof 0
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 100
 # define MAX_FD 1025
 
 size_t	ft_strlen(const char *s);
@@ -35,5 +35,6 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(char *s);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strtrim(char *s1, char *set);
 
 #endif

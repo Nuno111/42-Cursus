@@ -6,11 +6,23 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/11 13:15:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/11 16:44:14 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strtrim(char *s1, char *set)
+{
+	size_t end_length;
+
+	if (!s1 || !set)
+		return (NULL);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	end_length = ft_strlen(s1);
+	return (ft_substr(s1, 0, end_length + 1));
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -46,18 +58,14 @@ int		read_file(int fd, char **fd_num, char *eofile)
 
 int		update_line(int fd, char **fd_num, char **line)
 {
-	size_t i;
 	char	*index;
 	char	*tmp;
 
-	i = 0;
-	while (fd_num[fd][i] != '\n' && fd_num[fd])
-		i++;
 	index = ft_strchr(fd_num[fd], '\n');
 	if (index)
 	{
-		*line = ft_substr(fd_num[fd], 0, index - fd_num[fd]);
-		tmp = ft_substr(index, 0, ft_strlen(fd_num[fd]) -(index - fd_num[fd]));
+		*line = ft_substr(fd_num[fd], 0, index - fd_num[fd] - 1);
+		tmp = ft_strtrim(index, "\n");
 		free(fd_num[fd]);
 		fd_num[fd] = tmp;
 		return (ok);
@@ -75,7 +83,7 @@ int		get_next_line(int fd, char **line)
 	eofile = 'n';
 	if (line == NULL || BUFFER_SIZE <= 0 ||  fd < 0 || fd >= MAX_FD)
 		return (-1);
-	while (!ft_strchr(fd_num[fd], '\n'))
+	while (!ft_strchr(fd_num[fd], '\n') && status > 0)
 		status = read_file(fd, fd_num, &eofile);
 	if (status == err)
 		return (err);
