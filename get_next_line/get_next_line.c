@@ -6,13 +6,23 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/11 00:19:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/11 13:15:12 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		eol_exists(int fd, char *fd_num, char *eofile)
+size_t	ft_strlen(const char *s)
+{
+	size_t i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int		read_file(int fd, char **fd_num, char *eofile)
 {
 	char buffer[BUFFER_SIZE + 1];
 	ssize_t read_bytes;
@@ -20,19 +30,39 @@ int		eol_exists(int fd, char *fd_num, char *eofile)
 	read_bytes = read(fd, buffer, BUFFER_SIZE);
 	if (read_bytes == 0)
 	{
-		*eofile == 'y';
-		return (0);
+		*eofile = 'y';
+		return (eof);
 	}
 	else if (read_bytes < 0)
 		return (err);
-	buffer[read_bytes] = '\0';
 	if (fd_num[fd] == NULL)
 		fd_num[fd] = ft_strdup(buffer);
 	else
-		fd_num[fd] = ft_strjoin(&fd_num[fd], buffer);
-	if (ft_strchr(fd_num[fd], '\n'))
-		return (0);
-	return (1);
+		fd_num[fd] = ft_strjoin(fd_num[fd], buffer);
+	if (fd_num[fd] == NULL)
+		return (err);
+	return (ok);
+}
+
+int		update_line(int fd, char **fd_num, char **line)
+{
+	size_t i;
+	char	*index;
+	char	*tmp;
+
+	i = 0;
+	while (fd_num[fd][i] != '\n' && fd_num[fd])
+		i++;
+	index = ft_strchr(fd_num[fd], '\n');
+	if (index)
+	{
+		*line = ft_substr(fd_num[fd], 0, index - fd_num[fd]);
+		tmp = ft_substr(index, 0, ft_strlen(fd_num[fd]) -(index - fd_num[fd]));
+		free(fd_num[fd]);
+		fd_num[fd] = tmp;
+		return (ok);
+	}
+	return (eof);
 }
 
 int		get_next_line(int fd, char **line)
@@ -45,8 +75,8 @@ int		get_next_line(int fd, char **line)
 	eofile = 'n';
 	if (line == NULL || BUFFER_SIZE <= 0 ||  fd < 0 || fd >= MAX_FD)
 		return (-1);
-	while (status > 0)
-		status = eol_exists(fd, fd_num, &eofile);
+	while (!ft_strchr(fd_num[fd], '\n'))
+		status = read_file(fd, fd_num, &eofile);
 	if (status == err)
 		return (err);
 	if (eofile == 'y')
@@ -55,8 +85,8 @@ int		get_next_line(int fd, char **line)
 		return (eof);
 	}
 	else
-		update_line();
-	return (ok);
+		status = update_line(fd, fd_num, line);
+	return (status);
 }
 
 int main()

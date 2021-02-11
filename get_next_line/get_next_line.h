@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:42:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/10 21:44:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/11 13:10:57 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,14 @@
 # define eof 0
 # define BUFFER_SIZE 1
 # define MAX_FD 1025
+
+size_t	ft_strlen(const char *s);
+int		read_file(int fd, char **fd_num, char *eofile);
+int		update_line(int fd, char **fd_num, char **line);
+char    *ft_strncpy(char *dest, char *src, unsigned int n);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(char *s);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif
