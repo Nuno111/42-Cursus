@@ -6,63 +6,57 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/09 20:14:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/11 00:19:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+int		eol_exists(int fd, char *fd_num, char *eofile)
 {
-	size_t			i;
-	unsigned char	*ptr;
+	char buffer[BUFFER_SIZE + 1];
+	ssize_t read_bytes;
 
-	ptr = s;
-	i = 0;
-	while (i < n)
+	read_bytes = read(fd, buffer, BUFFER_SIZE);
+	if (read_bytes == 0)
 	{
-		ptr[i] = (unsigned char)c;
-		i++;
+		*eofile == 'y';
+		return (0);
 	}
-	return (ptr);
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void *ptr;
-
-	if (!size)
-		return (ptr = malloc(1));
-	if (!nmemb || nmemb * size > 2147483647)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	return (ft_memset(ptr, 0, nmemb * size));
+	else if (read_bytes < 0)
+		return (err);
+	buffer[read_bytes] = '\0';
+	if (fd_num[fd] == NULL)
+		fd_num[fd] = ft_strdup(buffer);
+	else
+		fd_num[fd] = ft_strjoin(&fd_num[fd], buffer);
+	if (ft_strchr(fd_num[fd], '\n'))
+		return (0);
+	return (1);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	char newline_found;
-	char eofile;
-	t_list *list;
-	t_list *curr_node;
+	static char	*fd_num[MAX_FD];
+	char		eofile;
+	int			status;
 
-	list = NULL;
-	newline_found = 'n';
-	if (!fd || !line)
+	status = 1;
+	eofile = 'n';
+	if (line == NULL || BUFFER_SIZE <= 0 ||  fd < 0 || fd >= MAX_FD)
+		return (-1);
+	while (status > 0)
+		status = eol_exists(fd, fd_num, &eofile);
+	if (status == err)
 		return (err);
-	while (newline_found == 'n')
+	if (eofile == 'y')
 	{
-		curr_node = ft_lstnew(&list, fd, &eofile);
-		if (!curr_node)
-			return (err);
-		if (eofile == 'y')
-			return (eof);
-		if (ft_strchr(curr_node->content, 10))
-			newline_found = 'y';
+		free(fd_num[fd]);
+		return (eof);
 	}
-	return (ft_helper(line, list, &list));
+	else
+		update_line();
+	return (ok);
 }
 
 int main()
