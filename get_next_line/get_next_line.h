@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:42:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/12 13:57:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/12 15:46:30 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LNE_H
+# define GET_NEXT_LINE_H
 
 #include <unistd.h>
 #include <stdlib.h>

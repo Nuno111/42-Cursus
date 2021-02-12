@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/12 12:53:27 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/12 15:58:01 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,9 @@ int		update_line(int fd, char **fd_num, char **line)
 	}
 	else
 	{
-		if (fd_num[fd])
+		if (fd_num[fd] != NULL)
 		{
 			*line = ft_strdup(fd_num[fd]);
-			free(fd_num[fd]);
 		}
 		else
 			*line = ft_strdup("\0");
