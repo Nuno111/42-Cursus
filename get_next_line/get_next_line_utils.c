@@ -45,19 +45,21 @@ char	*ft_strdup(char *s)
 	newstr = malloc(sizeof(char) * length + 1);
 	if (!newstr)
 		return (NULL);
-	ft_strncpy(newstr, s, length + 1);
-	return (newstr);
+	return(ft_strncpy(newstr, s, length + 1));
 }
 
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*sub_str;
 
-	if (!(sub_str = malloc(sizeof(char) * len + 1)) || !len || !s)
+	if (!s)
+		return (NULL);
+	sub_str = malloc(sizeof(char) * len + 1);
+	if (!sub_str)
 		return (NULL);
 	if (start < ft_strlen(s))
 	{
-		ft_strncpy(sub_str, &s[start], len + 1);
+		ft_strlcpy(sub_str, &s[start], len + 1);
 		return (sub_str);
 	}
 	else
@@ -75,8 +77,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	length2 = s2 ? ft_strlen(s2) : 0;
 	if (!(arr = malloc(sizeof(char) * (length1 + length2) + 1)))
 		return (NULL);
-	ft_strncpy(arr, s1, length1);
-	ft_strncpy(&arr[length1], s2, length2 + 1);
+	ft_strlcpy(arr, s1, length1 + 1);
+	ft_strlcpy(&arr[length1], s2, length2 + 1);
 	free(s1);
 	return (arr);
 }

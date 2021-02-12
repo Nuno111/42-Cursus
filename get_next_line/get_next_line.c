@@ -6,22 +6,30 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/11 16:44:14 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/12 00:58:06 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strtrim(char *s1, char *set)
+size_t		ft_strlcpy(char *dst, char *src, size_t size)
 {
-	size_t end_length;
+	size_t i;
+	size_t length;
 
-	if (!s1 || !set)
-		return (NULL);
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	end_length = ft_strlen(s1);
-	return (ft_substr(s1, 0, end_length + 1));
+	if (!src)
+		return (0);
+	length = ft_strlen(src);
+	if (!dst || !size)
+		return (length);
+	i = 0;
+	while (src[i] != '\0' && i < size - 1)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (length);
 }
 
 size_t	ft_strlen(const char *s)
@@ -40,6 +48,7 @@ int		read_file(int fd, char **fd_num, char *eofile)
 	ssize_t read_bytes;
 
 	read_bytes = read(fd, buffer, BUFFER_SIZE);
+	buffer[read_bytes] = '\0';
 	if (read_bytes == 0)
 	{
 		*eofile = 'y';
@@ -64,8 +73,8 @@ int		update_line(int fd, char **fd_num, char **line)
 	index = ft_strchr(fd_num[fd], '\n');
 	if (index)
 	{
-		*line = ft_substr(fd_num[fd], 0, index - fd_num[fd] - 1);
-		tmp = ft_strtrim(index, "\n");
+		*line = ft_substr(fd_num[fd], 0, index - fd_num[fd]);
+		tmp = ft_substr(index, 1, ft_strlen(fd_num[fd]) - (index - fd_num[fd] + 1));
 		free(fd_num[fd]);
 		fd_num[fd] = tmp;
 		return (ok);
