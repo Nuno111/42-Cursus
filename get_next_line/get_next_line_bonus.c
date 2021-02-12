@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/12 12:53:27 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/12 12:33:27 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t		ft_strlcpy(char *dst, char *src, size_t size)
 {
@@ -98,7 +98,7 @@ int		get_next_line(int fd, char **line)
 
 	status = 1;
 	if (line == NULL || BUFFER_SIZE <= 0 ||  fd < 0 || fd >= MAX_FD)
-		return (err);
+		return (-1);
 	while (!ft_strchr(fd_num[fd], '\n') && status > 0)
 	{
 		buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
@@ -111,3 +111,27 @@ int		get_next_line(int fd, char **line)
 		status = update_line(fd, fd_num, line);
 	return (status);
 }
+
+/*
+int main()
+{
+	int		fd;
+	int		j;
+	char	*line = 0;
+
+	j = 1;
+	if (!(fd = open("1.txt", O_RDONLY)))
+	{
+		printf("\nError in open\n");
+		return (0);
+	}
+	while (get_next_line(fd, &line) > 0)
+	{
+		printf("%s\n", line);
+		free(line);
+		line = NULL;
+		j++;
+	}
+}
+*/
+
