@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/12 15:58:01 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/12 16:42:29 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 size_t		ft_strlcpy(char *dst, char *src, size_t size)
 {
-	size_t i;
-	size_t length;
+	size_t	i;
+	size_t	length;
 
 	if (!src)
 		return (0);
@@ -32,7 +32,7 @@ size_t		ft_strlcpy(char *dst, char *src, size_t size)
 	return (length);
 }
 
-size_t	ft_strlen(const char *s)
+size_t		ft_strlen(const char *s)
 {
 	size_t i;
 
@@ -42,71 +42,72 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int		read_file(int fd, char **fd_num, char *buffer)
+int			read_file(int fd, char **arr, char *buffer)
 {
-	ssize_t read_bytes;
+	ssize_t	read_bytes;
 
 	read_bytes = read(fd, buffer, BUFFER_SIZE);
 	buffer[read_bytes] = '\0';
 	if (read_bytes == 0)
-	{
-		return (eof);
-	}
+		return (EOFILE);
 	else if (read_bytes < 0)
-		return (err);
-	if (fd_num[fd] == NULL)
-		fd_num[fd] = ft_strdup(buffer);
+		return (ERR);
+	if (arr[fd] == NULL)
+		arr[fd] = ft_strdup(buffer);
 	else
-		fd_num[fd] = ft_strjoin(fd_num[fd], buffer);
-	if (fd_num[fd] == NULL)
-		return (err);
-	return (ok);
+		arr[fd] = ft_strjoin(arr[fd], buffer);
+	if (arr[fd] == NULL)
+		return (ERR);
+	return (OK);
 }
 
-int		update_line(int fd, char **fd_num, char **line)
+int			update_line(int fd, char **arr, char **line)
 {
 	char	*index;
 	char	*tmp;
 
-	index = ft_strchr(fd_num[fd], '\n');
+	index = ft_strchr(arr[fd], '\n');
 	if (index)
 	{
-		*line = ft_substr(fd_num[fd], 0, index - fd_num[fd]);
-		tmp = ft_substr(index, 1, ft_strlen(fd_num[fd]) - (index - fd_num[fd] + 1));
-		free(fd_num[fd]);
-		fd_num[fd] = tmp;
-		return (ok);
+		*line = ft_substr(arr[fd], 0, index - arr[fd]);
+		tmp = ft_substr(index, 1, ft_strlen(arr[fd]) - (index - arr[fd] + 1));
+		free(arr[fd]);
+		arr[fd] = tmp;
+		return (OK);
 	}
 	else
 	{
-		if (fd_num[fd] != NULL)
+		if (arr[fd])
 		{
-			*line = ft_strdup(fd_num[fd]);
+			*line = ft_strdup(arr[fd]);
+			arr[fd] = NULL;
 		}
 		else
 			*line = ft_strdup("\0");
 	}
-	return (eof);
+	return (EOFILE);
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
-	static char	*fd_num[MAX_FD];
+	static char	*arr[MAX_FD];
 	int			status;
-	char *buffer;
+	char		*buffer;
 
 	status = 1;
-	if (line == NULL || BUFFER_SIZE <= 0 ||  fd < 0 || fd >= MAX_FD)
-		return (err);
-	while (!ft_strchr(fd_num[fd], '\n') && status > 0)
+	if (line == NULL || BUFFER_SIZE <= 0 || fd < 0 || fd >= MAX_FD)
+		return (ERR);
+	while (!ft_strchr(arr[fd], '\n') && status > 0)
 	{
 		buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-		status = read_file(fd, fd_num, buffer);
+		if (!buffer)
+			return (ERR);
+		status = read_file(fd, arr, buffer);
 		free(buffer);
 	}
-	if (status == err)
-		return (err);
+	if (status == ERR)
+		return (ERR);
 	else
-		status = update_line(fd, fd_num, line);
+		status = update_line(fd, arr, line);
 	return (status);
 }
