@@ -19,7 +19,8 @@ ft_strnstr.c ft_isascii.c ft_memmove.c ft_strdup.c ft_strrchr.c
 
 BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c\
 		ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c\
-		ft_strcat_bonus.c ft_isspace_bonus.c
+		ft_strcat_bonus.c ft_isspace_bonus.c ft_strnew_bonus.c ft_freearrays_bonus.c\
+		ft_strchrindex_bonus.c
 
 DST = ${SRC:.c=.o}
 
