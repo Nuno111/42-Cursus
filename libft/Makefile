@@ -26,27 +26,27 @@ DST = ${SRC:.c=.o}
 
 DST_BONUS = ${BONUS:.c=.o}
 
-all : ${NAME}
-
 ${NAME}: $(DST)
 	$(LIBOPT) $@ $^
 
 bonus: ${DST} ${DST_BONUS}
 	${LIBOPT} ${NAME} $^
 
-%.o : %.c $(LIB)
+%.o: %.c $(LIB)
 	$(CC) $(OPT) $(CFLAGS) $<
 
-clean :
+all: ${NAME}
+
+clean:
 	rm -f ${DST} ${DST_BONUS} *.so *.out
 
-fclean : clean
+fclean: clean
 	rm -f ${NAME}
 
-re : fclean all
+re: fclean all
 
 so:
-	$(CC) -c $(CFLAGS) -fPIC $(SRC)
-	gcc -shared -o libft.so $(DST)
+	$(CC) -c $(CFLAGS) -fPIC $(SRC) $(BONUS)
+	gcc -shared -o libft.so $(DST) $(DST_BONUS)
 
 .PHONY: all clean fclean re

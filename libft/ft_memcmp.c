@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 11:53:52 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/27 22:17:49 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/13 23:35:25 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t i;
 
+	if (!n)
+		return (0);
 	i = 0;
 	while (((unsigned char *)s1)[i] == ((unsigned char *)s2)[i] && i < n - 1)
 		i++;

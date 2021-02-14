@@ -6,12 +6,12 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:59:38 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/02 10:35:24 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/14 00:13:52 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+#include <stdio.h>
 size_t		ft_count_words(char const *s, char c)
 {
 	size_t	word_count;
@@ -63,4 +63,12 @@ char		**ft_split(char const *s, char c)
 	}
 	arr[i] = 0;
 	return (arr);
+}
+
+int					main(void)
+{
+
+
+		printf("%s", *ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.", 'i'));
+
 }

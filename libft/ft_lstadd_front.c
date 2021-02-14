@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 22:19:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/05 14:24:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/13 23:15:18 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (*lst == NULL)
+	if (!(*lst))
 		*lst = new;
 	else
 	{

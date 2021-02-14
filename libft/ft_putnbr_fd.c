@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 23:54:28 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/04 00:42:36 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/13 23:40:42 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_putnbr_fd(int n, int fd)
 			ft_putchar_fd('-', fd);
 			n *= -1;
 		}
-		if (n >= 9)
+		if (n > 9)
 			ft_putnbr_fd(n / 10, fd);
 		ft_putchar_fd((n % 10) + '0', fd);
 	}
