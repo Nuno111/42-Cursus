@@ -6,12 +6,12 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:59:38 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/14 14:26:30 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/14 14:29:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
+
 size_t		ft_count_words(char const *s, char c)
 {
 	size_t	word_count;
