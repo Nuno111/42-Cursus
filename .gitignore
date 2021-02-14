@@ -1,4 +1,4 @@
 *.[oa]
 *.so
 *.out
-libft-unit-test
+testing-libft
