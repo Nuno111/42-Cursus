@@ -35,7 +35,7 @@ bonus: ${DST} ${DST_BONUS}
 %.o: %.c $(LIB)
 	$(CC) $(OPT) $(CFLAGS) $<
 
-all: ${NAME}
+all:${NAME}
 
 clean:
 	rm -f ${DST} ${DST_BONUS} *.so *.out
