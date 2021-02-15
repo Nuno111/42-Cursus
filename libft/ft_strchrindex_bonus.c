@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 18:31:33 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/13 18:32:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/15 22:40:15 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_strchrindex(const char *s, int c)
+int		ft_strchrindex(const char *s, int c)
 {
 	int i;
 

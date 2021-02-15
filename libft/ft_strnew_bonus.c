@@ -6,17 +6,17 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 17:20:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/13 17:21:19 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/15 22:39:22 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strnew(size_t size)
+char	*ft_strnew(size_t size)
 {
-    char	*str;
+	char	*str;
 
-    str = malloc(sizeof(char) * size + 1);
+	str = malloc(sizeof(char) * size + 1);
 	if (!str)
 		return (NULL);
 	ft_bzero(str, size + 1);

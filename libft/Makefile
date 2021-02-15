@@ -22,30 +22,30 @@ BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c\
 		ft_strcat_bonus.c ft_isspace_bonus.c ft_strnew_bonus.c ft_freearrays_bonus.c\
 		ft_strchrindex_bonus.c
 
-DST = ${SRC:.c=.o}
+DST = $(SRC:.c=.o)
 
-DST_BONUS = ${BONUS:.c=.o}
+DST_BONUS = $(BONUS:.c=.o)
 
-${NAME}: $(DST)
+$(NAME) : $(DST)
 	$(LIBOPT) $@ $^
 
-bonus: ${DST} ${DST_BONUS}
-	${LIBOPT} ${NAME} $^
+bonus : $(DST) $(DST_BONUS)
+	$(LIBOPT) $(NAME) $^
 
-%.o: %.c $(LIB)
+%.o : %.c $(LIB)
 	$(CC) $(OPT) $(CFLAGS) $<
 
-all:${NAME}
+all : $(NAME)
 
-clean:
-	rm -f ${DST} ${DST_BONUS} *.so *.out
+clean :
+	rm -f $(DST) $(DST_BONUS) *.so *.out
 
-fclean: clean
-	rm -f ${NAME}
+fclean : clean
+	rm -f $(NAME)
 
-re: fclean all
+re : fclean all
 
-so:
+so :
 	$(CC) -c $(CFLAGS) -fPIC $(SRC) $(BONUS)
 	gcc -shared -o libft.so $(DST) $(DST_BONUS)
 

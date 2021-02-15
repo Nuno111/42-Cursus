@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:59:38 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/14 14:29:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/15 22:41:02 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,14 @@ size_t		ft_count_words(char const *s, char c)
 	return (word_count);
 }
 
-char		**ft_split(char const *s, char c)
+void		ft_fill_array(size_t words_nbr, char **arr, const char *s, char c)
 {
-	char	**arr;
 	size_t	sep_index;
 	size_t	next_index;
-	size_t	words_nbr;
 	size_t	i;
 
-	if (!s || !c)
-		return (NULL);
 	i = -1;
 	sep_index = 0;
-	words_nbr = ft_count_words(s, c);
-	if (!(arr = malloc(sizeof(char *) * (words_nbr + 1))))
-		return (NULL);
 	while (++i < words_nbr)
 	{
 		while (s[sep_index] == c)
@@ -58,9 +51,25 @@ char		**ft_split(char const *s, char c)
 		next_index = ft_strchr(&s[sep_index], c)
 		? ft_strchr(&s[sep_index], c) - s - sep_index
 		: ft_strlen(s) - sep_index;
-		arr[i] = ft_substr(s, sep_index, next_index);
+		if (next_index == 0)
+			arr[i] = NULL;
+		else
+			arr[i] = ft_substr(s, sep_index, next_index);
 		sep_index = ft_strchr(&s[sep_index], c) - s + 1;
 	}
 	arr[i] = 0;
+}
+
+char		**ft_split(char const *s, char c)
+{
+	char	**arr;
+	size_t	words_nbr;
+
+	if (!s || !c)
+		return (NULL);
+	words_nbr = ft_count_words(s, c);
+	if (!(arr = malloc(sizeof(char *) * (words_nbr + 1))))
+		return (NULL);
+	ft_fill_array(words_nbr, arr, s, c);
 	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 01:32:54 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/13 23:59:43 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/15 19:59:30 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub_str;
 
-	if (!s || !len)
+	if (!s)
 		return (NULL);
 	sub_str = malloc(sizeof(char) * len + 1);
 	if (!sub_str)
