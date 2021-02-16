@@ -6,11 +6,17 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:15:06 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/15 18:00:34 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/15 23:26:40 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static	int		isspace(int c)
+{
+	return ((c == '\f' || c == '\n' || c == '\r'
+			|| c == '\t' || c == '\v' || c == ' ')) ? 1 : 0;
+}
 
 static	int		ft_convert(const char *nbr, int sign)
 {
@@ -33,7 +39,7 @@ int				ft_atoi(const char *nptr)
 	int i;
 
 	i = 0;
-	while (ft_isspace(nptr[i]))
+	while (isspace(nptr[i]))
 		i++;
 	if (nptr[i] == '+')
 	{
