@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:59:38 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/15 22:41:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/16 02:11:19 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char		**ft_split(char const *s, char c)
 	char	**arr;
 	size_t	words_nbr;
 
-	if (!s || !c)
+	if (!s)
 		return (NULL);
 	words_nbr = ft_count_words(s, c);
 	if (!(arr = malloc(sizeof(char *) * (words_nbr + 1))))
