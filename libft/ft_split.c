@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:59:38 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/16 02:11:19 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/16 12:28:18 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ size_t		ft_count_words(char const *s, char c)
 		is_word == 'y' ? word_count += 1 : word_count;
 		while (*s != c && *s != '\0')
 			s++;
-		if (*s == c && *(s + 1) != c)
+		if (*s == '\0')
+			return (++word_count);
+		else if (*s == c && *(s + 1) != c)
 			is_word = 'y';
 		else if (*s != '\0')
 			is_word = 'n';
-		else
-			return (++word_count);
 		s++;
 	}
-	is_word == 'y' ? word_count += 1 : word_count;
 	return (word_count);
 }
 
@@ -57,7 +56,7 @@ void		ft_fill_array(size_t words_nbr, char **arr, const char *s, char c)
 			arr[i] = ft_substr(s, sep_index, next_index);
 		sep_index = ft_strchr(&s[sep_index], c) - s + 1;
 	}
-	arr[i] = 0;
+	arr[i] = NULL;
 }
 
 char		**ft_split(char const *s, char c)
