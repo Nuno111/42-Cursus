@@ -45,8 +45,4 @@ fclean : clean
 
 re : fclean all
 
-so :
-	$(CC) -c $(CFLAGS) -fPIC $(SRC) $(BONUS)
-	gcc -shared -o libft.so $(DST) $(DST_BONUS)
-
 .PHONY: all clean fclean re
