@@ -6,11 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/17 13:45:20 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/17 23:38:55 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/libft.h"
 
 int		ft_printf(const char *s, ...)
 {
@@ -20,15 +20,17 @@ int		ft_printf(const char *s, ...)
 	i = 0;
 	va_start(ap, s);
 
-	while (s[i] != '%')
+
+	while (s[i] != '%' && s[i])
 	{
 		ft_putchar(s[i]);
 		i++;
 	}
-	if (s[++i] == 'd')
-	{
-		ft_putnbr(va_arg(ap, long));
-	}
+	if (s[i])
+		i++;
+	if (s[i] == 'd')
+		ft_putnbr(va_arg(ap, unsigned int));
+	else if ()
 	while (s[++i])
 	{
 		ft_putchar(s[i]);
@@ -40,6 +42,14 @@ int		ft_printf(const char *s, ...)
 
 int		main(void)
 {
-
-	ft_printf("Hello number %d", 1);
+	printf("HEllo %0-10X", 10);
 }
+
+// Options
+// Padding is only added if necessary, length argument < padding
+// -0 or 0-	padding = spaces	aligned left, 0 is ignored
+// * 		padding = spaces	determined by argument
+// .*		padding = 0			determined by argument
+// *.		padding = spaces	determined by argument
+// . 		padding = spaces	determined by preceding number
+// 0d 		padding = 0			determined by preceding number
