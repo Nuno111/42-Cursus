@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/17 23:38:55 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/18 18:59:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int		ft_printf(const char *s, ...)
 {
 	va_list ap;
 	size_t i;
+	int		count;
 
+	count = 0;
 	i = 0;
 	va_start(ap, s);
 
@@ -24,13 +26,14 @@ int		ft_printf(const char *s, ...)
 	while (s[i] != '%' && s[i])
 	{
 		ft_putchar(s[i]);
+		count++;
 		i++;
 	}
-	if (s[i])
-		i++;
+	if (!s[i])
+		return (count);
+	i++;
 	if (s[i] == 'd')
-		ft_putnbr(va_arg(ap, unsigned int));
-	else if ()
+		ft_putnbr(va_arg(ap, long long));
 	while (s[++i])
 	{
 		ft_putchar(s[i]);
@@ -42,7 +45,9 @@ int		ft_printf(const char *s, ...)
 
 int		main(void)
 {
-	printf("HEllo %0-10X", 10);
+	long long b = 111111111111111111;
+
+	printf("HEllo %.155lld", b);
 }
 
 // Options
