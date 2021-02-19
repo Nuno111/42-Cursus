@@ -14,7 +14,9 @@ typedef struct		node_t
 	int				pad_len;
     bool            left_align;
     bool            has_pad;
+    bool            from_arg;
     bool            pad_is_zero;
+	bool			done;
 }					node;
 
 

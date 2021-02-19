@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/19 16:40:31 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/19 20:42:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ int		manage_node(char *str_to_print, char *s, va_list ap, int *count, int i)
 	to_add.pad_is_zero = 0;
 	to_add.left_align = 0;
 	to_add.pad_len = NULL;
-	flags(s, to_add, i);
-	width(s, to_add);
-	precision(s, to_add);
-	size(s, to_add);
+	to_add.from_arg = 0;
+	while (to_add->done != 1)
+		handle_cases(s, to_add);
+
+	return (to_add.i);
 }
 
 int		iterate_string(char *str_to_print, char *s, va_list ap, int *count)

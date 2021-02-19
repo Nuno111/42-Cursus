@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.c                                          :+:      :+:    :+:   */
+/*   handle_cases.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 14:31:58 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/19 20:42:36 by ngregori         ###   ########.fr       */
+/*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
+/*   Updated: 2021/02/19 20:42:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "ft_printf.h"
 
-
-void	handle_cases(char *s, node *to_add)
+void	handle_zero(char *s, node *to_add)
 {
-	if (!s[to_add->i])
-		return ;
-	if (s[to_add->i] == '-')
+	if (s[to_add->i] == '0' && s[to_add->i - 1] != '-')
 	{
-		to_add->left_align = 1;
+		to_add->has_pad = 1;
 		to_add->i++;
 	}
-	else if (s[to_add->i] == '\0')
-		handle_zero(s, to_add);
-	else if (s[to_add->i] == '*')
-		handle_asterisk(s, to_add);
-	else if (s[to_add->i] == '.')
-		handle_dot(s, to_add);
-	else
-		handle_type(s, to_add);
-
-	// need to check another ignored case if 0 is present and has precision
+	else if (s[to_add->i] == '0')
+	{
+		to_add->has_pad = 1;
+		to_add->pad_is_zero = 1;
+		to_add->left_align = 0;
+		to_add->i++;
+	}
 }
 
+void	handle_asterisk(char *s, node *to_add)
+{
+		to_add->has_pad = 1;
+		to_add->from_arg = 1;
+		to_add->i++;
+}
