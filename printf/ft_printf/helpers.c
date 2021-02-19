@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 14:31:58 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/19 21:38:10 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/19 21:43:34 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_cases(char *s, node *to_add)
 		return ;
 	if (s[to_add->i] == '-')
 	{
-		to_add->left_align = 1;
+		to_add->left_align = TRUE;
 		to_add->i++;
 	}
 	else if (s[to_add->i] == '0')
