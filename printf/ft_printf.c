@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/19 20:42:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/19 21:38:32 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ int		manage_node(char *str_to_print, char *s, va_list ap, int *count, int i)
 	to_add.has_pad = 0;
 	to_add.pad_is_zero = 0;
 	to_add.left_align = 0;
-	to_add.pad_len = NULL;
+	to_add.pad_len = 0;
 	to_add.from_arg = 0;
-	while (to_add->done != 1)
-		handle_cases(s, to_add);
-
+	to_add.done = 0;
+	while (to_add.done != 1)
+		handle_cases(s, &to_add);
+	if (to_add.content)
+		free(to_add.content);
 	return (to_add.i);
 }
 
@@ -50,7 +52,7 @@ int		iterate_string(char *str_to_print, char *s, va_list ap, int *count)
 		if (i < 0)
 			return (-1);
 		else if (i > length)
-				return (0);
+			return (0);
 	}
 	return (0);
 }
@@ -70,14 +72,6 @@ int		ft_printf(const char *s, ...)
 	if (status != 0)
 		return (count);
 	return (status);
-}
-
-int		main(void)
-{
-	long long b = 111111111111111111;
-
-	printf("HEllo %lld", b);
-	ft_printf("HEllo %lld", b);
 }
 
 // Flags -0

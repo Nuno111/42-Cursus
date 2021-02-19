@@ -17,6 +17,7 @@ typedef struct		node_t
     bool            from_arg;
     bool            pad_is_zero;
 	bool			done;
+	bool			can_trunc;
 }					node;
 
 

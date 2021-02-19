@@ -2,5 +2,5 @@
 
 int	main(void)
 {
-	printf("Hello %-.10d", 5);
+	printf("Hello %0.10d", 5);
 }
