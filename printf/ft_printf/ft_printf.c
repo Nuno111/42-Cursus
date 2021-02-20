@@ -6,12 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 12:46:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/20 22:26:36 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include "ft_printf/ft_printf.h"
+#include "ft_printf.h"
 
 int		manage_node(char *str_to_print, char *s, va_list ap, int i)
 {
@@ -38,7 +37,7 @@ int		manage_node(char *str_to_print, char *s, va_list ap, int i)
 	return (to_add.i);
 }
 
-int		iterate_string(char *str_to_print, char *s, va_list ap)
+int		iterate_string(char **str_to_print, char *s, va_list ap)
 {
 	int	i;
 	int length;
@@ -47,13 +46,16 @@ int		iterate_string(char *str_to_print, char *s, va_list ap)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] != '%' || (s[i] == '%' && s[i - 1] == '%'))
+		if (s[i] != '%' /*|| (s[i] == '%' && s[i - 1] == '%')*/)
 		{
 			add_letter(s[i], str_to_print);
 			i++;
 		}
 		else if (s[i] == '%' && s[i - 1] != '%')
-			i = manage_node(str_to_print, s[++i], ap, i);
+		{
+			i++;
+			i = manage_node(*str_to_print, &s[i], ap, i);
+		}
 		else
 			i++;
 		if (i < 0)
@@ -69,15 +71,14 @@ int		ft_printf(const char *s, ...)
 	va_list ap;
 	char *str_to_print;
 	int status;
-	int count;
 
+	str_to_print = NULL;
 	if (!s)
 		return (-1);
 	va_start(ap, s);
-	status = iterate_string(str_to_print, s, ap, &count);
+	status = iterate_string(&str_to_print, (char *)s, ap);
 	va_end(ap);
-	if (status != 0)
-		return (count);
+
 	return (status);
 }
 

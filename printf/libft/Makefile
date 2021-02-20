@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIB = libft.h
 
-OPT = -c
+OPT = -c -g
 
 LIBOPT = ar rcs
 

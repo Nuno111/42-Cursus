@@ -1,7 +1,21 @@
-all :
-	gcc -Wextra -Wall -Werror -g ft_printf.c libft/libft.a
+NAME = libftprintf.a
 
-r: all
-	./a.out
+SRC = $(wildcard ft_printf/*.c)
 
+DST = $(SRC:.c=.o)
+
+HEADER = ft_printf.h
+
+DEP_LIB = libft/libft.a
+
+all : $(NAME)
+
+$(NAME) : $(DST)
+	ar -rcs $@ $^
+
+$(DST) : $(SRC) $(HEADER) $(DEP_LIB)
+	gcc -g -Wall -Werror -Wextra $< $(DEP_LIB)
+
+$(DEP_LIB) :
+	cd libft && $(MAKE)
 

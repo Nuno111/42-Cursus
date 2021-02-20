@@ -6,11 +6,10 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 10:57:27 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/20 22:26:49 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "ft_printf.h"
 
 void	handle_zero(char *s, node *to_add)

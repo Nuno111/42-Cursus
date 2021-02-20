@@ -6,14 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 10:57:03 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 16:41:13 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/20 22:26:55 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "ft_printf.h"
 
-void	update_content(char *s, node *to_add, char *new_str)
+void	update_content(node *to_add, char *new_str)
 {
 	char 	*padding;
 	int		i;
@@ -46,7 +45,7 @@ void	handle_d(char *s, node *to_add, va_list ap)
 	if (to_add->from_arg)
 		handle_padding(s, to_add, ap);
 	new_str = ft_itoa(va_arg(ap, int));
-	if (to_add->pad_len > ft_strlen(new_str) && to_add->has_pad)
-		update_content(s, to_add, new_str);
+	if (to_add->pad_len > (int)ft_strlen(new_str) && to_add->has_pad)
+		update_content(to_add, new_str);
 }
 

@@ -6,25 +6,37 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 14:31:58 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 16:42:10 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/20 22:26:20 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "ft_printf.h"
+
+void	add_letter(char s, char **str_to_print)
+{
+	char *new;
+
+	if (*str_to_print == NULL)
+		*str_to_print = ft_strdup(&s);
+	else
+	{
+		new = ft_strjoin(*str_to_print, &s);
+		free(*str_to_print);
+		*str_to_print = new;
+	}
+}
 
 void	handle_padding(char *s, node *to_add, va_list ap)
 {
 	int		i;
 	char	*str_len;
-	int		int_len;
 
 	if (to_add->from_arg)
 		to_add->pad_len = va_arg(ap, int);
 	else
 	{
 		i = 0;
-		while (ft_is_numeric(s[to_add->i]))
+		while (ft_isdigit(s[to_add->i]))
 		{
 			to_add->i++;
 			i++;
@@ -41,7 +53,7 @@ void	handle_types(char *s, node *to_add, va_list ap)
 {
 	if (!s[to_add->i])
 		return ;
-	else if (ft_is_numeric(s[to_add->i]) && !to_add->from_arg)
+	else if (ft_isdigit(s[to_add->i]) && !to_add->from_arg)
 		handle_padding(s, to_add, ap);
 	else if (s[to_add->i] == 'd')
 		handle_d(s, to_add, ap);
@@ -63,7 +75,7 @@ void	handle_cases(char *s, node *to_add, va_list ap)
 	else if (s[to_add->i] == '.')
 		handle_dot(to_add);
 	else
-		handle_type(s, to_add, ap);
+		handle_types(s, to_add, ap);
 
 	// need to check another ignored case if 0 is present and has precision
 }
