@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 14:31:58 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 13:15:16 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/20 16:42:10 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,8 @@ void	handle_types(char *s, node *to_add, va_list ap)
 		return ;
 	else if (ft_is_numeric(s[to_add->i]) && !to_add->from_arg)
 		handle_padding(s, to_add, ap);
-	else if (s[to_add->i] == 'c')
-		handle_c(to_add);
-	else if (s[to_add->i] == 's')
-		handle_s(to_add);
-	else if (s[to_add->i] == 'p')
-		handle_p(to_add);
 	else if (s[to_add->i] == 'd')
-		handle_d(to_add);
-	else if (s[to_add->i] == 'i')
-		handle_i(to_add);
-	else if (s[to_add->i] == 'u')
-		handle_u(to_add);
-	else if (s[to_add->i] == 'x')
-		handle_x(to_add);
-	else if (s[to_add->i] == 'X')
-		handle_X(to_add);
+		handle_d(s, to_add, ap);
 }
 
 void	handle_cases(char *s, node *to_add, va_list ap)
