@@ -2,5 +2,8 @@
 
 int	main(void)
 {
-	printf("Hello %0.10d", 5);
+	printf("Hello %*d", ,"12", 15);
 }
+
+
+// type S Characters are printed until a null character is found.

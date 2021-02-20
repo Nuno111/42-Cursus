@@ -1,45 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers_dependents.c                               :+:      :+:    :+:   */
+/*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 10:57:27 by ngregori         ###   ########.fr       */
+/*   Created: 2021/02/20 10:57:03 by ngregori          #+#    #+#             */
+/*   Updated: 2021/02/20 13:27:28 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "ft_printf.h"
 
-void	handle_zero(char *s, node *to_add)
+void	handle_d(char *s, node *to_add, va_list ap)
 {
-	if (s[to_add->i - 1] != '-')
-	{
+	//conditions of padding t be handled here
+	if (to_add->pad_len > 0)
 		to_add->has_pad = TRUE;
-		to_add->i++;
-	}
-	else
-	{
-		to_add->has_pad = TRUE;
-		to_add->pad_is_zero = TRUE;
-		to_add->left_align = FALSE;
-		to_add->i++;
-	}
+	if (to_add->from_arg)
+		handle_padding(s, to_add);
+	to_add->content = ft_itoa(va_arg(ap, int));
 }
-
-void	handle_asterisk(node *to_add)
-{
-		to_add->has_pad = TRUE;
-		to_add->from_arg = TRUE;
-		to_add->i++;
-}
-
-void	handle_dot(node *to_add)
-{
-	to_add->pad_is_zero = TRUE;
-	to_add->has_pad = TRUE;
-	to_add->i++;
-}
-

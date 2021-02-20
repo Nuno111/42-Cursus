@@ -7,6 +7,7 @@ typedef int bool;
 # define TRUE 1
 # define FALSE 0
 
+
 typedef struct		node_t
 {
     char            *content;
@@ -18,6 +19,7 @@ typedef struct		node_t
     bool            pad_is_zero;
 	bool			done;
 	bool			can_trunc;
+	char			type;
 }					node;
 
 

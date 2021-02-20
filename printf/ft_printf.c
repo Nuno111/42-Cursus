@@ -6,16 +6,17 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/19 21:45:24 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/20 12:46:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf/ft_printf.h"
 
-int		manage_node(char *str_to_print, char *s, va_list ap, int *count, int i)
+int		manage_node(char *str_to_print, char *s, va_list ap, int i)
 {
 	node to_add;
+	char *new_str;
 
 	to_add.i = i;
 	to_add.has_pad = FALSE;
@@ -25,13 +26,19 @@ int		manage_node(char *str_to_print, char *s, va_list ap, int *count, int i)
 	to_add.from_arg = FALSE;
 	to_add.done = FALSE;
 	while (to_add.done != TRUE)
-		handle_cases(s, &to_add);
+		handle_cases(s, &to_add, ap);
 	if (to_add.content)
+	{
+		new_str = ft_strjoin(str_to_print, to_add.content);
 		free(to_add.content);
+		if (str_to_print)
+			free(str_to_print);
+		str_to_print = new_str;
+	}
 	return (to_add.i);
 }
 
-int		iterate_string(char *str_to_print, char *s, va_list ap, int *count)
+int		iterate_string(char *str_to_print, char *s, va_list ap)
 {
 	int	i;
 	int length;
@@ -42,11 +49,11 @@ int		iterate_string(char *str_to_print, char *s, va_list ap, int *count)
 	{
 		if (s[i] != '%' || (s[i] == '%' && s[i - 1] == '%'))
 		{
-			add_letter(s[i], count, str_to_print);
+			add_letter(s[i], str_to_print);
 			i++;
 		}
 		else if (s[i] == '%' && s[i - 1] != '%')
-			i = manage_node(str_to_print, s[++i], ap, &count, i);
+			i = manage_node(str_to_print, s[++i], ap, i);
 		else
 			i++;
 		if (i < 0)
