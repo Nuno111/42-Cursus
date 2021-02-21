@@ -14,15 +14,17 @@ HEADER = ft_printf/ft_printf.h
 
 LIB_DEP = libft/libft.a
 
-all : $(CHECK_DEP) $(NAME)
+A = $(wildcard libft/*.o)
 
-$(CHECK_DEP) :
+all : $(LIB_DEP) $(NAME)
+
+$(LIB_DEP) :
 	$(MAKE) -C libft
 
 $(NAME) : $(DST)
-	ar $(LIB_FLAGS) $@ $^ $(LIB_DEP)
+	ar $(LIB_FLAGS) $@ $^ $(A)
 
 %.o : %.c $(HEADER)
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) -I libft $< -o $@
 
-
+.PHONY: $(LIB_DEP)
