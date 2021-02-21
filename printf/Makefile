@@ -28,3 +28,13 @@ $(NAME) : $(DST) $(DEP_DST)
 
 libft/%.o : libft/%.c $(DEP_HEADER)
 	$(CC) $(CFLAGS) $< -o $@
+
+clean :
+	rm -f $(DST) $(DEP_DST)
+
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all
+
+.PHONY : all clean fclean re
