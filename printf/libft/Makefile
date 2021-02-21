@@ -1,5 +1,3 @@
-NAME = libft.a
-
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
@@ -20,21 +18,17 @@ ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstm
 ft_lstnew.c ft_lstsize.c ft_strcat.c ft_isspace.c ft_strnew.c\
 ft_freearrays.c ft_strchrindex.c ft_putchar.c ft_putnbr.c
 
-DST = $(SRC:.c=.o)
+NAME = $(SRC:.c=.o)
 
-$(NAME) : $(DST)
-	$(LIBOPT) $@ $^
+all : $(NAME)
 
 %.o : %.c $(LIB)
 	$(CC) $(OPT) $(CFLAGS) $<
 
-all : $(NAME)
-
 clean :
-	rm -f $(DST) *.out
+	rm -f $(NAME)
 
 fclean : clean
-	rm -f $(NAME)
 
 re : fclean all
 

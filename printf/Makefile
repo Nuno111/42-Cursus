@@ -1,8 +1,8 @@
 NAME = libftprintf.a
 
-SRC = $(wildcard ft_printf/*.c)
+HEADER = ft_printf/ft_printf.h
 
-DST = $(SRC:.c=.o)
+DEP_HEADER = libft/libft.h
 
 CC = gcc
 
@@ -10,21 +10,21 @@ CFLAGS =  -c -g -Wall -Werror -Wextra
 
 LIB_FLAGS = -rcs
 
-HEADER = ft_printf/ft_printf.h
+SRC = $(wildcard ft_printf/*.c)
 
-LIB_DEP = libft/libft.a
+DST = $(SRC:.c=.o)
 
-A = $(wildcard libft/*.o)
+DEP_SRC = $(wildcard libft/*.c)
 
-all : $(LIB_DEP) $(NAME)
+DEP_DST = $(DEP_SRC:.c=.o)
 
-$(LIB_DEP) :
-	$(MAKE) -C libft
+all : $(NAME)
 
-$(NAME) : $(DST)
-	ar $(LIB_FLAGS) $@ $^ $(A)
+$(NAME) : $(DST) $(DEP_DST)
+	ar $(LIB_FLAGS) $@ $^
 
 %.o : %.c $(HEADER)
-	$(CC) $(CFLAGS) -I libft $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
-.PHONY: $(LIB_DEP)
+libft/%.o : libft/%.c $(DEP_HEADER)
+	$(CC) $(CFLAGS) $< -o $@
