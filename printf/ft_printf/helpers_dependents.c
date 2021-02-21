@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 22:26:49 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/21 18:57:46 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,17 @@ void	handle_dot(node *to_add)
 	to_add->pad_is_zero = TRUE;
 	to_add->has_pad = TRUE;
 	to_add->i++;
+}
+
+int		handle_percent(int index, char *s, char **str_to_print, va_list ap)
+{
+	if (s[index + 1] == '%')
+	{
+		add_letter(s[index], str_to_print);
+		return (index += 2);
+	}
+	else if (s[index + 1])
+		index = manage_node(*str_to_print, s, ap, index++);
+	return (++index);
 }
 

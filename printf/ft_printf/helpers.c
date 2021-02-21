@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 14:31:58 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 22:26:20 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/21 17:47:01 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ void	add_letter(char s, char **str_to_print)
 	char *new;
 
 	if (*str_to_print == NULL)
-		*str_to_print = ft_strdup(&s);
-	else
 	{
-		new = ft_strjoin(*str_to_print, &s);
-		free(*str_to_print);
-		*str_to_print = new;
+		*str_to_print = ft_strdup("");
 	}
+	new = ft_strjoin_c(*str_to_print, s);
+	free(*str_to_print);
+	*str_to_print = new;
 }
 
 void	handle_padding(char *s, node *to_add, va_list ap)

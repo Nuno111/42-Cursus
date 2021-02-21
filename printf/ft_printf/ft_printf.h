@@ -22,6 +22,7 @@ typedef struct		node_t
 	char			type;
 }					node;
 
+int		handle_percent(int index, char *s, char **str_to_print, va_list ap);
 void	add_letter(char s, char **str_to_print);
 int		manage_node(char *str_to_print, char *s, va_list ap, int i);
 int		iterate_string(char **str_to_print, char *s, va_list ap);

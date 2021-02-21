@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 23:27:05 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/21 18:57:25 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,13 @@ int		iterate_string(char **str_to_print, char *s, va_list ap)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] != '%' /*|| (s[i] == '%' && s[i - 1] == '%')*/)
+		if (s[i] != '%')
 		{
 			add_letter(s[i], str_to_print);
 			i++;
 		}
-		else if (s[i] == '%' && s[i - 1] != '%')
-		{
-			i++;
-			i = manage_node(*str_to_print, &s[i], ap, i);
-		}
 		else
-			i++;
+			i = handle_percent(i, s, str_to_print, ap);
 		if (i < 0)
 			return (-1);
 		else if (i > length)
@@ -71,6 +66,7 @@ int		ft_printf(const char *s, ...)
 	va_list ap;
 	char *str_to_print;
 	int status;
+	int	length;
 
 	str_to_print = NULL;
 	if (!s)
@@ -78,7 +74,15 @@ int		ft_printf(const char *s, ...)
 	va_start(ap, s);
 	status = iterate_string(&str_to_print, (char *)s, ap);
 	va_end(ap);
-
+	if (status < 0)
+		return (status);
+	if (str_to_print)
+	{
+		ft_putstr_fd(str_to_print, 0);
+		length = ft_strlen(str_to_print);
+		free(str_to_print);
+		return (length);
+	}
 	return (status);
 }
 
