@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 10:57:03 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/20 22:26:55 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/21 23:36:29 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	update_content(node *to_add, char *new_str)
 		ft_memset(padding, '0', i);
 	else
 		ft_memset(padding, ' ', i);
+	padding[i] = '\0';
 	to_add->content = ft_strjoin(padding, new_str);
 	to_add->done = 1;
 	free(padding);
 	free(new_str);
-
 }
 
 void	handle_d(char *s, node *to_add, va_list ap)
@@ -47,5 +47,10 @@ void	handle_d(char *s, node *to_add, va_list ap)
 	new_str = ft_itoa(va_arg(ap, int));
 	if (to_add->pad_len > (int)ft_strlen(new_str) && to_add->has_pad)
 		update_content(to_add, new_str);
+	else
+	{
+		to_add->content = new_str;
+		to_add->done = 1;
+	}
 }
 

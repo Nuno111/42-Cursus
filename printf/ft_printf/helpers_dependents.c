@@ -6,15 +6,15 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/21 18:57:46 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/21 23:19:28 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	handle_zero(char *s, node *to_add)
+void	handle_zero(char *s, node *to_add, va_list ap)
 {
-	if (s[to_add->i - 1] != '-')
+	if (s[to_add->i - 1] == '-')
 	{
 		to_add->has_pad = TRUE;
 		to_add->i++;
@@ -26,6 +26,7 @@ void	handle_zero(char *s, node *to_add)
 		to_add->left_align = FALSE;
 		to_add->i++;
 	}
+	handle_padding(s, to_add, ap);
 }
 
 void	handle_asterisk(node *to_add)
@@ -50,7 +51,7 @@ int		handle_percent(int index, char *s, char **str_to_print, va_list ap)
 		return (index += 2);
 	}
 	else if (s[index + 1])
-		index = manage_node(*str_to_print, s, ap, index++);
+		index = manage_node(str_to_print, s, ap, ++index);
 	return (++index);
 }
 

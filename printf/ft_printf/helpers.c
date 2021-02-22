@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 14:31:58 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/21 17:47:01 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/21 23:31:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ void	handle_padding(char *s, node *to_add, va_list ap)
 	else
 	{
 		i = 0;
-		while (ft_isdigit(s[to_add->i]))
-		{
-			to_add->i++;
+		while (ft_isdigit(s[to_add->i + i]))
 			i++;
-		}
 		str_len = ft_substr(s, to_add->i, i);
 		to_add->pad_len = ft_atoi(str_len);
 		free(str_len);
 		// need to add on types, if pane_len > 0 then to_add->has_pad = TRUE
 		// depending on type
 	}
+	to_add->i++;
+	handle_types(s, to_add, ap);
+	to_add->done = 1;
 }
 
 void	handle_types(char *s, node *to_add, va_list ap)
@@ -68,7 +68,7 @@ void	handle_cases(char *s, node *to_add, va_list ap)
 		to_add->i++;
 	}
 	else if (s[to_add->i] == '0')
-		handle_zero(s, to_add);
+		handle_zero(s, to_add, ap);
 	else if (s[to_add->i] == '*')
 		handle_asterisk(to_add);
 	else if (s[to_add->i] == '.')

@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/21 18:57:25 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/21 23:28:15 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		manage_node(char *str_to_print, char *s, va_list ap, int i)
+int		manage_node(char **str_to_print, char *s, va_list ap, int i)
 {
 	node to_add;
 	char *new_str;
@@ -24,15 +24,16 @@ int		manage_node(char *str_to_print, char *s, va_list ap, int i)
 	to_add.pad_len = FALSE;
 	to_add.from_arg = FALSE;
 	to_add.done = FALSE;
+	to_add.content = NULL;
 	while (to_add.done != TRUE)
 		handle_cases(s, &to_add, ap);
 	if (to_add.content)
 	{
-		new_str = ft_strjoin(str_to_print, to_add.content);
+		new_str = ft_strjoin(*str_to_print, to_add.content);
 		free(to_add.content);
-		if (str_to_print)
-			free(str_to_print);
-		str_to_print = new_str;
+		if (*str_to_print)
+			free(*str_to_print);
+		*str_to_print = new_str;
 	}
 	return (to_add.i);
 }
@@ -78,9 +79,9 @@ int		ft_printf(const char *s, ...)
 		return (status);
 	if (str_to_print)
 	{
-		ft_putstr_fd(str_to_print, 0);
-		length = ft_strlen(str_to_print);
+		ft_putstr(str_to_print);
 		free(str_to_print);
+		length = ft_strlen(str_to_print);
 		return (length);
 	}
 	return (status);
