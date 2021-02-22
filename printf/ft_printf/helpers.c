@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 14:31:58 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/22 15:37:54 by ngregori         ###   ########.fr       */
+/*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
+/*   Updated: 2021/02/22 18:36:28 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "ft_printf.h"
 
@@ -34,7 +35,6 @@ void	update_content(char *new_str, t_node *node)
 		node->content = ft_strjoin(new_str, padding);
 	else
 		node->content = ft_strjoin(padding, new_str);
-	node->done = 1;
 	free(padding);
 	free(new_str);
 }
