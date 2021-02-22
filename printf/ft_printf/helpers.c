@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 14:31:58 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/22 11:41:14 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/22 12:41:57 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	handle_cases(char *s, node *to_add, va_list ap)
 		to_add->i++;
 	}
 	else if (s[to_add->i] == '0')
-		handle_zero(s, to_add, ap);
+		handle_zero(s, to_add);
 	else if (s[to_add->i] == '*')
 		handle_asterisk(to_add);
 	else if (s[to_add->i] == '.')

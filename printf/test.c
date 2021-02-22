@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:54:21 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/22 11:42:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/22 12:42:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	main(void)
 {
-	ft_printf("number :%05dd%%, number 2:%-*d\n", 5, 10, 8);
-	printf("number :%05dd%%, number 2:%-*d\n", 5, 10, 8);
+	ft_printf("%05d\n", 5, 3);
+	printf("%05d\n", 5);
 }
