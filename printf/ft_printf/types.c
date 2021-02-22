@@ -6,54 +6,33 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 10:57:03 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/22 12:41:03 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/22 15:14:23 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	update_content(node *to_add, char *new_str)
-{
-	char 	*padding;
-	int		i;
-	int		padding_length;
-
-	i = 0;
-	padding_length = to_add->pad_len - ft_strlen(new_str);
-	while (i < padding_length)
-		i++;
-	padding = malloc(sizeof(char) * i + 1);
-	if (!padding)
-		return ;
-	if (to_add->pad_is_zero)
-		ft_memset(padding, '0', i);
-	else
-		ft_memset(padding, ' ', i);
-	padding[i] = '\0';
-	if (to_add->left_align)
-		to_add->content = ft_strjoin(new_str, padding);
-	else
-		to_add->content = ft_strjoin(padding, new_str);
-	to_add->done = 1;
-	free(padding);
-	free(new_str);
-}
-
-void	handle_d(char *s, node *to_add, va_list ap)
+void	handle_d(char *s, t_node *node, va_list ap)
 {
 	char *new_str;
 
-	if (to_add->pad_len > 0)
-		to_add->has_pad = TRUE;
-	if (to_add->from_arg)
-		handle_padding(s, to_add, ap);
+	if (node->pad_len > 0)
+		node->has_pad = TRUE;
+	if (node->from_arg)
+		handle_padding(s, node, ap);
 	new_str = ft_itoa(va_arg(ap, int));
-	if (to_add->pad_len > (int)ft_strlen(new_str) && to_add->has_pad)
-		update_content(to_add, new_str);
+	if (node->pad_len > (int)ft_strlen(new_str) && node->has_pad)
+		update_content(new_str, node);
+	else if (node->pad_len < (int)ft_strlen(new_str) && node->can_trunc)
+	{
+		node->content = truncate_str(new_str, node);
+		free(new_str);
+	}
 	else
 	{
-		to_add->content = new_str;
-		to_add->done = 1;
+		node->content = new_str;
+		free(new_str);
+		node->done = 1;
 	}
 }
 
