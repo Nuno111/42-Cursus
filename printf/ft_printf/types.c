@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 10:57:03 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/21 23:36:29 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/22 10:27:05 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	update_content(node *to_add, char *new_str)
 	else
 		ft_memset(padding, ' ', i);
 	padding[i] = '\0';
-	to_add->content = ft_strjoin(padding, new_str);
+	if (to_add->left_align)
+		to_add->content = ft_strjoin(new_str, padding);
+	else
+		to_add->content = ft_strjoin(padding, new_str);
 	to_add->done = 1;
 	free(padding);
 	free(new_str);
