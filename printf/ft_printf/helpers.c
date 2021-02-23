@@ -6,12 +6,30 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/22 18:36:28 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/23 23:21:18 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
+
+char	*get_width(char *new_str, t_node *node)
+{
+	char	*width;
+	int		width_len;
+
+	width_len = node->width_len - ft_strlen(new_str);
+	width = malloc(sizeof(char) * width_len + 1);
+	if (!width)
+		return (NULL);
+	if (node->pad_is_zero)
+		ft_memset(width, '0', width_len);
+	else
+		ft_memset(width, ' ', width_len);
+	width[width_len] = '\0';
+
+	return (width);
+}
 
 void	update_content(char *new_str, t_node *node)
 {
@@ -19,18 +37,6 @@ void	update_content(char *new_str, t_node *node)
 	int		i;
 	int		padding_length;
 
-	i = 0;
-	padding_length = node->pad_len - ft_strlen(new_str);
-	while (i < padding_length)
-		i++;
-	padding = malloc(sizeof(char) * i + 1);
-	if (!padding)
-		return ;
-	if (node->pad_is_zero)
-		ft_memset(padding, '0', i);
-	else
-		ft_memset(padding, ' ', i);
-	padding[i] = '\0';
 	if (node->left_align)
 		node->content = ft_strjoin(new_str, padding);
 	else
@@ -45,13 +51,15 @@ int		manage_node(char *s, char **to_print, va_list ap, int i)
 	char *new_str;
 
 	node.i = i;
-	node.has_pad = FALSE;
+	node.has_width = FALSE;
+	node.has_prec = FALSE;
 	node.pad_is_zero = FALSE;
 	node.left_align = FALSE;
-	node.pad_len = FALSE;
 	node.from_arg = FALSE;
 	node.done = FALSE;
 	node.content = NULL;
+	node.prec_len = 0;
+	node.width_len = 0;
 	while (node.done != TRUE)
 		handle_cases(s, &node, ap);
 	if (node.content)
