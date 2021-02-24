@@ -24,6 +24,7 @@ typedef struct		s_node
 	char			type;
 }					t_node;
 
+char	*truncate_str(char *new_str, t_node *node);
 char	*get_width(char *new_str, t_node *node);
 void	handle_hyphen(t_node *node);
 int		handle_percent(char *s, char **to_print, va_list ap, int index);
@@ -38,7 +39,7 @@ void	handle_zero(t_node *node);
 void	handle_asterisk(char *s, t_node *node, va_list ap);
 void	handle_dot(t_node *node);
 void	update_content(char *new_str, t_node *node);
-void	handle_d(char *s, t_node *node, va_list ap);
+void	handle_d(t_node *node, va_list ap);
 
 
 #endif

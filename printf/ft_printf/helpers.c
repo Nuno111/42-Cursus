@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/23 23:21:18 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/24 01:02:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,36 @@ char	*get_width(char *new_str, t_node *node)
 	return (width);
 }
 
+char	*truncate_str(char *new_str, t_node *node)
+{
+	char *truncated;
+
+	truncated = ft_substr(new_str, 0, node->prec_len);
+	free(new_str);
+	return (truncated);
+}
+
 void	update_content(char *new_str, t_node *node)
 {
-	char 	*padding;
-	int		i;
-	int		padding_length;
+	char	*width;
+	int		length;
 
-	if (node->left_align)
-		node->content = ft_strjoin(new_str, padding);
+	if (node->can_trunc)
+		new_str = truncate_str(new_str, node);
+	length = ft_strlen(new_str);
+	if (node->has_width)
+	{
+		width = get_width(new_str, node);
+		if (length > node->width_len)
+			node->content = new_str;
+		else if (node->left_align)
+			node->content = ft_strjoin(new_str, width);
+		else
+			node->content = ft_strjoin(width, new_str);
+		free(width);
+	}
 	else
-		node->content = ft_strjoin(padding, new_str);
-	free(padding);
+		node->content = new_str;
 	free(new_str);
 }
 
