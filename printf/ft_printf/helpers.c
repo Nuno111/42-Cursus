@@ -6,61 +6,65 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 01:02:21 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/24 21:02:53 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
 
-char	*get_width(char *new_str, t_node *node)
+char	*get_filler(char *new_str, t_node *node, int *len)
 {
-	char	*width;
-	int		width_len;
+	char	*filler;
+	int		new_len;
 
-	width_len = node->width_len - ft_strlen(new_str);
-	width = malloc(sizeof(char) * width_len + 1);
-	if (!width)
+	new_len = *len - ft_strlen(new_str);
+	filler = malloc(sizeof(char) * new_len + 1);
+	if (!filler)
 		return (NULL);
 	if (node->pad_is_zero)
-		ft_memset(width, '0', width_len);
+		ft_memset(filler, '0', new_len);
 	else
-		ft_memset(width, ' ', width_len);
-	width[width_len] = '\0';
-
-	return (width);
+		ft_memset(filler, ' ', new_len);
+	filler[new_len] = '\0';
+	return (filler);
 }
 
 char	*truncate_str(char *new_str, t_node *node)
 {
-	char *truncated;
+	char *new;
 
-	truncated = ft_substr(new_str, 0, node->prec_len);
+	new = ft_substr(new_str, 0, node->prec_len);
 	free(new_str);
-	return (truncated);
+	return (new);
 }
 
 void	update_content(char *new_str, t_node *node)
 {
-	char	*width;
+	char	*filler;
 	int		length;
+	char	*tmp;
+	int		*b;
 
-	if (node->can_trunc)
+	if (node->can_trunc && ft_strlen(new_str) < node->prec_len)
 		new_str = truncate_str(new_str, node);
 	length = ft_strlen(new_str);
-	if (node->has_width)
-	{
-		width = get_width(new_str, node);
-		if (length > node->width_len)
-			node->content = new_str;
-		else if (node->left_align)
-			node->content = ft_strjoin(new_str, width);
-		else
-			node->content = ft_strjoin(width, new_str);
-		free(width);
-	}
-	else
+	if (node->prec_len > node->width_len)
+		b = &node->prec_len;
+	else if (node->has_width)
+		b = &node->width_len;
+	filler = get_filler(new_str, node, b);
+	if (length > *b)
 		node->content = new_str;
+	else if (node->left_align)
+		node->content = ft_strjoin(new_str, filler);
+	else if (node->is_neg)
+	{
+		tmp = ft_strjoin('-', filler);
+		node->content = ft_strjoin(tmp, new_str);
+		free(tmp);
+	}
+	free(filler);
 	free(new_str);
 }
 

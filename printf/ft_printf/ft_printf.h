@@ -21,11 +21,12 @@ typedef struct		s_node
     bool            pad_is_zero;
 	bool			done;
 	bool			can_trunc;
+	bool			is_neg;
 	char			type;
 }					t_node;
 
 char	*truncate_str(char *new_str, t_node *node);
-char	*get_width(char *new_str, t_node *node);
+char	*get_filler(char *new_str, t_node *node, int *len);
 void	handle_hyphen(t_node *node);
 int		handle_percent(char *s, char **to_print, va_list ap, int index);
 void	add_letter(char s, char **to_print);
