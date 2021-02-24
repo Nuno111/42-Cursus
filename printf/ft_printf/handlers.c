@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:29:09 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 11:36:20 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/24 21:34:28 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	handle_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool fro
 		free(str_len);
 		// need to add on types, if pane_len > 0 then node->has_pad = TRUE
 		// depending on type
-		node->i++;
+		node->i += i;
 	}
 	if (*w_or_p_len < 0)
 	{

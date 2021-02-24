@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 21:05:10 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/24 21:41:53 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ void	update_content(char *new_str, t_node *node)
 		new_str = truncate_str(new_str, node);
 	length = ft_strlen(new_str);
 	if (node->prec_len > node->width_len)
+	{
 		b = &node->prec_len;
+		node->pad_is_zero = TRUE;
+	}
 	else if (node->has_width)
 		b = &node->width_len;
 	filler = get_filler(new_str, node, b);
