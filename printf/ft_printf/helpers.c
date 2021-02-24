@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 21:02:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/24 21:05:10 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	update_content(char *new_str, t_node *node)
 	char	*tmp;
 	int		*b;
 
-	if (node->can_trunc && ft_strlen(new_str) < node->prec_len)
+	if (node->can_trunc && (int)ft_strlen(new_str) < node->prec_len)
 		new_str = truncate_str(new_str, node);
 	length = ft_strlen(new_str);
 	if (node->prec_len > node->width_len)
@@ -60,7 +60,7 @@ void	update_content(char *new_str, t_node *node)
 		node->content = ft_strjoin(new_str, filler);
 	else if (node->is_neg)
 	{
-		tmp = ft_strjoin('-', filler);
+		tmp = ft_strjoin("-", filler);
 		node->content = ft_strjoin(tmp, new_str);
 		free(tmp);
 	}
