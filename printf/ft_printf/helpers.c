@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 21:41:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/24 23:42:01 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,25 @@ char	*truncate_str(char *new_str, t_node *node)
 	return (new);
 }
 
-void	update_content(char *new_str, t_node *node)
+void	manage_padding(char *new_str, t_node *node)
 {
+	size_t	length;
+	int		*wid_or_pre;
 	char	*filler;
-	int		length;
 	char	*tmp;
-	int		*b;
 
-	if (node->can_trunc && (int)ft_strlen(new_str) < node->prec_len)
+	if (node->can_trunc && (int)ft_strlen(new_str) > node->prec_len)
 		new_str = truncate_str(new_str, node);
 	length = ft_strlen(new_str);
 	if (node->prec_len > node->width_len)
 	{
-		b = &node->prec_len;
+		wid_or_pre = &node->prec_len;
 		node->pad_is_zero = TRUE;
 	}
 	else if (node->has_width)
-		b = &node->width_len;
-	filler = get_filler(new_str, node, b);
-	if (length > *b)
+		wid_or_pre = &node->width_len;
+	filler = get_filler(new_str, node, wid_or_pre);
+	if ((int)length > *wid_or_pre)
 		node->content = new_str;
 	else if (node->left_align)
 		node->content = ft_strjoin(new_str, filler);
@@ -67,8 +67,21 @@ void	update_content(char *new_str, t_node *node)
 		node->content = ft_strjoin(tmp, new_str);
 		free(tmp);
 	}
+	else
+		node->content = new_str;
 	free(filler);
 	free(new_str);
+}
+
+
+void	update_content(char *new_str, t_node *node)
+{
+	if (node->has_prec || node->has_width)
+		manage_padding(new_str, node);
+	else if (node->can_trunc && (int)ft_strlen(new_str) < node->prec_len)
+		new_str = truncate_str(new_str, node);
+	else
+		node->content = new_str;
 }
 
 int		manage_node(char *s, char **to_print, va_list ap, int i)
@@ -134,4 +147,41 @@ void	add_letter(char s, char **to_print)
 	new = ft_strjoin_c(*to_print, s);
 	free(*to_print);
 	*to_print = new;
+}
+
+void	update_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool from_arg)
+{
+	int i;
+	char *str_len;
+
+	if (!node->has_prec)
+		node->has_width = TRUE;
+	i = 0;
+	if (from_arg)
+		*w_or_p_len = va_arg(ap, int);
+	else
+	{
+		i = 0;
+		while (ft_isdigit(s[node->i + i]))
+			i++;
+		str_len = ft_substr(s, node->i, i);
+		*w_or_p_len = ft_atoi(str_len);
+		free(str_len);
+		// need to add on types, if pane_len > 0 then node->has_pad = TRUE
+		// depending on type
+		node->i += i;
+	}
+	if (*w_or_p_len < 0)
+	{
+		if (!node->has_prec)
+		{
+			node->left_align = TRUE;
+			*w_or_p_len *= -1;
+		}
+		else
+		{
+			node->has_prec = FALSE;
+			*w_or_p_len = 0;
+		}
+	}
 }

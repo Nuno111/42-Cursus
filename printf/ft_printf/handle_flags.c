@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 00:18:32 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/24 23:09:57 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	handle_asterisk(char *s, t_node *node, va_list ap)
 		if (!(node->has_prec))
 		{
 			node->has_width = TRUE;
-			handle_padding(s, node, ap, &node->width_len, TRUE);
+			update_padding(s, node, ap, &node->width_len, TRUE);
 		}
 		else
-			handle_padding(s, node, ap, &node->prec_len, TRUE);
+			update_padding(s, node, ap, &node->prec_len, TRUE);
 		node->i++;
 }
 

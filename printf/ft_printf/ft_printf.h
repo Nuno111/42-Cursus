@@ -25,6 +25,7 @@ typedef struct		s_node
 	char			type;
 }					t_node;
 
+void	manage_padding(char *new_str, t_node *node);
 char	*truncate_str(char *new_str, t_node *node);
 char	*get_filler(char *new_str, t_node *node, int *len);
 void	handle_hyphen(t_node *node);
@@ -33,7 +34,7 @@ void	add_letter(char s, char **to_print);
 int		manage_node( char *s, char **to_print, va_list ap, int i);
 int		iterate_string(char *s, char **to_print, va_list ap);
 int		ft_printf(const char *s, ...);
-void	handle_padding(char *s, t_node *node, va_list ap, int *w_or_l, bool from_arg);
+void	update_padding(char *s, t_node *node, va_list ap, int *w_or_l, bool from_arg);
 void	handle_types(char *s, t_node *node, va_list ap);
 void	handle_cases(char *s, t_node *node, va_list ap);
 void	handle_zero(t_node *node);
