@@ -6,53 +6,66 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/25 01:42:03 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 20:15:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	manage_padding(char *new_str, t_node *node)
+void	handle_d(t_node *node, va_list ap)
 {
-	size_t	length;
-	int		*wid_or_pre;
-	char	*filler;
-	char	*tmp;
+	char	*new_str;
+	int		arg;
 
-	if (node->can_trunc && (int)ft_strlen(new_str) > node->prec_len)
-		new_str = truncate_str(new_str, node);
-	length = ft_strlen(new_str);
-	if (node->prec_len >= node->width_len)
+	new_str = NULL;
+	arg = va_arg(ap, int);
+	if (arg < 0)
 	{
-		wid_or_pre = &node->prec_len;
-		node->pad_is_zero = TRUE;
+		node->is_neg = TRUE;
+		arg *= -1;
 	}
-	else if (node->has_width)
-		wid_or_pre = &node->width_len;
-	filler = get_filler(new_str, node, wid_or_pre);
-	if ((int)length > *wid_or_pre)
-		node->content = new_str;
-	else if (node->left_align)
-		node->content = ft_strjoin(new_str, filler);
-	else if (node->is_neg)
-	{
-		tmp = ft_strjoin("-", filler);
-		node->content = ft_strjoin(tmp, new_str);
-		free(tmp);
-	}
+	new_str = ft_itoa(arg);
+	if (*new_str == '0' && node->width_len > 0 && !node->prec_len && node->has_width)
+		node->content = get_filler(new_str, node, &node->width_len);
+	else if (*new_str == '0' && !node->width_len && !node->prec_len)
+		node->done = 1;
 	else
-		node->content = new_str;
-	free(filler);
-	free(new_str);
+		update_content(new_str, node);
+	node->done = 1;
 }
 
 void	update_content(char *new_str, t_node *node)
 {
+	int		length;
+	char	*filler;
+	char	*tmp;
 
-	if (node->has_prec || node->has_width)
-		manage_padding(new_str, node);
-	else if (node->can_trunc && (int)ft_strlen(new_str) < node->prec_len)
-		new_str = truncate_str(new_str, node);
-	else
+	if (node->is_neg)
+		node->content = ft_strdup("-");
+	length = ft_strlen(new_str);
+	if (length > node->prec_len && length > node->width_len)
 		node->content = new_str;
+	else
+	{
+		if (node->has_prec && node->has_width)
+		{
+			if (node->prec_len >= node->width_len)
+				filler = get_filler(new_str, node, &node->prec_len);
+			else
+				filler = get_filler(new_str, node, &node->width_len);
+		}
+		if (filler)
+		{
+			if (node->is_neg)
+			{
+				tmp = ft_strjoin("-", filler);
+				node->content = ft_strjoin(tmp, new_str);
+				free(tmp);
+			}
+			else if (node->left_align)
+				node->content = ft_strjoin(new_str, filler);
+			else
+				node->content = ft_strjoin(filler, new_str);
+		}
+	}
 }
