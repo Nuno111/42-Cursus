@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/25 15:03:16 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 17:05:40 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,12 @@ int			get_next_line(int fd, char **line)
 	status = 1;
 	if (line == NULL || BUFFER_SIZE <= 0 || fd < 0 || fd >= MAX_FD)
 		return (ERR);
+	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buffer)
+		return (ERR);
 	while (!ft_strchr(arr[fd], '\n') && status > 0)
-	{
-		buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-		if (!buffer)
-			return (ERR);
 		status = read_file(fd, arr, buffer);
-		free(buffer);
-	}
+	free(buffer);
 	if (status == ERR)
 		return (ERR);
 	else
