@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 23:42:01 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 01:01:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	manage_padding(char *new_str, t_node *node)
 	if (node->can_trunc && (int)ft_strlen(new_str) > node->prec_len)
 		new_str = truncate_str(new_str, node);
 	length = ft_strlen(new_str);
-	if (node->prec_len > node->width_len)
+	if (node->prec_len >= node->width_len)
 	{
 		wid_or_pre = &node->prec_len;
 		node->pad_is_zero = TRUE;
@@ -112,43 +112,6 @@ int		manage_node(char *s, char **to_print, va_list ap, int i)
 	return (node.i);
 }
 
-int		iterate_string(char *s, char **to_print, va_list ap)
-{
-	int	i;
-	int length;
-
-	length = ft_strlen(s);
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] != '%')
-		{
-			add_letter(s[i], to_print);
-			i++;
-		}
-		else
-			i = handle_percent(s, to_print, ap, i);
-		if (i < 0)
-			return (-1);
-		else if (i > length)
-			return (0);
-	}
-	return (0);
-}
-
-void	add_letter(char s, char **to_print)
-{
-	char *new;
-
-	if (*to_print == NULL)
-	{
-		*to_print = ft_strdup("");
-	}
-	new = ft_strjoin_c(*to_print, s);
-	free(*to_print);
-	*to_print = new;
-}
-
 void	update_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool from_arg)
 {
 	int i;
@@ -167,8 +130,6 @@ void	update_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool fro
 		str_len = ft_substr(s, node->i, i);
 		*w_or_p_len = ft_atoi(str_len);
 		free(str_len);
-		// need to add on types, if pane_len > 0 then node->has_pad = TRUE
-		// depending on type
 		node->i += i;
 	}
 	if (*w_or_p_len < 0)

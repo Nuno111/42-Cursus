@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 10:57:03 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 23:44:03 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 00:01:41 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	handle_d(t_node *node, va_list ap)
 	new_str = ft_itoa(arg);
 	if (*new_str == '0' && node->width_len > 0 && node->prec_len == 0)
 		node->content = get_filler(new_str, node, &node->width_len);
+	else if (*new_str == '0' && !node->width_len && !node->prec_len)
+		node->done = 1;
 	else
 		update_content(new_str, node);
 	node->done = 1;

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 23:09:57 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 01:08:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void	handle_zero(t_node *node)
 void	handle_asterisk(char *s, t_node *node, va_list ap)
 {
 		if (!(node->has_prec))
-		{
-			node->has_width = TRUE;
 			update_padding(s, node, ap, &node->width_len, TRUE);
-		}
 		else
 			update_padding(s, node, ap, &node->prec_len, TRUE);
 		node->i++;
@@ -48,16 +45,4 @@ void	handle_dot(t_node *node)
 {
 	node->has_prec = TRUE;
 	node->i++;
-}
-
-int		handle_percent(char *s, char **to_print, va_list ap, int index)
-{
-	if (s[index + 1] == '%')
-	{
-		add_letter(s[index], to_print);
-		return (index += 2);
-	}
-	else if (s[index + 1])
-		index = manage_node(s, to_print, ap, ++index);
-	return (++index);
 }

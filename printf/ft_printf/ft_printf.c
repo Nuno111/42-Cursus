@@ -6,11 +6,60 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/22 15:37:55 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 01:08:18 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int		handle_percent(char *s, char **to_print, va_list ap, int index)
+{
+	if (s[index + 1] == '%')
+	{
+		add_letter(s[index], to_print);
+		return (index += 2);
+	}
+	else if (s[index + 1])
+		index = manage_node(s, to_print, ap, ++index);
+	return (++index);
+}
+
+void	add_letter(char s, char **to_print)
+{
+	char *new;
+
+	if (*to_print == NULL)
+	{
+		*to_print = ft_strdup("");
+	}
+	new = ft_strjoin_c(*to_print, s);
+	free(*to_print);
+	*to_print = new;
+}
+
+int		iterate_string(char *s, char **to_print, va_list ap)
+{
+	int	i;
+	int length;
+
+	length = ft_strlen(s);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] != '%')
+		{
+			add_letter(s[i], to_print);
+			i++;
+		}
+		else
+			i = handle_percent(s, to_print, ap, i);
+		if (i < 0)
+			return (-1);
+		else if (i > length)
+			return (0);
+	}
+	return (0);
+}
 
 int		ft_printf(const char *s, ...)
 {

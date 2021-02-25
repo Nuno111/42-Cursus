@@ -22,7 +22,6 @@ typedef struct		s_node
 	bool			done;
 	bool			can_trunc;
 	bool			is_neg;
-	char			type;
 }					t_node;
 
 void	manage_padding(char *new_str, t_node *node);

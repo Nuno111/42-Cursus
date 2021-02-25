@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:29:09 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/24 23:36:30 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 01:09:06 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,4 @@ void	handle_cases(char *s, t_node *node, va_list ap)
 		update_padding(s, node, ap, &node->prec_len, FALSE);
 	else
 		handle_types(s, node, ap);
-	// need to check another ignored case if 0 is present and has precision
 }
