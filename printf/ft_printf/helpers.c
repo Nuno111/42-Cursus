@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/25 01:41:19 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 01:42:32 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*truncate_str(char *new_str, t_node *node)
 	free(new_str);
 	return (new);
 }
-
 
 void	update_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool from_arg)
 {
