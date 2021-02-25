@@ -6,83 +6,12 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/25 01:01:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 01:41:19 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
-
-char	*get_filler(char *new_str, t_node *node, int *len)
-{
-	char	*filler;
-	int		new_len;
-
-	new_len = *len - ft_strlen(new_str);
-	filler = malloc(sizeof(char) * new_len + 1);
-	if (!filler)
-		return (NULL);
-	if (node->pad_is_zero)
-		ft_memset(filler, '0', new_len);
-	else
-		ft_memset(filler, ' ', new_len);
-	filler[new_len] = '\0';
-	return (filler);
-}
-
-char	*truncate_str(char *new_str, t_node *node)
-{
-	char *new;
-
-	new = ft_substr(new_str, 0, node->prec_len);
-	free(new_str);
-	return (new);
-}
-
-void	manage_padding(char *new_str, t_node *node)
-{
-	size_t	length;
-	int		*wid_or_pre;
-	char	*filler;
-	char	*tmp;
-
-	if (node->can_trunc && (int)ft_strlen(new_str) > node->prec_len)
-		new_str = truncate_str(new_str, node);
-	length = ft_strlen(new_str);
-	if (node->prec_len >= node->width_len)
-	{
-		wid_or_pre = &node->prec_len;
-		node->pad_is_zero = TRUE;
-	}
-	else if (node->has_width)
-		wid_or_pre = &node->width_len;
-	filler = get_filler(new_str, node, wid_or_pre);
-	if ((int)length > *wid_or_pre)
-		node->content = new_str;
-	else if (node->left_align)
-		node->content = ft_strjoin(new_str, filler);
-	else if (node->is_neg)
-	{
-		tmp = ft_strjoin("-", filler);
-		node->content = ft_strjoin(tmp, new_str);
-		free(tmp);
-	}
-	else
-		node->content = new_str;
-	free(filler);
-	free(new_str);
-}
-
-
-void	update_content(char *new_str, t_node *node)
-{
-	if (node->has_prec || node->has_width)
-		manage_padding(new_str, node);
-	else if (node->can_trunc && (int)ft_strlen(new_str) < node->prec_len)
-		new_str = truncate_str(new_str, node);
-	else
-		node->content = new_str;
-}
 
 int		manage_node(char *s, char **to_print, va_list ap, int i)
 {
@@ -111,6 +40,33 @@ int		manage_node(char *s, char **to_print, va_list ap, int i)
 	}
 	return (node.i);
 }
+
+char	*get_filler(char *new_str, t_node *node, int *len)
+{
+	char	*filler;
+	int		new_len;
+
+	new_len = *len - ft_strlen(new_str);
+	filler = malloc(sizeof(char) * new_len + 1);
+	if (!filler)
+		return (NULL);
+	if (node->pad_is_zero)
+		ft_memset(filler, '0', new_len);
+	else
+		ft_memset(filler, ' ', new_len);
+	filler[new_len] = '\0';
+	return (filler);
+}
+
+char	*truncate_str(char *new_str, t_node *node)
+{
+	char *new;
+
+	new = ft_substr(new_str, 0, node->prec_len);
+	free(new_str);
+	return (new);
+}
+
 
 void	update_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool from_arg)
 {
