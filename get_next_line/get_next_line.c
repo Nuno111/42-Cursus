@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/13 01:14:20 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 14:19:25 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int			read_file(int fd, char **arr, char *buffer)
 	ssize_t	read_bytes;
 
 	read_bytes = read(fd, buffer, BUFFER_SIZE);
-	buffer[read_bytes] = '\0';
+	if (read_bytes < 0)
+		return (ERR);
 	if (read_bytes == 0)
 		return (EOFILE);
-	else if (read_bytes < 0)
-		return (ERR);
+	buffer[read_bytes] = '\0';
 	if (arr[fd] == NULL)
 		arr[fd] = ft_strdup(buffer);
 	else
@@ -80,7 +80,7 @@ int			update_line(int fd, char **arr, char **line)
 		if (arr[fd])
 		{
 			*line = ft_strdup(arr[fd]);
-			arr[fd] = NULL;
+			free(arr[fd]);
 		}
 		else
 			*line = ft_strdup("\0");
