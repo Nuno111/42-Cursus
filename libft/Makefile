@@ -38,7 +38,7 @@ bonus : $(DST) $(DST_BONUS)
 all : $(NAME)
 
 clean :
-	rm -f $(DST) $(DST_BONUS) *.so *.out
+	rm -f $(DST) $(DST_BONUS)
 
 fclean : clean
 	rm -f $(NAME)
