@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/13 00:24:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/25 19:00:30 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int			read_file(int fd, char **arr, char *buffer)
 	ssize_t	read_bytes;
 
 	read_bytes = read(fd, buffer, BUFFER_SIZE);
-	buffer[read_bytes] = '\0';
+	if (read_bytes < 0)
+		return (ERR);
 	if (read_bytes == 0)
 		return (EOFILE);
-	else if (read_bytes < 0)
-		return (ERR);
+	buffer[read_bytes] = '\0';
 	if (arr[fd] == NULL)
 		arr[fd] = ft_strdup(buffer);
 	else
@@ -80,6 +80,7 @@ int			update_line(int fd, char **arr, char **line)
 		if (arr[fd])
 		{
 			*line = ft_strdup(arr[fd]);
+			free(arr[fd]);
 			arr[fd] = NULL;
 		}
 		else
@@ -97,14 +98,12 @@ int			get_next_line(int fd, char **line)
 	status = 1;
 	if (line == NULL || BUFFER_SIZE <= 0 || fd < 0 || fd >= MAX_FD)
 		return (ERR);
+	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buffer)
+		return (ERR);
 	while (!ft_strchr(arr[fd], '\n') && status > 0)
-	{
-		buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-		if (!buffer)
-			return (ERR);
 		status = read_file(fd, arr, buffer);
-		free(buffer);
-	}
+	free(buffer);
 	if (status == ERR)
 		return (ERR);
 	else
