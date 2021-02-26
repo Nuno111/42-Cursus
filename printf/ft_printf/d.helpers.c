@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/25 20:15:00 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/26 23:08:32 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ void	handle_d(t_node *node, va_list ap)
 	new_str = NULL;
 	arg = va_arg(ap, int);
 	if (arg < 0)
-	{
 		node->is_neg = TRUE;
-		arg *= -1;
-	}
-	new_str = ft_itoa(arg);
+	new_str = ft_itoa(-arg);
 	if (*new_str == '0' && node->width_len > 0 && !node->prec_len && node->has_width)
 		node->content = get_filler(new_str, node, &node->width_len);
 	else if (*new_str == '0' && !node->width_len && !node->prec_len)
@@ -40,8 +37,6 @@ void	update_content(char *new_str, t_node *node)
 	char	*filler;
 	char	*tmp;
 
-	if (node->is_neg)
-		node->content = ft_strdup("-");
 	length = ft_strlen(new_str);
 	if (length > node->prec_len && length > node->width_len)
 		node->content = new_str;

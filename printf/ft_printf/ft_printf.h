@@ -24,6 +24,7 @@ typedef struct		s_node
 	bool			is_neg;
 }					t_node;
 
+void	handle_negative_wp(int *w_or_p_len, t_node *node);
 void	manage_padding(char *new_str, t_node *node);
 char	*truncate_str(char *new_str, t_node *node);
 char	*get_filler(char *new_str, t_node *node, int *len);
@@ -35,7 +36,7 @@ int		iterate_string(char *s, char **to_print, va_list ap);
 int		ft_printf(const char *s, ...);
 void	update_padding(char *s, t_node *node, va_list ap, int *w_or_l, bool from_arg);
 void	handle_types(char *s, t_node *node, va_list ap);
-void	handle_cases(char *s, t_node *node, va_list ap);
+void	handle_flags(char *s, t_node *node, va_list ap);
 void	handle_zero(t_node *node);
 void	handle_asterisk(char *s, t_node *node, va_list ap);
 void	handle_dot(t_node *node);
