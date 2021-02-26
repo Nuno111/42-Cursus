@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 16:40:42 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/26 15:23:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/26 15:26:18 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ptr = malloc(nmemb * size);
 	if (!ptr)
 		return (NULL);
-	ft_bzero(ptr, nmembt * size);
+	ft_bzero(ptr, nmemb * size);
 	return (ptr);
 }
