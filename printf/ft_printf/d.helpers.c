@@ -6,21 +6,12 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 01:36:13 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 17:49:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	char	*str_join_free(char **beg, char **end)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(*beg, *end);
-	free(*beg);
-	free(*end);
-	return (tmp);
-}
 
 static	void	add_minus(char **new_str)
 {
@@ -35,21 +26,24 @@ static	void	update_content_d(char *new_str, t_node *node)
 {
 	char	*filler;
 
-	if ((int)ft_strlen(new_str) < node->prec_len)
-		filler = get_filler(new_str, node->prec_len, TRUE);
-	if (filler)
-		new_str = str_join_free(&filler, &new_str);
-	if (node->is_neg)
-		add_minus(&new_str);
 	if ((node->left_align && node->has_prec && node->pad_is_zero) || node->width_len < (int)ft_strlen(new_str))
 		node->content = new_str;
 	else
 	{
-		filler = get_filler(new_str, node->width_len, node->pad_is_zero);
-		if (node->left_align)
-			node->content = str_join_free(&new_str, &filler);
+		if ((int)ft_strlen(new_str) < node->prec_len)
+			filler = get_filler(new_str, node->prec_len, node->pad_is_zero);
+		if (filler)
+			new_str = str_join_free(&filler, &new_str);
+		if (node->is_neg)
+			add_minus(&new_str);
 		else
-			node->content = str_join_free(&filler, &new_str);
+		{
+			filler = get_filler(new_str, node->width_len, node->pad_is_zero);
+			if (node->left_align)
+				node->content = str_join_free(&new_str, &filler);
+			else
+				node->content = str_join_free(&filler, &new_str);
+		}
 	}
 }
 
@@ -62,14 +56,14 @@ void	handle_d(t_node *node, va_list ap)
 	arg = va_arg(ap, int);
 	if (arg < 0)
 	{
-		node->is_neg = TRUE;
+		node->is_neg = true;
 		arg *= -1;
 	}
 	new_str = ft_itoa(arg);
 	if (*new_str == '0' && node->width_len > 0 && !node->prec_len && node->has_width)
 		node->content = get_filler(new_str, node->width_len, node->pad_is_zero);
-	else if (*new_str == '0' && !node->width_len && !node->prec_len)
-		node->done = 1;
+	else if (*new_str == '0' && node->has_prec && !node->width_len && !node->prec_len)
+		free(new_str);
 	else
 		update_content_d(new_str, node);
 	node->done = 1;

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:29:09 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 00:13:35 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 13:48:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	handle_cases(char *s, t_node *node, va_list ap)
 	else if (s[node->i] == '.')
 		handle_dot(node);
 	else if (ft_isdigit(s[node->i])  && !node->has_prec)
-		update_padding(s, node, ap, &node->width_len, FALSE);
+		update_padding(s, node, ap, &node->width_len, false);
 	else if (ft_isdigit(s[node->i]) && node->has_prec)
-		update_padding(s, node, ap, &node->prec_len, FALSE);
+		update_padding(s, node, ap, &node->prec_len, false);
 	else
 		handle_types(s, node, ap);
 }

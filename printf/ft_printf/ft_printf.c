@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 00:13:21 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 17:36:12 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ void	add_letter(char s, char **to_print)
 {
 	char *new;
 
+	new = malloc(sizeof(char) * 2);
+	if (!new)
+		return ;
+	new[0] = s;
+	new[1] = '\0';
 	if (*to_print == NULL)
-	{
-		*to_print = ft_strdup("");
-	}
-	new = ft_strjoin_c(*to_print, s);
-	free(*to_print);
-	*to_print = new;
+		*to_print = new;
+	else
+		*to_print = str_join_free(to_print, &new);
 }
 
 int		iterate_string(char *s, char **to_print, va_list ap)

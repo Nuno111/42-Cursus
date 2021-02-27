@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 01:35:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 17:28:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,18 @@ int		manage_node(char *s, char **to_print, va_list ap, int i)
 	char *new_str;
 
 	node.i = i;
-	node.has_width = FALSE;
-	node.has_prec = FALSE;
-	node.pad_is_zero = FALSE;
-	node.left_align = FALSE;
-	node.from_arg = FALSE;
-	node.done = FALSE;
+	node.has_width = false;
+	node.has_prec = false;
+	node.pad_is_zero = false;
+	node.left_align = false;
+	node.from_arg = false;
+	node.done = false;
 	node.content = NULL;
 	node.prec_len = 0;
 	node.width_len = 0;
-	while (node.done != TRUE)
+	node.can_trunc = 0;
+	node.is_neg = 0;
+	while (node.done != true)
 		handle_cases(s, &node, ap);
 	if (node.content)
 	{
@@ -73,7 +75,7 @@ void	update_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool fro
 	char *str_len;
 
 	if (!node->has_prec)
-		node->has_width = TRUE;
+		node->has_width = true;
 	i = 0;
 	if (from_arg)
 		*w_or_p_len = va_arg(ap, int);
@@ -89,4 +91,14 @@ void	update_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool fro
 	}
 	if (*w_or_p_len < 0)
 		handle_negative_wp(w_or_p_len, node);
+}
+
+char	*str_join_free(char **beg, char **end)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(*beg, *end);
+	free(*beg);
+	free(*end);
+	return (tmp);
 }

@@ -3,11 +3,6 @@
 
 # include "../libft/libft.h"
 
-typedef int bool;
-# define TRUE 1
-# define FALSE 0
-
-
 typedef struct		s_node
 {
     char            *content;
@@ -24,6 +19,7 @@ typedef struct		s_node
 	bool			is_neg;
 }					t_node;
 
+char	*str_join_free(char **beg, char **end);
 void	handle_negative_wp(int *w_or_p_len, t_node *node);
 char	*truncate_str(char *new_str, t_node *node);
 char	*get_filler(char *new_str, int len, bool pad_is_zero);

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/21 22:56:52 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 17:32:03 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include <stdbool.h>
 
 typedef struct			s_list
 {
@@ -28,7 +29,6 @@ typedef struct			s_list
 }						t_list;
 
 void					ft_putstr(char *str);
-char					*ft_strjoin_c(char const *s1, char c);
 void					ft_putnbr(int nb);
 void					ft_putchar(char c);
 int						ft_strchrindex(const char *s, int c);
