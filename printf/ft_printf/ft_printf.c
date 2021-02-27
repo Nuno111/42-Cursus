@@ -6,23 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/25 01:08:18 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 00:13:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int		handle_percent(char *s, char **to_print, va_list ap, int index)
-{
-	if (s[index + 1] == '%')
-	{
-		add_letter(s[index], to_print);
-		return (index += 2);
-	}
-	else if (s[index + 1])
-		index = manage_node(s, to_print, ap, ++index);
-	return (++index);
-}
 
 void	add_letter(char s, char **to_print)
 {

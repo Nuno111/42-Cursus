@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/26 23:57:15 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 00:16:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static	void	add_minus(char **new_str)
 {
 	char	*tmp;
 
-	tmp = ft_strjoin('-', *new_str);
+	tmp = ft_strjoin("-", *new_str);
 	free(*new_str);
 	*new_str = tmp;
 }
@@ -34,15 +34,14 @@ static	void	add_minus(char **new_str)
 static	void	update_content_d(char *new_str, t_node *node)
 {
 	char	*filler;
-	char	*tmp;
 
-	if (ft_strlen(new_str) < node->prec_len)
+	if ((int)ft_strlen(new_str) < node->prec_len)
 		filler = get_filler(new_str, node, &node->prec_len);
 	if (filler)
 		new_str = str_join_free(&filler, &new_str);
 	if (node->is_neg)
 		add_minus(&new_str);
-	if ((node->left_align && node->has_prec) || node->width_len < ft_strlen(new_str))
+	if ((node->left_align && node->has_prec) || node->width_len < (int)ft_strlen(new_str))
 		node->content = new_str;
 	else
 	{

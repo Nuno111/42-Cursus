@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:29:09 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/25 01:09:06 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 00:13:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,16 @@ void	handle_cases(char *s, t_node *node, va_list ap)
 		update_padding(s, node, ap, &node->prec_len, FALSE);
 	else
 		handle_types(s, node, ap);
+}
+
+int		handle_percent(char *s, char **to_print, va_list ap, int index)
+{
+	if (s[index + 1] == '%')
+	{
+		add_letter(s[index], to_print);
+		return (index += 2);
+	}
+	else if (s[index + 1])
+		index = manage_node(s, to_print, ap, ++index);
+	return (++index);
 }
