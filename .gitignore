@@ -2,3 +2,5 @@
 *.so
 *.out
 testing-libft
+printfTester
+.vscode
