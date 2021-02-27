@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 13:58:08 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 21:58:18 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	handle_hyphen(t_node *node)
 {
 		node->left_align = true;
 		node->i++;
+		if (node->pad_is_zero)
+			node->pad_is_zero = false;
 }
 
 void	handle_zero(t_node *node)
@@ -44,6 +46,7 @@ void	handle_asterisk(char *s, t_node *node, va_list ap)
 void	handle_dot(t_node *node)
 {
 	node->has_prec = true;
-	node->pad_is_zero = true;
 	node->i++;
+	if (node->pad_is_zero)
+		node->pad_is_zero = false;
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 17:28:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 23:27:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		manage_node(char *s, char **to_print, va_list ap, int i)
 	return (node.i);
 }
 
-char	*get_filler(char *new_str, int len, bool pad_is_zero)
+char	*get_filler(char *new_str, long len, bool pad_is_zero)
 {
 	char	*filler;
 	int		new_len;
@@ -69,7 +69,7 @@ char	*truncate_str(char *new_str, t_node *node)
 	return (new);
 }
 
-void	update_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool from_arg)
+void	update_padding(char *s, t_node *node, va_list ap, long *w_or_p_len, bool from_arg)
 {
 	int i;
 	char *str_len;
