@@ -6,11 +6,53 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/26 23:08:32 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/26 23:57:15 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static	char	*str_join_free(char **beg, char **end)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(*beg, *end);
+	free(*beg);
+	free(*end);
+	return (tmp);
+}
+
+static	void	add_minus(char **new_str)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin('-', *new_str);
+	free(*new_str);
+	*new_str = tmp;
+}
+
+static	void	update_content_d(char *new_str, t_node *node)
+{
+	char	*filler;
+	char	*tmp;
+
+	if (ft_strlen(new_str) < node->prec_len)
+		filler = get_filler(new_str, node, &node->prec_len);
+	if (filler)
+		new_str = str_join_free(&filler, &new_str);
+	if (node->is_neg)
+		add_minus(&new_str);
+	if ((node->left_align && node->has_prec) || node->width_len < ft_strlen(new_str))
+		node->content = new_str;
+	else
+	{
+		filler = get_filler(new_str, node, &node->width_len);
+		if (node->left_align)
+			node->content = str_join_free(&new_str, &filler);
+		else
+			node->content = str_join_free(&filler, &new_str);
+	}
+}
 
 void	handle_d(t_node *node, va_list ap)
 {
@@ -27,40 +69,6 @@ void	handle_d(t_node *node, va_list ap)
 	else if (*new_str == '0' && !node->width_len && !node->prec_len)
 		node->done = 1;
 	else
-		update_content(new_str, node);
+		update_content_d(new_str, node);
 	node->done = 1;
-}
-
-void	update_content(char *new_str, t_node *node)
-{
-	int		length;
-	char	*filler;
-	char	*tmp;
-
-	length = ft_strlen(new_str);
-	if (length > node->prec_len && length > node->width_len)
-		node->content = new_str;
-	else
-	{
-		if (node->has_prec && node->has_width)
-		{
-			if (node->prec_len >= node->width_len)
-				filler = get_filler(new_str, node, &node->prec_len);
-			else
-				filler = get_filler(new_str, node, &node->width_len);
-		}
-		if (filler)
-		{
-			if (node->is_neg)
-			{
-				tmp = ft_strjoin("-", filler);
-				node->content = ft_strjoin(tmp, new_str);
-				free(tmp);
-			}
-			else if (node->left_align)
-				node->content = ft_strjoin(new_str, filler);
-			else
-				node->content = ft_strjoin(filler, new_str);
-		}
-	}
 }

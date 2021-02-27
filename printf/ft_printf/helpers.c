@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/26 22:19:03 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/26 23:51:29 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,5 @@ void	update_padding(char *s, t_node *node, va_list ap, int *w_or_p_len, bool fro
 		node->i += i;
 	}
 	if (*w_or_p_len < 0)
-		handle_negative_wp(node);
+		handle_negative_wp(w_or_p_len, node);
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:54:21 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/26 23:02:46 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/26 23:10:47 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(void)
 {
-	printf("%-4.0d \n", -5);
+	printf("%-4.2d \n", 0);
 }
 
 // strlen (arg) < precision then add padding // if left alig width is ignored
