@@ -26,7 +26,7 @@ typedef struct		s_node
 
 void	handle_negative_wp(int *w_or_p_len, t_node *node);
 char	*truncate_str(char *new_str, t_node *node);
-char	*get_filler(char *new_str, t_node *node, int *len);
+char	*get_filler(char *new_str, int len, bool pad_is_zero);
 void	handle_zero(t_node *node);
 void	handle_asterisk(char *s, t_node *node, va_list ap);
 void	handle_dot(t_node *node);

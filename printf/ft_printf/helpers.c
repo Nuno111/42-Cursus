@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 00:13:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/27 01:35:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ int		manage_node(char *s, char **to_print, va_list ap, int i)
 	return (node.i);
 }
 
-char	*get_filler(char *new_str, t_node *node, int *len)
+char	*get_filler(char *new_str, int len, bool pad_is_zero)
 {
 	char	*filler;
 	int		new_len;
 
-	new_len = *len - ft_strlen(new_str);
+	new_len = len - ft_strlen(new_str);
 	filler = malloc(sizeof(char) * new_len + 1);
 	if (!filler)
 		return (NULL);
-	if (node->pad_is_zero)
+	if (pad_is_zero)
 		ft_memset(filler, '0', new_len);
 	else
 		ft_memset(filler, ' ', new_len);
