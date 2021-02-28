@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 20:35:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/02 23:44:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/28 00:14:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		ft_convert_nbr(char *arr, long long n, size_t index)
 	arr[index] = n > 9 ? n % 10 + 48 : n + 48;
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa(long n)
 {
 	char		*arr;
 	long long	nbr;
