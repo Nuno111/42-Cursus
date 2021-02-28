@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 21:58:18 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/28 21:31:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	handle_zero(t_node *node)
 {
 	if (node->left_align)
 		node->has_width = true;
-	else if (node->has_prec)
+	else if (node->has_prec && node->has_width)
+		node->pad_is_zero = false;
+	else if(node->has_prec)
 		node->pad_is_zero = true;
 	else
 	{
