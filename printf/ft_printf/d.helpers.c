@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/28 00:18:30 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/02/28 14:39:43 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,16 @@ static	void	update_content_d(char *new_str, t_node *node)
 	{
 		filler = get_filler(new_str, node->width_len - 1, node->pad_is_zero);
 		if (node->left_align)
+		{
 			new_str = str_join_free(&new_str, &filler);
+			add_minus(&new_str);
+		}
 		else
+		{
+			add_minus(&new_str);
 			new_str = str_join_free(&filler, &new_str);
+		}
 
-		add_minus(&new_str);
 		node->content = new_str;
 		return ;
 	}
