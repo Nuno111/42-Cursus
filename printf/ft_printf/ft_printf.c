@@ -6,74 +6,55 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 17:36:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/01 23:30:43 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	add_letter(char s, char **to_print)
+void	add_letter(t_node *n)
 {
 	char *new;
 
 	new = malloc(sizeof(char) * 2);
 	if (!new)
 		return ;
-	new[0] = s;
+	new[0] = n->s[n->i];
 	new[1] = '\0';
-	if (*to_print == NULL)
-		*to_print = new;
+	if (*n->buf == NULL)
+		*n->buf = new;
 	else
-		*to_print = str_join_free(to_print, &new);
+		*n->buf = str_join_free(n->buf, &new);
 }
 
-int		iterate_string(char *s, char **to_print, va_list ap)
+void		iterate_string(t_node *n)
 {
-	int	i;
-	int length;
 
-	length = ft_strlen(s);
-	i = 0;
-	while (s[i])
+	while (n->s[n->i])
 	{
-		if (s[i] != '%')
+		if (n->s[n->i] != '%')
 		{
-			add_letter(s[i], to_print);
-			i++;
+			add_letter(n);
+			n->i++;
+		}
+		else if (n->s[n->i] == '%' && n->s[n->i + 1] == '%')
+		{
+			n->i += 2;
+			add_letter(n);
 		}
 		else
-			i = handle_percent(s, to_print, ap, i);
-		if (i < 0)
-			return (-1);
-		else if (i > length)
-			return (0);
+			handle_percent(n);
 	}
-	return (0);
 }
 
 int		ft_printf(const char *s, ...)
 {
-	va_list ap;
-	char *to_print;
-	int status;
-	int	length;
+	t_node *n;
 
-	to_print = NULL;
-	if (!s)
-		return (-1);
-	va_start(ap, s);
-	status = iterate_string((char *)s, &to_print, ap);
-	va_end(ap);
-	if (status < 0)
-		return (status);
-	if (to_print)
-	{
-		ft_putstr(to_print);
-		length = ft_strlen(to_print);
-		free(to_print);
-		return (length);
-	}
-	return (status);
+	va_start(n->ap, s);
+	init(n);
+	va_end(n->ap);
+	return (n->status);
 }
 
 // Flags -0

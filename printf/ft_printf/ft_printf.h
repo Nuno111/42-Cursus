@@ -5,8 +5,11 @@
 
 typedef struct		s_node
 {
-    char            *content;
+	char			*s;
+	char			*buf;
+    char            *new;
 	size_t			i;
+	size_t			len;
 	long			prec_len;
 	long			width_len;
     bool            left_align;
@@ -17,6 +20,8 @@ typedef struct		s_node
 	bool			done;
 	bool			can_trunc;
 	bool			is_neg;
+	va_list			ap;
+	int				status;
 }					t_node;
 
 char	*str_join_free(char **beg, char **end);
