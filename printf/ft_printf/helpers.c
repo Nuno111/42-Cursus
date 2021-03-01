@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/27 23:27:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/01 08:28:13 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ int		manage_node(char *s, char **to_print, va_list ap, int i)
 	node.is_neg = 0;
 	while (node.done != true)
 		handle_cases(s, &node, ap);
-	if (node.content)
+	if (*node.content == '\0')
+	{
+		write (1, '\0', 1);
+		free(node.content);
+	}
+	else if (node.content)
 	{
 		new_str = ft_strjoin(*to_print, node.content);
 		free(node.content);
