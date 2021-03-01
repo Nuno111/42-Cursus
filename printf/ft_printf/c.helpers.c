@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   c.helpers.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/21 10:54:21 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/01 00:53:35 by ngregori         ###   ########.fr       */
+/*   Created: 2021/03/01 01:18:44 by ngregori          #+#    #+#             */
+/*   Updated: 2021/03/01 01:30:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
+#include "ft_printf.h"
 
-int	main(void)
+void	handle_c(t_node *node, va_list ap)
 {
-	ft_printf("%-1111d\n", 20);
-	printf("%-1111d\n", 20);
+	char	*new_str;
+	char	*filler;
+	char	arg;
+
+	new_str = NULL;
+	arg = va_arg(ap, char);
+	if (node->width_len > 1)
+		filler = get_filler(arg, node->width_len, node->pad_is_zero)
+
 
 }
-
-// strlen (arg) < precision then add padding // if left alig width is ignored
