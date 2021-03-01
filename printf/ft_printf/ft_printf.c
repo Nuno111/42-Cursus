@@ -6,13 +6,33 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/01 23:30:43 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/01 23:49:29 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	add_letter(t_node *n)
+static	void	init(t_node *n)
+{
+	n->s = NULL;
+	n->buf = NULL;
+	n->new = NULL;
+	n->i = 0;
+	n->len = 0;
+	n->prec_len = 0;
+	n->width_len = 0;
+	n->left_align = false;
+	n->has_prec = false;
+	n->has_width = false;
+	n->from_arg = false;
+	n->pad_is_zero = false;
+	n->done = false;
+	n->can_trunc = false;
+	n->is_neg = false;
+	n->status = 0;
+}
+
+static	void	add_letter(t_node *n)
 {
 	char *new;
 
@@ -27,9 +47,8 @@ void	add_letter(t_node *n)
 		*n->buf = str_join_free(n->buf, &new);
 }
 
-void		iterate_string(t_node *n)
+static	void	iterate_string(t_node *n)
 {
-
 	while (n->s[n->i])
 	{
 		if (n->s[n->i] != '%')
@@ -43,11 +62,16 @@ void		iterate_string(t_node *n)
 			add_letter(n);
 		}
 		else
+		{
+			print_buffer(n->buf);
+			free(n->buf);
+			n->buf = NULL;
 			handle_percent(n);
+		}
 	}
 }
 
-int		ft_printf(const char *s, ...)
+int				ft_printf(const char *s, ...)
 {
 	t_node *n;
 
@@ -56,17 +80,3 @@ int		ft_printf(const char *s, ...)
 	va_end(n->ap);
 	return (n->status);
 }
-
-// Flags -0
-// Width *
-// precision .
-// sizes
-
-// Options
-// Padding is only added if necessary, length argument < padding
-// -0 or 0-	padding = spaces	aligned left, 0 is ignored
-// * 		padding = spaces	determined by argument
-// .*		padding = 0			determined by argument
-// *.		padding = spaces	determined by argument
-// . 		padding = spaces	determined by preceding number
-// 0d 		padding = 0			determined by preceding number
