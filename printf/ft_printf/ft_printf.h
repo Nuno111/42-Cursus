@@ -36,6 +36,7 @@ int		iterate_string(char *s, char **to_print, va_list ap);
 int		ft_printf(const char *s, ...);
 void	update_padding(char *s, t_node *node, va_list ap, long *w_or_l, bool from_arg);
 void	handle_d(t_node *node, va_list ap);
+void	handle_c(t_node *node, va_list ap);
 
 
 #endif
