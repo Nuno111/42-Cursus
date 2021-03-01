@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 01:18:44 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/01 06:49:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/01 12:19:52 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_width(char *c, t_node *node)
 {
 	char	*filler;
 
-	filler = get_filler(c, node->width_len, node->pad_is_zero);
+	filler = get_filler(" ", node->width_len, node->pad_is_zero);
 	if (node->left_align)
 		node->content = ft_strjoin(c, filler);
 	else
@@ -30,10 +30,10 @@ void	handle_c(t_node *node, va_list ap)
 
 	arg = va_arg(ap, int);
 
-	if (arg == '\0')
+	if (!ft_isprint(arg))
 	{
-		node->content =	malloc(sizeof(char) * 2);
-		ft_memset(node->content, '\0', 2);
+		node->content = malloc(sizeof(char) * 1);
+		node->content[0] = arg;
 	}
 	else if (node->width_len > 1)
 		handle_width(&arg, node);
