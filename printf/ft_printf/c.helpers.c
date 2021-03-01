@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 01:18:44 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/01 06:21:13 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/01 06:49:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@ void	handle_c(t_node *node, va_list ap)
 {
 	char	arg;
 
-	arg = (char) va_arg(ap, int);
+	arg = va_arg(ap, int);
 
-	if (node->width_len > 1)
+	if (arg == '\0')
+	{
+		node->content =	malloc(sizeof(char) * 2);
+		ft_memset(node->content, '\0', 2);
+	}
+	else if (node->width_len > 1)
 		handle_width(&arg, node);
 	else
 		node->content = ft_strdup(&arg);
