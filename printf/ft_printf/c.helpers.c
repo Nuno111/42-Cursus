@@ -6,22 +6,41 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 18:23:12 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 19:13:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 21:20:08 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
 
-static	void	handle_width(char *c, t_node *n)
+static	char	*str_join_char(char c, char *filler, t_node *n)
+{
+	char *new;
+	size_t len;
+
+	len = ft_strlen(filler);
+	new = malloc(sizeof(char) * len + 1);
+	if (!new)
+		return (NULL);
+	if (n->left_align)
+	{
+		new[0] = c;
+		ft_memmove(&new[1], filler, len);
+	}
+	else
+	{
+		ft_memmove(new, filler, len);
+		new[len] = c;
+	}
+	return (new);
+}
+
+static	void	handle_width(char c, t_node *n)
 {
 	char	*filler;
 
 	filler = get_filler(" ", n->width_len, n->pad_is_zero);
-	if (n->left_align)
-		n->buf = ft_strjoin(c, filler);
-	else
-		n->buf = ft_strjoin(filler, c);
+	n->buf = str_join_char(c, filler, n);
 	n->buf_len += ft_strlen(filler) + 1;
 	free(filler);
 }
@@ -33,7 +52,7 @@ void		handle_c(t_node *n)
 	arg = va_arg(n->ap, int);
 
 	if (n->width_len > 1)
-		handle_width(&arg, n);
+		handle_width(arg, n);
 	else
 	{
 		n->buf = ft_strdup(&arg);
