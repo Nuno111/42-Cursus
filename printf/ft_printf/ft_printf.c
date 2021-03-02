@@ -6,12 +6,20 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 01:42:09 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:52:49 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static	void	print_and_free(t_node *n)
+{
+
+	print_buffer(n, false);
+	n->len += ft_strlen(n->buf);
+	free(n->buf);
+	n->buf = NULL;
+}
 
 static	void	add_letter(t_node *n)
 {
@@ -45,20 +53,17 @@ static	void	iterate_string(t_node *n)
 		else
 		{
 			if (n->buf)
-			{
-				print_buffer(n, false);
-				n->len += ft_strlen(n->buf);
-				free(n->buf);
-				n->buf = NULL;
-			}
+				print_and_free(n);
 			new_buffer(n);
 		}
 	}
+	if (n->buf)
+		print_and_free(n);
 }
 
-static	void	init(t_node *n)
+static	void	init(t_node *n, const char *s)
 {
-	n->s = NULL;
+	n->s = s;
 	n->buf = NULL;
 	n->new = NULL;
 	n->type = 0;
@@ -81,7 +86,7 @@ int				ft_printf(const char *s, ...)
 {
 	t_node n;
 
-	init(&n);
+	init(&n, s);
 	va_start(n.ap, s);
 	iterate_string(&n);
 	va_end(n.ap);

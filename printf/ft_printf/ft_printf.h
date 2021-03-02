@@ -5,24 +5,24 @@
 
 typedef struct		s_node
 {
-	char			*s;
-	char			*buf;
-    char            *new;
-	char			type;
-	size_t			buf_len;
-	size_t			i;
-	size_t			len;
-	long			prec_len;
-	long			width_len;
-    bool            left_align;
-    bool            has_prec;
-    bool            has_width;
-    bool            from_arg;
-    bool            pad_is_zero;
-	bool			done;
-	bool			can_trunc;
-	bool			is_neg;
-	va_list			ap;
+	const	char			*s;
+	char					*buf;
+    char            		*new;
+	char					type;
+	size_t					buf_len;
+	size_t					i;
+	size_t					len;
+	long					prec_len;
+	long					width_len;
+    bool					left_align;
+    bool					has_prec;
+    bool					has_width;
+    bool					from_arg;
+    bool					pad_is_zero;
+	bool					done;
+	bool					can_trunc;
+	bool					is_neg;
+	va_list					ap;
 }					t_node;
 
 void	new_buffer(t_node *n);
