@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 02:17:35 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 19:18:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ void	new_buffer(t_node *n)
 	{
 		if (n->type == 'd')
 		{
-			print_buffer(n, false);
+			ft_putstr(n->buf);
 			n->len += ft_strlen(n->buf);
 		}
 		else
+		{
+			write(1, n->buf, n->buf_len);
 			n->len += n->buf_len;
+		}
 	}
 	reset_and_free(n);
 }

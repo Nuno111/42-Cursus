@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 22:15:53 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 02:11:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 19:18:43 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	reset_and_free(t_node *n)
 		free(n->buf);
 		n->buf = NULL;
 	}
+	n->buf_len = 0;
 	n->type = 0;
 	n->prec_len = 0;
 	n->width_len = 0;
@@ -30,12 +31,6 @@ void	reset_and_free(t_node *n)
 	n->done = false;
 	n->can_trunc = false;
 	n->is_neg = false;
-}
-
-void	print_buffer(t_node *n, bool print_wierd)
-{
-	if (!print_wierd)
-		ft_putstr(n->buf);
 }
 
 void	handle_negative_wp(long *w_or_p_len, t_node *n)

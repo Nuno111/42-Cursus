@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 03:03:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 19:19:46 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static	void	print_and_free(t_node *n)
 {
-
-	print_buffer(n, false);
+	ft_putstr(n->buf);
 	n->len += ft_strlen(n->buf);
 	free(n->buf);
 	n->buf = NULL;

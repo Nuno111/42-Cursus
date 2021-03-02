@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:54:21 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 02:12:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 19:15:52 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	main(void)
 {
-	ft_printf(" %.d ", 0);
+	ft_printf(" -%*c* -%-*c* \n", -10, 0, 2, 0);
+	printf(" -%*c* -%-*c* \n", -10, 0, 2, 0);
 }
 
 // strlen (arg) < precision then add padding // if left alig width is ignored
