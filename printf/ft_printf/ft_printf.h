@@ -24,6 +24,7 @@ typedef struct		s_node
 	int				status;
 }					t_node;
 
+void	new_buff(t_node *n);
 char	*str_join_free(char **beg, char **end);
 void	handle_negative_wp(long *w_or_p_len, t_node *node);
 char	*truncate_str(char *new_str, t_node *node);
@@ -33,8 +34,8 @@ void	handle_asterisk(char *s, t_node *node, va_list ap);
 void	handle_dot(t_node *node);
 void	handle_hyphen(t_node *node);
 int		handle_percent(char *s, char **to_print, va_list ap, int index);
-void	handle_types(char *s, t_node *node, va_list ap);
-void	handle_cases(char *s, t_node *node, va_list ap);
+void	handle_types(t_node *n);
+void	handle_cases(t_node *n);
 int		manage_node( char *s, char **to_print, va_list ap, int i);
 int		ft_printf(const char *s, ...);
 void	update_padding(char *s, t_node *node, va_list ap, long *w_or_l, bool from_arg);
