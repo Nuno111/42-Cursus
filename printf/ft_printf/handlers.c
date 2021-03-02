@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:29:09 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 00:20:57 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:29:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	handle_types(t_node *n)
 	c = n->s[n->i];
 	if (c == 'd')
 		handle_d(n);
-	else if (n == 'c')
-		handle_c(n);
 }
 
 void	handle_cases(t_node *n)

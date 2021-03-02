@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 10:54:21 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/01 21:49:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:27:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	main(void)
 {
-	printf("%d %c %d" ,10, 0, 10);
-
+	ft_printf("Hello");
 }
 
 // strlen (arg) < precision then add padding // if left alig width is ignored
