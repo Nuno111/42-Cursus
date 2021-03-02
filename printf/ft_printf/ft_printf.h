@@ -25,6 +25,7 @@ typedef struct		s_node
 	va_list			ap;
 }					t_node;
 
+void	new_buffer(t_node *n);
 void	reset_and_free(t_node *n);
 void	print_buffer(t_node *n, bool print_wierd);
 void	new_buff(t_node *n);
@@ -40,8 +41,7 @@ void	handle_types(t_node *n);
 void	handle_cases(t_node *n);
 int		ft_printf(const char *s, ...);
 void	update_padding(t_node *n, long *w_or_l, bool from_arg);
-void	handle_d(t_node *node, va_list ap);
-void	handle_c(t_node *node, va_list ap);
+void	handle_d(t_node *n);
 
 
 #endif

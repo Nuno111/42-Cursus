@@ -6,32 +6,12 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 01:25:25 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:42:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	void	init(t_node *n)
-{
-	n->s = NULL;
-	n->buf = NULL;
-	n->new = NULL;
-	n->type = NULL;
-	n->buf_len = 0;
-	n->i = 0;
-	n->len = 0;
-	n->prec_len = 0;
-	n->width_len = 0;
-	n->left_align = false;
-	n->has_prec = false;
-	n->has_width = false;
-	n->from_arg = false;
-	n->pad_is_zero = false;
-	n->done = false;
-	n->can_trunc = false;
-	n->is_neg = false;
-}
 
 static	void	add_letter(t_node *n)
 {
@@ -42,10 +22,10 @@ static	void	add_letter(t_node *n)
 		return ;
 	new[0] = n->s[n->i];
 	new[1] = '\0';
-	if (*n->buf == NULL)
-		*n->buf = new;
+	if (n->buf == NULL)
+		n->buf = new;
 	else
-		*n->buf = str_join_free(n->buf, &new);
+		n->buf = str_join_free(&n->buf, &new);
 }
 
 static	void	iterate_string(t_node *n)
@@ -76,12 +56,34 @@ static	void	iterate_string(t_node *n)
 	}
 }
 
+static	void	init(t_node *n)
+{
+	n->s = NULL;
+	n->buf = NULL;
+	n->new = NULL;
+	n->type = 0;
+	n->buf_len = 0;
+	n->i = 0;
+	n->len = 0;
+	n->prec_len = 0;
+	n->width_len = 0;
+	n->left_align = false;
+	n->has_prec = false;
+	n->has_width = false;
+	n->from_arg = false;
+	n->pad_is_zero = false;
+	n->done = false;
+	n->can_trunc = false;
+	n->is_neg = false;
+}
+
 int				ft_printf(const char *s, ...)
 {
-	t_node *n;
+	t_node n;
 
-	va_start(n->ap, s);
-	init(n);
-	va_end(n->ap);
-	return (n->len);
+	init(&n);
+	va_start(n.ap, s);
+	iterate_string(&n);
+	va_end(n.ap);
+	return (n.len);
 }

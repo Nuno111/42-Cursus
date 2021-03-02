@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 01:10:47 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:36:23 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static	void	handle_precision(t_node *n, bool *prec_handled)
 	char	*filler;
 
 	filler = get_filler(n->new, n->prec_len, true);
-	n->new = str_join_free(&filler, n->new);
+	n->new = str_join_free(&filler, &n->new);
 	if (n->is_neg)
-		add_minus(n->new);
+		add_minus(n);
 	*prec_handled = true;
 }
 
@@ -40,14 +40,14 @@ static	void	handle_width(t_node *n, bool prec_handled)
 		n->width_len--;
 	filler = get_filler(n->new, n->width_len, n->pad_is_zero);
 	if (n->is_neg && !prec_handled && !n->pad_is_zero)
-		add_minus(n->new);
+		add_minus(n);
 	if (n->left_align)
-		n->new = str_join_free(n->new, &filler);
+		n->new = str_join_free(&n->new, &filler);
 	else
 	{
-		n->new = str_join_free(&filler, n->new);
+		n->new = str_join_free(&filler, &n->new);
 		if (n->is_neg && !prec_handled && !ft_strchr(n->new, '-'))
-			add_minus(n->new);
+			add_minus(n);
 	}
 }
 

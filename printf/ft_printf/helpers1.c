@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 22:15:53 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 01:25:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:37:52 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	reset_and_free(t_node *n)
 		free(n->buf);
 	if (n->new)
 		free(n->buf);
-	n->type = NULL;
+	n->type = 0;
 	n->len = 0;
 	n->prec_len = 0;
 	n->width_len = 0;
