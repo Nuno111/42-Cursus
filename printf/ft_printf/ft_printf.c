@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 01:52:49 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:55:29 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static	void	iterate_string(t_node *n)
 		{
 			if (n->buf)
 				print_and_free(n);
+			n->i++;
 			new_buffer(n);
 		}
 	}

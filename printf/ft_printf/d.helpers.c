@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 01:36:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 02:03:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void	handle_d(t_node *n)
 		free(n->new);
 	else
 		update_content_d(n);
+	n->i++;
 	n->done = 1;
 }
