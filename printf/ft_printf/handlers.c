@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:29:09 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 00:10:58 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 00:14:04 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	handle_cases(t_node *n)
 	char c;
 
 	c = n->s[n->i];
-
 	if (c == '-')
 		handle_hyphen(n);
 	else if (c == '0')
