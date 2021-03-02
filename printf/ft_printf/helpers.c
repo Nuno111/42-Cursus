@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 00:31:29 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 00:38:27 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,23 @@ void	update_padding(t_node *n, long *w_or_p_len, bool from_arg)
 	int i;
 	char *str_len;
 
-	if (!node->has_prec)
-		node->has_width = true;
+	if (!n->has_prec)
+		n->has_width = true;
 	i = 0;
 	if (from_arg)
-		*w_or_p_len = va_arg(ap, int);
+		*w_or_p_len = va_arg(n->ap, int);
 	else
 	{
 		i = 0;
-		while (ft_isdigit(s[node->i + i]))
+		while (ft_isdigit(n->s[n->i + i]))
 			i++;
-		str_len = ft_substr(s, node->i, i);
+		str_len = ft_substr(n->s, n->i, i);
 		*w_or_p_len = ft_atoi(str_len);
 		free(str_len);
-		node->i += i;
+		n->i += i;
 	}
 	if (*w_or_p_len < 0)
-		handle_negative_wp(w_or_p_len, node);
+		handle_negative_wp(w_or_p_len, n);
 }
 
 char	*str_join_free(char **beg, char **end)
