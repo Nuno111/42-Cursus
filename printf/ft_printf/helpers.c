@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 00:38:27 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:13:12 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	new_buffer(t_node *n)
 {
 	while (!n->done)
 		handle_cases(n);
-	print_buffer(n->buf);
-	n->len += n->buf_len;
+	print_buffer(n, false);
+	if (n->type == 'd')
+		n->len += ft_strlen(n->buf);
+	else
+		n->len += n->buf_len;
 	reset_and_free(n);
 }
 
@@ -39,11 +42,11 @@ char	*get_filler(char *new_str, long len, bool pad_is_zero)
 	return (filler);
 }
 
-char	*truncate_str(char *new_str, t_node *node)
+char	*truncate_str(char *new_str, t_node *n)
 {
 	char *new;
 
-	new = ft_substr(new_str, 0, node->prec_len);
+	new = ft_substr(new_str, 0, n->prec_len);
 	free(new_str);
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 00:21:34 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:16:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static	void	init(t_node *n)
 	n->s = NULL;
 	n->buf = NULL;
 	n->new = NULL;
+	->type = NULL;
 	n->buf_len = 0;
 	n->i = 0;
 	n->len = 0;
@@ -66,7 +67,7 @@ static	void	iterate_string(t_node *n)
 		{
 			if (n->buf)
 			{
-				print_buffer(n->buf);
+				print_buffer(n, false);
 				n->len += ft_strlen(n->buf);
 				free(n->buf);
 				n->buf = NULL;
@@ -83,5 +84,5 @@ int				ft_printf(const char *s, ...)
 	va_start(n->ap, s);
 	init(n);
 	va_end(n->ap);
-	return (n->status);
+	return (n->len);
 }

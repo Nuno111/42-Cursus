@@ -6,85 +6,83 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/28 22:53:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:10:47 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	void	add_minus(char **new_str)
+static	void	add_minus(t_node *n)
 {
 	char	*tmp;
 
-	tmp = ft_strjoin("-", *new_str);
-	free(*new_str);
-	*new_str = tmp;
+	tmp = ft_strjoin("-", n->new);
+	free(n->new);
+	n->new = tmp;
 }
 
-static	void	handle_precision(char **str, t_node *node, bool *prec_handled)
+static	void	handle_precision(t_node *n, bool *prec_handled)
 {
 	char	*filler;
 
-	filler = get_filler(*str, node->prec_len, true);
-	*str = str_join_free(&filler, str);
-	if (node->is_neg)
-		add_minus(str);
+	filler = get_filler(n->new, n->prec_len, true);
+	n->new = str_join_free(&filler, n->new);
+	if (n->is_neg)
+		add_minus(n->new);
 	*prec_handled = true;
 }
 
-static	void	handle_width(char **new_str, t_node *node, bool prec_handled)
+static	void	handle_width(t_node *n, bool prec_handled)
 {
 	char	*filler;
 
-	if (node->is_neg && !prec_handled)
-		node->width_len--;
-	filler = get_filler(*new_str, node->width_len, node->pad_is_zero);
-	if (node->is_neg && !prec_handled && !node->pad_is_zero)
-		add_minus(new_str);
-	if (node->left_align)
-		*new_str = str_join_free(new_str, &filler);
+	if (n->is_neg && !prec_handled)
+		n->width_len--;
+	filler = get_filler(n->new, n->width_len, n->pad_is_zero);
+	if (n->is_neg && !prec_handled && !n->pad_is_zero)
+		add_minus(n->new);
+	if (n->left_align)
+		n->new = str_join_free(n->new, &filler);
 	else
 	{
-		*new_str = str_join_free(&filler, new_str);
-		if (node->is_neg && !prec_handled && !ft_strchr(*new_str, '-'))
-			add_minus(new_str);
+		n->new = str_join_free(&filler, n->new);
+		if (n->is_neg && !prec_handled && !ft_strchr(n->new, '-'))
+			add_minus(n->new);
 	}
 }
 
-static	void	update_content_d(char *new_str, t_node *node)
+static	void	update_content_d(t_node *n)
 {
 	bool precision_handled;
 
 	precision_handled = false;
-	if ((long)ft_strlen(new_str) < node->prec_len)
-		handle_precision(&new_str, node, &precision_handled);
-	if ((long)ft_strlen(new_str) < node->width_len)
-		handle_width(&new_str, node, precision_handled);
-	node->content = new_str;
+	if ((long)ft_strlen(n->new) < n->prec_len)
+		handle_precision(n, &precision_handled);
+	if ((long)ft_strlen(n->new) < n->width_len)
+		handle_width(n, precision_handled);
+	n->buf = n->new;
 }
 
-void	handle_d(t_node *node, va_list ap)
+void	handle_d(t_node *n)
 {
-	char	*new_str;
 	long	arg;
 
-	new_str = NULL;
-	arg = (long)va_arg(ap, int);
+	n->type = 'd';
+	arg = (long)va_arg(n->ap, int);
 	if (arg < 0)
 	{
-		node->is_neg = true;
+		n->is_neg = true;
 		arg *= -1;
 	}
-	new_str = ft_itoa(arg);
-	if (*new_str == '0' && node->width_len > 0 && !node->prec_len)
+	n->new = ft_itoa(arg);
+	if (*n->new == '0' && n->width_len > 0 && !n->prec_len)
 	{
-		node->content = get_filler("", node->width_len, node->pad_is_zero);
-		free(new_str);
+		n->buf = get_filler("", n->width_len, n->pad_is_zero);
+		free(n->new);
 	}
-	else if (*new_str == '0' && node->has_prec &&
-			!node->prec_len && !node->width_len)
-		free(new_str);
+	else if (*n->new == '0' && n->has_prec && !n->prec_len && !n->width_len)
+		free(n->new);
 	else
-		update_content_d(new_str, node);
-	node->done = 1;
+		update_content_d(n);
+	n->done = 1;
 }
