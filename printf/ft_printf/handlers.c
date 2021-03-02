@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:29:09 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 00:14:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 00:20:57 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,4 @@ void	handle_cases(t_node *n)
 		update_padding(n);
 	else
 		handle_types(n);
-}
-
-void	new_buffer(t_node *n)
-{
-	handle_cases(n);
 }

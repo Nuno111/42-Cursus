@@ -6,49 +6,49 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 19:28:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/28 21:31:21 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 00:29:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	handle_hyphen(t_node *node)
+void	handle_hyphen(t_node *n)
 {
-		node->left_align = true;
-		node->i++;
-		if (node->pad_is_zero)
-			node->pad_is_zero = false;
+		n->left_align = true;
+		n->i++;
+		if (n->pad_is_zero)
+			n->pad_is_zero = false;
 }
 
-void	handle_zero(t_node *node)
+void	handle_zero(t_node *n)
 {
-	if (node->left_align)
-		node->has_width = true;
-	else if (node->has_prec && node->has_width)
-		node->pad_is_zero = false;
-	else if(node->has_prec)
-		node->pad_is_zero = true;
+	if (n->left_align)
+		n->has_width = true;
+	else if (n->has_prec && n->has_width)
+		n->pad_is_zero = false;
+	else if(n->has_prec)
+		n->pad_is_zero = true;
 	else
 	{
-		node->has_width = true;
-		node->pad_is_zero = true;
+		n->has_width = true;
+		n->pad_is_zero = true;
 	}
-	node->i++;
+	n->i++;
 }
 
-void	handle_asterisk(char *s, t_node *node, va_list ap)
+void	handle_asterisk(t_node *n)
 {
-		if (!(node->has_prec))
-			update_padding(s, node, ap, &node->width_len, true);
+		if (!(n->has_prec))
+			update_padding(n, &n->width_len, true);
 		else
-			update_padding(s, node, ap, &node->prec_len, true);
-		node->i++;
+			update_padding(n, &n->prec_len, true);
+		n->i++;
 }
 
-void	handle_dot(t_node *node)
+void	handle_dot(t_node *n)
 {
-	node->has_prec = true;
-	node->i++;
-	if (node->pad_is_zero)
-		node->pad_is_zero = false;
+	n->has_prec = true;
+	if (n->pad_is_zero)
+		n->pad_is_zero = false;
+	n->i++;
 }

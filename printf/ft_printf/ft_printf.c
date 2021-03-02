@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 00:00:43 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 00:21:34 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static	void	init(t_node *n)
 	n->s = NULL;
 	n->buf = NULL;
 	n->new = NULL;
+	n->buf_len = 0;
 	n->i = 0;
 	n->len = 0;
 	n->prec_len = 0;
@@ -71,9 +72,6 @@ static	void	iterate_string(t_node *n)
 				n->buf = NULL;
 			}
 			new_buffer(n);
-			print_buffer(n->buf);
-			free(n->buf);
-			n->buf = NULL;
 		}
 	}
 }

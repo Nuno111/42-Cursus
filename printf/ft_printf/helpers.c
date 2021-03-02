@@ -6,41 +6,20 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/01 21:36:46 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 00:31:29 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
 
-int		manage_node(char *s, char **to_print, va_list ap, int i)
+void	new_buffer(t_node *n)
 {
-	t_node node;
-	char *new_str;
-
-	node.i = i;
-	node.has_width = false;
-	node.has_prec = false;
-	node.pad_is_zero = false;
-	node.left_align = false;
-	node.from_arg = false;
-	node.done = false;
-	node.content = NULL;
-	node.prec_len = 0;
-	node.width_len = 0;
-	node.can_trunc = 0;
-	node.is_neg = 0;
-	while (node.done != true)
-		handle_cases(s, &node, ap);
-	if (node.content)
-	{
-		new_str = ft_strjoin(*to_print, node.content);
-		free(node.content);
-		if (*to_print)
-			free(*to_print);
-		*to_print = new_str;
-	}
-	return (node.i);
+	while (!n->done)
+		handle_cases(n);
+	print_buffer(n->buf);
+	n->len += n->buf_len;
+	reset_and_free(n);
 }
 
 char	*get_filler(char *new_str, long len, bool pad_is_zero)
@@ -69,7 +48,7 @@ char	*truncate_str(char *new_str, t_node *node)
 	return (new);
 }
 
-void	update_padding(char *s, t_node *node, va_list ap, long *w_or_p_len, bool from_arg)
+void	update_padding(t_node *n, long *w_or_p_len, bool from_arg)
 {
 	int i;
 	char *str_len;
