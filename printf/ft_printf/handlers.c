@@ -6,50 +6,46 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:29:09 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/01 01:17:10 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 00:10:58 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	handle_types(char *s, t_node *node, va_list ap)
+void	handle_types(t_node *n)
 {
-	if (!s[node->i])
-		return ;
-	if (s[node->i] == 'd')
-		handle_d(node, ap);
-	else if (s[node->i] == 'c')
-		handle_c(node, ap);
+	char c;
+
+	c = n->s[n->i];
+	if (c == 'd')
+		handle_d(n);
+	else if (n == 'c')
+		handle_c(n);
 }
 
-void	handle_cases(char *s, t_node *node, va_list ap)
+void	handle_cases(t_node *n)
 {
-	if (!s[node->i])
-		return ;
-	if (s[node->i] == '-')
-		handle_hyphen(node);
-	else if (s[node->i] == '0')
-		handle_zero(node);
-	else if (s[node->i] == '*')
-		handle_asterisk(s, node, ap);
-	else if (s[node->i] == '.')
-		handle_dot(node);
-	else if (ft_isdigit(s[node->i])  && !node->has_prec)
-		update_padding(s, node, ap, &node->width_len, false);
-	else if (ft_isdigit(s[node->i]) && node->has_prec)
-		update_padding(s, node, ap, &node->prec_len, false);
+	char c;
+
+	c = n->s[n->i];
+
+	if (c == '-')
+		handle_hyphen(n);
+	else if (c == '0')
+		handle_zero(n);
+	else if (c == '*')
+		handle_asterisk(n);
+	else if (c == '.')
+		handle_dot(n);
+	else if (ft_isdigit(c)  && !n->has_prec)
+		update_padding(n);
+	else if (ft_isdigit(c) && n->has_prec)
+		update_padding(n);
 	else
-		handle_types(s, node, ap);
+		handle_types(n);
 }
 
-int		handle_percent(char *s, char **to_print, va_list ap, int index)
+void	new_buffer(t_node *n)
 {
-	if (s[index + 1] == '%')
-	{
-		add_letter(s[index], to_print);
-		return (index += 2);
-	}
-	else if (s[index + 1])
-		index = manage_node(s, to_print, ap, ++index);
-	return (++index);
+	handle_cases(n);
 }
