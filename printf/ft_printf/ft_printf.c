@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 01:16:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:25:25 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static	void	init(t_node *n)
 	n->s = NULL;
 	n->buf = NULL;
 	n->new = NULL;
-	->type = NULL;
+	n->type = NULL;
 	n->buf_len = 0;
 	n->i = 0;
 	n->len = 0;
@@ -31,7 +31,6 @@ static	void	init(t_node *n)
 	n->done = false;
 	n->can_trunc = false;
 	n->is_neg = false;
-	n->status = 0;
 }
 
 static	void	add_letter(t_node *n)

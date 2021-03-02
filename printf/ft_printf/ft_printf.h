@@ -25,6 +25,8 @@ typedef struct		s_node
 	va_list			ap;
 }					t_node;
 
+void	reset_and_free(t_node *n);
+void	print_buffer(t_node *n, bool print_wierd);
 void	new_buff(t_node *n);
 char	*str_join_free(char **beg, char **end);
 void	handle_negative_wp(long *w_or_p_len, t_node *n);

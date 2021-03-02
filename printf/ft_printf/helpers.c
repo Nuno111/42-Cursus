@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 01:13:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:21:04 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	new_buffer(t_node *n)
 {
 	while (!n->done)
 		handle_cases(n);
-	print_buffer(n, false);
 	if (n->type == 'd')
+	{
+		print_buffer(n, false);
 		n->len += ft_strlen(n->buf);
+	}
 	else
 		n->len += n->buf_len;
 	reset_and_free(n);

@@ -6,11 +6,31 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 22:15:53 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 01:14:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 01:25:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	reset_and_free(t_node *n)
+{
+	if (n->buf)
+		free(n->buf);
+	if (n->new)
+		free(n->buf);
+	n->type = NULL;
+	n->len = 0;
+	n->prec_len = 0;
+	n->width_len = 0;
+	n->left_align = false;
+	n->has_prec = false;
+	n->has_width = false;
+	n->from_arg = false;
+	n->pad_is_zero = false;
+	n->done = false;
+	n->can_trunc = false;
+	n->is_neg = false;
+}
 
 void	print_buffer(t_node *n, bool print_wierd)
 {
