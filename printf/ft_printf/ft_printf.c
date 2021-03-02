@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/01 23:49:29 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/02 00:00:43 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,17 @@ static	void	iterate_string(t_node *n)
 		}
 		else
 		{
+			if (n->buf)
+			{
+				print_buffer(n->buf);
+				n->len += ft_strlen(n->buf);
+				free(n->buf);
+				n->buf = NULL;
+			}
+			new_buffer(n);
 			print_buffer(n->buf);
 			free(n->buf);
 			n->buf = NULL;
-			handle_percent(n);
 		}
 	}
 }
