@@ -25,6 +25,7 @@ typedef struct		s_node
 	va_list					ap;
 }					t_node;
 
+void	handle_s(t_node *n);
 void	handle_c(t_node *n);
 void	new_buffer(t_node *n);
 void	reset_and_free(t_node *n);
