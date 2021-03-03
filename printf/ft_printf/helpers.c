@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/03 17:06:29 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/03 19:31:10 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	*truncate_str(char *new_str, t_node *n)
 	char *new;
 
 	new = ft_substr(new_str, 0, n->prec_len);
+	free(new_str);
 	return (new);
 }
 
