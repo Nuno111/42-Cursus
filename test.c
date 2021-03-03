@@ -2,5 +2,5 @@
 
 int main(void)
 {
-	printf("%s", " //t/t");
+	ft_printf(" %s %s ", "0", "1");
 }
