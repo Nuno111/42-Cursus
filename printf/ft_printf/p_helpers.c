@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 22:10:54 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/04 20:44:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/04 21:13:17 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	void	add_letter(t_node *n, char c)
 		n->new = str_join_free(&n->new, &new);
 }
 
-void	handle_hex(t_node *n, __int128 nbr)
+void	handle_hex(t_node *n, long nbr)
 {
 	char *hex;
 
@@ -44,12 +44,14 @@ void	handle_hex(t_node *n, __int128 nbr)
 
 void	handle_p(t_node *n)
 {
-	__int128 nbr;
+	long long nbr;
 	char *filler;
 
-	nbr = va_arg(n->ap, __int128);
-	if (nbr == 0 || nbr <= T_MIN_LONG)
+	nbr = va_arg(n->ap, long long);
+	if (nbr == 0)
 		n->new = ft_strdup("(nil)");
+	else if (nbr == T_MIN_LONG)
+		n->new = ft_strdup("0x8000000000000000");
 	else
 	{
 		if (nbr < 0)
