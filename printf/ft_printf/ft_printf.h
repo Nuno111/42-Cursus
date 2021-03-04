@@ -2,7 +2,7 @@
 # define FT_PRINTF_H
 
 # include "../libft/libft.h"
-
+# define T_MIN_LONG -9223372036854775807 - 1
 typedef struct		s_node
 {
 	const	char			*s;
