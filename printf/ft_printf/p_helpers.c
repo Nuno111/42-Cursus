@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 22:10:54 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/04 15:08:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/04 15:15:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,7 @@ void	handle_p(t_node *n)
 			n->buf = str_join_free(&filler, &n->new);
 	}
 	else
-	{
-
-		n->buf = ft_strdup(n->new);
-		free(n->new);
-	}
+		n->buf = n->new;
 	n->done = 1;
 	n->i++;
 }
