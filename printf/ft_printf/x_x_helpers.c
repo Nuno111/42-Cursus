@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 14:00:21 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 16:18:31 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 17:40:08 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	handle_x_X(t_node *n, char type)
+void	handle_x_x(t_node *n, char type)
 {
 	unsigned int	arg;
 

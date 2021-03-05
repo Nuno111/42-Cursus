@@ -6,10 +6,9 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 16:22:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 17:43:03 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_printf.h"
 
@@ -41,8 +40,8 @@ char	*truncate_str(char *new_str, t_node *n)
 
 void	update_padding(t_node *n, long *w_or_p_len, bool from_arg)
 {
-	int i;
-	char *str_len;
+	int		i;
+	char	*str_len;
 
 	if (!n->has_prec)
 		n->has_width = true;

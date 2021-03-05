@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 15:31:03 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 17:28:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static	void	update_content_d(t_node *n)
 	n->buf = n->new;
 }
 
-void	handle_d(t_node *n)
+void			handle_d(t_node *n)
 {
 	long	arg;
 

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 16:22:07 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 17:32:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static	void	new_buffer(t_node *n)
 	}
 	reset_and_free(n);
 }
+
 static	void	print_and_free(t_node *n)
 {
 	ft_putstr(n->buf);

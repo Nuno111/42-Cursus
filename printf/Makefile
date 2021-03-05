@@ -37,10 +37,4 @@ fclean : clean
 
 re : fclean all
 
-test : all
-	@echo "Starting test:"
-	@echo "\/----------------\/"
-	@gcc -g -fsanitize=address -Wall -Wextra test.c $(NAME)
-	@./a.out | cat -e
-
 .PHONY : all clean fclean re

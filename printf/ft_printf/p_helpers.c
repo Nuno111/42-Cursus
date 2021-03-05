@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 22:10:54 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 16:18:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 17:44:53 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	handle_p(t_node *n)
 {
-	unsigned long nbr;
-	char *filler;
+	unsigned long	nbr;
+	char			*filler;
 
 	nbr = va_arg(n->ap, unsigned long);
 	if (nbr == 0)
