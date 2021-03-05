@@ -6,12 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 22:10:54 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 19:26:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 19:39:43 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	handle_p(t_node *n)
 {
