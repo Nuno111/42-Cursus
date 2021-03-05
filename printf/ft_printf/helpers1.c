@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 22:15:53 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/04 15:21:32 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 13:50:16 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	reset_and_free(t_node *n)
 	n->from_arg = false;
 	n->pad_is_zero = false;
 	n->done = false;
-	n->can_trunc = false;
 	n->is_neg = false;
 }
 

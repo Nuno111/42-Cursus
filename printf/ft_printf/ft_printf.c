@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/02 19:19:46 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 13:50:27 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static	void	init(t_node *n, const char *s)
 	n->from_arg = false;
 	n->pad_is_zero = false;
 	n->done = false;
-	n->can_trunc = false;
 	n->is_neg = false;
 }
 
