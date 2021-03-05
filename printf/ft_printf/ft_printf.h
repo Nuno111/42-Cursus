@@ -2,6 +2,7 @@
 # define FT_PRINTF_H
 
 # include "../libft/libft.h"
+
 typedef struct		s_node
 {
 	const	char			*s;
@@ -23,6 +24,11 @@ typedef struct		s_node
 	va_list					ap;
 }					t_node;
 
+void	add_letter(char c, char **buffer);
+void	handle_x_X(t_node *n, char type);
+void	handle_width(t_node *n);
+void	handle_precision(t_node *n);
+void	update_content(t_node *n);
 void	handle_u(t_node *n);
 void	handle_p(t_node *n);
 void	handle_s(t_node *n);

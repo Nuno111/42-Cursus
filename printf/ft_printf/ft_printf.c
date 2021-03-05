@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 13:50:27 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:04:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,19 @@ static	void	print_and_free(t_node *n)
 	n->buf = NULL;
 }
 
-static	void	add_letter(t_node *n)
-{
-	char *new;
-
-	new = malloc(sizeof(char) * 2);
-	if (!new)
-		return ;
-	new[0] = n->s[n->i];
-	new[1] = '\0';
-	if (n->buf == NULL)
-		n->buf = new;
-	else
-		n->buf = str_join_free(&n->buf, &new);
-}
-
 static	void	iterate_string(t_node *n)
 {
 	while (n->s[n->i])
 	{
 		if (n->s[n->i] != '%')
 		{
-			add_letter(n);
+			add_letter(n->s[n->i], &n->buf);
 			n->i++;
 		}
 		else if (n->s[n->i] == '%' && n->s[n->i + 1] == '%')
 		{
+			add_letter(n->s[n->i], &n->buf);
 			n->i += 2;
-			add_letter(n);
 		}
 		else
 		{
@@ -79,6 +64,21 @@ static	void	init(t_node *n, const char *s)
 	n->pad_is_zero = false;
 	n->done = false;
 	n->is_neg = false;
+}
+
+void	add_letter(char c, char **buffer)
+{
+	char *new;
+
+	new = malloc(sizeof(char) * 2);
+	if (!new)
+		return ;
+	new[0] = c;
+	new[1] = '\0';
+	if (*buffer == NULL)
+		*buffer = new;
+	else
+		*buffer = str_join_free(buffer, &new);
 }
 
 int				ft_printf(const char *s, ...)

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 01:40:04 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 13:48:07 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:31:03 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	void	add_minus(t_node *n)
 	n->new = tmp;
 }
 
-static	void	handle_precision(t_node *n, bool *prec_handled)
+static	void	handle_precision_d(t_node *n, bool *prec_handled)
 {
 	char	*filler;
 
@@ -32,7 +32,7 @@ static	void	handle_precision(t_node *n, bool *prec_handled)
 	*prec_handled = true;
 }
 
-static	void	handle_width(t_node *n, bool prec_handled)
+static	void	handle_width_d(t_node *n, bool prec_handled)
 {
 	char	*filler;
 
@@ -57,9 +57,9 @@ static	void	update_content_d(t_node *n)
 
 	precision_handled = false;
 	if ((long)ft_strlen(n->new) < n->prec_len)
-		handle_precision(n, &precision_handled);
+		handle_precision_d(n, &precision_handled);
 	if ((long)ft_strlen(n->new) < n->width_len)
-		handle_width(n, precision_handled);
+		handle_width_d(n, precision_handled);
 	n->buf = n->new;
 }
 

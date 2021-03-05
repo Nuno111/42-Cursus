@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 18:23:12 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/03 16:24:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:33:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static	char	*str_join_char(char c, char *filler, t_node *n)
 	return (new);
 }
 
-static	void	handle_width(char c, t_node *n)
+static	void	handle_width_c(char c, t_node *n)
 {
 	char	*filler;
 
@@ -53,7 +53,7 @@ void		handle_c(t_node *n)
 	arg = va_arg(n->ap, int);
 
 	if (n->width_len > 1)
-		handle_width(arg, n);
+		handle_width_c(arg, n);
 	else
 	{
 		n->buf = ft_strdup(&arg);
