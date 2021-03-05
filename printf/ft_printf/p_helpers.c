@@ -6,26 +6,12 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 22:10:54 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 15:51:32 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:18:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-
-static	void	handle_hex(t_node *n, unsigned long nbr)
-{
-	char *hex;
-
-	hex = "0123456789abcdef";
-	if (nbr >= 16)
-	{
-		handle_hex(n, nbr / 16);
-		handle_hex(n, nbr % 16);
-	}
-	else
-		add_letter(hex[nbr], &n->new);
-}
 
 void	handle_p(t_node *n)
 {

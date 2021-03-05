@@ -6,12 +6,31 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 13:15:19 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 16:04:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:22:07 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static	void	new_buffer(t_node *n)
+{
+	while (!n->done)
+		handle_cases(n);
+	if (n->buf)
+	{
+		if (n->type == 'c')
+		{
+			write(1, n->buf, n->buf_len);
+			n->len += n->buf_len;
+		}
+		else
+		{
+			ft_putstr(n->buf);
+			n->len += ft_strlen(n->buf);
+		}
+	}
+	reset_and_free(n);
+}
 static	void	print_and_free(t_node *n)
 {
 	ft_putstr(n->buf);
@@ -64,21 +83,6 @@ static	void	init(t_node *n, const char *s)
 	n->pad_is_zero = false;
 	n->done = false;
 	n->is_neg = false;
-}
-
-void	add_letter(char c, char **buffer)
-{
-	char *new;
-
-	new = malloc(sizeof(char) * 2);
-	if (!new)
-		return ;
-	new[0] = c;
-	new[1] = '\0';
-	if (*buffer == NULL)
-		*buffer = new;
-	else
-		*buffer = str_join_free(buffer, &new);
 }
 
 int				ft_printf(const char *s, ...)

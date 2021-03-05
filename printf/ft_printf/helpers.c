@@ -6,32 +6,12 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 17:57:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/04 14:51:39 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:22:12 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
-
-void	new_buffer(t_node *n)
-{
-	while (!n->done)
-		handle_cases(n);
-	if (n->buf)
-	{
-		if (n->type == 'c')
-		{
-			write(1, n->buf, n->buf_len);
-			n->len += n->buf_len;
-		}
-		else
-		{
-			ft_putstr(n->buf);
-			n->len += ft_strlen(n->buf);
-		}
-	}
-	reset_and_free(n);
-}
 
 char	*get_filler(char *new_str, long len, bool pad_is_zero)
 {
