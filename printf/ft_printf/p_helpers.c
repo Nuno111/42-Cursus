@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 22:10:54 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 19:25:21 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 19:26:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,9 @@ void	handle_p(t_node *n)
 	char			*filler;
 
 	nbr = va_arg(n->ap, unsigned long);
-	else
-	{
-		add_letter('0', &n->new);
-		add_letter('x', &n->new);
-		handle_hex(n, nbr);
-	}
+	add_letter('0', &n->new);
+	add_letter('x', &n->new);
+	handle_hex(n, nbr);
 	if (n->width_len > (long)ft_strlen(n->new))
 	{
 		filler = get_filler(n->new, n->width_len, n->pad_is_zero);
