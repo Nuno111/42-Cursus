@@ -1,16 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers3.c                                         :+:      :+:    :+:   */
+/*   helpers2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 16:17:47 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 16:21:43 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:23:49 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	handle_types(t_node *n)
+{
+	char c;
+
+	c = n->s[n->i];
+	if (c == 'd' || c == 'i')
+		handle_d(n);
+	if (c == 'c')
+		handle_c(n);
+	if (c == 's')
+		handle_s(n);
+	if (c == 'p')
+		handle_p(n);
+	if (c == 'u')
+		handle_u(n);
+	if (c == 'x' || c == 'X')
+		handle_x_X(n, c);
+}
+
+void	handle_cases(t_node *n)
+{
+	char c;
+
+	c = n->s[n->i];
+	if (c == '-')
+		handle_hyphen(n);
+	else if (c == '0')
+		handle_zero(n);
+	else if (c == '*')
+		handle_asterisk(n);
+	else if (c == '.')
+		handle_dot(n);
+	else if (ft_isdigit(c)  && !n->has_prec)
+		update_padding(n, &n->width_len, false);
+	else if (ft_isdigit(c) && n->has_prec)
+		update_padding(n, &n->prec_len, false);
+	else
+		handle_types(n);
+}
 
 void	handle_hex(t_node *n, unsigned long nbr)
 {
