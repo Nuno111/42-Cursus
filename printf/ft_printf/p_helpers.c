@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 22:10:54 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/05 17:44:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/05 19:25:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	handle_p(t_node *n)
 	char			*filler;
 
 	nbr = va_arg(n->ap, unsigned long);
-	if (nbr == 0)
-		n->new = ft_strdup("(nil)");
 	else
 	{
 		add_letter('0', &n->new);
