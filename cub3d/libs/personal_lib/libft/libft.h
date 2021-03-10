@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/09 14:01:25 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/10 17:11:38 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,19 @@
 # include <stdio.h>
 # include <stdbool.h>
 
+# define OK 1
+# define ERR -1
+# define EOFILE 0
+
+# define MAX_FD 1025
+
 typedef struct			s_list
 {
 	void			*content;
 	struct s_list	*next;
 }						t_list;
 
+int						get_next_line(int fd, char **line);
 void					ft_putstr(char *str);
 void					ft_putnbr(int nb);
 void					ft_putchar(char c);
