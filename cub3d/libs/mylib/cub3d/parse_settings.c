@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/10 20:55:47 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/10 21:22:13 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static	bool	handle_line(char *line, t_scene *settings)
 
 static	void	init_settings(t_scene *settings)
 {
-	settings->res.x = 0;
-	settings->res.y = 0;
+	settings->res = NULL;
 	settings->no = NULL;
 	settings->so = NULL;
 	settings->we = NULL;

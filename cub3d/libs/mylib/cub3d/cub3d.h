@@ -10,17 +10,25 @@ typedef struct		s_res
 	int		y;
 }					t_res;
 
+typedef	struct		s_rgb
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}					t_rgb;
+
+
 typedef struct		s_scene
 {
-	t_res	res;
+	t_res	*res;
 	char	*no;
 	char	*so;
 	char	*we;
 	char	*ea;
-	int		*sprite;
-	int		**floor;
-	int		**ceil;
-	int		**map;
+	char	*sprite;
+	t_rgb	*floor;
+	t_rgb	*ceil;
+	t_rgb	*map;
 }					t_scene;
 
 bool	parse_name(char *map);
