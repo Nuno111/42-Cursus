@@ -1,4 +1,4 @@
-NAME = libftprintf.a
+NAME = mylib.a
 
 HEADER = ft_printf/ft_printf.h
 

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/10 17:11:38 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/10 17:16:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define EOFILE 0
 
 # define MAX_FD 1025
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 10000000000
+#endif
 
 typedef struct			s_list
 {
