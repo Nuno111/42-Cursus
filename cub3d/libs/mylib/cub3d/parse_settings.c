@@ -6,32 +6,35 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/10 23:18:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/10 23:35:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	void	validate_identifiers(char *identifier, t_scene *settings)
+static	void	validate_identifiers(char **strs, t_scene *settings)
 {
+	char identifier;
+
+	identifier = strs[0];
 	if (ft_strcmp(identifier, "R" == 0))
-		validate_r(settings);
+		validate_r(settings, strs);
 	else if (ft_strcmp(identifier, "NO" == 0))
-		validate_texture(settings, &settings->no);
+		validate_texture(settings, &settings->no, strs);
 	else if (ft_strcmp(identifier, "SO" == 0))
-		validate_texture(settings, &settings->so);
+		validate_texture(settings, &settings->so), strs;
 	else if (ft_strcmp(identifier, "EA" == 0))
-		validate_texture(settings, &settings->ea);
+		validate_texture(settings, &settings->ea, strs);
 	else if (ft_strcmp(identifier, "WE" == 0))
-		validate_texture(settings, &settings->we);
+		validate_texture(settings, &settings->we, strs);
 	else if (ft_strcmp(identifier, "S" == 0))
-		validate_s(settings);
+		validate_s(settings, strs);
 	else if (ft_strcmp(identifier, "F" == 0))
-		validate_f(settings);
+		validate_f(settings, strs);
 	else if (ft_strcmp(identifier, "C" == 0))
-		validate_c(settings);
+		validate_c(settings, strs);
 	else
-		validate_map(settings);
+		validate_map(settings, strs);
 }
 
 static	bool	validate_line(char *line, t_scene *settings)
@@ -41,7 +44,7 @@ static	bool	validate_line(char *line, t_scene *settings)
 	strs = ft_split(line, ' ');
 	if (!strs)
 		return (true);
-	validate_identifiers(strs[0], settings);
+	validate_identifiers(strs, settings);
 
 	return (settings->valid);
 
