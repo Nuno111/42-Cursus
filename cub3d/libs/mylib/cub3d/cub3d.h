@@ -6,8 +6,8 @@
 
 typedef struct		s_res
 {
-	int		x;
-	int		y;
+	int				x;
+	int				y;
 }					t_res;
 
 typedef	struct		s_rgb
@@ -29,6 +29,7 @@ typedef struct		s_scene
 	t_rgb	*floor;
 	t_rgb	*ceil;
 	t_rgb	*map;
+	bool	valid;
 }					t_scene;
 
 bool	parse_name(char *map);
