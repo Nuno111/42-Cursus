@@ -7,4 +7,5 @@ int     main(int argc, char *argv[])
 {
 	if (argc != 2 || !parse_name(argv[1]) || !parse_settings(argv[1]))
 		return (ERR);
+	return (OK);
 }
