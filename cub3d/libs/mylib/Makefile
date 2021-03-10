@@ -1,36 +1,39 @@
 NAME = mylib.a
 
-HEADER = ft_printf/ft_printf.h
-
-DEP_HEADER = libft/libft.h
-
 CC = gcc
 
 CFLAGS =  -c -g -Wall -Werror -Wextra
 
 LIB_FLAGS = -rcs
 
-SRC = $(wildcard ft_printf/*.c)
+SRC0 = $(wildcard ft_printf/*.c)
 
-DST = $(SRC:.c=.o)
+DST0 = $(SRC:.c=.o)
 
-DEP_SRC = $(wildcard libft/*.c)
+SRC1 = $(wildcard libft/*.c)
 
-DEP_DST = $(DEP_SRC:.c=.o)
+DST1 = $(SRC1:.c=.o)
+
+SRC2 = $(wildcard cub3d/*.c)
+
+DST2 = $(SRC2:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(DST) $(DEP_DST)
+$(NAME) : $(DST0) $(DST1) $(DST2)
 	ar $(LIB_FLAGS) $@ $^
 
-%.o : %.c $(HEADER)
+ft_printf/%.o : ft_printf/%.c ft_printf/ft_printf.h
 	$(CC) $(CFLAGS) $< -o $@
 
-libft/%.o : libft/%.c $(DEP_HEADER)
+libft/%.o : libft/%.c libft/libft.h
+	$(CC) $(CFLAGS) $< -o $@
+
+cub3d/%.o : cub3d/%.c cub3d/cub3d.h
 	$(CC) $(CFLAGS) $< -o $@
 
 clean :
-	rm -f $(DST) $(DEP_DST)
+	rm -f $(DST0) $(DST1) $(DST2)
 
 fclean : clean
 	rm -f $(NAME)
