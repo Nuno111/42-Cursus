@@ -20,6 +20,7 @@ typedef struct		s_scene
 	char	*sprite;
 	char	**floor;
 	char	**ceil;
+	char	**map;
 }					t_scene;
 
 bool	parse_name(char *map);
