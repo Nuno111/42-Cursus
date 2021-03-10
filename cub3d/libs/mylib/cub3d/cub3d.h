@@ -32,6 +32,11 @@ typedef struct		s_scene
 	bool	valid;
 }					t_scene;
 
+void	validate_r(t_scene *settings);
+void	validate_s(t_scene *settings);
+void	validate_f(t_scene *settings);
+void	validate_c(t_scene *settings);
+void	validate_texture(t_scene *settings, char **path);
 bool	parse_name(char *map);
 bool	parse_settings(char *map);
 
