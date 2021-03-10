@@ -17,10 +17,10 @@ typedef struct		s_scene
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	*sprite;
-	char	**floor;
-	char	**ceil;
-	char	**map;
+	int		*sprite;
+	int		**floor;
+	int		**ceil;
+	int		**map;
 }					t_scene;
 
 bool	parse_name(char *map);
