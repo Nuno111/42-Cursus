@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/12 11:50:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/12 12:55:17 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ static	void	validate_identifiers(char **strs, t_scene *settings)
 	if (ft_strcmp(identifier, "R" == 0))
 		validate_r(settings, strs);
 	else if (ft_strcmp(identifier, "NO" == 0))
-		validate_texture(settings, &settings->no, strs);
+		validate_textures(settings, &settings->no, strs);
 	else if (ft_strcmp(identifier, "SO" == 0))
-		validate_texture(settings, &settings->so), strs;
+		validate_textures(settings, &settings->so, strs);
 	else if (ft_strcmp(identifier, "EA" == 0))
-		validate_texture(settings, &settings->ea, strs);
+		validate_textures(settings, &settings->ea, strs);
 	else if (ft_strcmp(identifier, "WE" == 0))
-		validate_texture(settings, &settings->we, strs);
-	else if (ft_strcmp(identifier, "S" == 0))
-		validate_s(settings, strs);
+		validate_textures(settings, &settings->we, strs);
+	else if (ft_strcmp(identifier, "S") == 0)
+		validate_textures(settings, &settings->sprite, strs);
 	else if (ft_strcmp(identifier, "F" == 0))
-		validate_f(settings, strs);
+		validate_floor_ceil(settings, strs, &settings->floor);
 	else if (ft_strcmp(identifier, "C" == 0))
-		validate_c(settings, strs);
+		validate_floor_ceil(settings, strs, &settings->ceil);
 	else
 		validate_map(settings, strs);
 }

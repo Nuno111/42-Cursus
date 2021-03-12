@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/12 12:50:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/12 12:50:56 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	validate_floor_ceil(t_scene *settings, t_rgb *floor_or_ceil, char **strs)
 		settings->valid = false;
 }
 
-void	validate_texture(t_scene *settings, char **path, char **strs)
+void	validate_textures(t_scene *settings, char **path, char **strs)
 {
 
 }

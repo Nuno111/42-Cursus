@@ -35,7 +35,7 @@ typedef struct		s_scene
 void	validate_floor_ceil(t_scene *settings, t_rgb *floor_or_ceil, char **strs);
 void	validate_r(t_scene *settings, char **strs);
 void	validate_map(t_scene *settings, char **strs);
-void	validate_texture(t_scene *settings, char **path, char **strs);
+void	validate_textures(t_scene *settings, char **path, char **strs);
 bool	parse_name(char *map);
 bool	parse_settings(char *map);
 
