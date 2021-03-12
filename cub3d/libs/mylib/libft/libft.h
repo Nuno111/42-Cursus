@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/10 23:04:40 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/12 11:25:47 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct			s_list
 	struct s_list	*next;
 }						t_list;
 
+bool					ft_str_is_numeric(char *str);
 int						get_next_line(int fd, char **line);
 void					ft_putstr(char *str);
 void					ft_putnbr(int nb);
