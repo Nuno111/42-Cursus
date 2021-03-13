@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/12 23:55:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:29:47 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,26 @@ void	validate_textures(t_scene *settings, char **path, char **strs)
 		*path = tmp;
 	else
 		settings->valid = false;
+}
+
+bool    validate_name(char *map)
+{
+	char	*index;
+	char	*valid;
+	int		i;
+
+	i = 1;
+	valid = ".cub";
+	if (map)
+	{
+		index = ft_strchr(map, '.');
+		if (index)
+		{
+			while (index[i] == valid[i])
+					i++;
+		}
+		if (valid[i] == '\0')
+			return (true);
+	}
+    return (false);
 }

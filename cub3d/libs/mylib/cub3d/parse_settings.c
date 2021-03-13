@@ -6,32 +6,29 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/13 21:00:10 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:30:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	bool    validate_name(char *map)
+static	void	parse_map(char *line, t_scene *settings)
 {
-	char	*index;
-	char	*valid;
 	int		i;
+	char	*valid;
 
-	i = 1;
-	valid = ".cub";
-	if (map)
+	i = 0;
+	while (line[i])
 	{
-		index = ft_strchr(map, '.');
-		if (index)
-		{
-			while (index[i] == valid[i])
-					i++;
-		}
-		if (valid[i] == '\0')
-			return (true);
+		valid = ft_strchr("012NSEW ", line[i]);
+		if (!valid)
+			break;
+		i++;
 	}
-    return (false);
+	if (valid)
+		ft_lstadd_back(&settings->map, ft_lstnew(ft_strdup(line)));
+	else
+		settings->valid = false;
 }
 
 static	void	validate_identifiers(char **strs, t_scene *settings)
@@ -109,5 +106,6 @@ bool    parse_settings(char *file)
 		status = parse_line(line, &settings);
 		free(line);
 	}
+	validate_map(&settings);
 	return (status);
 }
