@@ -6,11 +6,33 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/13 20:55:31 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/13 21:00:10 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static	bool    validate_name(char *map)
+{
+	char	*index;
+	char	*valid;
+	int		i;
+
+	i = 1;
+	valid = ".cub";
+	if (map)
+	{
+		index = ft_strchr(map, '.');
+		if (index)
+		{
+			while (index[i] == valid[i])
+					i++;
+		}
+		if (valid[i] == '\0')
+			return (true);
+	}
+    return (false);
+}
 
 static	void	validate_identifiers(char **strs, t_scene *settings)
 {
@@ -35,7 +57,7 @@ static	void	validate_identifiers(char **strs, t_scene *settings)
 		validate_floor_ceil(settings, strs, &settings->ceil);
 }
 
-static	bool	validate_line(char *line, t_scene *settings)
+static	bool	parse_line(char *line, t_scene *settings)
 {
 	char *strs;
 
@@ -74,7 +96,7 @@ bool    parse_settings(char *file)
 	bool status;
 	t_scene settings;
 
-	if (!file)
+	if (!file || !parse_name(file))
 		return (false);
 	init_settings(&settings);
 	status = true;
@@ -84,7 +106,7 @@ bool    parse_settings(char *file)
 	{
 		line = NULL;
 		ret = get_next_line(fd, &line);
-		status = validate_line(line, &settings);
+		status = parse_line(line, &settings);
 		free(line);
 	}
 	return (status);
