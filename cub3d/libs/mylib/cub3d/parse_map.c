@@ -6,15 +6,42 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/13 23:32:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:46:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	char	*replace_tabs(t_scene *settings)
+static	char	*replace_tabs(char *str)
 {
+	size_t	i;
+	size_t	count;
+	char	*new;
 
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\t')
+			count++;
+		i++;
+	}
+	new = malloc(sizeof(char) * (ft_strlen(str) + (count * 4) - count) + 1);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '\t')
+		{
+			new[i] = str[i];
+			i++;
+		}
+		else
+		{
+			ft_memset(&new[i], ' ', 4);
+			i+= 4;
+		}
+	}
+	new[i] = '\0';
 }
 
 static	void	linked_to_array(t_scene *settings)
