@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/13 21:03:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/13 21:56:17 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,19 @@
 
 void	parse_map(char *line, t_scene *settings)
 {
-	char *valid_input;
+	int		i;
+	char	*valid;
 
-	valid_input = "012NSEW ";
+	i = 0;
+	while (line[i])
+	{
+		valid = ft_strchr("012NSEW ", line[i]);
+		if (!valid)
+			break;
+		i++;
+	}
+	if (valid)
+		ft_lstadd_back(&settings->map, ft_lstnew(ft_strdup(line)));
+	else
+		settings->valid = false;
 }
