@@ -28,7 +28,7 @@ typedef struct		s_scene
 	char	*sprite;
 	t_rgb	*floor;
 	t_rgb	*ceil;
-	t_rgb	*map;
+	char	**map;
 	bool	valid;
 }					t_scene;
 

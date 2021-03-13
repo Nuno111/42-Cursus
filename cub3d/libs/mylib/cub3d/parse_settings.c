@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/12 12:55:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/13 20:55:31 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,23 @@ static	void	validate_identifiers(char **strs, t_scene *settings)
 		validate_floor_ceil(settings, strs, &settings->floor);
 	else if (ft_strcmp(identifier, "C" == 0))
 		validate_floor_ceil(settings, strs, &settings->ceil);
-	else
-		validate_map(settings, strs);
 }
 
 static	bool	validate_line(char *line, t_scene *settings)
 {
 	char *strs;
 
-	strs = ft_split(line, ' ');
-	if (!strs)
-		return (true);
-	validate_identifiers(strs, settings);
-
+	if (*line == '\0')
+		return (settings->valid);
+	if (settings->res && settings->no && settings->ea && settings->we
+	&& settings->so && settings->sprite && settings->floor && settings->ceil)
+		parse_map(line, settings);
+	else
+	{
+		strs = ft_split(line, ' ');
+		validate_identifiers(strs, settings);
+	}
 	return (settings->valid);
-
 }
 
 static	void	init_settings(t_scene *settings)
