@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/13 22:30:21 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:33:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static	void	parse_map(char *line, t_scene *settings)
 		i++;
 	}
 	if (valid)
-		ft_lstadd_back(&settings->map, ft_lstnew(ft_strdup(line)));
+		ft_lstadd_back(&settings->tmp_map, ft_lstnew(ft_strdup(line)));
 	else
 		settings->valid = false;
 }

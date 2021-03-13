@@ -6,27 +6,37 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/13 21:56:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:58:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parse_map(char *line, t_scene *settings)
+static	void	linked_to_array(t_scene *settings)
 {
+	int		size;
+	char	**arr;
 	int		i;
-	char	*valid;
+	t_list	tmp_node;
 
-	i = 0;
-	while (line[i])
+	size = ft_lstsize(settings->tmp_map);
+	arr = malloc(sizeof(char *) * size);
+	if (!arr)
+		return 	;
+	tmp_node = *(settings->tmp_map);
+	while (tmp_node.content)
 	{
-		valid = ft_strchr("012NSEW ", line[i]);
-		if (!valid)
-			break;
+		arr[i] = ft_strdup(tmp_node.content);
+		tmp_node = *tmp_node.next;
 		i++;
 	}
-	if (valid)
-		ft_lstadd_back(&settings->map, ft_lstnew(ft_strdup(line)));
-	else
-		settings->valid = false;
+	ft_free_list(&settings->tmp_map);
+}
+
+void	validate_map(t_scene *settings)
+{
+	if (!settings->valid)
+		return ;
+	linked_to_array(settings);
+
 }
