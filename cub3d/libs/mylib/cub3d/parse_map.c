@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 16:54:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:51:34 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	linked_to_array(t_scene *settings)
 	int		i;
 	t_list	*tmp_node;
 
+	i = 0;
 	size = ft_lstsize(settings->tmp_map);
 	arr = malloc(sizeof(char *) * size);
 	if (!arr)
