@@ -12,9 +12,9 @@ typedef struct		s_res
 
 typedef	struct		s_rgb
 {
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	int				r;
+	int				g;
+	int				b;
 }					t_rgb;
 
 

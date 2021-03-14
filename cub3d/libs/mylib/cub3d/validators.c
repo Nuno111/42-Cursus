@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 20:45:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:00:05 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,21 @@ void	validate_r(t_scene *settings, char **strs)
 void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs)
 {
 	t_rgb	*tmp;
-	char	*tmp_strs;
+	char	**tmp_strs;
 
-	if (!strs[1] || !strs[2] || *floor_or_ceil)
+	if (!strs[1] || *floor_or_ceil)
 	{
 		settings->valid = false;
 		return ;
 	}
-	tmp_strs = ft_split(strs[2], ',');
-	if (ft_str_is_numeric(tmp_strs[1]) && ft_str_is_numeric(tmp_strs[2]) && ft_str_is_numeric(tmp_strs[3]))
+	tmp_strs = ft_split(strs[1], ',');
+	if (ft_str_is_numeric(tmp_strs[0]) && ft_str_is_numeric(tmp_strs[1]) && ft_str_is_numeric(tmp_strs[2]))
 		tmp = malloc(sizeof(t_rgb));
 	if (tmp)
 	{
-		tmp->r = (unsigned char)ft_atoi(strs[1]);
-		tmp->g = (unsigned char)ft_atoi(strs[2]);
-		tmp->b = (unsigned char)ft_atoi(strs[3]);
+		tmp->r = (unsigned char)ft_atoi(tmp_strs[0]);
+		tmp->g = (unsigned char)ft_atoi(tmp_strs[1]);
+		tmp->b = (unsigned char)ft_atoi(tmp_strs[2]);
 		*floor_or_ceil = tmp;
 	}
 	else
