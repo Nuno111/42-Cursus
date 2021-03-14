@@ -6,11 +6,39 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 13:21:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 13:51:38 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static	void	verify_position(t_scene *settings)
+{
+	int		i;
+	int		j;
+	bool	position_found;
+	char	*valid_char;
+
+	position_found = false;
+	i = 0;
+	while (settings->map[i])
+	{
+		j = 0;
+		while (settings->map[i][j])
+		{
+			valid_char = ft_strchr("NESW", settings->map[i][j]);
+			if (valid_char && !position_found)
+				position_found = true;
+			else if (valid_char)
+			{
+				settings->valid = false;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 static	char	*replace_tabs(char *str)
 {
@@ -33,6 +61,7 @@ static	char	*replace_tabs(char *str)
 		}
 		i++;
 	}
+	return (new);
 }
 
 static	void	linked_to_array(t_scene *settings)
@@ -63,6 +92,7 @@ void	validate_map(t_scene *settings)
 {
 	if (!settings->valid)
 		return ;
-	replace_tabs(settings);
 	linked_to_array(settings);
+	verify_position(settings);
+	verify_walls(settings);
 }
