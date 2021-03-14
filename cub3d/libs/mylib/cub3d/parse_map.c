@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/13 23:46:35 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 13:21:56 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,24 @@
 static	char	*replace_tabs(char *str)
 {
 	size_t	i;
-	size_t	count;
 	char	*new;
+	char	*tmp;
 
-	count = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\t')
-			count++;
-		i++;
-	}
-	new = malloc(sizeof(char) * (ft_strlen(str) + (count * 4) - count) + 1);
+	new = NULL;
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] != '\t')
-		{
-			new[i] = str[i];
-			i++;
-		}
+			add_letter(str[i], &new);
 		else
 		{
-			ft_memset(&new[i], ' ', 4);
-			i+= 4;
+			tmp = ft_strjoin(new, "    ");
+			if (new)
+				free(new);
+			new = tmp;
 		}
+		i++;
 	}
-	new[i] = '\0';
 }
 
 static	void	linked_to_array(t_scene *settings)
