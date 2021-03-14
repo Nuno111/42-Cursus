@@ -33,8 +33,13 @@ typedef struct		s_scene
 	bool	valid;
 }					t_scene;
 
-bool    validate_name(char *map);
-void	validate_floor_ceil(t_scene *settings, t_rgb *floor_or_ceil, char **strs);
+void	linked_to_array(t_scene *settings);
+void	verify_walls(t_scene *settings);
+bool	verify_str(char *str, bool whole);
+void	verify_position(t_scene *settings);
+char	*replace_tabs(char *str);
+bool    validate_name(char *file);
+void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs);
 void	validate_r(t_scene *settings, char **strs);
 void	validate_map(t_scene *settings);
 void	validate_textures(t_scene *settings, char **path, char **strs);

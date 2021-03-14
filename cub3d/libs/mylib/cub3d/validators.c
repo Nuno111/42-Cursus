@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 15:18:13 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 17:12:12 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	validate_r(t_scene *settings, char **strs)
 		settings->valid = false;
 }
 
-void	validate_floor_ceil(t_scene *settings, t_rgb *floor_or_ceil, char **strs)
+void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs)
 {
 	t_rgb *tmp;
 
-	if (!strs[1] || !strs[2] || !strs[3] || floor_or_ceil)
+	if (!strs[1] || !strs[2] || !strs[3] || *floor_or_ceil)
 	{
 		settings->valid = false;
 		return ;
@@ -52,10 +52,7 @@ void	validate_floor_ceil(t_scene *settings, t_rgb *floor_or_ceil, char **strs)
 		tmp->r = (unsigned char)ft_atoi(strs[1]);
 		tmp->g = (unsigned char)ft_atoi(strs[2]);
 		tmp->b = (unsigned char)ft_atoi(strs[3]);
-		if (tmp->r < 0 || tmp->g < 0 || tmp->b < 0)
-			settings->valid = false;
-		else
-			floor_or_ceil = tmp;
+		*floor_or_ceil = tmp;
 	}
 	else
 		settings->valid = false;
@@ -77,7 +74,7 @@ void	validate_textures(t_scene *settings, char **path, char **strs)
 		settings->valid = false;
 }
 
-bool    validate_name(char *map)
+bool    validate_name(char *file)
 {
 	char	*index;
 	char	*valid;
@@ -85,12 +82,12 @@ bool    validate_name(char *map)
 
 	i = 1;
 	valid = ".cub";
-	if (map)
+	if (file)
 	{
-		index = ft_strchr(map, '.');
+		index = ft_strchr(file, '.');
 		if (index)
 		{
-			while (index[i] == valid[i])
+			while (index[i] == valid[i] && index[i])
 					i++;
 		}
 		if (valid[i] == '\0')

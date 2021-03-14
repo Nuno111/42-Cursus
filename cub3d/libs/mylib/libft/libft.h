@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/13 23:02:15 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 17:42:02 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 # define MAX_FD 1025
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 10000000000
+# define BUFFER_SIZE 10000
 #endif
 
 typedef struct			s_list

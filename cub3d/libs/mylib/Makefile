@@ -8,7 +8,7 @@ LIB_FLAGS = -rcs
 
 SRC0 = $(wildcard ft_printf/*.c)
 
-DST0 = $(SRC:.c=.o)
+DST0 = $(SRC0:.c=.o)
 
 SRC1 = $(wildcard libft/*.c)
 

@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 15:04:39 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 16:54:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	char	*replace_tabs(char *str)
+char	*replace_tabs(char *str)
 {
 	size_t	i;
 	char	*new;
@@ -36,7 +36,7 @@ static	char	*replace_tabs(char *str)
 	return (new);
 }
 
-static	void	verify_position(t_scene *settings)
+void	verify_position(t_scene *settings)
 {
 	int		i;
 	int		j;
@@ -64,10 +64,28 @@ static	void	verify_position(t_scene *settings)
 	}
 }
 
-static	void	verify_walls(t_scene *settings)
+bool	verify_str(char *str, bool whole)
+{
+	if (!whole)
+	{
+		while (*str && *str == '1')
+			str++;
+		if (*str == '\0')
+			return (true);
+		return (false);
+	}
+	else
+	{
+		if (str[0] == '1' && str[ft_strlen(str) - 1] == '1')
+			return (true);
+		return (false);
+	}
+}
+
+void	verify_walls(t_scene *settings)
 {
 	char	*str;
-	int		i;
+	size_t	i;
 	size_t	arr_len;
 
 	if (!settings->valid)
@@ -78,11 +96,11 @@ static	void	verify_walls(t_scene *settings)
 	i = 0;
 	while (settings->map[i])
 	{
-		str = ft_trim(settings->map[i], ' ');
+		str = ft_strtrim(settings->map[i], " ");
 		if (i == 0 || i == arr_len)
-			verify_beg_and_end(str);
+			settings->valid = verify_str(str, true);
 		else
-			verify_string(str);
+			settings->valid = verify_str(str, false);
 		free(str);
 		if (!settings->valid)
 			return ;
@@ -90,7 +108,7 @@ static	void	verify_walls(t_scene *settings)
 	}
 }
 
-static	void	linked_to_array(t_scene *settings)
+void	linked_to_array(t_scene *settings)
 {
 	int		size;
 	char	**arr;
@@ -112,13 +130,4 @@ static	void	linked_to_array(t_scene *settings)
 		i++;
 	}
 	ft_free_list(&settings->tmp_map);
-}
-
-void	validate_map(t_scene *settings)
-{
-	if (!settings->valid)
-		return ;
-	linked_to_array(settings);
-	verify_position(settings);
-	verify_walls(settings);
 }

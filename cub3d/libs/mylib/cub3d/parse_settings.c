@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/13 22:33:35 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 17:04:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,30 @@ static	void	parse_map(char *line, t_scene *settings)
 
 static	void	validate_identifiers(char **strs, t_scene *settings)
 {
-	char identifier;
+	char *identifier;
 
 	identifier = strs[0];
-	if (ft_strcmp(identifier, "R" == 0))
+	if (ft_strcmp(identifier, "R") == 0)
 		validate_r(settings, strs);
-	else if (ft_strcmp(identifier, "NO" == 0))
+	else if (ft_strcmp(identifier, "NO") == 0)
 		validate_textures(settings, &settings->no, strs);
-	else if (ft_strcmp(identifier, "SO" == 0))
+	else if (ft_strcmp(identifier, "SO") == 0)
 		validate_textures(settings, &settings->so, strs);
-	else if (ft_strcmp(identifier, "EA" == 0))
+	else if (ft_strcmp(identifier, "EA") == 0)
 		validate_textures(settings, &settings->ea, strs);
-	else if (ft_strcmp(identifier, "WE" == 0))
+	else if (ft_strcmp(identifier, "WE") == 0)
 		validate_textures(settings, &settings->we, strs);
 	else if (ft_strcmp(identifier, "S") == 0)
 		validate_textures(settings, &settings->sprite, strs);
-	else if (ft_strcmp(identifier, "F" == 0))
-		validate_floor_ceil(settings, strs, &settings->floor);
-	else if (ft_strcmp(identifier, "C" == 0))
-		validate_floor_ceil(settings, strs, &settings->ceil);
+	else if (ft_strcmp(identifier, "F") == 0)
+		validate_floor_ceil(settings, &settings->floor, strs);
+	else if (ft_strcmp(identifier, "C") == 0)
+		validate_floor_ceil(settings, &settings->ceil, strs);
 }
 
 static	bool	parse_line(char *line, t_scene *settings)
 {
-	char *strs;
+	char **strs;
 
 	if (*line == '\0')
 		return (settings->valid);
@@ -93,7 +93,7 @@ bool    parse_settings(char *file)
 	bool status;
 	t_scene settings;
 
-	if (!file || !parse_name(file))
+	if (!file || !validate_name(file))
 		return (false);
 	init_settings(&settings);
 	status = true;
