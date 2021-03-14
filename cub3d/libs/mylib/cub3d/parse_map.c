@@ -6,11 +6,35 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 13:51:38 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 15:04:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static	char	*replace_tabs(char *str)
+{
+	size_t	i;
+	char	*new;
+	char	*tmp;
+
+	new = NULL;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '\t')
+			add_letter(str[i], &new);
+		else
+		{
+			tmp = ft_strjoin(new, "    ");
+			if (new)
+				free(new);
+			new = tmp;
+		}
+		i++;
+	}
+	return (new);
+}
 
 static	void	verify_position(t_scene *settings)
 {
@@ -40,28 +64,30 @@ static	void	verify_position(t_scene *settings)
 	}
 }
 
-static	char	*replace_tabs(char *str)
+static	void	verify_walls(t_scene *settings)
 {
-	size_t	i;
-	char	*new;
-	char	*tmp;
+	char	*str;
+	int		i;
+	size_t	arr_len;
 
-	new = NULL;
+	if (!settings->valid)
+		return ;
+	arr_len = 0;
+	while (settings->map[arr_len])
+		arr_len++;
 	i = 0;
-	while (str[i])
+	while (settings->map[i])
 	{
-		if (str[i] != '\t')
-			add_letter(str[i], &new);
+		str = ft_trim(settings->map[i], ' ');
+		if (i == 0 || i == arr_len)
+			verify_beg_and_end(str);
 		else
-		{
-			tmp = ft_strjoin(new, "    ");
-			if (new)
-				free(new);
-			new = tmp;
-		}
+			verify_string(str);
+		free(str);
+		if (!settings->valid)
+			return ;
 		i++;
 	}
-	return (new);
 }
 
 static	void	linked_to_array(t_scene *settings)
