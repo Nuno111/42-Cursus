@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 17:04:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:33:41 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static	void	init_settings(t_scene *settings)
 	settings->sprite = NULL;
 	settings->floor = NULL;
 	settings->ceil = NULL;
+	settings->tmp_map = NULL;
 	settings->map = NULL;
 	settings->valid = true;
 }
