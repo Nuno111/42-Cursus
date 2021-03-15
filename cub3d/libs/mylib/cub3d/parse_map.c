@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 20:26:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 22:06:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	verify_position(t_scene *settings)
 	bool	position_found;
 	char	*valid_char;
 
-	if (!settings->valid)
-		return ;
 	position_found = false;
 	i = 0;
 	while (settings->map[i])
@@ -56,10 +54,7 @@ void	verify_position(t_scene *settings)
 			if (valid_char && !position_found)
 				position_found = true;
 			else if (valid_char)
-			{
-				settings->valid = false;
-				return ;
-			}
+				error_and_exit(settings, "Invalid char found when parsing map");
 			j++;
 		}
 		i++;
@@ -89,9 +84,8 @@ void	verify_walls(t_scene *settings)
 	char	*str;
 	size_t	i;
 	size_t	arr_len;
+	bool	str_is_valid;
 
-	if (!settings->valid)
-		return ;
 	arr_len = 0;
 	while (settings->map[arr_len])
 		arr_len++;
@@ -100,12 +94,12 @@ void	verify_walls(t_scene *settings)
 	{
 		str = ft_strtrim(settings->map[i], " ");
 		if (i == 0 || i == arr_len)
-			settings->valid = verify_str(str, true);
+			str_is_valid = verify_str(str, true);
 		else
-			settings->valid = verify_str(str, false);
+			str_is_valid = verify_str(str, false);
 		free(str);
-		if (!settings->valid)
-			return ;
+		if (!str_is_valid)
+			error_and_exit(settings, "Error when reading map, map is not properly surrounded by walls");
 		i++;
 	}
 }
@@ -121,7 +115,7 @@ char	**linked_to_array(t_list *settings)
 	size = ft_lstsize(settings);
 	arr = malloc(sizeof(char *) * size);
 	if (!arr)
-		return (NULL);
+		error_and_exit(settings, "Error allocating memory for map array");
 	while (settings)
 	{
 		tmp_node = settings;
