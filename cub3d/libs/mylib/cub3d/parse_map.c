@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 19:58:46 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 20:26:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	verify_position(t_scene *settings)
 	bool	position_found;
 	char	*valid_char;
 
+	if (!settings->valid)
+		return ;
 	position_found = false;
 	i = 0;
 	while (settings->map[i])

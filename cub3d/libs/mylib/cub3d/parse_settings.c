@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 19:41:08 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:43:58 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,26 +75,23 @@ static	bool	parse_line(char *line, t_scene *settings)
 	return (settings->valid);
 }
 
-bool    parse_settings(t_scene *settings, char *file)
+void    parse_settings(t_scene *settings, char *file)
 {
 	char *line;
 	int ret;
 	int fd;
-	bool status;
 
-	if (!file || !validate_name(file))
-		return (false);
-	status = true;
+	if (!validate_name(file))
+		error_and_exit(settings, "Invalid name. File must end with .cub");
 	ret = 1;
 	fd = open(file, O_RDONLY);
-	while (ret > 0 && status)
+	while (ret > 0)
 	{
 		line = NULL;
 		ret = get_next_line(fd, &line);
-		status = parse_line(line, settings);
+		parse_line(line, settings);
 		free(line);
 	}
 	validate_map(settings);
 	close(fd);
-	return (status);
 }

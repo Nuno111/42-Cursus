@@ -3,6 +3,13 @@
 #include "libs/mylib/libft/libft.h"
 #include "libs/mylib/cub3d/cub3d.h"
 
+void			error_and_exit(t_scene *settings, char *error_description)
+{
+	printf("%s\n", error_description);
+	free_settings(settings);
+	exit(ERR);
+}
+
 static	void	init_settings(t_scene *settings)
 {
 	settings->res = NULL;
@@ -18,7 +25,7 @@ static	void	init_settings(t_scene *settings)
 	settings->valid = true;
 }
 
-static	void	free_settings(t_scene *settings)
+void	free_settings(t_scene *settings)
 {
 	if (settings->res)
 		free(settings->res);
@@ -47,12 +54,9 @@ int     main(int argc, char *argv[])
 	t_scene settings;
 
 	init_settings(&settings);
-	if (argc != 2 || !parse_settings(&settings, argv[1]))
-	{
-		free_settings(&settings);
-		printf("Error");
-		return (ERR);
-	}
+	if (argc != 2)
+		error_and_exit(&settings, "Two arguments needed");
+	parse_settings(&settings, argv[1]);
 	free_settings(&settings);
 	printf("ok");
 	return (OK);
