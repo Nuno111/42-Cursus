@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 21:43:58 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:56:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	void	parse_map(char *line, t_scene *settings)
 		settings->valid = false;
 }
 
-static	void	validate_identifiers(char **strs, t_scene *settings)
+static	void	verify_identifiers(char **strs, t_scene *settings)
 {
 	char *identifier;
 
@@ -57,22 +57,25 @@ static	void	validate_identifiers(char **strs, t_scene *settings)
 		validate_floor_ceil(settings, &settings->ceil, strs);
 }
 
-static	bool	parse_line(char *line, t_scene *settings)
+static	void	parse_line(char *line, t_scene *settings)
 {
 	char **strs;
 
 	if (*line == '\0')
-		return (settings->valid);
+		return ;
 	if (settings->res && settings->no && settings->ea && settings->we
 	&& settings->so && settings->sprite && settings->floor && settings->ceil)
-		parse_map(line, settings);
+	{
+		settings->map = linked_to_array(settings->tmp_map);
+		verify_position(settings);
+		verify_walls(settings);
+	}
 	else
 	{
 		strs = ft_split(line, ' ');
-		validate_identifiers(strs, settings);
+		verify_identifiers(strs, settings);
 		ft_freearrays(strs);
 	}
-	return (settings->valid);
 }
 
 void    parse_settings(t_scene *settings, char *file)

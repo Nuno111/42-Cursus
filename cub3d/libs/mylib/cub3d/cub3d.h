@@ -43,7 +43,6 @@ char	*replace_tabs(char *str);
 bool    validate_name(char *file);
 void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs);
 void	validate_r(t_scene *settings, char **strs);
-void	validate_map(t_scene *settings);
 void	validate_textures(t_scene *settings, char **path, char **strs);
 void	parse_settings(t_scene *settings, char *file);
 
