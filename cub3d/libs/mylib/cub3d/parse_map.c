@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 22:06:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 22:14:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	verify_position(t_scene *settings)
 			if (valid_char && !position_found)
 				position_found = true;
 			else if (valid_char)
-				error_and_exit(settings, "Invalid char found when parsing map");
+				error_and_exit(settings, "Error: Only one starting postion must be given");
 			j++;
 		}
 		i++;
@@ -115,7 +115,7 @@ char	**linked_to_array(t_list *settings)
 	size = ft_lstsize(settings);
 	arr = malloc(sizeof(char *) * size);
 	if (!arr)
-		error_and_exit(settings, "Error allocating memory for map array");
+		return (NULL);
 	while (settings)
 	{
 		tmp_node = settings;

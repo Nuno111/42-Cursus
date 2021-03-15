@@ -3,9 +3,9 @@
 #include "libs/mylib/libft/libft.h"
 #include "libs/mylib/cub3d/cub3d.h"
 
-void			error_and_exit(t_scene *settings, char *error_description)
+void			error_and_exit(t_scene *settings, char *error_log)
 {
-	printf("%s\n", error_description);
+	printf("%s\n", error_log);
 	free_settings(settings);
 	exit(ERR);
 }

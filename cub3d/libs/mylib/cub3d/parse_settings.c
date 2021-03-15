@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 21:59:18 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 22:17:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	void	parse_map(char *line, t_scene *settings)
 		ft_lstadd_back(&settings->tmp_map, node);
 	}
 	else
-		settings->valid = false;
+		error_and_exit(settings, "Error when parsing map, forbidden character found");
 }
 
 static	void	verify_identifiers(char **strs, t_scene *settings)
@@ -65,11 +65,7 @@ static	void	parse_line(char *line, t_scene *settings)
 		return ;
 	if (settings->res && settings->no && settings->ea && settings->we
 	&& settings->so && settings->sprite && settings->floor && settings->ceil)
-	{
-		settings->map = linked_to_array(settings->tmp_map);
-		verify_position(settings);
-		verify_walls(settings);
-	}
+		parse_map(line, settings);
 	else
 	{
 		strs = ft_split(line, ' ');

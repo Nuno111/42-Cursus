@@ -33,7 +33,8 @@ typedef struct		s_scene
 	bool	valid;
 }					t_scene;
 
-void	error_and_exit(t_scene *settings, int num);
+void	validate_map(t_scene *settings);
+void	error_and_exit(t_scene *settings, char *error_log);
 void	free_settings(t_scene *settings);
 char	**linked_to_array(t_list *settings);
 void	verify_walls(t_scene *settings);

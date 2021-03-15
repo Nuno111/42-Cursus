@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 21:57:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 22:17:29 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,11 @@ bool    validate_name(char *file)
 			return (true);
 	}
     return (false);
+}
+
+void	validate_map(t_scene *settings)
+{
+	settings->map = linked_to_array(settings->tmp_map);
+	verify_position(settings);
+	verify_walls(settings);
 }
