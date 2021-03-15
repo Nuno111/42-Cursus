@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 21:51:34 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 19:58:46 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	verify_walls(t_scene *settings)
 	}
 }
 
-void	linked_to_array(t_scene *settings)
+char	**linked_to_array(t_list *settings)
 {
 	int		size;
 	char	**arr;
@@ -116,19 +116,19 @@ void	linked_to_array(t_scene *settings)
 	t_list	*tmp_node;
 
 	i = 0;
-	size = ft_lstsize(settings->tmp_map);
+	size = ft_lstsize(settings);
 	arr = malloc(sizeof(char *) * size);
 	if (!arr)
-		return 	;
-	while (settings->tmp_map)
+		return (NULL);
+	while (settings)
 	{
-		tmp_node = settings->tmp_map;
-		settings->tmp_map = settings->tmp_map->next;
+		tmp_node = settings;
+		settings = settings->next;
 		if (ft_strchr(tmp_node->content, '\t'))
 			arr[i] = replace_tabs(tmp_node->content);
 		else
 			arr[i] = ft_strdup(tmp_node->content);
 		i++;
 	}
-	ft_free_list(&settings->tmp_map);
+	return(arr);
 }

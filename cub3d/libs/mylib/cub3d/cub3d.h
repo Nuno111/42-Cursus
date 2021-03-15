@@ -33,7 +33,7 @@ typedef struct		s_scene
 	bool	valid;
 }					t_scene;
 
-void	linked_to_array(t_scene *settings);
+char	**linked_to_array(t_list *settings);
 void	verify_walls(t_scene *settings);
 bool	verify_str(char *str, bool whole);
 void	verify_position(t_scene *settings);
@@ -43,6 +43,6 @@ void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs);
 void	validate_r(t_scene *settings, char **strs);
 void	validate_map(t_scene *settings);
 void	validate_textures(t_scene *settings, char **path, char **strs);
-bool	parse_settings(char *map);
+bool	parse_settings(t_scene *settings, char *file);
 
 #endif

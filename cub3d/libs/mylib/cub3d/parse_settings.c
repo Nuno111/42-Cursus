@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 21:33:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 19:41:08 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static	void	parse_map(char *line, t_scene *settings)
 {
 	int		i;
 	char	*valid;
-
+	t_list	*node;
 	i = 0;
 	while (line[i])
 	{
@@ -26,7 +26,10 @@ static	void	parse_map(char *line, t_scene *settings)
 		i++;
 	}
 	if (valid)
-		ft_lstadd_back(&settings->tmp_map, ft_lstnew(ft_strdup(line)));
+	{
+		node = ft_lstnew(ft_strdup(line));
+		ft_lstadd_back(&settings->tmp_map, node);
+	}
 	else
 		settings->valid = false;
 }
@@ -67,36 +70,20 @@ static	bool	parse_line(char *line, t_scene *settings)
 	{
 		strs = ft_split(line, ' ');
 		validate_identifiers(strs, settings);
+		ft_freearrays(strs);
 	}
 	return (settings->valid);
 }
 
-static	void	init_settings(t_scene *settings)
-{
-	settings->res = NULL;
-	settings->no = NULL;
-	settings->so = NULL;
-	settings->we = NULL;
-	settings->ea = NULL;
-	settings->sprite = NULL;
-	settings->floor = NULL;
-	settings->ceil = NULL;
-	settings->tmp_map = NULL;
-	settings->map = NULL;
-	settings->valid = true;
-}
-
-bool    parse_settings(char *file)
+bool    parse_settings(t_scene *settings, char *file)
 {
 	char *line;
 	int ret;
 	int fd;
 	bool status;
-	t_scene settings;
 
 	if (!file || !validate_name(file))
 		return (false);
-	init_settings(&settings);
 	status = true;
 	ret = 1;
 	fd = open(file, O_RDONLY);
@@ -104,9 +91,10 @@ bool    parse_settings(char *file)
 	{
 		line = NULL;
 		ret = get_next_line(fd, &line);
-		status = parse_line(line, &settings);
+		status = parse_line(line, settings);
 		free(line);
 	}
-	validate_map(&settings);
+	validate_map(settings);
+	close(fd);
 	return (status);
 }

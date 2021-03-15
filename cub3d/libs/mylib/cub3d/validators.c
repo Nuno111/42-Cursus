@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 21:00:05 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 19:53:07 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	validate_map(t_scene *settings)
 {
 	if (!settings->valid)
 		return ;
-	linked_to_array(settings);
+	settings->map = linked_to_array(settings->tmp_map);
 	verify_position(settings);
 	verify_walls(settings);
 }

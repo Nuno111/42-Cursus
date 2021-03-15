@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 17:42:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 17:36:16 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void					*ft_memset(void *s, int c, size_t n);
 void					*ft_calloc(size_t nmemb, size_t size);
 void					*ft_calloc(size_t nmemb, size_t size);
 void					ft_lstiter(t_list *lst, void (*f)(void *));
-void					ft_lstadd_back(t_list **lst, t_list *new);
+void					ft_lstadd_back(t_list **lst, t_list *new_node);
 void					ft_lstadd_front(t_list **lst, t_list *new);
 void					*ft_memchr(const void *s, int c, size_t n);
 void					ft_lstclear(t_list **lst, void (*del)(void*));
