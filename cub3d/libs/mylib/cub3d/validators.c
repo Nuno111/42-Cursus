@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 19:53:07 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:44:56 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ bool    validate_name(char *file)
 	char	*valid;
 	int		i;
 
+	// This is wrong, need to handle it differently.
 	i = 1;
 	valid = ".cub";
 	if (file)
