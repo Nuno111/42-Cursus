@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 22:14:11 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/16 11:03:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	verify_position(t_scene *settings)
 
 bool	verify_str(char *str, bool whole)
 {
-	if (!whole)
+	if (whole)
 	{
-		while (*str && *str == '1')
+		while (*str && (*str == '1' || *str == ' '))
 			str++;
 		if (*str == '\0')
 			return (true);
@@ -97,9 +97,12 @@ void	verify_walls(t_scene *settings)
 			str_is_valid = verify_str(str, true);
 		else
 			str_is_valid = verify_str(str, false);
-		free(str);
 		if (!str_is_valid)
+		{
+			printf("%s", str);
 			error_and_exit(settings, "Error when reading map, map is not properly surrounded by walls");
+		}
+		free(str);
 		i++;
 	}
 }
