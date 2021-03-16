@@ -5,7 +5,7 @@
 
 void			error_and_exit(t_scene *settings, char *error_log)
 {
-	printf("%s\n", error_log);
+	printf("%s.\n", error_log);
 	free_settings(settings);
 	exit(ERR);
 }

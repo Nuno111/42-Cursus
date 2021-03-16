@@ -36,7 +36,7 @@ typedef struct		s_scene
 void	validate_map(t_scene *settings);
 void	error_and_exit(t_scene *settings, char *error_log);
 void	free_settings(t_scene *settings);
-char	**linked_to_array(t_list *settings);
+char	**linked_to_array(t_scene *settings, t_list *head);
 void	verify_walls(t_scene *settings);
 bool	verify_str(char *str, bool whole);
 void	verify_position(t_scene *settings);

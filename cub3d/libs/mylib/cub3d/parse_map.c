@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/16 11:03:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/16 11:11:57 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,13 @@ void	verify_walls(t_scene *settings)
 		else
 			str_is_valid = verify_str(str, false);
 		if (!str_is_valid)
-		{
-			printf("%s", str);
 			error_and_exit(settings, "Error when reading map, map is not properly surrounded by walls");
-		}
 		free(str);
 		i++;
 	}
 }
 
-char	**linked_to_array(t_list *settings)
+char	**linked_to_array(t_scene *settings, t_list *head)
 {
 	int		size;
 	char	**arr;
@@ -115,14 +112,16 @@ char	**linked_to_array(t_list *settings)
 	t_list	*tmp_node;
 
 	i = 0;
-	size = ft_lstsize(settings);
+	size = ft_lstsize(head);
+	if (size <= 0)
+		error_and_exit(settings, "Scene description incomplete. RTFM");
 	arr = malloc(sizeof(char *) * size);
 	if (!arr)
 		return (NULL);
-	while (settings)
+	while (head)
 	{
-		tmp_node = settings;
-		settings = settings->next;
+		tmp_node = head;
+		head = head->next;
 		if (ft_strchr(tmp_node->content, '\t'))
 			arr[i] = replace_tabs(tmp_node->content);
 		else
