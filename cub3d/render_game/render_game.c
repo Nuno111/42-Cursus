@@ -6,14 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/16 18:45:42 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/16 21:57:42 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libs/mylib/ft_printf/ft_printf.h"
-#include "../libs/mylib/libft/libft.h"
-#include "../validate_settings/cub3d.h"
-#include <mlx.h>
+#include "render_game.h"
 
 void	render_minimap(t_scene *settings, void *mlx)
 {
