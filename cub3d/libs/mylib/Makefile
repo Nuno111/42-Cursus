@@ -14,10 +14,6 @@ SRC1 = $(wildcard libft/*.c)
 
 DST1 = $(SRC1:.c=.o)
 
-SRC2 = $(wildcard cub3d/*.c)
-
-DST2 = $(SRC2:.c=.o)
-
 all : $(NAME)
 
 $(NAME) : $(DST0) $(DST1) $(DST2)
@@ -29,11 +25,8 @@ ft_printf/%.o : ft_printf/%.c ft_printf/ft_printf.h
 libft/%.o : libft/%.c libft/libft.h
 	$(CC) $(CFLAGS) $< -o $@
 
-cub3d/%.o : cub3d/%.c cub3d/cub3d.h
-	$(CC) $(CFLAGS) $< -o $@
-
 clean :
-	rm -f $(DST0) $(DST1) $(DST2)
+	rm -f $(DST0) $(DST1)
 
 fclean : clean
 	rm -f $(NAME)

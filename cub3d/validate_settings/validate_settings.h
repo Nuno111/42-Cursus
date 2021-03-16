@@ -1,8 +1,19 @@
-#ifndef CUB3D_H
-# define CUB3D_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_settings.h                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/16 21:40:46 by ngregori          #+#    #+#             */
+/*   Updated: 2021/03/16 21:44:39 by ngregori         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../libs/mylib/libft/libft.h"
-#include "../libs/mylib/ft_printf/ft_printf.h"
+#ifndef VALIDATE_SETTINGS_H
+#define VALIDATE_SETTINGS_H
+
+# include "cub3d.h"
 
 typedef struct		s_res
 {

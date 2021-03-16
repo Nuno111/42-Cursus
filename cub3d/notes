@@ -1,0 +1,5 @@
+tile width = res.x / num of tiles
+tile height = res.y num of tiles
+
+tile.x =
+tile.y

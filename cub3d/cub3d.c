@@ -1,7 +1,16 @@
-#include <mlx.h>
-#include "libs/mylib/ft_printf/ft_printf.h"
-#include "libs/mylib/libft/libft.h"
-#include "cub3d/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/16 21:32:40 by ngregori          #+#    #+#             */
+/*   Updated: 2021/03/16 21:42:57 by ngregori         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
 
 void			error_and_exit(t_scene *settings, char *error_log)
 {
@@ -57,6 +66,7 @@ int     main(int argc, char *argv[])
 	if (argc != 2)
 		error_and_exit(&settings, "Two arguments needed");
 	parse_settings(&settings, argv[1]);
+	render_game(&settings);
 	free_settings(&settings);
 	printf("ok");
 	return (OK);
