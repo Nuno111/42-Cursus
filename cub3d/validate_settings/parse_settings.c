@@ -6,11 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/16 11:21:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/16 21:31:57 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "validate_settings.h"
 
 static	void	parse_map(char *line, t_scene *settings)
 {
