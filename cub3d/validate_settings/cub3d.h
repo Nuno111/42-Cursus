@@ -1,8 +1,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "../libft/libft.h"
-#include "../ft_printf/ft_printf.h"
+#include "../libs/mylib/libft/libft.h"
+#include "../libs/mylib/ft_printf/ft_printf.h"
 
 typedef struct		s_res
 {

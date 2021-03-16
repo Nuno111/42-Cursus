@@ -1,7 +1,7 @@
 #include <mlx.h>
 #include "libs/mylib/ft_printf/ft_printf.h"
 #include "libs/mylib/libft/libft.h"
-#include "libs/mylib/cub3d/cub3d.h"
+#include "cub3d/cub3d.h"
 
 void			error_and_exit(t_scene *settings, char *error_log)
 {
