@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 22:17:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/16 11:21:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void    parse_settings(t_scene *settings, char *file)
 		error_and_exit(settings, "Invalid name. File must end with .cub");
 	ret = 1;
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		error_and_exit(settings, "Could not open the file for reading");
 	while (ret > 0)
 	{
 		line = NULL;

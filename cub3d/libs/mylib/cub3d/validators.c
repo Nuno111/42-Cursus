@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/16 11:12:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/16 11:19:41 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,15 @@ void	validate_textures(t_scene *settings, char **path, char **strs)
 
 bool    validate_name(char *file)
 {
-	char	*index;
-	char	*valid;
-	int		i;
+	size_t	len;
 
-	// This is wrong, need to handle it differently.
-	i = 1;
-	valid = ".cub";
-	if (file)
-	{
-		index = ft_strchr(file, '.');
-		if (index)
-		{
-			while (index[i] == valid[i] && index[i])
-					i++;
-		}
-		if (valid[i] == '\0')
-			return (true);
-	}
-    return (false);
+	len = ft_strlen(file);
+	if (len <= 4)
+		return (false);
+	if (file[len - 1] == 'b' && file[len - 2] == 'u'
+	&& file[len - 3] == 'c' && file[len - 4] == '.')
+		return (true);
+	return (false);
 }
 
 void	validate_map(t_scene *settings)
