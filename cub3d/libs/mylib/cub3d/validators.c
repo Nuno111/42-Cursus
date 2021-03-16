@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/16 11:19:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/16 11:36:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs)
 	if (!strs[1] || *floor_or_ceil)
 		error_and_exit(settings, "Error found when handling floor or ceiling values");
 	tmp_strs = ft_split(strs[1], ',');
+	if (!tmp_strs[0] || !tmp_strs[1] || !tmp_strs[2])
+		error_and_exit(settings, "Error found when handling floor or ceiling, 3 color values are needed");
 	if (ft_str_is_numeric(tmp_strs[0]) && ft_str_is_numeric(tmp_strs[1]) && ft_str_is_numeric(tmp_strs[2]))
 		tmp = malloc(sizeof(t_rgb));
 	if (tmp)
