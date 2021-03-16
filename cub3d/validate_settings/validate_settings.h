@@ -6,12 +6,12 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:40:46 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/16 22:00:34 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/16 22:09:34 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VALIDATE_SETTINGS_H
-#define VALIDATE_SETTINGS_H
+# define VALIDATE_SETTINGS_H
 
 # include "../cub3d.h"
 
