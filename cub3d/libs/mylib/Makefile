@@ -16,7 +16,7 @@ DST1 = $(SRC1:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(DST0) $(DST1) $(DST2)
+$(NAME) : $(DST0) $(DST1)
 	ar $(LIB_FLAGS) $@ $^
 
 ft_printf/%.o : ft_printf/%.c ft_printf/ft_printf.h
