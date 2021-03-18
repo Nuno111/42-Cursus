@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/18 12:37:50 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:49:32 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,8 @@ void	validate_r(t_scene *settings, char **strs);
 void	validate_textures(t_scene *settings, char **path, char **strs);
 void	parse_settings(t_scene *settings, char *file);
 void    render_game(t_scene *settings);
+void	error_and_exit(t_scene *settings, char *error_log);
+void	init_settings(t_scene *settings);
+void	free_settings(t_scene *settings);
 
 #endif

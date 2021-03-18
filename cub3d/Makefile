@@ -10,11 +10,9 @@ DEBUG = -g -fsanitize=address
 
 CUB3DLIB = libcub3d.a
 
-MLXFLAGS = -lbsd -lmlx -lXext -lx11
+MLXFLAGS = -lbsd -lmlx -lXext -lX11
 
-LIB_DEP = $(shell find . -name *.h)
-
-DEP_FLAGS = -Irender_game -Ivalidate_settings -Ihelpers -I. -Ilibs/mylib/ft_printf -Ilibs/mylib/libft
+DEP_FLAGS = -I. -Ilibs/mylib/ft_printf -Ilibs/mylib/libft
 
 SRC0 = $(wildcard validate_settings/*.c)
 
@@ -24,7 +22,7 @@ SRC1 = $(wildcard render_game/*.c)
 
 DST1 = $(SRC1:.c=.o)
 
-SRC2 = $(wildcard helpers/*.c)
+SRC2 = $(wildcard game_helpers/*.c)
 
 DST2 = $(SRC2:.c=.o)
 
@@ -33,7 +31,7 @@ MYLIB = libs/mylib/mylib.a
 all : create_mylib $(NAME)
 
 $(NAME): $(CUB3DLIB)
-	$(CC) $(CFLAGS) $(DEBUG) cub3d.c $(CUB3DLIB)
+	$(CC) $(ERR_FLAGS) $(DEBUG) cub3d.c $(CUB3DLIB) $(MYLIB) $(MLXFLAGS) $(DEP_FLAGS)
 
 $(CUB3DLIB) : $(DST0) $(DST1) $(DST2)
 	ar $(LIB_FLAGS) $@ $^
@@ -41,14 +39,14 @@ $(CUB3DLIB) : $(DST0) $(DST1) $(DST2)
 create_mylib:
 	cd libs/mylib && $(MAKE)
 
-validate_settings/%.o : validate_settings/%.c $(LIB_DEP)
-	$(CC) $(CFLAGS) -c $(DEP_FLAGS)  $< $(MYLIB) -o $@
+validate_settings/%.o : validate_settings/%.c cub3d.h
+	$(CC) $(ERR_FLAGS) -c $(DEP_FLAGS)  $< -o $@
 
-render_game/%.o : render_game/%.c $(LIB_DEP)
-	$(CC) $(CFLAGS) -c $(DEP_FLAGS) $< $(MYLIB) -o $@
+render_game/%.o : render_game/%.c cub3d.h
+	$(CC) $(ERR_FLAGS) -c $(DEP_FLAGS) $< -o $@
 
-helpers/%.o : helpers/%.c $(LIB_DEP)
-	$(CC) $(CFLAGS) -c $(DEP_FLAGS) $< $(MYLIB) -o $@
+game_helpers/%.o : game_helpers/%.c cub3d.h
+	$(CC) $(ERR_FLAGS) -c $(DEP_FLAGS) $< -o $@
 
 clean :
 	rm -f $(DST0) $(DST1)
