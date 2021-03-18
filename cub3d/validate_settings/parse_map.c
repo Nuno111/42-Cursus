@@ -6,11 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/16 21:31:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:38:10 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "validate_settings.h"
+#include "cub3d.h"
 
 char	*replace_tabs(char *str)
 {

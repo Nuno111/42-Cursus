@@ -6,11 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/16 22:40:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:40:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_game.h"
+#include "cub3d.h"
 
 void    render_game(t_scene *settings)
 {

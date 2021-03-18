@@ -6,11 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 21:21:32 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/17 21:22:15 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:40:10 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "helpers.h"
+#include "cub3d.h"
 
 void			error_and_exit(t_scene *settings, char *error_log)
 {
