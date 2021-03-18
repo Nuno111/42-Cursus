@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/16 22:49:57 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/17 21:24:38 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 # include "libs/mylib/ft_printf/ft_printf.h"
 # include "validate_settings/validate_settings.h"
 # include "render_game/render_game.h"
+# include "helpers/helpers.h"
 
 #endif

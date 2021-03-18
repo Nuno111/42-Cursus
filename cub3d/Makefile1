@@ -1,0 +1,48 @@
+NAME = cub3D
+
+CC = gcc
+
+CFLAGS = -Wall -Werror -Wextra
+
+LIB_FLAGS = -rcs
+
+DEBUG = -g -fsanitize=addres
+
+CUB3DLIB = libcub3d.a
+
+MYLIB = MYLIB.a
+
+MLXFLAGS = -lbsd -lmlx -lXext -lx11
+
+SRC0 = $(wildcard validate_settings/*.c)
+
+DST0 = $(SRC0:.c=.o)
+
+SRC1 = $(wildcard render_game/*.c)
+
+DST1 = $(SRC1:.c=.o)
+
+SRC2 = $(wildcard helpers/*.c)
+
+DST2 = $(SRC2:.c=.o)
+
+all : create_mylib $(NAME)
+
+$(NAME): $(CUB3DLIB)
+	$(CC) $(CFLAGS) $(DEBUG) cub3d.c $(CUB3DLIB) $(MLXFLAGS)
+
+$(CUB3Dlib) : $(DST0) $(DST1) $(DST2)
+	ar $(LIB_FLAGS) $@ $^
+
+create_mylib:
+	cd libs/mylib && $(make)
+
+clean :
+	rm -f $(DST0) $(DST1)
+
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all
+
+.PHONY : all clean fclean re
