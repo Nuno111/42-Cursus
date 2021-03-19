@@ -6,7 +6,7 @@ ERR_FLAGS = -Wall -Werror -Wextra
 
 LIB_FLAGS = -rcs
 
-DEBUG = -g -fsanitize=address
+DEBUG_FLAGS = -g -fsanitize=address
 
 CUB3DLIB = libcub3d.a
 
@@ -31,7 +31,7 @@ MYLIB = libs/mylib/mylib.a
 all : create_mylib $(NAME)
 
 $(NAME): $(CUB3DLIB)
-	$(CC) $(ERR_FLAGS) $(DEBUG) cub3d.c $(CUB3DLIB) $(MYLIB) $(MLXFLAGS) $(DEP_FLAGS)
+	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(MYLIB) $(MLXFLAGS) $(DEP_FLAGS) -o $(NAME)
 
 $(CUB3DLIB) : $(DST0) $(DST1) $(DST2)
 	ar $(LIB_FLAGS) $@ $^
@@ -40,19 +40,20 @@ create_mylib:
 	cd libs/mylib && $(MAKE)
 
 validate_settings/%.o : validate_settings/%.c cub3d.h
-	$(CC) $(ERR_FLAGS) -c $(DEP_FLAGS)  $< -o $@
+	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) -c $(DEP_FLAGS)  $< -o $@
 
 render_game/%.o : render_game/%.c cub3d.h
-	$(CC) $(ERR_FLAGS) -c $(DEP_FLAGS) $< -o $@
+	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) -c $(DEP_FLAGS) $< -o $@
 
 game_helpers/%.o : game_helpers/%.c cub3d.h
-	$(CC) $(ERR_FLAGS) -c $(DEP_FLAGS) $< -o $@
+	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) -c $(DEP_FLAGS) $< -o $@
 
 clean :
-	rm -f $(DST0) $(DST1)
+	rm -f $(DST0) $(DST1) $(DST2)
 
 fclean : clean
 	rm -f $(NAME)
+	cd libs/mylib && make fclean
 
 re : fclean all
 
