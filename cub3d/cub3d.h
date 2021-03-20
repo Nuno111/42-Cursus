@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/18 14:05:38 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/19 15:46:41 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 # include <mlx.h>
 # include "libft.h"
 # include "ft_printf.h"
+
+typedef struct	s_data {
+    void		*img;
+    char		*addr;
+    int			bits_per_pixel;
+    int			line_length;
+    int			endian;
+}				t_data;
 
 typedef struct		s_res
 {
