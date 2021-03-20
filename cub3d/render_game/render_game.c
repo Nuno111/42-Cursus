@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/20 11:28:31 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/20 12:13:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	square(t_data *data)
 	unsigned color;
 
 	y = 0;
-	color = 0xFFFF00;
+	color = 0xFAFFFF00;
 	while (y < 200)
 	{
 		x = 0;
