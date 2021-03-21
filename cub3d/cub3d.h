@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/20 17:30:05 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/21 22:04:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
 
+int		handle_key_press(int keycode, t_vars *vars);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	validate_map(t_scene *settings);
 void	error_and_exit(t_scene *settings, char *error_log);

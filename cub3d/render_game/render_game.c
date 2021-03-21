@@ -6,51 +6,53 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/20 17:56:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/21 23:06:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-void	square(t_data *data)
+void	create_tile(t_data *img, int x, int y, int color)
 {
-	int x;
-	int y;
-	unsigned color;
+	int i;
+	int j;
 
-	y = 0;
-	color = 0xFAFFFF00;
-	while (y < 200)
+	i = 0;
+	while (i < 10)
 	{
-		x = 0;
-		while (x < 200)
+		j = 0;
+		while (j < 10)
 		{
-			my_mlx_pixel_put(data, x, y, color);
-			x++;
+			my_mlx_pixel_put(img , x + i, y + j, color);
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
 
-int	key_hook(int keycode, char *msg)
+void	create_minimap(t_scene *settings, t_data *img)
 {
-	printf("%s%d\n", msg, keycode);
-	return (0);
-}
+	int x;
+	int y;
+	int color;
 
-int		mouse_hook(int btn, int x, int y, void *param)
-{
-	printf("%s%d %d\n", (char *)param, x, y);
-	printf("No btn was clicked %d\n", btn);
-	return (0);
-}
-
-int	close_win(int keycode, t_vars *var)
-{
-	printf("%d\n", keycode);
-	mlx_destroy_window(var->mlx, var->win);
-	return (0);
+	x = 0;
+	y = 0;
+	while (settings->map[x])
+	{
+		y = 0;
+		while (settings->map[x][y])
+		{
+			if (settings->map[x][y] == '1')
+				color = 0x000080;
+			else
+				color = 0x00FF00;
+			create_tile(img, y * 10, x * 10, color);
+			y++;
+			printf("%d\n", y);
+		}
+		x++;
+	}
 }
 
 void    render_game(t_scene *settings)
@@ -62,8 +64,8 @@ void    render_game(t_scene *settings)
 	var.win = mlx_new_window(var.mlx, settings->res->x, settings->res->y, "CUB3D");
 	img.img = mlx_new_image(var.mlx, settings->res->x, settings->res->y);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	square(&img);
+	create_minimap(settings, &img);
 	mlx_put_image_to_window(var.mlx, var.win, img.img, 0, 0);
-	mlx_hook(var.win, 2, 1L<<0, close_win, &var);
+	mlx_key_hook(var.win, handle_key_press, &var);
 	mlx_loop(var.mlx);
 }
