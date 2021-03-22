@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/21 23:06:39 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/22 12:03:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	create_minimap(t_scene *settings, t_data *img)
 				color = 0x00FF00;
 			create_tile(img, y * 10, x * 10, color);
 			y++;
-			printf("%d\n", y);
 		}
 		x++;
 	}
