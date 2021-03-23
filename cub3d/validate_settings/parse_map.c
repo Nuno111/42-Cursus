@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/23 15:05:20 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/23 18:38:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*replace_tabs(char *str)
 	while (str[i])
 	{
 		if (str[i] != '\t')
-			add_letter(str[i], &new);
+			ft_add_letter(str[i], &new, false);
 		else
 		{
 			tmp = ft_strjoin(new, "    ");

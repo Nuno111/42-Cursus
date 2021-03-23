@@ -12,7 +12,7 @@ CUB3DLIB = libcub3d.a
 
 MLXFLAGS = -lbsd -lmlx -lXext -lX11
 
-DEP_FLAGS = -I. -Ilibs/mylib/ft_printf -Ilibs/mylib/libft
+DEP_FLAGS = -I. -Ilibs/libft/libft
 
 SRC0 = $(wildcard validate_settings/*.c)
 
@@ -26,7 +26,7 @@ SRC2 = $(wildcard game_helpers/*.c)
 
 DST2 = $(SRC2:.c=.o)
 
-MYLIB = libs/mylib/mylib.a
+MYLIB = libs/libft/libft.a
 
 all : create_mylib $(NAME)
 
@@ -37,7 +37,7 @@ $(CUB3DLIB) : $(DST0) $(DST1) $(DST2)
 	ar $(LIB_FLAGS) $@ $^
 
 create_mylib:
-	cd libs/mylib && $(MAKE)
+	cd libs/libft && $(MAKE)
 
 validate_settings/%.o : validate_settings/%.c cub3d.h
 	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) -c $(DEP_FLAGS)  $< -o $@
@@ -53,7 +53,7 @@ clean :
 
 fclean : clean
 	rm -f $(NAME)
-	cd libs/mylib && make fclean
+	cd libs/libft && make fclean
 
 re : fclean all
 
