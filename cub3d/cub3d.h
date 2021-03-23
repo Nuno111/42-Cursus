@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/21 22:04:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/23 18:27:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void    render_game(t_scene *settings);
 void	error_and_exit(t_scene *settings, char *error_log);
 void	init_settings(t_scene *settings);
 void	free_settings(t_scene *settings);
+void	create_fake_map(t_scene *settings, size_t *max_width);
 
 #endif

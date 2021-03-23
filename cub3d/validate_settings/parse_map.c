@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/19 12:38:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/23 15:05:20 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ char	**linked_to_array(t_scene *settings, t_list *head)
 	t_list	*tmp_node;
 
 	i = 0;
-	size = ft_lstsize(head) + 1;
+	size = ft_lstsize(head);
 	if (size <= 0)
 		error_and_exit(settings, "Scene description incomplete. RTFM");
-	arr = malloc(sizeof(char *) * size);
+	arr = malloc(sizeof(char *) * (size + 1));
 	if (!arr)
 		return (NULL);
 	while (head)
