@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:09:52 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/23 19:26:25 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/23 20:28:03 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,18 @@ static	void	create_fake_line(t_scene *settings, char **fake_map, int i, size_t m
 	fake_map[i][max_width] = '\0';
 }
 
-void	create_fake_map(t_scene *settings, size_t *max_width)
+void	create_fake_map(t_scene *settings, size_t *max_width, size_t *arr_size)
 {
-	size_t		arr_size;
 	char		**fake_map;
 	int			i;
 
 	i = 0;
 	add_beg_and_end(settings);
-	arr_size = 0;
-	while (settings->map[arr_size])
-		arr_size++;
-	if (arr_size == 0)
+	while (settings->map[*arr_size])
+		(*arr_size)++;
+	if (*arr_size == 0)
 		error_and_exit(settings, "Error\nMap doesn't exist");
-	fake_map = malloc(sizeof(char *) * (arr_size + 3));
+	fake_map = malloc(sizeof(char *) * (*arr_size + 3));
 	if (!fake_map)
 		error_and_exit(settings, "Error\nThere was a problem when allocating memory for the map");
 	get_max_width(settings, max_width);
@@ -72,8 +70,8 @@ void	create_fake_map(t_scene *settings, size_t *max_width)
 		fake_map[i + 1] = ft_strdup(settings->map[i]);
 		i++;
 	}
-	create_fake_line(settings, fake_map, arr_size + 1, *max_width);
-	fake_map[arr_size + 2] = NULL;
+	create_fake_line(settings, fake_map, *arr_size + 1, *max_width);
+	fake_map[*arr_size + 2] = NULL;
 	ft_freearrays(settings->map);
 	settings->map = fake_map;
 }

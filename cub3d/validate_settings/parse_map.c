@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/23 18:38:35 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/23 20:31:23 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,27 +79,34 @@ bool	verify_str(char *str, bool whole)
 	}
 }
 
-void	verify_walls(t_scene *settings)
+void	verify_walls(t_scene *settings, char **m, size_t max_width, size_t arr_size)
 {
-	char	*str;
-	size_t	i;
-	size_t	arr_len;
-	bool	str_is_valid;
+	size_t i;
+	size_t j;
+	char *valid;
 
-	arr_len = 0;
-	while (settings->map[arr_len])
-		arr_len++;
-	i = 0;
-	while (settings->map[i])
+	valid = "1+ ";
+	i = 1;
+	while (i < arr_size)
 	{
-		str = ft_strtrim(settings->map[i], " ");
-		if (i == 0 || i == arr_len)
-			str_is_valid = verify_str(str, true);
-		else
-			str_is_valid = verify_str(str, false);
-		if (!str_is_valid)
-			error_and_exit(settings, "Error when reading map, map is not properly surrounded by walls");
-		free(str);
+		j = 1;
+		while (j < max_width - 1)
+		{
+			if (ft_strchr("1 ", m[i][j]))
+			{
+				if (!ft_strchr(valid, m[i - 1][j - 1])
+				|| !ft_strchr(valid, m[i - 1][j])
+				|| !ft_strchr(valid, m[i - 1][j + 1])
+				|| !ft_strchr(valid, m[i][j - 1])
+				|| !ft_strchr(valid, m[i][j + 1])
+				|| !ft_strchr(valid, m[i + 1][j - 1])
+				|| !ft_strchr(valid, m[i + 1][j])
+				|| !ft_strchr(valid, m[i + 1][j + 1])
+				)
+					error_and_exit(settings, "Error\nMap is not properly surrounded by walls");
+			}
+			j++;
+		}
 		i++;
 	}
 }

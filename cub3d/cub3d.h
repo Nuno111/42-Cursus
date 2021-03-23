@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/23 18:35:49 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/23 20:25:41 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	validate_map(t_scene *settings);
 void	error_and_exit(t_scene *settings, char *error_log);
 void	free_settings(t_scene *settings);
 char	**linked_to_array(t_scene *settings, t_list *head);
-void	verify_walls(t_scene *settings);
 bool	verify_str(char *str, bool whole);
 void	verify_position(t_scene *settings);
 char	*replace_tabs(char *str);
@@ -86,6 +85,7 @@ void    render_game(t_scene *settings);
 void	error_and_exit(t_scene *settings, char *error_log);
 void	init_settings(t_scene *settings);
 void	free_settings(t_scene *settings);
-void	create_fake_map(t_scene *settings, size_t *max_width);
+void	create_fake_map(t_scene *settings, size_t *max_width, size_t *arr_size);
+void	verify_walls(t_scene *settings, char **m, size_t max_width, size_t arr_size);
 
 #endif
