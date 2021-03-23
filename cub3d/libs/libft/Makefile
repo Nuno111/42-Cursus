@@ -1,4 +1,4 @@
-NAME = mylib.a
+NAME = libft.a
 
 CC = gcc
 
@@ -6,21 +6,14 @@ CFLAGS =  -c -g -Wall -Werror -Wextra
 
 LIB_FLAGS = -rcs
 
-SRC0 = $(wildcard ft_printf/*.c)
+SRC0 = $(wildcard libft/*.c)
 
 DST0 = $(SRC0:.c=.o)
 
-SRC1 = $(wildcard libft/*.c)
-
-DST1 = $(SRC1:.c=.o)
-
 all : $(NAME)
 
-$(NAME) : $(DST0) $(DST1)
+$(NAME) : $(DST0)
 	ar $(LIB_FLAGS) $@ $^
-
-ft_printf/%.o : ft_printf/%.c ft_printf/ft_printf.h
-	$(CC) $(CFLAGS) $< -o $@
 
 libft/%.o : libft/%.c libft/libft.h
 	$(CC) $(CFLAGS) $< -o $@
