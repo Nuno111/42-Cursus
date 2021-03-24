@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/23 20:25:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:47:10 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct		s_scene
 	t_rgb	*ceil;
 	t_list	*tmp_map;
 	char	**map;
+	size_t	map_width;
+	size_t	map_size;
 	bool	valid;
 }					t_scene;
 
@@ -85,7 +87,7 @@ void    render_game(t_scene *settings);
 void	error_and_exit(t_scene *settings, char *error_log);
 void	init_settings(t_scene *settings);
 void	free_settings(t_scene *settings);
-void	create_fake_map(t_scene *settings, size_t *max_width, size_t *arr_size);
-void	verify_walls(t_scene *settings, char **m, size_t max_width, size_t arr_size);
+void	create_fake_map(t_scene *settings);
+void	verify_walls(t_scene *settings, char **m);
 
 #endif

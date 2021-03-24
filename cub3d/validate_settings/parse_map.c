@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/24 09:38:11 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:46:23 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool	verify_str(char *str, bool whole)
 	}
 }
 
-void	verify_walls(t_scene *settings, char **m, size_t max_width, size_t arr_size)
+void	verify_walls(t_scene *settings, char **m)
 {
 	size_t i;
 	size_t j;
@@ -87,10 +87,10 @@ void	verify_walls(t_scene *settings, char **m, size_t max_width, size_t arr_size
 
 	valid = "1+ ";
 	i = 1;
-	while (i < arr_size)
+	while (i < settings->map_size)
 	{
 		j = 1;
-		while (j < max_width - 1)
+		while (j < settings->map_width - 1)
 		{
 			if (m[i][j] == ' ')
 			{

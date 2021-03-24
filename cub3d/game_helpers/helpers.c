@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 21:21:32 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/20 12:22:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/24 10:44:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	init_settings(t_scene *settings)
 	settings->ceil = NULL;
 	settings->tmp_map = NULL;
 	settings->map = NULL;
-	settings->valid = true;
+	settings->map_width = 0;
+	settings->map_size = 0;
 }
 
 void	free_settings(t_scene *settings)
