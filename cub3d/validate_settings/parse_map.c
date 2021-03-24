@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/23 20:31:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/24 09:38:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	verify_walls(t_scene *settings, char **m, size_t max_width, size_t arr_size
 		j = 1;
 		while (j < max_width - 1)
 		{
-			if (ft_strchr("1 ", m[i][j]))
+			if (m[i][j] == ' ')
 			{
 				if (!ft_strchr(valid, m[i - 1][j - 1])
 				|| !ft_strchr(valid, m[i - 1][j])
