@@ -6,51 +6,53 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/22 12:03:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:52:49 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	create_tile(t_data *img, int x, int y, int color)
+void	create_tile(t_data *img, t_scene *settings, int x, int y, int color)
 {
-	int i;
-	int j;
+	size_t width;
+	size_t height;
 
-	i = 0;
-	while (i < 10)
+	height = 0;
+	while (height <= settings->tile_size.y)
 	{
-		j = 0;
-		while (j < 10)
+		width = 0;
+		while (width <= settings->tile_size.x)
 		{
-			my_mlx_pixel_put(img , x + i, y + j, color);
-			j++;
+			my_mlx_pixel_put(img , x + width, y + height, color);
+			width++;
 		}
-		i++;
+		height++;
 	}
 }
 
 void	create_minimap(t_scene *settings, t_data *img)
 {
-	int x;
-	int y;
+	int width;
+	int height;
 	int color;
 
-	x = 0;
-	y = 0;
-	while (settings->map[x])
+
+	height = 0;
+	settings->tile_size.x = settings->res->x / settings->map_width;
+	settings->tile_size.y = settings->res->y / settings->map_size;
+	while (settings->map[height])
 	{
-		y = 0;
-		while (settings->map[x][y])
+		width = 0;
+		while (settings->map[height][width])
 		{
-			if (settings->map[x][y] == '1')
+			if (settings->map[height][width] == '1')
 				color = 0x000080;
 			else
 				color = 0x00FF00;
-			create_tile(img, y * 10, x * 10, color);
-			y++;
+			create_tile(img, settings, width * settings->tile_size.x, height * settings->tile_size.y, color);
+			width++;
 		}
-		x++;
+		height++;
 	}
 }
 

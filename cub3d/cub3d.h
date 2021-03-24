@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/24 10:47:10 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/24 11:10:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ typedef	struct		s_rgb
 	int				b;
 }					t_rgb;
 
+typedef struct  s_vars {
+        void    *mlx;
+        void    *win;
+}               t_vars;
+
+typedef struct s_tsize
+{
+	size_t x;
+	size_t y;
+}				t_tsize;
 
 typedef struct		s_scene
 {
@@ -53,12 +63,10 @@ typedef struct		s_scene
 	size_t	map_width;
 	size_t	map_size;
 	bool	valid;
+	t_tsize tile_size;
 }					t_scene;
 
-typedef struct  s_vars {
-        void    *mlx;
-        void    *win;
-}               t_vars;
+
 
 /*
 Colour operations

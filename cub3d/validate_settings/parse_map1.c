@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:09:52 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/24 11:02:43 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/24 13:04:52 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,6 @@ void	create_fake_map(t_scene *settings)
 	finish_fake_map(settings, fake_map);
 	ft_freearrays(settings->map);
 	settings->map = fake_map;
+	while (settings->map[settings->map_size])
+		settings->map_size++;
 }
