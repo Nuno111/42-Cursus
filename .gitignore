@@ -1,6 +1,7 @@
 *.[oa]
 *.so
 *.out
+.DS_Store
 testing-libft
 printfTester
 .vscode
