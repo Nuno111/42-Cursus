@@ -14,6 +14,10 @@ MLXFLAGS = -lbsd -lmlx -lXext -lX11
 
 DEP_FLAGS = -I. -Ilibs/libft/libft
 
+MYLIB = libs/libft/libft.a
+
+OS = $(shell uname)
+
 SRC0 = $(wildcard validate_settings/*.c)
 
 DST0 = $(SRC0:.c=.o)
@@ -25,8 +29,6 @@ DST1 = $(SRC1:.c=.o)
 SRC2 = $(wildcard game_helpers/*.c)
 
 DST2 = $(SRC2:.c=.o)
-
-MYLIB = libs/libft/libft.a
 
 all : create_mylib $(NAME)
 
