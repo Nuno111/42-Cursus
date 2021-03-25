@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/24 10:46:50 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/25 10:58:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	validate_r(t_scene *settings, char **strs)
 {
 	t_res *resolution;
 
+	resolution = NULL;
 	if (!strs[1] || !strs[2] || settings->res)
 		error_and_exit(settings, "Error with handling resolution");
 	if (ft_str_is_numeric(strs[1]) && ft_str_is_numeric(strs[2]))
@@ -38,6 +39,7 @@ void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs)
 	t_rgb	*tmp;
 	char	**tmp_strs;
 
+	tmp = NULL;
 	if (!strs[1] || *floor_or_ceil)
 		error_and_exit(settings, "Error found when handling floor or ceiling values");
 	tmp_strs = ft_split(strs[1], ',');
