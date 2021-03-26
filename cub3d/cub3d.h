@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/26 20:34:01 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/26 23:37:31 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ typedef struct s_player
 {
 	int x;
 	int y;
-	int radius;
+	double radius;
+	double rotation_angle;
+	double move_speed;
+	double rotation_speed;
 	int turn_dir;
 	int walk_dir;
-	float rotation_angle;
-	int move_speed;
-	float rotation_speed;
 }				t_player;
 /*
 Colour operations

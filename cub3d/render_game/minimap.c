@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 12:29:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/26 21:51:49 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/26 23:37:53 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static	void	draw_circle(t_data *img, t_scene *settings, t_player player, int posx, int posy)
 {
-	double x;
-	double y;
+	int x;
+	int y;
 	int color;
 	double ang;
 
@@ -25,7 +25,7 @@ static	void	draw_circle(t_data *img, t_scene *settings, t_player player, int pos
 	{
 		x = player.radius * cos(deg_to_rad(ang));
 		y = player.radius * sin(deg_to_rad(ang));
-		my_mlx_pixel_put(img, posx + x + (settings->tile_size.x / 2), posy + y + (settings->tile_size.y / 2), color);
+		my_mlx_pixel_put(img, posx + x + settings->tile_size.x / 2 , posy + y + settings->tile_size.x / 2, color);
 		ang+= 0.1;
 	}
 }
@@ -42,8 +42,11 @@ static	void	init_player(t_data *img, t_scene *settings, int x, int y)
 	player.rotation_angle = M_PI / 2; //player facing position pi /2 90degree == North
 	player.move_speed = 1;
 	player.rotation_speed = 2 * (M_PI / 180);
-	draw_circle(img, settings, player, x, y);
-	printf("%s", settings->no);
+	while (player.radius > 0)
+	{
+		draw_circle(img, settings, player, x, y);
+		player.radius--;
+	}
 }
 
 static	void	draw_square(t_data *img, t_scene *settings, int x, int y, int color)
