@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/24 11:10:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/26 20:34:01 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 
 # include <mlx.h>
 # include "libft.h"
+# include <math.h>
 
-typedef struct	s_data {
+# define deg_to_rad(degrees) ((degrees) * M_PI / 180.0)
+# define rad_to_deg(radians) ((radians) * 180.0 / M_PI)
+
+
+typedef struct	s_data
+{
     void		*img;
     char		*addr;
     int			bits_per_pixel;
@@ -37,7 +43,8 @@ typedef	struct		s_rgb
 	int				b;
 }					t_rgb;
 
-typedef struct  s_vars {
+typedef struct  s_vars
+{
         void    *mlx;
         void    *win;
 }               t_vars;
@@ -66,8 +73,17 @@ typedef struct		s_scene
 	t_tsize tile_size;
 }					t_scene;
 
-
-
+typedef struct s_player
+{
+	int x;
+	int y;
+	int radius;
+	int turn_dir;
+	int walk_dir;
+	float rotation_angle;
+	int move_speed;
+	float rotation_speed;
+}				t_player;
 /*
 Colour operations
 */
@@ -97,5 +113,6 @@ void	init_settings(t_scene *settings);
 void	free_settings(t_scene *settings);
 void	create_fake_map(t_scene *settings);
 void	verify_walls(t_scene *settings, char **m);
+void	create_minimap(t_scene *settings, t_data *img);
 
 #endif

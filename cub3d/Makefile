@@ -16,6 +16,8 @@ DEP_FLAGS = -I. -Ilibs/libft/libft
 
 MYLIB = libs/libft/libft.a
 
+MATHFLAG = -lm
+
 OS = $(shell uname)
 
 SRC0 = $(wildcard validate_settings/*.c)
@@ -33,7 +35,7 @@ DST2 = $(SRC2:.c=.o)
 all : create_mylib $(NAME)
 
 $(NAME): $(CUB3DLIB)
-	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(MYLIB) $(MLXFLAGS) $(DEP_FLAGS) -o $(NAME)
+	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(MYLIB) $(MLXFLAGS) $(DEP_FLAGS) $(MATHFLAG) -o $(NAME)
 
 $(CUB3DLIB) : $(DST0) $(DST1) $(DST2)
 	ar $(LIB_FLAGS) $@ $^
