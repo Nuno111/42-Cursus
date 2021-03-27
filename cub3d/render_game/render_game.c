@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/26 12:30:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/27 16:18:03 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void    render_game(t_scene *settings)
 {
-	t_data	img;
-	t_vars var;
+	t_game game;
 
-	var.mlx = mlx_init();
-	var.win = mlx_new_window(var.mlx, settings->res->x, settings->res->y, "CUB3D");
-	img.img = mlx_new_image(var.mlx, settings->res->x, settings->res->y);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	create_minimap(settings, &img);
-	mlx_put_image_to_window(var.mlx, var.win, img.img, 0, 0);
-	mlx_key_hook(var.win, handle_key_press, &var);
-	mlx_loop(var.mlx);
+	game.vars.mlx = mlx_init();
+	game.vars.win = mlx_new_window(game.vars.mlx, settings->res->x, settings->res->y, "CUB3D");
+	game.img.img = mlx_new_image(game.vars.mlx, settings->res->x, settings->res->y);
+	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bits_per_pixel, &game.img.line_length, &game.img.endian);
+	create_minimap(settings, &game.img);
+	mlx_put_image_to_window(game.vars.mlx, game.vars.win, game.img.img, 0, 0);
+	mlx_hook(game.vars.win, 2, 1L<<0, key_press, &game);
+	mlx_hook(game.vars.win, 3, 1L<<1, key_release, &game);
+	mlx_loop(game.vars.mlx);
 }

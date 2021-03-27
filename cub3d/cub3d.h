@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/26 23:37:31 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:49:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 # define rad_to_deg(radians) ((radians) * 180.0 / M_PI)
 
 
-typedef struct	s_data
+typedef struct	s_img
 {
     void		*img;
     char		*addr;
     int			bits_per_pixel;
     int			line_length;
     int			endian;
-}				t_data;
+}				t_img;
 
 typedef struct		s_res
 {
@@ -49,11 +49,11 @@ typedef struct  s_vars
         void    *win;
 }               t_vars;
 
-typedef struct s_tsize
+typedef struct s_tile_size
 {
 	size_t x;
 	size_t y;
-}				t_tsize;
+}				t_tile_size;
 
 typedef struct		s_scene
 {
@@ -70,7 +70,7 @@ typedef struct		s_scene
 	size_t	map_width;
 	size_t	map_size;
 	bool	valid;
-	t_tsize tile_size;
+	t_tile_size tile_size;
 }					t_scene;
 
 typedef struct s_player
@@ -84,6 +84,12 @@ typedef struct s_player
 	int turn_dir;
 	int walk_dir;
 }				t_player;
+
+typedef struct s_game
+{
+	t_vars	vars;
+	t_img	img;
+}				t_game;
 /*
 Colour operations
 */
@@ -93,8 +99,12 @@ int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
 
+void	draw_circle(t_img *img, t_scene *settings, t_player player, int posx, int posy);
+void	draw_square(t_img *img, t_scene *settings, int x, int y, int color);
+int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
 int		handle_key_press(int keycode, t_vars *vars);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	validate_map(t_scene *settings);
 void	error_and_exit(t_scene *settings, char *error_log);
 void	free_settings(t_scene *settings);
@@ -113,6 +123,6 @@ void	init_settings(t_scene *settings);
 void	free_settings(t_scene *settings);
 void	create_fake_map(t_scene *settings);
 void	verify_walls(t_scene *settings, char **m);
-void	create_minimap(t_scene *settings, t_data *img);
+void	create_minimap(t_scene *settings, t_img *img);
 
 #endif
