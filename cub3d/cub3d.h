@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/27 20:52:16 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/27 21:26:46 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,19 @@ typedef struct	s_circle
 	int		color;
 }				t_circle;
 
+typedef struct	s_line
+{
+	double	x;
+	double	y;
+	double	direction;
+	double	size;
+	int		color;
+}				t_line;
+
 typedef struct s_player
 {
-	t_circle circle;
+	t_circle	circle;
+	t_line		line;
 	double rotation_angle;
 	double move_speed;
 	double rotation_speed;
@@ -107,7 +117,8 @@ int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
 
-void	draw_line(t_img *img, t_player player, int posx, int posy, int color);
+void	draw_inner_circle(t_img *img, t_circle circle);
+void	draw_line(t_img *img, t_line line);
 void	draw_circle(t_img *img, t_circle circle);
 void	draw_square(t_img *img, t_scene *settings, int x, int y, int color);
 int		key_press(int keycode, t_game *game);

@@ -6,25 +6,35 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 19:48:12 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/27 20:52:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/27 21:26:38 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_line(t_img *img, t_circle circle)
+void	draw_inner_circle(t_img *img, t_circle circle)
 {
-	int		size;
-	float	x;
-	float	y;
-
-	size = 0;
-	while (size <= circle.radius)
+	while (circle.radius > 0)
 	{
-		x = circle.x + circle.radius + size;
-		y = circle.y + circle.radius + size;
-		my_mlx_pixel_put(img, x, y, circle.color);
-		size++;
+		circle.radius--;
+		fill_circle(img, circle);
+	}
+	draw_circle(img, circle);
+}
+
+void	draw_line(t_img *img, t_line line)
+{
+	int		i;
+	float	tmp_x;
+	float	tmp_y;
+
+	i = 0;
+	while (i <= line.size)
+	{
+		tmp_x = line.x + line.size;
+		tmp_y = line.y + line.size;
+		my_mlx_pixel_put(img, tmp_x, tmp_y, line.color);
+		line.size++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 12:29:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/27 20:52:28 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/27 21:30:08 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,23 @@ static	void	init_player(t_img *img, t_scene *settings, int x, int y)
 	t_player player;
 
 	player.circle.x = x + settings->tile_size.x / 2;
-	player.circle.y = y;
-	player.circle.radius = settings->tile_size.x / 3; // size of circle needs to be adjsted later
+	player.circle.y = y + settings->tile_size.x / 2;
+	player.circle.radius = settings->tile_size.x / 3;
 	player.circle.color = 0x7F0000;
 	player.circle.ang = 0;
 	player.turn_dir = 0;
 	player.walk_dir = 0;
-	player.rotation_angle = M_PI / 2; //player facing position pi /2 90degree == North
+	player.rotation_angle = M_PI / 2;
 	player.move_speed = 1;
 	player.rotation_speed = 2 * (M_PI / 180);
+	player.line.x = player.circle.x + player.circle.radius;
+	player.line.y = player.circle.y;
+	player.line.color = player.circle.color;
+	player.line.direction = player.line.direction;
+	player.line.size = player.circle.radius;
 	draw_circle(img, player.circle);
-	draw_line(img, player);
-	fill_circle(img, settings, player);
+	draw_inner_circle(img, player.circle);
+	draw_line(img, player.line);
 }
 
 void	create_minimap(t_scene *settings, t_img *img)
