@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 12:29:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/27 19:53:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/27 20:52:28 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ static	void	init_player(t_img *img, t_scene *settings, int x, int y)
 {
 	t_player player;
 
-	player.x = x;
-	player.x = y;
-	player.radius = settings->tile_size.x / 3; // size of circle needs to be adjsted later
+	player.circle.x = x + settings->tile_size.x / 2;
+	player.circle.y = y;
+	player.circle.radius = settings->tile_size.x / 3; // size of circle needs to be adjsted later
+	player.circle.color = 0x7F0000;
+	player.circle.ang = 0;
 	player.turn_dir = 0;
 	player.walk_dir = 0;
 	player.rotation_angle = M_PI / 2; //player facing position pi /2 90degree == North
 	player.move_speed = 1;
 	player.rotation_speed = 2 * (M_PI / 180);
-	while (player.radius > 0)
-	{
-		draw_circle(img, settings, player, x, y);
-		player.radius--;
-	}
+	draw_circle(img, player.circle);
+	draw_line(img, player);
+	fill_circle(img, settings, player);
 }
 
 void	create_minimap(t_scene *settings, t_img *img)
