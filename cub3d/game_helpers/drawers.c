@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 19:48:12 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/27 21:26:38 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/28 13:58:53 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,20 @@ void	draw_inner_circle(t_img *img, t_circle circle)
 	while (circle.radius > 0)
 	{
 		circle.radius--;
-		fill_circle(img, circle);
+		draw_inner_circle(img, circle);
+		draw_circle(img, circle);
 	}
-	draw_circle(img, circle);
 }
 
 void	draw_line(t_img *img, t_line line)
 {
-	int		i;
-	float	tmp_x;
-	float	tmp_y;
+	int i;
 
 	i = 0;
 	while (i <= line.size)
 	{
-		tmp_x = line.x + line.size;
-		tmp_y = line.y + line.size;
-		my_mlx_pixel_put(img, tmp_x, tmp_y, line.color);
-		line.size++;
+		my_mlx_pixel_put(img, cos(line.direction) * i + line.x, sin(line.direction) * i + line.y, line.color);
+		i++;
 	}
 }
 
@@ -45,8 +41,8 @@ void	draw_circle(t_img *img, t_circle circle)
 
 	while (circle.ang < 360)
 	{
-		x = circle.radius * cos(deg_to_rad(ang)) + circle.x;
-		y = circle.radius * sin(deg_to_rad(ang)) + circle.y;
+		x = circle.radius * cos(deg_to_rad(circle.ang)) + circle.x;
+		y = circle.radius * sin(deg_to_rad(circle.ang)) + circle.y;
 		my_mlx_pixel_put(img, x, y, circle.color);
 		circle.ang++;
 	}

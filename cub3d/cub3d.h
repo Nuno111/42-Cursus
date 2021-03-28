@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/27 21:26:46 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/28 13:54:55 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct	s_line
 	double	y;
 	double	direction;
 	double	size;
+	double	thickness;
 	int		color;
 }				t_line;
 
