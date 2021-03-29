@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 19:48:12 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/28 13:58:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/29 14:12:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,18 @@ void	draw_circle(t_img *img, t_circle circle)
 	}
 }
 
-void	draw_square(t_img *img, t_scene *settings, int x, int y, int color)
+void	draw_square(t_img *img, t_square square)
 {
 	size_t width;
 	size_t height;
 
 	height = 0;
-	while (height <= settings->tile_size.y)
+	while (height <= square.size)
 	{
 		width = 0;
-		while (width <= settings->tile_size.x)
+		while (width <= square.size)
 		{
-			my_mlx_pixel_put(img , x + width, y + height, color);
+			my_mlx_pixel_put(img , square.x + width, square.y + height, square.color);
 			width++;
 		}
 		height++;

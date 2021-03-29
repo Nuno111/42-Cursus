@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:11:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/27 19:54:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/29 13:39:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,26 @@ int		key_press(int keycode, t_game *game)
 {
 	if (keycode == 65307)
 		mlx_destroy_window(game->vars.mlx, game->vars.win);
-	else if (keycode == 119 || keycode == 97 || keycode == 115 || keycode == 100 || keycode == 65361 || keycode == 65363)
-		printf("%d\n", keycode);
-	else
-		return (1);
-	return (0);
+	if (keycode == 119)
+		game->player->walk_dir = forward;
+	else if (keycode == 100)
+		game->player->walk_dir = right;
+	else if (keycode == 115)
+		game->player->walk_dir = back;
+	else if (keycode == 97)
+		game->player->walk_dir = left;
+	else if (keycode == 35631)
+		game->player->turn_dir = left;
+	else if (keycode == 35633)
+		game->player->turn_dir = right;
+	return (1);
 }
 
 int		key_release(int keycode, t_game *game)
 {
-	if (keycode == 65307)
-		mlx_destroy_window(game->vars.mlx, game->vars.win);
-	else if (keycode == 119 || keycode == 97 || keycode == 115 || keycode == 100 || keycode == 65361 || keycode == 65363)
-		printf("%d\n", keycode);
-	else
-		return (1);
-	return (0);
+	if (keycode == 119 || keycode == 100 || keycode == 115 || keycode == 97)
+		game->player->walk_dir = 0;
+	else if (keycode == 35631 || keycode == 35633)
+		game->player->turn_dir = 0;
+	return (1);
 }

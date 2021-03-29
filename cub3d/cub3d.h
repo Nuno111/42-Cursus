@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/28 13:54:55 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/29 14:12:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 
 # define deg_to_rad(degrees) ((degrees) * M_PI / 180.0)
 # define rad_to_deg(radians) ((radians) * 180.0 / M_PI)
+# define left -1
+# define right 1
+# define forward 2
+# define back -2
 
 
 typedef struct	s_img
@@ -82,19 +86,27 @@ typedef struct	s_circle
 	int		color;
 }				t_circle;
 
+typedef struct s_square
+{
+	double	x;
+	double	y;
+	double	size;
+	int		color;
+}				t_square;
+
 typedef struct	s_line
 {
 	double	x;
 	double	y;
 	double	direction;
 	double	size;
-	double	thickness;
 	int		color;
 }				t_line;
 
 typedef struct s_player
 {
 	t_circle	circle;
+	t_square	square;
 	t_line		line;
 	double rotation_angle;
 	double move_speed;
@@ -104,10 +116,13 @@ typedef struct s_player
 }				t_player;
 
 
+
 typedef struct s_game
 {
-	t_vars	vars;
-	t_img	img;
+	t_player	player;
+	t_scene		settings;
+	t_vars		vars;
+	t_img		img;
 }				t_game;
 /*
 Colour operations
@@ -121,7 +136,7 @@ int	get_b(int trgb);
 void	draw_inner_circle(t_img *img, t_circle circle);
 void	draw_line(t_img *img, t_line line);
 void	draw_circle(t_img *img, t_circle circle);
-void	draw_square(t_img *img, t_scene *settings, int x, int y, int color);
+void	draw_square(t_img *img, t_square square);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		handle_key_press(int keycode, t_vars *vars);
@@ -138,12 +153,13 @@ void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs);
 void	validate_r(t_scene *settings, char **strs);
 void	validate_textures(t_scene *settings, char **path, char **strs);
 void	parse_settings(t_scene *settings, char *file);
-void    render_game(t_scene *settings);
+void    render_game(t_game *game);
 void	error_and_exit(t_scene *settings, char *error_log);
 void	init_settings(t_scene *settings);
 void	free_settings(t_scene *settings);
 void	create_fake_map(t_scene *settings);
 void	verify_walls(t_scene *settings, char **m);
-void	create_minimap(t_scene *settings, t_img *img);
+void	create_minimap(t_game *game);
+void	init_player(t_game *game, t_scene *settings, int x, int y);
 
 #endif

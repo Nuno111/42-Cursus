@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/26 13:25:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/29 13:46:52 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int     main(int argc, char *argv[])
 {
-	t_scene settings;
+	t_game game;
 
-	init_settings(&settings);
+	init_settings(&game.settings);
 	if (argc != 2)
-		error_and_exit(&settings, "Two arguments needed");
-	parse_settings(&settings, argv[1]);
-	render_game(&settings);
-	free_settings(&settings);
+		error_and_exit(&game.settings, "Two arguments needed");
+	parse_settings(&game.settings, argv[1]);
+	render_game(&game);
+	free_settings(&game.settings);
 	printf("ok");
 	return (OK);
 }
