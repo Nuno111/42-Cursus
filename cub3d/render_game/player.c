@@ -6,11 +6,32 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/29 13:30:58 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/29 14:48:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static	void	get_player_pos(t_game *game)
+{
+	int h;
+	int w;
+
+	h = 0;
+	while (game->settings.map[h][w])
+	{
+		w = 0;
+		while (!ft_strchr("NESW", game->settings.map[h][w]))
+			w++;
+		if (ft_strchr("NESW", game->settings.map[h][w]))
+		{
+			game->player.circle.x = w * game->settings.tile_size.x;
+			game->player.circle.y = h * game->settings.tile_size.y;
+			break;
+		}
+		h++;
+	}
+}
 
 void	init_player(t_game *game, t_scene *settings, int x, int y)
 {
