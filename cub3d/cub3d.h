@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/29 14:12:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/30 14:45:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct		s_scene
 	char	**map;
 	size_t	map_width;
 	size_t	map_size;
-	bool	valid;
 	t_tile_size tile_size;
 }					t_scene;
 
@@ -106,7 +105,6 @@ typedef struct	s_line
 typedef struct s_player
 {
 	t_circle	circle;
-	t_square	square;
 	t_line		line;
 	double rotation_angle;
 	double move_speed;
@@ -120,12 +118,14 @@ typedef struct s_player
 typedef struct s_game
 {
 	t_player	player;
+	t_square	map_tile;
 	t_scene		settings;
 	t_vars		vars;
 	t_img		img;
 }				t_game;
+
 /*
-Colour operations
+Colours
 */
 int	create_trgb(int t, int r, int g, int b);
 int	get_t(int trgb);
@@ -133,33 +133,42 @@ int	get_r(int trgb);
 int	get_g(int trgb);
 int	get_b(int trgb);
 
-void	draw_inner_circle(t_img *img, t_circle circle);
-void	draw_line(t_img *img, t_line line);
-void	draw_circle(t_img *img, t_circle circle);
-void	draw_square(t_img *img, t_square square);
-int		key_press(int keycode, t_game *game);
-int		key_release(int keycode, t_game *game);
-int		handle_key_press(int keycode, t_vars *vars);
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	validate_map(t_scene *settings);
-void	error_and_exit(t_scene *settings, char *error_log);
+/*
+validate_settings
+*/
+void	init_settings(t_scene *settings);
 void	free_settings(t_scene *settings);
+void	validate_map(t_scene *settings);
 char	**linked_to_array(t_scene *settings, t_list *head);
-bool	verify_str(char *str, bool whole);
 void	verify_position(t_scene *settings);
+bool	verify_str(char *str, bool whole);
 char	*replace_tabs(char *str);
 bool    validate_name(char *file);
 void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs);
 void	validate_r(t_scene *settings, char **strs);
 void	validate_textures(t_scene *settings, char **path, char **strs);
 void	parse_settings(t_scene *settings, char *file);
+
+/*
+Drawing
+*/
+void	draw_inner_circle(t_img *img, t_circle circle);
+void	draw_line(t_img *img, t_line line);
+void	draw_circle(t_img *img, t_circle circle);
+void	draw_square(t_img *img, t_square square);
+
+void	free_settings(t_scene *settings);
+int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
+int		handle_key_press(int keycode, t_vars *vars);
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	error_and_exit(t_scene *settings, char *error_log);
 void    render_game(t_game *game);
 void	error_and_exit(t_scene *settings, char *error_log);
-void	init_settings(t_scene *settings);
-void	free_settings(t_scene *settings);
 void	create_fake_map(t_scene *settings);
 void	verify_walls(t_scene *settings, char **m);
-void	create_minimap(t_game *game);
-void	init_player(t_game *game, t_scene *settings, int x, int y);
+void	create_minimap(t_scene *settings, t_game *game);
+void	init_player(t_game *game);
+void    update_game(t_game *game);
 
 #endif

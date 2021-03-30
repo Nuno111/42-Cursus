@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 12:29:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/29 14:48:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:47:06 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	create_minimap(t_scene *settings, t_game *game)
 				game->map_tile.color = 0x000000;
 			game->map_tile.x = width * settings->tile_size.x;
 			game->map_tile.y = height * settings->tile_size.y;
+			game->map_tile.size = settings->tile_size.x;
 			draw_square(&game->img, game->map_tile);
 			width++;
 		}
