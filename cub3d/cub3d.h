@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/30 14:45:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:47:25 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_player
 	double rotation_speed;
 	int turn_dir;
 	int walk_dir;
+	int strafe_dir;
 }				t_player;
 
 

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/30 15:09:52 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/30 17:20:14 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	init_player(t_game *game)
 	game->player.turn_dir = 0;
 	game->player.walk_dir = 0;
 	game->player.move_speed = 3;
-	game->player.rotation_speed = 2 * (M_PI / 180);
+	game->player.rotation_speed = (M_PI / 8);
 	game->player.line.x = game->player.circle.x;
 	game->player.line.y = game->player.circle.y;
 	game->player.line.color = 0x008000;

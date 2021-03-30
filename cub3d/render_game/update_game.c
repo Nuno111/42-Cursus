@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 14:38:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/30 14:48:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/30 22:03:40 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,22 @@ static  void    update_player(t_game *game)
 
 	game->player.rotation_angle += game->player.turn_dir * game->player.rotation_speed;
 	move_step = game->player.walk_dir * game->player.move_speed;
-	game->player.circle.x += cos(game->player.rotation_angle) * move_step;
-	game->player.circle.y += sin(game->player.rotation_angle) * move_step;
+	if (game->player.strafe_dir)
+	{
+		printf("strafing");
+		game->player.circle.y += cos(game->player.rotation_angle) * move_step;
+		game->player.circle.x += sin(game->player.rotation_angle) * -move_step;
+	}
+	else
+	{
+		game->player.circle.x += cos(game->player.rotation_angle) * move_step;
+		game->player.circle.y += sin(game->player.rotation_angle) * move_step;
+	}
+	printf("%f", move_step);
 }
 
 void    update_game(t_game *game)
 {
-
 	create_minimap(&game->settings, game);
     update_player(game);
 	update_line(game);
