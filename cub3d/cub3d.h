@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/30 23:35:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/31 21:09:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,10 @@ typedef struct s_player
 	int turn_dir;
 	int walk_dir;
 	bool strafe;
+	double		fov_ang;
+	int			wall_strip_width;
+	t_line		**rays;
+	int			num_rays;
 }				t_player;
 
 
@@ -137,6 +141,7 @@ int	get_b(int trgb);
 /*
 validate_settings
 */
+void	error_and_exit_settings(t_scene *settings, char *error_log);
 void	init_settings(t_scene *settings);
 void	free_settings(t_scene *settings);
 void	validate_map(t_scene *settings);
@@ -149,6 +154,8 @@ void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs);
 void	validate_r(t_scene *settings, char **strs);
 void	validate_textures(t_scene *settings, char **path, char **strs);
 void	parse_settings(t_scene *settings, char *file);
+void	create_fake_map(t_scene *settings);
+void	verify_walls(t_scene *settings, char **m);
 
 /*
 Drawing
@@ -158,18 +165,15 @@ void	draw_line(t_img *img, t_line line);
 void	draw_circle(t_img *img, t_circle circle);
 void	draw_square(t_img *img, t_square square);
 
-void	free_settings(t_scene *settings);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		handle_key_press(int keycode, t_vars *vars);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	error_and_exit(t_scene *settings, char *error_log);
 void    render_game(t_game *game);
-void	error_and_exit(t_scene *settings, char *error_log);
-void	create_fake_map(t_scene *settings);
-void	verify_walls(t_scene *settings, char **m);
 void	create_minimap(t_scene *settings, t_game *game);
 void	init_player(t_game *game);
 void    update_game(t_game *game);
+void    error_and_exit_game(t_game *game, char *error_log);
+void	cast_rays(t_game *game);
 
 #endif

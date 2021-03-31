@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/30 23:35:40 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/31 22:21:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ void	init_player(t_game *game)
 	game->player.line.direction = game->player.rotation_angle;
 	game->player.line.size = game->player.circle.radius * 4;
 	game->player.strafe = false;
+	game->player.fov_ang = deg_to_rad(60);
+	game->player.wall_strip_width = 80;
+	game->player.num_rays = game->settings.res->x / game->player.wall_strip_width;
+	game->player.rays = malloc(sizeof (t_line *) * game->player.num_rays);
+	if (!game->player.rays)
+		error_and_exit_game(game, "Error\nUnable to allocate memory for rays");
 	draw_circle(&game->img, game->player.circle);
 	draw_inner_circle(&game->img, game->player.circle);
 	draw_line(&game->img, game->player.line);

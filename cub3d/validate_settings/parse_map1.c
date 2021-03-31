@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 15:09:52 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/24 13:04:52 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/31 20:59:34 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static	void	create_fake_line(t_scene *settings, char **fake_map, int i)
 {
 	fake_map[i] = malloc(sizeof(char) * (settings->map_width + 1));
 	if (!fake_map[i])
-		error_and_exit(settings, "Error\nThere was a problem when allocating memory for the map");
+		error_and_exit_settings(settings, "Error\nThere was a problem when allocating memory for the map");
 	ft_memset(fake_map[i], '+', settings->map_width);
 	fake_map[i][settings->map_width] = '\0';
 }
@@ -86,10 +86,10 @@ void	create_fake_map(t_scene *settings)
 	while (settings->map[settings->map_size])
 		(settings->map_size)++;
 	if (settings->map_size == 0)
-		error_and_exit(settings, "Error\nMap doesn't exist");
+		error_and_exit_settings(settings, "Error\nMap doesn't exist");
 	fake_map = malloc(sizeof(char *) * (settings->map_size + 3));
 	if (!fake_map)
-		error_and_exit(settings, "Error\nThere was a problem when allocating memory for the map");
+		error_and_exit_settings(settings, "Error\nThere was a problem when allocating memory for the map");
 	finish_fake_map(settings, fake_map);
 	ft_freearrays(settings->map);
 	settings->map = fake_map;

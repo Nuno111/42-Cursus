@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/22 12:43:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/31 20:59:29 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	void	parse_map(char *line, t_scene *settings)
 		ft_lstadd_back(&settings->tmp_map, node);
 	}
 	else
-		error_and_exit(settings, "Error when parsing map, forbidden character found");
+		error_and_exit_settings(settings, "Error when parsing map, forbidden character found");
 }
 
 static	void	verify_identifiers(char **strs, t_scene *settings)
@@ -81,11 +81,11 @@ void    parse_settings(t_scene *settings, char *file)
 	int fd;
 
 	if (!validate_name(file))
-		error_and_exit(settings, "Invalid name. File must end with .cub");
+		error_and_exit_settings(settings, "Invalid name. File must end with .cub");
 	ret = 1;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		error_and_exit(settings, "Could not open the file for reading");
+		error_and_exit_settings(settings, "Could not open the file for reading");
 	while (ret > 0)
 	{
 		line = NULL;
