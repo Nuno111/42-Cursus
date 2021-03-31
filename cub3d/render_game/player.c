@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/30 17:20:14 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/30 23:35:40 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	init_player(t_game *game)
 	game->player.line.color = 0x008000;
 	game->player.line.direction = game->player.rotation_angle;
 	game->player.line.size = game->player.circle.radius * 4;
+	game->player.strafe = false;
 	draw_circle(&game->img, game->player.circle);
 	draw_inner_circle(&game->img, game->player.circle);
 	draw_line(&game->img, game->player.line);
