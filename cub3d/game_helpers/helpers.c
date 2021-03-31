@@ -6,19 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 21:21:32 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/27 16:16:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/31 16:49:13 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
 
 void			error_and_exit(t_scene *settings, char *error_log)
 {
