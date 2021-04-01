@@ -56,7 +56,7 @@ clean :
 	rm -f $(DST0) $(DST1) $(DST2)
 
 fclean : clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(CUB3DLIB)
 	cd libs/libft && make fclean
 
 re : fclean all

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 14:38:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/31 15:48:19 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/03/31 22:55:49 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ void    update_game(t_game *game)
 	draw_circle(&game->img, game->player.circle);
 	draw_inner_circle(&game->img, game->player.circle);
 	draw_line(&game->img, game->player.line);
+	cast_rays(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0);
 }

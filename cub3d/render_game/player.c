@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/31 22:21:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/01 00:02:55 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_player(t_game *game)
 	game->player.line.size = game->player.circle.radius * 4;
 	game->player.strafe = false;
 	game->player.fov_ang = deg_to_rad(60);
-	game->player.wall_strip_width = 80;
+	game->player.wall_strip_width = 1;
 	game->player.num_rays = game->settings.res->x / game->player.wall_strip_width;
 	game->player.rays = malloc(sizeof (t_line *) * game->player.num_rays);
 	if (!game->player.rays)

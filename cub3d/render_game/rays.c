@@ -6,11 +6,20 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/31 21:14:07 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/01 16:11:19 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+double		normalize_angle(double ray_ang)
+{
+
+	ray_ang =  fmod(ray_ang, 2 * M_PI);
+	if (ray_ang < 0)
+		ray_ang += (2 * M_PI);
+}
+
 
 t_line*   create_ray(t_game *game, double ray_ang)
 {
@@ -34,7 +43,6 @@ void	cast_rays(t_game *game)
 
 	i = 0;
 	ray_ang = game->player.rotation_angle - (game->player.fov_ang / 2);
-	printf("%f\n", ray_ang);
 	while (i < game->player.num_rays)
 	{
 		game->player.rays[i] = create_ray(game, ray_ang);
