@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 14:38:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/31 22:55:49 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/01 19:25:04 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	bool	is_wall(double x, double y, t_game *game)
+bool	is_wall(double x, double y, t_game *game)
 {
 	int index_w;
 	int index_h;
