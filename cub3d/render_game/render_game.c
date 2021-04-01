@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/31 20:26:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/01 22:23:43 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    render_game(t_game *game)
 	game->settings.tile_size.y = game->settings.tile_size.x;
 	create_minimap(&game->settings, game);
 	init_player(game);
-	cast_rays(game);
+	render_rays(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0);
 	mlx_hook(game->vars.win, 2, 1L<<0, key_press, game);
 	mlx_hook(game->vars.win, 3, 1L<<1, key_release, game);

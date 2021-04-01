@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/01 22:18:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/01 23:21:32 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,18 @@ double	get_horizontal_distance(t_game *game, t_ray *ray)
 
 	y_intercept = floor(ray->ray.x / game->settings.tile_size.y) * game->settings.tile_size.y;
 	x_intercept = ray->ray.x + (y_intercept - ray->ray.y) / tan(ray->ray.direction);
-	if (!ray_facing_up(ray))
+	if (!ray->facing_up)
 		y_intercept += game->settings.tile_size.y;
 	y_step = game->settings.tile_size.y;
 	x_step = y_step / tan(ray->ray.direction);
 	if (ray->facing_up)
 		y_step *= -1;
-	printf("ray facing right: %d x_step value: %f\n", ray->facing_right, x_step);
+	printf("y_step: %f x_step value: %f angle value : %f\n", y_step, x_step, ray->ray.direction);
 	if (!ray->facing_right && x_step > 0)
 		x_step *= -1;
 	if (ray->facing_right && x_step < 0)
 		x_step *= -1;
+	return (0);
 }
 
 double	get_distance_from_wall(t_game *game, t_ray *ray)
@@ -48,13 +49,13 @@ double	get_distance_from_wall(t_game *game, t_ray *ray)
 	//double v;
 
 	h = get_horizontal_distance(game, ray);
-	//v = get_vertical_distance(game, ray);
+	v = get_vertical_distance(game, ray);
 
-	//if (h < v)
-		//return (h);
-	//return (v);
-	return (h);
+	if (h < v)
+		return (h);
+	return (v);
 }
+
 t_ray*   create_ray(t_game *game, double ray_ang)
 {
 	t_ray *ray;
@@ -77,7 +78,7 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 		ray->facing_right = true;
 	else
 		ray->facing_right = false;
-	ray->distance = get_distance_from_wall(game, &ray);
+	ray->distance = get_distance_from_wall(game, ray);
 	return (ray);
 }
 
@@ -92,7 +93,6 @@ void	render_rays(t_game *game)
 	while (i < game->player.num_rays)
 	{
 		game->player.rays[i] = create_ray(game, ray_ang);
-		update_ray(game, i);
 		draw_line(&game->img, game->player.rays[i]->ray);
 		i++;
 		ray_ang += game->player.fov_ang / game->player.num_rays;
