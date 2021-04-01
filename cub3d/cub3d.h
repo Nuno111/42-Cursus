@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/01 00:04:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/01 22:19:17 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,16 @@ typedef struct	s_line
 	int		color;
 }				t_line;
 
+typedef struct s_ray
+{
+	t_line ray;
+	double	wall_hit_x;
+	double	wall_hit_y;
+	double	distance;
+	bool	facing_up;
+	bool	facing_right;
+}				t_ray;
+
 typedef struct s_player
 {
 	t_circle	circle;
@@ -114,7 +124,7 @@ typedef struct s_player
 	bool strafe;
 	double		fov_ang;
 	int			wall_strip_width;
-	t_line		**rays;
+	t_ray		**rays;
 	int			num_rays;
 }				t_player;
 
@@ -175,5 +185,7 @@ void	init_player(t_game *game);
 void    update_game(t_game *game);
 void    error_and_exit_game(t_game *game, char *error_log);
 void	cast_rays(t_game *game);
+bool	is_wall(double x, double y, t_game *game);
+void	render_rays(t_game *game);
 
 #endif
