@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/02 11:39:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/02 12:55:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,4 @@ void	init_player(t_game *game)
 		error_and_exit_game(game, "Error\nUnable to allocate memory for rays");
 	draw_circle(&game->img, game->player.circle);
 	draw_inner_circle(&game->img, game->player.circle);
-	//draw_line(&game->img, game->player.line);
 }

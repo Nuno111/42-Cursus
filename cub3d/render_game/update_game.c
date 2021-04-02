@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 14:38:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/02 11:48:32 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/02 13:11:14 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	is_wall(double x, double y, t_game *game)
 	return (false);
 }
 
-static	void	update_line(t_game *game)
+void	update_line(t_game *game)
 {
 	game->player.line.x = game->player.circle.x;
 	game->player.line.y = game->player.circle.y;
