@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/03 01:05:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 01:25:30 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <mlx.h>
 # include "libft.h"
 # include <math.h>
+# include <float.h>
 
 # define deg_to_rad(degrees) ((degrees) * M_PI / 180.0)
 # define rad_to_deg(radians) ((radians) * 180.0 / M_PI)
@@ -198,5 +199,9 @@ void    error_and_exit_game(t_game *game, char *error_log);
 void	cast_rays(t_game *game);
 bool	is_wall(double x, double y, t_game *game);
 void	render_rays(t_game *game);
+double		get_distance(double x, double y, double hit_x, double hit_y);
+double		normalize_angle(double ray_ang);
+void		get_horizontal_intercection(t_game *game, t_ray *ray);
+void		get_vertical_intercection(t_game *game, t_ray *ray);
 
 #endif

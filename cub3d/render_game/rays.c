@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/03 00:26:40 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 01:29:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,29 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 		ray->facing_right = true;
 	else
 		ray->facing_right = false;
-	get_horizontal_intercection(game, ray);
-	ray->ray.size = get_distance(*ray);
 	return (ray);
+}
+
+void	cast_ray(t_game *game, t_ray *ray)
+{
+	double hrzt_dist;
+	double vrtc_dist;
+
+	get_horizontal_intercection(game, ray);
+	get_vertical_intercection(game, ray);
+	if (ray->hrzt_hit)
+		hrzt_dist = get_distance(ray->ray.x, ray->ray.y, ray->hrzt_hit_x, ray->hrzt_hit_y);
+	else
+		hrzt_dist = DBL_MAX;
+	if (ray->vrtc_hit)
+		vrtc_dist = get_distance(ray->ray.x, ray->ray.y, ray->vrtc_hit_x, ray->vrtc_hit_y);
+	else
+		vrtc_dist = DBL_MAX;
+	if (hrzt_dist < vrtc_dist)
+		ray->ray.size = hrzt_dist;
+	else
+		ray->ray.size = vrtc_dist;
+	draw_line(&game->img, ray->ray);
 }
 
 void	render_rays(t_game *game)
@@ -46,7 +66,7 @@ void	render_rays(t_game *game)
 	while (i < 1)
 	{
 		game->player.rays[i] = create_ray(game, ray_ang);
-		draw_line(&game->img, game->player.rays[i]->ray);
+		cast_ray(game, game->player.rays[i]);
 		i++;
 		ray_ang += game->player.fov_ang / game->player.num_rays;
 	}
