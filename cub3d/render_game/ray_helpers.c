@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:39:24 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/03 01:09:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 15:14:04 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ double		normalize_angle(double ray_ang)
 
 void		did_ray_hit_wall(t_game *game, t_ray *ray, t_intercect intercect, bool hrzt)
 {
-	while (intercect.x < game->settings.res->x && intercect.y < game->settings.res->y)
+	while (intercect.x < game->settings.res->x && intercect.y < game->settings.res->y &&
+			intercect.x > 0 && intercect.y > 0)
 	{
 		if (is_wall(intercect.x, intercect.y, game))
 		{
@@ -60,6 +61,7 @@ void		get_horizontal_intercection(t_game *game, t_ray *ray)
 {
 	t_intercect intercect;
 
+	intercect.x_offset = 0;
 	intercect.y = floor(ray->ray.y / game->settings.tile_size.y) * game->settings.tile_size.y;
 	if (!ray->facing_up)
 		intercect.y += game->settings.tile_size.y;
@@ -74,6 +76,8 @@ void		get_horizontal_intercection(t_game *game, t_ray *ray)
 		intercect.x_step *= -1;
 	if (ray->facing_up)
 		intercect.y--;
+	else
+		intercect.y_offset = 0;
 	did_ray_hit_wall(game, ray, intercect, true);
 }
 
@@ -81,18 +85,19 @@ void		get_vertical_intercection(t_game *game, t_ray *ray)
 {
 	t_intercect intercect;
 
+	intercect.y_offset = 0;
 	intercect.x = floor(ray->ray.x / game->settings.tile_size.x) * game->settings.tile_size.x;
 	if (ray->facing_right)
 		intercect.x += game->settings.tile_size.x;
-	intercect.y = ray->ray.y + (intercect.x - ray->ray.x) / tan(ray->ray.direction);
+	intercect.y = ray->ray.y + (intercect.x - ray->ray.x) * tan(ray->ray.direction);
 	intercect.x_step = game->settings.tile_size.x;
 	if (!ray->facing_right)
 		intercect.x_step *= -1;
-	intercect.y_step = game->settings.tile_size.y / tan(ray->ray.direction);
+	intercect.y_step = game->settings.tile_size.y * tan(ray->ray.direction);
 	if (ray->facing_up && intercect.y_step > 0)
 		intercect.y_step *= -1;
 	if (!ray->facing_up && intercect.y_step < 0)
-		intercect.x_step *= -1;
+		intercect.y_step *= -1;
 	if (!ray->facing_right)
 		intercect.x--;
 	did_ray_hit_wall(game, ray, intercect, false);

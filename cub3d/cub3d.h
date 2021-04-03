@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/03 01:25:30 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 12:53:03 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ typedef struct s_intercect
 	double y;
 	double x_step;
 	double y_step;
+	int		x_offset;
+	int		y_offset;
 }				t_intercect;
 
 
