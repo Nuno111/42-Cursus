@@ -6,18 +6,17 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:39:24 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/03 01:02:06 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 01:09:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double		get_distance(t_ray ray)
+double		get_distance(double x, double y, double hit_x, double hit_y)
 {
 	double distance;
 
-	distance = (ray.wall_hit_x - ray.ray.x) * (ray.wall_hit_x - ray.ray.x) +
-				(ray.wall_hit_y - ray.ray.y) * (ray.wall_hit_y - ray.ray.y);
+	distance = (hit_x - x) * (hit_x - x) + (hit_y - y) * (hit_y - y);
 	return (sqrt(distance));
 }
 
@@ -29,16 +28,24 @@ double		normalize_angle(double ray_ang)
 	return (ray_ang);
 }
 
-void		ray_hit_wall(t_game *game, t_ray *ray, t_intercect intercect, bool hrzt)
+void		did_ray_hit_wall(t_game *game, t_ray *ray, t_intercect intercect, bool hrzt)
 {
 	while (intercect.x < game->settings.res->x && intercect.y < game->settings.res->y)
 	{
 		if (is_wall(intercect.x, intercect.y, game))
 		{
-			ray->wall_hit_x = intercect.x;
-			ray->wall_hit_y = intercect.y;
 			if (hrzt)
+			{
 				ray->hrzt_hit = true;
+				ray->hrzt_hit_x = intercect.x;
+				ray->hrzt_hit_y = intercect.y;
+			}
+			else
+			{
+				ray->vrtc_hit = true;
+				ray->vrtc_hit_x = intercect.x;
+				ray->vrtc_hit_y = intercect.y;
+			}
 			return ;
 		}
 		else
@@ -67,6 +74,7 @@ void		get_horizontal_intercection(t_game *game, t_ray *ray)
 		intercect.x_step *= -1;
 	if (ray->facing_up)
 		intercect.y--;
+	did_ray_hit_wall(game, ray, intercect, true);
 }
 
 void		get_vertical_intercection(t_game *game, t_ray *ray)
@@ -87,4 +95,5 @@ void		get_vertical_intercection(t_game *game, t_ray *ray)
 		intercect.x_step *= -1;
 	if (!ray->facing_right)
 		intercect.x--;
+	did_ray_hit_wall(game, ray, intercect, false);
 }

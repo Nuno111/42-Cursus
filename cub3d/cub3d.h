@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/03 00:48:40 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 01:05:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,10 @@ typedef struct	s_line
 typedef struct s_ray
 {
 	t_line ray;
-	double	wall_hit_x;
-	double	wall_hit_y;
+	double	hrzt_hit_x;
+	double	hrzt_hit_y;
+	double	vrtc_hit_x;
+	double	vrtc_hit_y;
 	double	distance;
 	bool	facing_up;
 	bool	facing_right;
