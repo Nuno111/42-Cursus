@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/03 15:09:06 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 21:33:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 	ray->ray.y = game->player.circle.y;
 	ray->ray.direction = normalize_angle(ray_ang);
 	ray->ray.color = game->player.circle.color;
-	if (ray->ray.direction >= M_PI  && ray->ray.direction <= 2 * M_PI)
+	if (ray->ray.direction > M_PI  && ray->ray.direction < 2 * M_PI)
 		ray->facing_up = true;
 	else
 		ray->facing_up = false;
@@ -63,7 +63,7 @@ void	render_rays(t_game *game)
 
 	i = 0;
 	ray_ang = game->player.rotation_angle - (game->player.fov_ang / 2);
-	while (i < 1)
+	while (i < game->player.num_rays)
 	{
 		game->player.rays[i] = create_ray(game, ray_ang);
 		cast_ray(game, game->player.rays[i]);

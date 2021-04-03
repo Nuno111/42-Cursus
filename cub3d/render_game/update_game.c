@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 14:38:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/02 13:11:14 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 21:56:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 bool	is_wall(double x, double y, t_game *game)
 {
-	int index_w;
-	int index_h;
+	size_t index_w;
+	size_t index_h;
 	char	c;
 
-	index_w = x / game->map_tile.size;
-	index_h = y / game->map_tile.size;
+	index_w = x / game->settings.tile_size.x;
+	index_h = y / game->settings.tile_size.y;
+	if (index_w >= game->settings.map_width || index_h >= game->settings.map_size)
+		return (false);
 	c = game->settings.map[index_h][index_w];
 	if (c == '1' || c == '2')
 		return (true);
@@ -62,10 +64,10 @@ void    update_game(t_game *game)
 {
 	create_minimap(&game->settings, game);
     update_player(game);
-	update_line(game);
+	//update_line(game);
 	draw_circle(&game->img, game->player.circle);
 	draw_inner_circle(&game->img, game->player.circle);
-	draw_line(&game->img, game->player.line);
+	//draw_line(&game->img, game->player.line);
 	render_rays(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0);
 }

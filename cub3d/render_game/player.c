@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/02 13:52:28 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 18:25:05 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	void	get_player_rotation(char c, t_game *game)
 	else if (c == 'E')
 		game->player.rotation_angle = 0;
 	else if (c == 'S')
-		game->player.rotation_angle = M_PI / 2;
+		game->player.rotation_angle = M_PI / 1.3;
 	else if (c == 'W')
 		game->player.rotation_angle = M_PI;
 }
@@ -57,7 +57,7 @@ void	init_player(t_game *game)
 	game->player.turn_dir = 0;
 	game->player.walk_dir = 0;
 	game->player.move_speed = 3;
-	game->player.rotation_speed = (M_PI / 8);
+	game->player.rotation_speed = (M_PI / 20);
 	game->player.line.x = game->player.circle.x;
 	game->player.line.y = game->player.circle.y;
 	game->player.line.color = 0x008000;
