@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/02 12:55:09 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/02 13:52:28 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	init_player(t_game *game)
 	game->player.line.size = game->player.circle.radius * 4;
 	game->player.strafe = false;
 	game->player.fov_ang = deg_to_rad(60);
-	game->player.wall_strip_width = 1;
-	game->player.num_rays = game->settings.res->x / game->player.wall_strip_width;
+	game->player.wall_wid = 1;
+	game->player.num_rays = game->settings.res->x / game->player.wall_wid;
 	game->player.rays = malloc(sizeof (t_line *) * game->player.num_rays);
 	if (!game->player.rays)
 		error_and_exit_game(game, "Error\nUnable to allocate memory for rays");

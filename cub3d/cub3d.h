@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/01 22:19:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/03 00:48:40 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ typedef struct s_ray
 	double	distance;
 	bool	facing_up;
 	bool	facing_right;
+	bool	hrzt_hit;
+	bool	vrtc_hit;
 }				t_ray;
 
 typedef struct s_player
@@ -119,15 +121,22 @@ typedef struct s_player
 	double rotation_angle;
 	double move_speed;
 	double rotation_speed;
+	double		fov_ang;
 	int turn_dir;
 	int walk_dir;
+	int			wall_wid;
 	bool strafe;
-	double		fov_ang;
-	int			wall_strip_width;
 	t_ray		**rays;
 	int			num_rays;
 }				t_player;
 
+typedef struct s_intercect
+{
+	double x;
+	double y;
+	double x_step;
+	double y_step;
+}				t_intercect;
 
 
 typedef struct s_game
