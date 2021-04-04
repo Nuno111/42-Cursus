@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/03 12:53:03 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/04 20:56:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 
 # define deg_to_rad(degrees) ((degrees) * M_PI / 180.0)
 # define rad_to_deg(radians) ((radians) * 180.0 / M_PI)
-# define left -1
-# define right 1
-# define forward 2
-# define back -2
 
+typedef	struct 	s_texture
+{
+    void    *img;
+    char    *relative_path;
+    int     width;
+    int     height;
+}				t_texture;
 
 typedef struct	s_img
 {
@@ -192,7 +195,7 @@ void	draw_square(t_img *img, t_square square);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		handle_key_press(int keycode, t_vars *vars);
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void    render_game(t_game *game);
 void	create_minimap(t_scene *settings, t_game *game);
 void	init_player(t_game *game);
@@ -205,5 +208,6 @@ double		get_distance(double x, double y, double hit_x, double hit_y);
 double		normalize_angle(double ray_ang);
 void		get_horizontal_intercection(t_game *game, t_ray *ray);
 void		get_vertical_intercection(t_game *game, t_ray *ray);
+void	render_walls(t_game *game);
 
 #endif
