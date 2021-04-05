@@ -14,7 +14,7 @@
 
 void	handle_types(t_node *n)
 {
-	char c;
+	char	c;
 
 	c = n->s[n->i];
 	if (c == 'd' || c == 'i')
@@ -33,7 +33,7 @@ void	handle_types(t_node *n)
 
 void	handle_cases(t_node *n)
 {
-	char c;
+	char	c;
 
 	c = n->s[n->i];
 	if (c == '-')
@@ -54,7 +54,7 @@ void	handle_cases(t_node *n)
 
 void	handle_hex(t_node *n, unsigned long nbr)
 {
-	char *hex;
+	char	*hex;
 
 	if (n->type == 'X')
 		hex = "0123456789ABCDEF";
@@ -71,7 +71,7 @@ void	handle_hex(t_node *n, unsigned long nbr)
 
 void	add_letter(char c, char **buffer)
 {
-	char *new;
+	char	*new;
 
 	new = malloc(sizeof(char) * 2);
 	if (!new)

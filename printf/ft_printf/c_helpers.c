@@ -44,7 +44,7 @@ static	void	handle_width_c(char c, t_node *n)
 	free(filler);
 }
 
-void			handle_c(t_node *n)
+void	handle_c(t_node *n)
 {
 	char	arg;
 

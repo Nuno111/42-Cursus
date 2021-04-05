@@ -14,11 +14,11 @@
 
 void	handle_s(t_node *n)
 {
-	char *filler;
-	char *new;
-	char *arg;
+	char	*filler;
+	char	*new;
+	char	*arg;
 
-	arg = va_arg(n->ap, char*);
+	arg = va_arg(n->ap, char *);
 	if (arg == NULL)
 		new = ft_strdup("(null)");
 	else

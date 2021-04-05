@@ -53,7 +53,7 @@ static	void	handle_width_d(t_node *n, bool prec_handled)
 
 static	void	update_content_d(t_node *n)
 {
-	bool precision_handled;
+	bool	precision_handled;
 
 	precision_handled = false;
 	if ((long)ft_strlen(n->new) < n->prec_len)
@@ -63,7 +63,7 @@ static	void	update_content_d(t_node *n)
 	n->buf = n->new;
 }
 
-void			handle_d(t_node *n)
+void	handle_d(t_node *n)
 {
 	long	arg;
 

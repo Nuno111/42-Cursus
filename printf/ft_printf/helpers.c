@@ -31,7 +31,7 @@ char	*get_filler(char *new_str, long len, bool pad_is_zero)
 
 char	*truncate_str(char *new_str, t_node *n)
 {
-	char *new;
+	char	*new;
 
 	new = ft_substr(new_str, 0, n->prec_len);
 	free(new_str);

@@ -86,9 +86,9 @@ static	void	init(t_node *n, const char *s)
 	n->is_neg = false;
 }
 
-int				ft_printf(const char *s, ...)
+int	ft_printf(const char *s, ...)
 {
-	t_node n;
+	t_node	n;
 
 	init(&n, s);
 	va_start(n.ap, s);
