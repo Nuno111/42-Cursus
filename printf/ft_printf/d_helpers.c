@@ -60,6 +60,8 @@ static	void	update_content_d(t_node *n)
 		handle_precision_d(n, &precision_handled);
 	if ((long)ft_strlen(n->new) < n->width_len)
 		handle_width_d(n, precision_handled);
+	if (n->is_neg && !(ft_strchr(n->new, '-')))
+		add_minus(n);
 	n->buf = n->new;
 }
 

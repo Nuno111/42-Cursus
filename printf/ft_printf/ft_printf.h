@@ -33,6 +33,8 @@ typedef struct s_node
 	      bool			pad_is_zero;
 	      bool			done;
 	      bool			is_neg;
+	      bool			zero;
+	      bool			hyphen;
 	      va_list		ap;
 }							t_node;
 

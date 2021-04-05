@@ -66,6 +66,7 @@ void	handle_negative_wp(long *w_or_p_len, t_node *n)
 	if (!n->has_prec)
 	{
 		n->left_align = true;
+		n->hyphen = true;
 		*w_or_p_len *= -1;
 		if (n->pad_is_zero)
 			n->pad_is_zero = false;
@@ -73,6 +74,7 @@ void	handle_negative_wp(long *w_or_p_len, t_node *n)
 	else
 	{
 		n->has_prec = false;
-		*w_or_p_len = 0;
+		if (n->zero && !n->hyphen)
+			n->pad_is_zero = true;
 	}
 }

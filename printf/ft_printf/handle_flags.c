@@ -18,6 +18,7 @@ void	handle_hyphen(t_node *n)
 	n->i++;
 	if (n->pad_is_zero)
 		n->pad_is_zero = false;
+	n->hyphen = true;
 }
 
 void	handle_zero(t_node *n)
@@ -33,6 +34,7 @@ void	handle_zero(t_node *n)
 		n->has_width = true;
 		n->pad_is_zero = true;
 	}
+	n->zero = true;
 	n->i++;
 }
 

@@ -84,6 +84,8 @@ static	void	init(t_node *n, const char *s)
 	n->pad_is_zero = false;
 	n->done = false;
 	n->is_neg = false;
+	n->zero = false;
+	n->hyphen = false;
 }
 
 int	ft_printf(const char *s, ...)
