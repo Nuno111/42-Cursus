@@ -63,5 +63,6 @@ char						*get_filler(char *new_str,
 void						update_padding(t_node *n,
 								long *w_or_l, bool from_arg);
 int							ft_printf(const char *s, ...);
+void						norm_again(t_node *n);
 
 #endif

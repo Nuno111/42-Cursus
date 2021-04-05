@@ -19,10 +19,7 @@ void	handle_u(t_node *n)
 	arg = va_arg(n->ap, unsigned int);
 	n->new = ft_itoa(arg);
 	if (*n->new == '0' && n->width_len > 0 && !n->prec_len)
-	{
-		n->buf = get_filler("", n->width_len, n->pad_is_zero);
-		free(n->new);
-	}
+		norm_again(n);
 	else if (*n->new == '0' && n->has_prec && !n->prec_len && !n->width_len)
 		free(n->new);
 	else
