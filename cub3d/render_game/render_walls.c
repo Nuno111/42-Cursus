@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 20:07:47 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/04 22:01:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/05 21:18:27 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,39 @@
 
 void	render_walls(t_game *game)
 {
-	t_texture n_wall;
+	t_img n_wall;
+	//t_color	color;
 
-	n_wall.relative_path = game->settings.no;
-	printf("%s\n", n_wall.relative_path);
-	n_wall.img = mlx_xpm_file_to_image(game->vars.mlx, n_wall.relative_path, &n_wall.width, &n_wall.height);
-	printf(" Width: %d, Height: %d\n",n_wall.width, n_wall.height);
-	printf("%d\n", ((int )n_wall.img[1]));
+
+	n_wall.img = mlx_xpm_file_to_image(game->vars.mlx, game->settings.no, &n_wall.width, &n_wall.height);
+	n_wall.addr = mlx_get_data_addr(n_wall.img, &n_wall.bits_per_pixel, &n_wall.line_length, &n_wall.endian);
+	printf("%d\n", n_wall.addr[1]);
+	/*
+	int i = 0;
+	while (i < n_wall.height)
+	{
+		int j = 0;
+		while (j < n_wall.width)
+		{
+			if (n_wall.endian == 1)
+			{
+				color.t = n_wall.addr[i * n_wall.line_length];
+				color.r = n_wall.addr[i * n_wall.line_length + 1];
+				color.g = n_wall.addr[i * n_wall.line_length + 2];
+				color.b = n_wall.addr[i * n_wall.line_length + 3];
+			}
+			else
+			{
+				color.t = n_wall.addr[i * n_wall.line_length + 3];
+				color.r = n_wall.addr[i * n_wall.line_length + 2];
+				color.g = n_wall.addr[i * n_wall.line_length + 1];
+				color.b = n_wall.addr[i * n_wall.line_length];
+			}
+			color.trgb = create_trgb(color.t, color.r, color.g, color.b);
+			my_mlx_pixel_put(game->img.img, 300 + j, 300 + i, color.trgb);
+			j += 4;
+		}
+		i++;
+	}
+	*/
 }

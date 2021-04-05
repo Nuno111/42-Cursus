@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/04 20:56:00 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/05 20:55:13 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,6 @@
 # define deg_to_rad(degrees) ((degrees) * M_PI / 180.0)
 # define rad_to_deg(radians) ((radians) * 180.0 / M_PI)
 
-typedef	struct 	s_texture
-{
-    void    *img;
-    char    *relative_path;
-    int     width;
-    int     height;
-}				t_texture;
-
 typedef struct	s_img
 {
     void		*img;
@@ -36,7 +28,18 @@ typedef struct	s_img
     int			bits_per_pixel;
     int			line_length;
     int			endian;
+	int			width;
+	int			height;
 }				t_img;
+
+typedef struct s_color
+{
+	int t;
+	int r;
+	int g;
+	int b;
+	int trgb;
+}	t_color;
 
 typedef struct		s_res
 {
