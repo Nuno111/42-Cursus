@@ -26,7 +26,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		length2 = ft_strlen(s2);
 	else
 		length2 = 0;
-	arr = malloc(sizeof(char) * (length1 + length2) + 1));
+	arr = malloc(sizeof(char) * (length1 + length2) + 1);
 	if (!arr)
 		return (NULL);
 	ft_memmove(arr, s1, length1);
