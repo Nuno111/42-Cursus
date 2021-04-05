@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-int		ft_strchrindex(const char *s, int c)
+int	ft_strchrindex(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])

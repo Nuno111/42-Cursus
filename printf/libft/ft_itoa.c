@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-size_t		ft_get_length(size_t n)
+size_t	ft_get_length(size_t n)
 {
-	size_t length;
+	size_t	length;
 
 	length = 1;
 	while (n > 9)
@@ -25,23 +25,18 @@ size_t		ft_get_length(size_t n)
 	return (length);
 }
 
-void		ft_convert_nbr(char *arr, long long n, size_t index)
+void	ft_convert_nbr(char *arr, long long n, size_t index)
 {
 	if (n > 9)
 		ft_convert_nbr(arr, n / 10, index - 1);
-	arr[index] = n > 9 ? n % 10 + 48 : n + 48;
+	if (n > 9)
+		arr[index] = n % 10 + 48;
+	else
+		arr[index] = n + 48;
 }
 
-char		*ft_itoa(long n)
+void	norm(long n, char *arr, long long nbr, size_t length)
 {
-	char		*arr;
-	long long	nbr;
-	size_t		length;
-
-	nbr = n < 0 ? (long long)n * -1 : n;
-	length = n < 0 ? ft_get_length(nbr) + 1 : ft_get_length(nbr);
-	if (!(arr = malloc(sizeof(char) * length + 1)))
-		return (NULL);
 	if (n < 0)
 	{
 		arr[0] = '-';
@@ -52,5 +47,27 @@ char		*ft_itoa(long n)
 		ft_convert_nbr(arr, nbr, length - 1);
 	}
 	arr[length] = '\0';
+}
+
+char	*ft_itoa(long n)
+{
+	char		*arr;
+	long long	nbr;
+	size_t		length;
+
+	if (n < 0)
+	{
+		nbr = (long long)n * -1;
+		length = ft_get_length(nbr) + 1;
+	}
+	else
+	{
+		nbr = n;
+		length = ft_get_length(nbr);
+	}
+	arr = malloc(sizeof(char) * length + 1);
+	if (!arr)
+		return (NULL);
+	norm(n, arr, nbr, length);
 	return (arr);
 }

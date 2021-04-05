@@ -14,7 +14,7 @@
 
 void	ft_freearrays(char **array)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (array[i])

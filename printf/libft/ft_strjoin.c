@@ -18,9 +18,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	length2;
 	char	*arr;
 
-	length1 = s1 ? ft_strlen(s1) : 0;
-	length2 = s2 ? ft_strlen(s2) : 0;
-	if (!(arr = malloc(sizeof(char) * (length1 + length2) + 1)))
+	if (s1)
+		length1 = ft_strlen(s1);
+	else
+		length1 = 0;
+	if (s2)
+		length2 = ft_strlen(s2);
+	else
+		length2 = 0;
+	arr = malloc(sizeof(char) * (length1 + length2) + 1));
+	if (!arr)
 		return (NULL);
 	ft_memmove(arr, s1, length1);
 	ft_memmove(&arr[length1], s2, length2 + 1);
