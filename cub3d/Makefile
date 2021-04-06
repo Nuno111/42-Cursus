@@ -12,17 +12,13 @@ DEBUG_FLAGS = -g -fsanitize=address
 
 CUB3DLIB = libcub3d.a
 
-MLXFLAGS = -lbsd -lmlx -lXext -lX11
+LINUXFLAGS = -lbsd -lmlx -lXext -lX11 -lm
 
-MACFLAGS = -Llibs/macopengl/ -lmlx -framework OpenGL -framework AppKit
+MACFLAGS = -Llibs/macopengl/ -lmlx -framework OpenGL -framework AppKit -lm
 
-DEP_FLAGS = -I. -Ilibs/libft/libft
+DEP_FLAGS = -I. -Ilibs/libft/libft 
 
-MYLIB = libs/libft/libft.a
-
-MATHFLAG = -lm
-
-OS = $(shell uname)
+LIBFT = libs/libft/libft.a
 
 SRC0 = $(wildcard validate_settings/*.c)
 
@@ -36,23 +32,23 @@ SRC2 = $(wildcard game_helpers/*.c)
 
 DST2 = $(SRC2:.c=.o)
 
-all : create_mylib $(NAME)
+all : libft $(NAME)
 
-mac : create_mylib test $(MACNAME)
+mac : libft mlx $(MACNAME)
 
-test :
+mlx :
 	cd libs/macopengl && $(MAKE) 
 
 $(MACNAME) : $(CUB3DLIB)
-	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(MYLIB) $(MACFLAGS) $(DEP_FLAGS) $(MATHFLAG) -o $(MACNAME)
+	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(LIBFT) $(MACFLAGS) $(DEP_FLAGS) -o $(MACNAME)
 
 $(NAME): $(CUB3DLIB)
-	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(MYLIB) $(MLXFLAGS) $(DEP_FLAGS) $(MATHFLAG) -o $(NAME)
+	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(LIBFT) $(LINUXFLAGS) $(DEP_FLAGS) -o $(NAME)
 
 $(CUB3DLIB) : $(DST0) $(DST1) $(DST2)
 	ar $(LIB_FLAGS) $@ $^
 
-create_mylib:
+libft:
 	cd libs/libft && $(MAKE)
 
 validate_settings/%.o : validate_settings/%.c cub3d.h
@@ -68,8 +64,9 @@ clean :
 	rm -f $(DST0) $(DST1) $(DST2)
 
 fclean : clean
-	rm -f $(NAME) $(CUB3DLIB)
+	rm -rf $(NAME) $(CUB3DLIB) $(MACNAME) *.dSYM
 	cd libs/libft && make fclean
+	cd libs/macopengl && make clean
 
 re : fclean all
 
