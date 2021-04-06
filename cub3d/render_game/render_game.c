@@ -18,7 +18,7 @@ void    render_game(t_game *game)
 	game->vars.win = mlx_new_window(game->vars.mlx, game->settings.res->x, game->settings.res->y, "CUB3D");
 	game->img.img = mlx_new_image(game->vars.mlx, game->settings.res->x, game->settings.res->y);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
-	game->settings.tile_size.x = (game->settings.res->x / game->settings.map_width) / 4;
+	game->settings.tile_size.x = (game->settings.res->x / game->settings.map_width) / 2;
 	game->settings.tile_size.y = game->settings.tile_size.x;
 	create_minimap(&game->settings, game);
 	init_player(game);

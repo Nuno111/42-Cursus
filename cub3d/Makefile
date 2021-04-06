@@ -34,6 +34,9 @@ DST2 = $(SRC2:.c=.o)
 
 all : libft $(NAME)
 
+macr : mac
+	./cub3dmac maps/map.cub
+
 mac : libft mlx $(MACNAME)
 
 mlx :

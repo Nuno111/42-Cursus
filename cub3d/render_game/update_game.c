@@ -69,5 +69,6 @@ void    update_game(t_game *game)
 	draw_inner_circle(&game->img, game->player.circle);
 	//draw_line(&game->img, game->player.line);
 	render_rays(game);
+	render_walls(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0);
 }
