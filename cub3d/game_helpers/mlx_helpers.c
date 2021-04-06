@@ -34,7 +34,7 @@ int		key_press(int keycode, t_game *game)
 	}
 	else if (keycode == 115 || keycode == 1)
 		game->player.walk_dir = -1;
-	else if (keycode == 97 || 0)
+	else if (keycode == 97 || keycode == 0)
 	{
 		game->player.strafe = true;
 		game->player.walk_dir = -1;

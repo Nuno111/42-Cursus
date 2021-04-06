@@ -34,11 +34,11 @@ typedef struct	s_img
 
 typedef struct s_color
 {
-	int t;
-	int r;
-	int g;
-	int b;
-	int trgb;
+	unsigned int t;
+	unsigned int r;
+	unsigned int g;
+	unsigned int b;
+	unsigned int trgb;
 }	t_color;
 
 typedef struct		s_res

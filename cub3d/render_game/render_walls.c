@@ -16,35 +16,38 @@ void	render_walls(t_game *game)
 {
 	t_img n_wall;
 	t_color	color;
+	int y;
+	int x;
+	int posx;
 
-
-	n_wall.img = mlx_xpm_file_to_image(game->vars.mlx, game->settings.no, &n_wall.width, &n_wall.height);
+	y = 0;
+	n_wall.img = mlx_xpm_file_to_image(game->vars.mlx, game->settings.ea, &n_wall.width, &n_wall.height);
 	n_wall.addr = mlx_get_data_addr(n_wall.img, &n_wall.bits_per_pixel, &n_wall.line_length, &n_wall.endian);
-	int i = 0;
-	while (i < n_wall.height)
+	while (y < n_wall.height)
 	{
-		int j = 0;
-		while (j < n_wall.width)
+		posx = 0;
+		x = 0;
+		while (x < n_wall.width)
 		{
 			if (n_wall.endian == 1)
 			{
-				color.t = n_wall.addr[(i * n_wall.line_length) + j];
-				color.r = n_wall.addr[(i * n_wall.line_length) + j + 1];
-				color.g = n_wall.addr[(i * n_wall.line_length) + j + 2];
-				color.b = n_wall.addr[(i * n_wall.line_length) + j + 3];
+				color.t = (int)n_wall.addr[(y * n_wall.line_length) + x];
+				color.r = (int)n_wall.addr[(y * n_wall.line_length) + x + 1];
+				color.g = (int)n_wall.addr[(y * n_wall.line_length) + x + 2];
+				color.b = (int)n_wall.addr[(y * n_wall.line_length) + x + 3];
 			}
 			else
 			{
-				color.t = n_wall.addr[(i * n_wall.line_length) + j + 3];
-				color.r = n_wall.addr[(i * n_wall.line_length) + j + 2];
-				color.g = n_wall.addr[(i * n_wall.line_length) + j + 1];
-				color.b = n_wall.addr[(i * n_wall.line_length) + j];
+				color.t = (int)n_wall.addr[(y * n_wall.line_length) + x + 3];
+				color.r = (int)n_wall.addr[(y * n_wall.line_length) + x + 2];
+				color.g = (int)n_wall.addr[(y * n_wall.line_length) + x + 1];
+				color.b = (int)n_wall.addr[(y * n_wall.line_length) + x];
 			}
 			color.trgb = create_trgb(color.t, color.r, color.g, color.b);
-			printf("%d\n", color.trgb);
-			my_mlx_pixel_put(&game->img, 300 + j, 300 + i, color.trgb);
-			j += 4;
+			my_mlx_pixel_put(&game->img, posx,y, color.trgb);
+			posx++;
+			x+= 4;
 		}
-		i++;
+		y++;
 	}
 }
