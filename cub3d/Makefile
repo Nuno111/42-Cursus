@@ -16,7 +16,7 @@ LINUXFLAGS = -lbsd -lmlx -lXext -lX11 -lm
 
 MACFLAGS = -Llibs/macopengl/ -lmlx -framework OpenGL -framework AppKit -lm
 
-DEP_FLAGS = -I. -Ilibs/libft/libft 
+DEP_FLAGS = -I. -Ilibs/libft/libft
 
 LIBFT = libs/libft/libft.a
 
@@ -40,7 +40,7 @@ macr : mac
 mac : libft mlx $(MACNAME)
 
 mlx :
-	cd libs/macopengl && $(MAKE) 
+	cd libs/macopengl && $(MAKE)
 
 $(MACNAME) : $(CUB3DLIB)
 	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(LIBFT) $(MACFLAGS) $(DEP_FLAGS) -o $(MACNAME)

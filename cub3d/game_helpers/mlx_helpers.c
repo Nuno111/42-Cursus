@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_events_handler.c                               :+:      :+:    :+:   */
+/*   mlx_helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:11:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/31 16:05:13 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/06 21:51:28 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 int		key_press(int keycode, t_game *game)
 {
-	printf("%d\n", keycode);
 	if (keycode == 65307)
 		mlx_destroy_window(game->vars.mlx, game->vars.win);
 	if (keycode == 119 || keycode == 13)
