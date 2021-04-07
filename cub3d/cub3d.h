@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/05 20:55:13 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/07 11:03:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct s_player
 	bool strafe;
 	t_ray		**rays;
 	int			num_rays;
+	int			height;
 }				t_player;
 
 typedef struct s_intercect
@@ -157,6 +158,7 @@ typedef struct s_game
 	t_scene		settings;
 	t_vars		vars;
 	t_img		img;
+	int			wall_size;
 }				t_game;
 
 /*

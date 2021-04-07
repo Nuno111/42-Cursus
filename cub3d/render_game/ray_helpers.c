@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:39:24 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/03 18:24:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:38:01 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		did_ray_hit_wall(t_game *game, t_ray *ray, t_intercect intercect, bool hrz
 			{
 				ray->hrzt_hit = true;
 				ray->hrzt_hit_x = intercect.x;
+				printf("%f\n", ray->hrzt_hit_x);
 				ray->hrzt_hit_y = intercect.y;
 			}
 			else
