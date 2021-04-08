@@ -19,6 +19,7 @@ void    render_game(t_game *game)
 	game->main_img.img = mlx_new_image(game->vars.mlx, game->settings.res->x, game->settings.res->y);
 	game->main_img.addr = mlx_get_data_addr(game->main_img.img, &game->main_img.bits_per_pixel, &game->main_img.line_length, &game->main_img.endian);
 	game->cube_size = 64;
+	game->dtpp = (game->settings.res->x / 2) / tan(game->player.fov_ang / 2);
 	create_minimap(&game->settings, game);
 	init_player(game);
 	render_rays(game);

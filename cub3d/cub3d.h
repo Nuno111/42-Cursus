@@ -151,6 +151,7 @@ typedef struct s_game
 	t_vars		vars;
 	t_img		main_img;
 	int			cube_size;
+	double		dtpp;
 }				t_game;
 
 /*
