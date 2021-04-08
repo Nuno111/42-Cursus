@@ -24,14 +24,15 @@ void	draw_inner_circle(t_img *img, t_circle circle)
 
 void	draw_line(t_img *img, t_line line)
 {
-	int i;
+	int	i;
+	int	dir_x;
+	int	dir_y;
 
-	i = 0;
-	while (i <= line.size)
-	{
-		my_mlx_pixel_put(img, cos(line.direction) * i + line.x, sin(line.direction) * i + line.y, line.color);
-		i++;
-	}
+	dir_x = cos(line.direction);
+	dir_y = sin(line.direction);
+	i = -1;
+	while (++i <= line.size)
+		my_mlx_pixel_put(img, dir_x * i + line.x, dir_y * i + line.y, line.color);
 }
 
 void	draw_circle(t_img *img, t_circle circle)
@@ -44,7 +45,7 @@ void	draw_circle(t_img *img, t_circle circle)
 		x = circle.radius * cos(deg_to_rad(circle.ang)) + circle.x;
 		y = circle.radius * sin(deg_to_rad(circle.ang)) + circle.y;
 		my_mlx_pixel_put(img, x, y, circle.color);
-		circle.ang+= 0.1;
+		circle.ang++;
 	}
 }
 

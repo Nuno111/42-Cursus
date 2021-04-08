@@ -24,15 +24,15 @@ void	create_minimap(t_scene *settings, t_game *game)
 		while (settings->map[height][width])
 		{
 			if (settings->map[height][width] == '1')
-				game->map_tile.color = 0x000080;
+				game->minimap_tile.color = 0x000080;
 			else if (settings->map[height][width] == '0' || ft_strchr("NESW", settings->map[height][width]))
-				game->map_tile.color = 0xFFFF00;
+				game->minimap_tile.color = 0xFFFF00;
 			else
-				game->map_tile.color = 0x000000;
-			game->map_tile.x = width * settings->tile_size.x;
-			game->map_tile.y = height * settings->tile_size.y;
-			game->map_tile.size = settings->tile_size.x;
-			draw_square(&game->img, game->map_tile);
+				game->minimap_tile.color = 0x000000;
+			game->minimap_tile.size = (game->settings.res->x / game->settings.map_width) / 3;
+			game->minimap_tile.x = width * game->minimap_tile.size;
+			game->minimap_tile.y = height * game->minimap_tile.size;
+			draw_square(&game->img, game->minimap_tile);
 			width++;
 		}
 		height++;

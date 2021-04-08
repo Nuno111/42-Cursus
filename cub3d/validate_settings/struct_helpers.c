@@ -31,8 +31,6 @@ void	init_settings(t_scene *settings)
 	settings->ceil = NULL;
 	settings->tmp_map = NULL;
 	settings->map = NULL;
-	settings->tile_size.x = 0;
-	settings->tile_size.y = 0;
 	settings->map_width = 0;
 	settings->map_size = 0;
 }

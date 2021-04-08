@@ -60,12 +60,6 @@ typedef struct  s_vars
         void    *win;
 }               t_vars;
 
-typedef struct s_tile_size
-{
-	size_t x;
-	size_t y;
-}				t_tile_size;
-
 typedef struct		s_scene
 {
 	t_res	*res;
@@ -80,7 +74,6 @@ typedef struct		s_scene
 	char	**map;
 	size_t	map_width;
 	size_t	map_size;
-	t_tile_size tile_size;
 }					t_scene;
 
 typedef struct	s_circle
@@ -133,7 +126,6 @@ typedef struct s_player
 	double		fov_ang;
 	int turn_dir;
 	int walk_dir;
-	int			wall_wid;
 	bool strafe;
 	t_ray		**rays;
 	int			num_rays;
@@ -154,11 +146,11 @@ typedef struct s_intercect
 typedef struct s_game
 {
 	t_player	player;
-	t_square	map_tile;
+	t_square	minimap_tile;
 	t_scene		settings;
 	t_vars		vars;
 	t_img		img;
-	int			wall_size;
+	int			cube_size;
 }				t_game;
 
 /*
