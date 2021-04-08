@@ -39,7 +39,6 @@ void		did_ray_hit_wall(t_game *game, t_ray *ray, t_intercect intercect, bool hrz
 			{
 				ray->hrzt_hit = true;
 				ray->hrzt_hit_x = intercect.x;
-				printf("%f\n", ray->hrzt_hit_x);
 				ray->hrzt_hit_y = intercect.y;
 			}
 			else
@@ -76,7 +75,7 @@ void		get_horizontal_intercection(t_game *game, t_ray *ray)
 	if (ray->facing_right && intercect.x_step < 0)
 		intercect.x_step *= -1;
 	if (ray->facing_up)
-		intercect.y--;
+		intercect.y-= 0.00001;
 	else
 		intercect.y_offset = 0;
 	did_ray_hit_wall(game, ray, intercect, true);
@@ -100,6 +99,6 @@ void		get_vertical_intercection(t_game *game, t_ray *ray)
 	if (!ray->facing_up && intercect.y_step < 0)
 		intercect.y_step *= -1;
 	if (!ray->facing_right)
-		intercect.x--;
+		intercect.x-= 0.00001;
 	did_ray_hit_wall(game, ray, intercect, false);
 }

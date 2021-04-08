@@ -64,11 +64,11 @@ void    update_game(t_game *game)
 {
 	create_minimap(&game->settings, game);
     update_player(game);
-	//update_line(game);
+	update_line(game);
 	draw_circle(&game->img, game->player.circle);
 	draw_inner_circle(&game->img, game->player.circle);
-	//draw_line(&game->img, game->player.line);
-	render_rays(game);
-	render_walls(game);
+	draw_line(&game->img, game->player.line);
+	//render_rays(game);
+	//render_walls(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0);
 }

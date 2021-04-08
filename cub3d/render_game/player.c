@@ -73,4 +73,5 @@ void	init_player(t_game *game)
 		error_and_exit_game(game, "Error\nUnable to allocate memory for rays");
 	draw_circle(&game->img, game->player.circle);
 	draw_inner_circle(&game->img, game->player.circle);
+	draw_line(&game->img, game->player.line);
 }
