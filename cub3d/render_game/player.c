@@ -37,8 +37,8 @@ static	void	get_player_pos(t_game *game)
 		{
 			if (ft_strchr("NESW", game->settings.map[h][w]))
 			{
-				game->player.circle.x = (w * game->minimap_tile.x) + (game->minimap_tile.size / 2.0);
-				game->player.circle.y = (h * game->minimap_tile.y) + (game->minimap_tile.size/ 2.0);
+				game->player.circle.x = (w * game->minimap_tile.size) + (game->minimap_tile.size / 2.0);
+				game->player.circle.y = (h * game->minimap_tile.size) + (game->minimap_tile.size/ 2.0);
 				get_player_rotation(game->settings.map[h][w], game);
 				return;
 			}
@@ -56,8 +56,8 @@ void	init_player(t_game *game)
 	game->player.circle.ang = 0;
 	game->player.turn_dir = 0;
 	game->player.walk_dir = 0;
-	game->player.move_speed = 3;
-	game->player.rotation_speed = (M_PI / 20);
+	game->player.move_speed = game->minimap_tile.size / 3;
+	game->player.rotation_speed = (M_PI / 10);
 	game->player.line.x = game->player.circle.x;
 	game->player.line.y = game->player.circle.y;
 	game->player.line.color = 0x008000;
@@ -70,7 +70,7 @@ void	init_player(t_game *game)
 	game->player.height = game->cube_size / 2;
 	if (!game->player.rays)
 		error_and_exit_game(game, "Error\nUnable to allocate memory for rays");
-	draw_circle(&game->img, game->player.circle);
-	draw_inner_circle(&game->img, game->player.circle);
-	draw_line(&game->img, game->player.line);
+	draw_circle(&game->main_img, game->player.circle);
+	draw_inner_circle(&game->main_img, game->player.circle);
+	draw_line(&game->main_img, game->player.line);
 }

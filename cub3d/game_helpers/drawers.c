@@ -24,9 +24,9 @@ void	draw_inner_circle(t_img *img, t_circle circle)
 
 void	draw_line(t_img *img, t_line line)
 {
-	int	i;
-	int	dir_x;
-	int	dir_y;
+	int		i;
+	double	dir_x;
+	double	dir_y;
 
 	dir_x = cos(line.direction);
 	dir_y = sin(line.direction);

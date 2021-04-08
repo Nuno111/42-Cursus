@@ -18,8 +18,8 @@ bool	is_wall(double x, double y, t_game *game)
 	size_t index_h;
 	char	c;
 
-	index_w = x / game->settings.tile_size.x;
-	index_h = y / game->settings.tile_size.y;
+	index_w = x / game->minimap_tile.size;
+	index_h = y / game->minimap_tile.size;
 	if (index_w >= game->settings.map_width || index_h >= game->settings.map_size)
 		return (false);
 	c = game->settings.map[index_h][index_w];
@@ -65,10 +65,10 @@ void    update_game(t_game *game)
 	create_minimap(&game->settings, game);
     update_player(game);
 	update_line(game);
-	draw_circle(&game->img, game->player.circle);
-	draw_inner_circle(&game->img, game->player.circle);
-	draw_line(&game->img, game->player.line);
+	draw_circle(&game->main_img, game->player.circle);
+	draw_inner_circle(&game->main_img, game->player.circle);
+	draw_line(&game->main_img, game->player.line);
 	//render_rays(game);
 	//render_walls(game);
-	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->img.img, 0, 0);
+	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->main_img.img, 0, 0);
 }

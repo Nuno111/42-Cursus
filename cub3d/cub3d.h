@@ -104,7 +104,7 @@ typedef struct	s_line
 
 typedef struct s_ray
 {
-	t_line ray;
+	t_line	line;
 	double	hrzt_hit_x;
 	double	hrzt_hit_y;
 	double	vrtc_hit_x;
@@ -149,7 +149,7 @@ typedef struct s_game
 	t_square	minimap_tile;
 	t_scene		settings;
 	t_vars		vars;
-	t_img		img;
+	t_img		main_img;
 	int			cube_size;
 }				t_game;
 

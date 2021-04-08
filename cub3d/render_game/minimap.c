@@ -29,10 +29,10 @@ void	create_minimap(t_scene *settings, t_game *game)
 				game->minimap_tile.color = 0xFFFF00;
 			else
 				game->minimap_tile.color = 0x000000;
-			game->minimap_tile.size = (game->settings.res->x / game->settings.map_width) / 3;
+			game->minimap_tile.size = (game->settings.res->x / game->settings.map_width);
 			game->minimap_tile.x = width * game->minimap_tile.size;
 			game->minimap_tile.y = height * game->minimap_tile.size;
-			draw_square(&game->img, game->minimap_tile);
+			draw_square(&game->main_img, game->minimap_tile);
 			width++;
 		}
 		height++;

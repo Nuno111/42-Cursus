@@ -62,14 +62,14 @@ void		get_horizontal_intercection(t_game *game, t_ray *ray)
 	t_intercect intercect;
 
 	intercect.x_offset = 0;
-	intercect.y = floor(ray->ray.y / game->settings.tile_size.y) * game->settings.tile_size.y;
+	intercect.y = floor(ray->line.y / game->minimap_tile.size) * game->minimap_tile.size;
 	if (!ray->facing_up)
-		intercect.y += game->settings.tile_size.y;
-	intercect.x = ray->ray.x + (intercect.y - ray->ray.y) / tan(ray->ray.direction);
-	intercect.y_step = game->settings.tile_size.y;
+		intercect.y += game->minimap_tile.size;
+	intercect.x = ray->line.x + (intercect.y - ray->line.y) / tan(ray->line.direction);
+	intercect.y_step = game->minimap_tile.size;
 	if (ray->facing_up)
 		intercect.y_step *= -1;
-	intercect.x_step = game->settings.tile_size.x / tan(ray->ray.direction);
+	intercect.x_step = game->minimap_tile.size / tan(ray->line.direction);
 	if (!ray->facing_right && intercect.x_step > 0)
 		intercect.x_step *= -1;
 	if (ray->facing_right && intercect.x_step < 0)
@@ -86,14 +86,14 @@ void		get_vertical_intercection(t_game *game, t_ray *ray)
 	t_intercect intercect;
 
 	intercect.y_offset = 0;
-	intercect.x = floor(ray->ray.x / game->settings.tile_size.x) * game->settings.tile_size.x;
+	intercect.x = floor(ray->line.x / game->minimap_tile.size) * game->minimap_tile.size;
 	if (ray->facing_right)
-		intercect.x += game->settings.tile_size.x;
-	intercect.y = ray->ray.y + (intercect.x - ray->ray.x) * tan(ray->ray.direction);
-	intercect.x_step = game->settings.tile_size.x;
+		intercect.x += game->minimap_tile.size;
+	intercect.y = ray->line.y + (intercect.x - ray->line.x) * tan(ray->line.direction);
+	intercect.x_step = game->minimap_tile.size;
 	if (!ray->facing_right)
 		intercect.x_step *= -1;
-	intercect.y_step = game->settings.tile_size.y * tan(ray->ray.direction);
+	intercect.y_step = game->minimap_tile.size * tan(ray->line.direction);
 	if (ray->facing_up && intercect.y_step > 0)
 		intercect.y_step *= -1;
 	if (!ray->facing_up && intercect.y_step < 0)
