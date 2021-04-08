@@ -53,6 +53,7 @@ void	cast_ray(t_game *game, t_ray *ray)
 		ray->line.size = hrzt_dist;
 	else
 		ray->line.size = vrtc_dist;
+	printf("%f\n", ray->line.size);
 	draw_line(&game->main_img, ray->line);
 }
 
