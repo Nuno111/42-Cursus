@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/09 21:14:09 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/09 21:28:34 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define CUB3D_H
 
 # include <mlx.h>
-# include "libft.h"
 # include <math.h>
 # include <float.h>
+# include "libft.h"
 
 # define deg_to_rad(degrees) ((degrees) * M_PI / 180.0)
 # define rad_to_deg(radians) ((radians) * 180.0 / M_PI)
