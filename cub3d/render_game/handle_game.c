@@ -6,11 +6,23 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/09 18:35:42 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/09 21:21:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void    update_game(t_game *game)
+{
+    update_player(game);
+	create_rays(game);
+	draw_walls(game);
+	draw_minimap(&game->settings, game);
+	draw_circle(&game->main_img, game->player.circle);
+	draw_inner_circle(&game->main_img, game->player.circle);
+	draw_rays(game);
+	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->main_img.img, 0, 0);
+}
 
 void    render_game(t_game *game)
 {

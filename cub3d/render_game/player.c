@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/09 18:02:09 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/09 21:14:10 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,31 @@ static	void	get_player_pos(t_game *game)
 	}
 }
 
+void    update_player(t_game *game)
+{
+	double move_step;
+	double tmp_x;
+	double tmp_y;
+
+	game->player.rotation_angle += game->player.turn_dir * game->player.rotation_speed;
+	move_step = game->player.walk_dir * game->player.move_speed;
+	if (game->player.strafe)
+	{
+		tmp_x = game->player.circle.x + sin(game->player.rotation_angle) * -move_step;
+		tmp_y = game->player.circle.y + cos(game->player.rotation_angle) * move_step;
+	}
+	else
+	{
+		tmp_x = game->player.circle.x + cos(game->player.rotation_angle) * move_step;
+		tmp_y = game->player.circle.y + sin(game->player.rotation_angle) * move_step;
+	}
+	if (!is_wall(tmp_x, tmp_y, game))
+	{
+		game->player.circle.x = tmp_x;
+		game->player.circle.y = tmp_y;
+	}
+}
+
 void	init_player(t_game *game)
 {
 	get_player_pos(game);
@@ -69,6 +94,7 @@ void	init_player(t_game *game)
 	game->player.rays = malloc(sizeof (t_line *) * game->player.num_rays);
 	game->player.height = game->cube_size / 2;
 	game->player.dtpp = (game->settings.res->x / 2) / tan(game->player.fov_ang / 2);
+	game->player.ang_increment = game->player.fov_ang / game->player.num_rays;
 	if (!game->player.rays)
 		error_and_exit_game(game, "Error\nUnable to allocate memory for rays");
 }

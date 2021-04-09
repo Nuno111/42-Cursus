@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/09 18:37:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/09 21:14:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_player
 	int			num_rays;
 	int			height;
 	double		dtpp;
+	double		ang_increment;
 }				t_player;
 
 typedef struct s_intercect
@@ -220,5 +221,7 @@ double		normalize_angle(double ray_ang);
 void		get_horizontal_intercection(t_game *game, t_ray *ray);
 void		get_vertical_intercection(t_game *game, t_ray *ray);
 double	get_wall_height(t_game *game, t_ray *ray);
+void    update_player(t_game *game);
+void	update_rays(t_game *game);
 
 #endif
