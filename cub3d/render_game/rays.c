@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/07 14:21:47 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/09 10:39:40 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,16 @@ void	cast_ray(t_game *game, t_ray *ray)
 	else
 		vrtc_dist = DBL_MAX;
 	if (hrzt_dist < vrtc_dist)
+	{
+		ray->vrtc_hit = false;
 		ray->line.size = hrzt_dist;
+	}
 	else
+	{
+		ray->hrzt_hit = false;
 		ray->line.size = vrtc_dist;
-	printf("%f\n", ray->line.size);
+
+	}
 	draw_line(&game->main_img, ray->line);
 }
 
@@ -64,7 +70,7 @@ void	render_rays(t_game *game)
 	int		i;
 
 	i = 0;
-	ang_increment = game->player.fov_ang / game->player.num_rays; 
+	ang_increment = game->player.fov_ang / game->player.num_rays;
 	ray_ang = game->player.rotation_angle - (game->player.fov_ang / 2);
 	while (i < game->player.num_rays)
 	{
