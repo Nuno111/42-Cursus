@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_walls.c                                     :+:      :+:    :+:   */
+/*   draw_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/04 20:07:47 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/09 17:44:42 by ngregori         ###   ########.fr       */
+/*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
+/*   Updated: 2021/04/09 18:38:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	get_wall_height(t_game *game, t_ray *ray)
-{
-	double height;
-	double distance;
-	double fishbowl_adjust;
-
-	fishbowl_adjust = cos(ray->line.direction - game->player.rotation_angle);
-	distance = (ray->line.size / game->minimap_tile.size) * game->cube_size * fishbowl_adjust;
-	height = (game->cube_size / distance) * game->dtpp;
-	return (height);
-}
-
-void	render_walls(t_game *game)
+void	draw_walls(t_game *game)
 {
 	int i;
 	t_line line;
@@ -41,9 +29,42 @@ void	render_walls(t_game *game)
 			line.y = 0;
 		if (line.size > game->settings.res->y)
 			line.size = game->settings.res->y;
-		printf("%f\n", line.y);
-		printf("%f\n", line.y);
 		draw_line(&game->main_img, line);
 		i++;
 	}
+}
+
+void	draw_minimap(t_scene *settings, t_game *game)
+{
+	int width;
+	int height;
+
+	height = 0;
+	while (settings->map[height])
+	{
+		width = 0;
+		while (settings->map[height][width])
+		{
+			if (settings->map[height][width] == '1')
+				game->minimap_tile.color = 0x000080;
+			else if (settings->map[height][width] == '0' || ft_strchr("NESW", settings->map[height][width]))
+				game->minimap_tile.color = 0xFFFF00;
+			else
+				game->minimap_tile.color = 0x000000;
+			game->minimap_tile.x = width * game->minimap_tile.size;
+			game->minimap_tile.y = height * game->minimap_tile.size;
+			draw_square(&game->main_img, game->minimap_tile);
+			width++;
+		}
+		height++;
+	}
+}
+
+void	draw_rays(t_game *game)
+{
+	int	i;
+
+	i = -1;
+	while (++i < game->player.num_rays)
+		draw_line(&game->main_img, game->player.rays[i]->line);
 }

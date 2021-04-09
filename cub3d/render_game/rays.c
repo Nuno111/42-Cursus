@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/09 10:39:40 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:34:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ void	cast_ray(t_game *game, t_ray *ray)
 	{
 		ray->hrzt_hit = false;
 		ray->line.size = vrtc_dist;
-
 	}
-	draw_line(&game->main_img, ray->line);
 }
 
-void	render_rays(t_game *game)
+void	create_rays(t_game *game)
 {
 	double	ray_ang;
 	double	ang_increment;

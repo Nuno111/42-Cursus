@@ -6,33 +6,15 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 14:38:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/09 11:26:15 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:43:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	is_wall(double x, double y, t_game *game)
+static	void	update_rays(t_game *game)
 {
-	size_t index_w;
-	size_t index_h;
-	char	c;
 
-	index_w = x / game->minimap_tile.size;
-	index_h = y / game->minimap_tile.size;
-	if (index_w >= game->settings.map_width || index_h >= game->settings.map_size)
-		return (false);
-	c = game->settings.map[index_h][index_w];
-	if (c == '1' || c == '2')
-		return (true);
-	return (false);
-}
-
-void	update_line(t_game *game)
-{
-	game->player.line.x = game->player.circle.x;
-	game->player.line.y = game->player.circle.y;
-	game->player.line.direction = game->player.rotation_angle;
 }
 
 static  void    update_player(t_game *game)
@@ -62,13 +44,12 @@ static  void    update_player(t_game *game)
 
 void    update_game(t_game *game)
 {
-	create_minimap(&game->settings, game);
     update_player(game);
-	update_line(game);
+	create_rays(game);
+	draw_walls(game);
+	draw_minimap(&game->settings, game);
 	draw_circle(&game->main_img, game->player.circle);
 	draw_inner_circle(&game->main_img, game->player.circle);
-	draw_line(&game->main_img, game->player.line);
-	render_rays(game);
-	render_walls(game);
+	draw_rays(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->main_img.img, 0, 0);
 }

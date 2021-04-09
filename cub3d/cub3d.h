@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/07 11:03:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:37:56 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_player
 	t_ray		**rays;
 	int			num_rays;
 	int			height;
+	double		dtpp;
 }				t_player;
 
 typedef struct s_intercect
@@ -151,7 +152,6 @@ typedef struct s_game
 	t_vars		vars;
 	t_img		main_img;
 	int			cube_size;
-	double		dtpp;
 }				t_game;
 
 /*
@@ -190,22 +190,35 @@ void	draw_line(t_img *img, t_line line);
 void	draw_circle(t_img *img, t_circle circle);
 void	draw_square(t_img *img, t_square square);
 
+/*
+MLX Events
+*/
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		handle_key_press(int keycode, t_vars *vars);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
+/*
+Draw game functions
+*/
+void	draw_minimap(t_scene *settings, t_game *game);
+void	draw_rays(t_game *game);
+void	draw_walls(t_game *game);
+
+/*
+Game functions
+*/
 void    render_game(t_game *game);
-void	create_minimap(t_scene *settings, t_game *game);
 void	init_player(t_game *game);
 void    update_game(t_game *game);
 void    error_and_exit_game(t_game *game, char *error_log);
-void	cast_rays(t_game *game);
 bool	is_wall(double x, double y, t_game *game);
-void	render_rays(t_game *game);
+void	create_rays(t_game *game);
+void	cast_ray(t_game *game, t_ray *ray);
 double		get_distance(double x, double y, double hit_x, double hit_y);
 double		normalize_angle(double ray_ang);
 void		get_horizontal_intercection(t_game *game, t_ray *ray);
 void		get_vertical_intercection(t_game *game, t_ray *ray);
-void	render_walls(t_game *game);
+double	get_wall_height(t_game *game, t_ray *ray);
 
 #endif

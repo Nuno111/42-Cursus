@@ -6,35 +6,24 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 12:29:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/08 22:31:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/09 18:08:56 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	create_minimap(t_scene *settings, t_game *game)
+bool	is_wall(double x, double y, t_game *game)
 {
-	int width;
-	int height;
+	size_t index_w;
+	size_t index_h;
+	char	c;
 
-	height = 0;
-	game->minimap_tile.size = (game->settings.res->x / game->settings.map_width) / 3;
-	while (settings->map[height])
-	{
-		width = 0;
-		while (settings->map[height][width])
-		{
-			if (settings->map[height][width] == '1')
-				game->minimap_tile.color = 0x000080;
-			else if (settings->map[height][width] == '0' || ft_strchr("NESW", settings->map[height][width]))
-				game->minimap_tile.color = 0xFFFF00;
-			else
-				game->minimap_tile.color = 0x000000;
-			game->minimap_tile.x = width * game->minimap_tile.size;
-			game->minimap_tile.y = height * game->minimap_tile.size;
-			draw_square(&game->main_img, game->minimap_tile);
-			width++;
-		}
-		height++;
-	}
+	index_w = x / game->minimap_tile.size;
+	index_h = y / game->minimap_tile.size;
+	if (index_w >= game->settings.map_width || index_h >= game->settings.map_size)
+		return (false);
+	c = game->settings.map[index_h][index_w];
+	if (c == '1' || c == '2')
+		return (true);
+	return (false);
 }
