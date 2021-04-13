@@ -6,30 +6,49 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/09 18:38:11 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 13:54:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	draw_wall_line(t_game *game, t_wall wall, t_ray ray)
+{
+	int j;
+	int h;
+	double texture_x;
+
+	j = 0;
+	while (j < wall.size)
+	{
+		texture_x = fmod(wall.x, wall.texture.width);
+		h = 0;
+		while (h < wall.size / game->cube_size)
+		{
+
+		}
+
+	}
+}
+
 void	draw_walls(t_game *game)
 {
 	int i;
-	t_line line;
+	t_wall wall;
 
 	i = 0;
+	wall.ang = (M_PI / 2);
 	while (i < game->player.num_rays)
 	{
-		line.color = 0xffffff;
-		line.direction = (M_PI / 2);
-		line.size = get_wall_height(game, game->player.rays[i]);
-		line.x = i;
-		line.y = (game->settings.res->y / 2) - (line.size / 2);
-		if (line.y < 0)
-			line.y = 0;
-		if (line.size > game->settings.res->y)
-			line.size = game->settings.res->y;
-		draw_line(&game->main_img, line);
+		wall.size = get_wall_height(game, game->player.rays[i]);
+		if (wall.size > game->settings.res->y)
+			wall.size = game->settings.res->y;
+		if (wall.y < 0)
+			wall.y = 0;
+		wall.x = i;
+		wall.y = (game->settings.res->y / 2) - (wall.size / 2);
+		wall.texture = assign_wall_texture(game, *game->player.rays[i]);
+		draw_wall_line(game, wall, *game->player.rays[i]);
 		i++;
 	}
 }

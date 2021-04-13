@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 10:54:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 13:24:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,20 @@ typedef struct	s_img
 
 typedef struct s_wall
 {
+	t_img texture;
+	double	x;
+	double	y;
+	double	size;
+	double	ang;
+}			t_wall;
+
+typedef struct s_walls
+{
 	t_img no;
 	t_img ea;
 	t_img so;
 	t_img we;
-}				t_wall;
+}				t_walls;
 
 
 typedef struct s_color
@@ -162,7 +171,7 @@ typedef struct s_game
 	t_scene		settings;
 	t_vars		vars;
 	t_img		main_img;
-	t_wall		wall;
+	t_walls		walls;
 	int			cube_size;
 }				t_game;
 
@@ -234,5 +243,6 @@ void		get_vertical_intercection(t_game *game, t_ray *ray);
 double	get_wall_height(t_game *game, t_ray *ray);
 void    update_player(t_game *game);
 void	update_rays(t_game *game);
+t_img	assign_wall_texture(t_game *game, t_ray ray);
 
 #endif
