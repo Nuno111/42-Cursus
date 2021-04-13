@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/09 21:28:34 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 10:30:08 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ typedef struct	s_img
 	int			width;
 	int			height;
 }				t_img;
+
+typedef struct s_wall
+{
+	t_img no;
+	t_img ea;
+	t_img so;
+	t_img we;
+}				t_wall;
+
 
 typedef struct s_color
 {
@@ -152,6 +161,7 @@ typedef struct s_game
 	t_scene		settings;
 	t_vars		vars;
 	t_img		main_img;
+	t_wall		wall;
 	int			cube_size;
 }				t_game;
 
