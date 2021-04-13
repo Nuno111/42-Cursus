@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 14:14:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 19:10:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_wall
 	double	y;
 	double	size;
 	double	ang;
-	int		color;
+	unsigned int		color;
 }			t_wall;
 
 typedef struct s_walls
@@ -246,5 +246,6 @@ void    update_player(t_game *game);
 void	update_rays(t_game *game);
 t_img	assign_wall_texture(t_game *game, t_ray ray);
 void	init_walls(t_game *game);
+void	reset_rays(t_game *game);
 
 #endif

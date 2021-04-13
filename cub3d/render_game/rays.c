@@ -6,11 +6,34 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 14:13:08 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 19:10:17 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	reset_rays(t_game *game)
+{
+	int i;
+
+	i = -1;
+	while (++i < game->player.num_rays)
+	{
+		game->player.rays[i]->distance = 0;
+		game->player.rays[i]->facing_right = false;
+		game->player.rays[i]->facing_up = false;
+		game->player.rays[i]->hrzt_hit = false;
+		game->player.rays[i]->hrzt_hit_x = 0;
+		game->player.rays[i]->hrzt_hit_y = 0;
+		game->player.rays[i]->line.direction = 0;
+		game->player.rays[i]->line.size = 0;
+		game->player.rays[i]->line.x = 0;
+		game->player.rays[i]->line.y = 0;
+		game->player.rays[i]->vrtc_hit = false;
+		game->player.rays[i]->vrtc_hit_x = 0;
+		game->player.rays[i]->vrtc_hit_y = 0;
+	}
+}
 
 void	cast_ray(t_game *game, t_ray *ray)
 {
@@ -81,8 +104,8 @@ void	update_rays(t_game *game)
 			game->player.rays[i]->facing_right = true;
 		else
 			game->player.rays[i]->facing_right = false;
-		ray_ang += game->player.ang_increment;
 		cast_ray(game, game->player.rays[i]);
+		ray_ang += game->player.ang_increment;
 	}
 }
 
@@ -97,7 +120,6 @@ void	create_rays(t_game *game)
 	{
 		game->player.rays[i] = create_ray(game, ray_ang);
 		cast_ray(game, game->player.rays[i]);
-		assign_wall_texture(game, *game->player.rays[i]);
 		ray_ang += game->player.ang_increment;
 	}
 }

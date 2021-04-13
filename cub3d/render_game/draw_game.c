@@ -6,30 +6,56 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 15:02:11 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 18:48:22 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static	unsigned int	get_wall_color(t_wall wall, int height)
+{
+	int	x;
+	t_color color;
+
+	x = (int)fmod(wall.x, wall.texture.width);
+	if (wall.texture.endian == 1)
+	{
+		color.t = wall.texture.addr[x + height * wall.texture.line_length];
+		color.r = wall.texture.addr[x + 1 + height * wall.texture.line_length];
+		color.g = wall.texture.addr[x + 2 + height * wall.texture.line_length];
+		color.b = wall.texture.addr[x + 3 + height * wall.texture.line_length];
+	}
+	else
+	{
+		color.t = wall.texture.addr[x + 3 + height * wall.texture.line_length];
+		color.r = wall.texture.addr[x + 2 + height * wall.texture.line_length];
+		color.g = wall.texture.addr[x + 1 + height * wall.texture.line_length];
+		color.b = wall.texture.addr[x + height * wall.texture.line_length];
+	}
+	color.trgb = create_trgb(color.t, color.r, color.g, color.b);
+	return (color.trgb);
+}
+
 static	void	draw_wall_line(t_game *game, t_wall wall)
 {
 	int j;
-	int	texture_x;
 	int i;
+	int h;
 
 	i = 0;
-	while (i < wall.size)
+	h = wall.y;
+	while (i < wall.texture.height)
 	{
 		j = 0;
-		texture_x = (int)fmod(wall.x, wall.texture.width);
-		wall.color = wall.texture.addr[texture_x + j * wall.texture.line_length];
+		wall.color = get_wall_color(wall, i);
 		while (j < wall.size / game->cube_size)
 		{
-			my_mlx_pixel_put(&game->main_img, wall.x, wall.y + j + i, wall.color);
+			my_mlx_pixel_put(&game->main_img, wall.x, h, wall.color);
 			j++;
+			h++;
 		}
 	i++;
+	h++;
 	}
 }
 
