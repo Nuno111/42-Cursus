@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 13:54:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 14:11:15 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@ void	draw_wall_line(t_game *game, t_wall wall, t_ray ray)
 {
 	int j;
 	int h;
-	double texture_x;
+	int	texture_x;
 
 	j = 0;
 	while (j < wall.size)
 	{
-		texture_x = fmod(wall.x, wall.texture.width);
 		h = 0;
-		while (h < wall.size / game->cube_size)
+		texture_x = (int)fmod(wall.x, wall.texture.width);
+		wall.color = wall.texture.addr[texture_x + j * wall.texture.line_length];
+		while (j + h < wall.size / game->cube_size)
 		{
-
+			my_mlx_pixel_put(&game->main_img, wall.x, wall.y + j + h, wall.color);
+			h++;
 		}
+		j++;
 
 	}
 }

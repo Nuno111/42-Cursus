@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 13:24:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 14:01:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_wall
 	double	y;
 	double	size;
 	double	ang;
+	int		color;
 }			t_wall;
 
 typedef struct s_walls
