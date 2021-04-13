@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 11:07:09 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 14:13:08 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	update_rays(t_game *game)
 			game->player.rays[i]->facing_right = false;
 		ray_ang += game->player.ang_increment;
 		cast_ray(game, game->player.rays[i]);
-		assign_wall_texture(game, game->player.rays[i]);
 	}
 }
 
@@ -98,7 +97,7 @@ void	create_rays(t_game *game)
 	{
 		game->player.rays[i] = create_ray(game, ray_ang);
 		cast_ray(game, game->player.rays[i]);
-		assign_wall_texture(game, game->player.rays[i]);
+		assign_wall_texture(game, *game->player.rays[i]);
 		ray_ang += game->player.ang_increment;
 	}
 }

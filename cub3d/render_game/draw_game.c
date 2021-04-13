@@ -6,31 +6,30 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 14:11:15 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 15:02:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_wall_line(t_game *game, t_wall wall, t_ray ray)
+static	void	draw_wall_line(t_game *game, t_wall wall)
 {
 	int j;
-	int h;
 	int	texture_x;
+	int i;
 
-	j = 0;
-	while (j < wall.size)
+	i = 0;
+	while (i < wall.size)
 	{
-		h = 0;
+		j = 0;
 		texture_x = (int)fmod(wall.x, wall.texture.width);
 		wall.color = wall.texture.addr[texture_x + j * wall.texture.line_length];
-		while (j + h < wall.size / game->cube_size)
+		while (j < wall.size / game->cube_size)
 		{
-			my_mlx_pixel_put(&game->main_img, wall.x, wall.y + j + h, wall.color);
-			h++;
+			my_mlx_pixel_put(&game->main_img, wall.x, wall.y + j + i, wall.color);
+			j++;
 		}
-		j++;
-
+	i++;
 	}
 }
 
@@ -51,7 +50,7 @@ void	draw_walls(t_game *game)
 		wall.x = i;
 		wall.y = (game->settings.res->y / 2) - (wall.size / 2);
 		wall.texture = assign_wall_texture(game, *game->player.rays[i]);
-		draw_wall_line(game, wall, *game->player.rays[i]);
+		draw_wall_line(game, wall);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 10:47:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 14:51:14 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ void    render_game(t_game *game)
 	game->cube_size = 64;
 	game->minimap_tile.size = (game->settings.res->x / game->settings.map_width) / 3;
 	init_player(game);
-	init_walls(game);
 	create_rays(game);
-	choose_wall_textures(game);
+	init_walls(game);
 	draw_walls(game);
 	draw_minimap(&game->settings, game);
 	draw_circle(&game->main_img, game->player.circle);

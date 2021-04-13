@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 14:01:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 14:14:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,5 +245,6 @@ double	get_wall_height(t_game *game, t_ray *ray);
 void    update_player(t_game *game);
 void	update_rays(t_game *game);
 t_img	assign_wall_texture(t_game *game, t_ray ray);
+void	init_walls(t_game *game);
 
 #endif
