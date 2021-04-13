@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 19:10:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 20:09:12 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 void	update_rays(t_game *game)
 {
 	int	i;
-	int ray_ang;
+	double ray_ang;
 
 	i = -1;
 	ray_ang = game->player.rotation_angle - (game->player.fov_ang / 2);

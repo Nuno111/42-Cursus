@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/13 19:06:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/13 20:15:42 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    update_game(t_game *game)
 	update_rays(game);
 	draw_minimap(&game->settings, game);
 	draw_circle(&game->main_img, game->player.circle);
-	//draw_walls(game);
+	draw_walls(game);
 	draw_inner_circle(&game->main_img, game->player.circle);
 	draw_rays(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->main_img.img, 0, 0);
