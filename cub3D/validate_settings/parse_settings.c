@@ -6,11 +6,25 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 15:34:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:35:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static	bool	str_is_printable(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isprint(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 static	void	parse_map(char *line, t_scene *settings)
 {
@@ -39,7 +53,7 @@ static	void	verify_identifiers(char **strs, t_scene *settings)
 	char *identifier;
 
 	identifier = strs[0];
-	if (!identifier)
+	if (!identifier || !strs[1])
 		error_and_exit_settings(settings, "Error\nProblem found when handling paths.");
 	if (ft_strcmp(identifier, "R") == 0)
 		validate_r(settings, strs);
@@ -70,6 +84,8 @@ static	void	parse_line(char *line, t_scene *settings)
 		parse_map(line, settings);
 	else
 	{
+		if (!str_is_printable(line))
+			error_and_exit_settings(settings, "Erro\nString contains invalid characters.");
 		strs = ft_split(line, ' ');
 		verify_identifiers(strs, settings);
 		ft_freearrays(strs);

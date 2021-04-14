@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 21:21:32 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 16:39:50 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:04:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	validate_string(char *str)
 		}
 		else if (str[i] == ',')
 			return (false);
-		if (comma > 2 || num > 3)
+		if (comma > 2 || num > 3 || (!ft_isdigit(str[i]) && str[i] != ','))
 			return (false);
 		i++;
 	}
