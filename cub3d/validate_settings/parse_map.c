@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/31 20:59:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/14 14:25:24 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	verify_position(t_scene *settings)
 			if (valid_char && !position_found)
 				position_found = true;
 			else if (valid_char)
-				error_and_exit_settings(settings, "Error: Only one starting postion must be given");
+				error_and_exit_settings(settings, "Error\nOnly one starting postion must be given.");
 			j++;
 		}
 		i++;
@@ -103,7 +103,7 @@ void	verify_walls(t_scene *settings, char **m)
 				|| !ft_strchr(valid, m[i + 1][j])
 				|| !ft_strchr(valid, m[i + 1][j + 1])
 				)
-					error_and_exit_settings(settings, "Error\nMap is not properly surrounded by walls");
+					error_and_exit_settings(settings, "Error\nMap is not properly surrounded by walls.");
 			}
 			j++;
 		}
@@ -121,7 +121,7 @@ char	**linked_to_array(t_scene *settings, t_list *head)
 	i = 0;
 	size = ft_lstsize(head);
 	if (size <= 0)
-		error_and_exit_settings(settings, "Scene description incomplete. RTFM");
+		error_and_exit_settings(settings, "Error\nScene description incomplete, RTFM.");
 	arr = malloc(sizeof(char *) * (size + 1));
 	if (!arr)
 		return (NULL);
