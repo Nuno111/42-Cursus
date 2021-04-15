@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:59:38 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 18:00:24 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:59:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	ft_fill_array(size_t words_nbr, char **arr, const char *s, char c)
 
 	i = -1;
 	sep_index = 0;
-	while (++i < words_nbr)
+	while (++i < words_nbr && sep_index <= ft_strlen(s))
 	{
-		while (s[sep_index] == c)
+		while (sep_index <= ft_strlen(s) && s[sep_index] == c)
 			sep_index = ft_strchr(&s[sep_index], c) - s + 1;
 		if (ft_strchr(&s[sep_index], c))
 			next_index = ft_strchr(&s[sep_index], c) - s - sep_index;

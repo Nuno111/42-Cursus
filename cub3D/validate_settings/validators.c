@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 16:42:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/14 23:06:04 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	validate_r(t_scene *settings, char **strs)
 	t_res *resolution;
 
 	resolution = NULL;
-	if (!strs[1] || !strs[2] || settings->res)
+	if (!strs[1] || !strs[2] || strs[3] || settings->res)
 		error_and_exit_settings(settings, "Error\nProblem when handling resolution.");
 	if (ft_str_is_numeric(strs[1]) && ft_str_is_numeric(strs[2]))
 		resolution = malloc(sizeof(t_res));
@@ -94,4 +94,6 @@ void	validate_map(t_scene *settings)
 	verify_position(settings);
 	create_fake_map(settings);
 	verify_walls(settings, settings->map);
+	for (int i = 0; settings->map[i] != 0; i++)
+		printf("%s\n", settings->map[i]);
 }

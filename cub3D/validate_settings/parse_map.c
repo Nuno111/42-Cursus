@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 14:25:24 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/14 23:05:12 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,8 @@ void	verify_position(t_scene *settings)
 		}
 		i++;
 	}
-}
-
-bool	verify_str(char *str, bool whole)
-{
-	if (whole)
-	{
-		while (*str && (*str == '1' || *str == ' '))
-			str++;
-		if (*str == '\0')
-			return (true);
-		return (false);
-	}
-	else
-	{
-		if (str[0] == '1' && str[ft_strlen(str) - 1] == '1')
-			return (true);
-		return (false);
-	}
+	if (!position_found)
+		error_and_exit_settings(settings, "Error\nNo player starting position has been given");
 }
 
 void	verify_walls(t_scene *settings, char **m)
@@ -84,7 +68,9 @@ void	verify_walls(t_scene *settings, char **m)
 	size_t i;
 	size_t j;
 	char *valid;
+	char	*charset;
 
+	charset = "NESW02";
 	valid = "1+ ";
 	i = 1;
 	while (i < settings->map_size)
@@ -102,6 +88,19 @@ void	verify_walls(t_scene *settings, char **m)
 				|| !ft_strchr(valid, m[i + 1][j - 1])
 				|| !ft_strchr(valid, m[i + 1][j])
 				|| !ft_strchr(valid, m[i + 1][j + 1])
+				)
+					error_and_exit_settings(settings, "Error\nMap is not properly surrounded by walls.");
+			}
+			if (ft_strchr(charset, m[i][j]))
+			{
+				if (m[i - 1][j - 1] == '+'
+				|| m[i - 1][j] == '+'
+				|| m[i - 1][j + 1] == '+'
+				|| m[i][j - 1] == '+'
+				|| m[i][j + 1] == '+'
+				|| m[i + 1][j - 1] == '+'
+				|| m[i + 1][j] == '+'
+				|| m[i + 1][j + 1] == '+'
 				)
 					error_and_exit_settings(settings, "Error\nMap is not properly surrounded by walls.");
 			}

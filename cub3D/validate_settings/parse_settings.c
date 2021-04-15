@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 17:35:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/14 22:15:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static	void	parse_line(char *line, t_scene *settings)
 	else
 	{
 		if (!str_is_printable(line))
-			error_and_exit_settings(settings, "Erro\nString contains invalid characters.");
+			error_and_exit_settings(settings, "Error\nString contains invalid characters.");
 		strs = ft_split(line, ' ');
 		verify_identifiers(strs, settings);
 		ft_freearrays(strs);
