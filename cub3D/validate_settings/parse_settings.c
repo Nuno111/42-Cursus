@@ -6,25 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 22:15:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/16 22:16:58 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static	bool	str_is_printable(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isprint(str[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
 
 static	void	parse_map(char *line, t_scene *settings)
 {
@@ -71,22 +57,26 @@ static	void	verify_identifiers(char **strs, t_scene *settings)
 		validate_floor_ceil(settings, &settings->floor, strs);
 	else if (ft_strcmp(identifier, "C") == 0)
 		validate_floor_ceil(settings, &settings->ceil, strs);
+	else
+		error_and_exit_settings(settings, "Error\nInvalid string found when parsing map settings.");
 }
 
-static	void	parse_line(char *line, t_scene *settings)
+static	void	parse_line(t_scene *settings)
 {
 	char **strs;
+	char	*trimmed;
 
-	if (*line == '\0')
+	if (*settings->line == '\0')
 		return ;
 	if (settings->res && settings->no && settings->ea && settings->we
 	&& settings->so && settings->sprite && settings->floor && settings->ceil)
-		parse_map(line, settings);
+		parse_map(settings->line, settings);
 	else
 	{
-		if (!str_is_printable(line))
-			error_and_exit_settings(settings, "Error\nString contains invalid characters.");
-		strs = ft_split(line, ' ');
+		trimmed = ft_strtrim(settings->line, " \n\t\v\f\r");
+		free(settings->line);
+		settings->line = trimmed;
+		strs = ft_split(settings->line, ' ');
 		verify_identifiers(strs, settings);
 		ft_freearrays(strs);
 	}
@@ -94,7 +84,6 @@ static	void	parse_line(char *line, t_scene *settings)
 
 void    parse_settings(t_scene *settings, char *file)
 {
-	char *line;
 	int ret;
 	int fd;
 
@@ -106,10 +95,10 @@ void    parse_settings(t_scene *settings, char *file)
 		error_and_exit_settings(settings, "Error\nCould not open the file for reading.");
 	while (ret > 0)
 	{
-		line = NULL;
-		ret = get_next_line(fd, &line);
-		parse_line(line, settings);
-		free(line);
+		ret = get_next_line(fd, &settings->line);
+		parse_line(settings);
+		free(settings->line);
+		settings->line = NULL;
 	}
 	validate_map(settings);
 	close(fd);

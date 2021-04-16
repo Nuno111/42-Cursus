@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 16:35:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/16 22:07:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct		s_scene
 	char	*we;
 	char	*ea;
 	char	*sprite;
+	char	*line;
 	t_rgb	*floor;
 	t_rgb	*ceil;
 	t_list	*tmp_map;

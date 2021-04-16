@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 21:21:32 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 17:04:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/16 22:11:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	init_settings(t_scene *settings)
 	settings->map = NULL;
 	settings->map_width = 0;
 	settings->map_size = 0;
+	settings->line = NULL;
 }
 
 void	free_settings(t_scene *settings)
@@ -87,4 +88,6 @@ void	free_settings(t_scene *settings)
 		ft_free_list(&settings->tmp_map);
 	if (settings->map)
 		ft_freearrays(settings->map);
+	if (settings->line)
+		free(settings->line);
 }
