@@ -6,18 +6,18 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/17 17:08:49 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/17 23:27:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned int	get_wall_pixel(t_game *game, t_wall wall, int height)
+unsigned int	get_wall_pixel(t_game *game, t_wall wall, int height, int i)
 {
 	int	x;
 	t_color color;
 
-	x = (int)fmod(game->texture_pixel, wall.texture.width);
+	x = (int)fmod(game->player.rays[i]->texture_pixel, wall.texture.width);
 	if (wall.texture.endian == 1)
 	{
 		color.t = wall.texture.addr[x + height * wall.texture.line_length];
@@ -36,31 +36,37 @@ unsigned int	get_wall_pixel(t_game *game, t_wall wall, int height)
 	return (color.trgb);
 }
 
-static	void	draw_wall_line(t_game *game, t_wall wall, double height)
+static	void	draw_wall_line(t_game *game, t_wall wall, double height, int ray_index)
 {
-	double	repeat_pixel;
-	int		offset;
+	int	repeat_pixel;
 	int		i;
 	int		y;
+	int		offset;
 
-	repeat_pixel = floor(height / game->cube_size);
-	offset = 0;
+	repeat_pixel = (int)floor(height / game->cube_size);
 	y = 0;
-	while (offset  < game->cube_size / 2)
+	offset = 0;
+	while (y * 2 < wall.size)
 	{
 		i = 0;
 		while (i < repeat_pixel)
 		{
 			// Draw pixel above middle of the wall
-			wall.color = get_wall_pixel(game, wall, game->cube_size / 2 - offset);
+			if (wall.y - y < 0)
+				return ;
+			wall.color = get_wall_pixel(game, wall, game->cube_size / 2 - (offset % 31), ray_index);
 			my_mlx_pixel_put(&game->main_img, wall.x, wall.y - y, wall.color);
 			// Draw pixel below middle of the wall
-			wall.color = get_wall_pixel(game, wall, game->cube_size / 2 + offset);
+			if (wall.y + y > game->settings.res->y)
+				return ;
+			wall.color = get_wall_pixel(game, wall, game->cube_size / 2 + (offset % 31), ray_index);
 			my_mlx_pixel_put(&game->main_img, wall.x, wall.y + y, wall.color);
 			i++;
 			y++;
 		}
 		offset++;
+		if (i == 0)
+			break ;
 	}
 }
 
@@ -83,7 +89,7 @@ void	draw_walls(t_game *game)
 		wall.x = i;
 		wall.y = (game->settings.res->y / 2); //- (wall.size / 2);
 		wall.texture = assign_wall_texture(game, *game->player.rays[i]);
-		draw_wall_line(game, wall, height);
+		draw_wall_line(game, wall, height, i);
 		i++;
 	}
 }
