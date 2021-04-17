@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/16 22:07:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/17 15:10:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_ray
 	bool	hrzt_hit;
 	bool	vrtc_hit;
 	void	*texture;
+	double	texture_pixel;
 }				t_ray;
 
 typedef struct s_player

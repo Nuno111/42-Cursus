@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/16 22:03:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/17 14:21:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	validate_textures(t_scene *settings, char **path, char **strs)
 	*path = tmp;
 	trimmed = ft_strtrim(*path, " \n\t\v\f\r");
 	len = ft_strlen(trimmed);
-	if (trimmed[len - 1] != 'g' || trimmed[len - 2] != 'n' || trimmed[len - 3] != 'p' || tmp[len - 4] != '.')
+	if (trimmed[len - 1] != 'm' || trimmed[len - 2] != 'p' || trimmed[len - 3] != 'x' || tmp[len - 4] != '.')
 	{
 		free(trimmed);
 		error_and_exit_settings(settings, "Error\nProblem found when handling path to textures.");

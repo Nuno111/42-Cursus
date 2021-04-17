@@ -1,10 +1,10 @@
 R 800 600
-NO ./textures/north.png
-SO ./textures/south.png
-WE ./textures/west.png
-EA ./textures/east.png
+NO ./assets/north.xpm
+SO ./assets/south.xpm
+WE ./assets/west.xpm
+EA ./assets/east.xpm
 
-S ./path_to_the_sprite_texture.png
+S ./assets/barrel.xpm
 C 255,200,200
 F 122,122,122
 

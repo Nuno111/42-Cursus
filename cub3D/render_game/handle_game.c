@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 14:15:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/17 14:31:57 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void    update_game(t_game *game)
 {
+	mlx_destroy_image(game->vars.mlx, game->main_img.img);
+	game->main_img.img = mlx_new_image(game->vars.mlx, game->settings.res->x, game->settings.res->y);
+	game->main_img.addr = mlx_get_data_addr(game->main_img.img, &game->main_img.bits_per_pixel, &game->main_img.line_length, &game->main_img.endian);
     update_player(game);
 	reset_rays(game);
 	update_rays(game);

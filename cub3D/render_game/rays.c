@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 14:15:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/17 15:26:52 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ void	cast_ray(t_game *game, t_ray *ray)
 	{
 		ray->vrtc_hit = false;
 		ray->line.size = hrzt_dist;
+		ray->texture_pixel = fmod(ray->hrzt_hit_x,game->cube_size);
 	}
 	else
 	{
 		ray->hrzt_hit = false;
 		ray->line.size = vrtc_dist;
+		ray->texture_pixel = fmod(ray->hrzt_hit_y,game->cube_size);
 	}
 }
 
