@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/17 14:21:39 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 15:40:57 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	validate_r(t_scene *settings, char **strs)
 		resolution = malloc(sizeof(t_res));
 	if (resolution)
 	{
-		resolution->x = ft_atoi(strs[1]);
-		resolution->y = ft_atoi(strs[2]);
-		if (resolution->x <= 0 || resolution->y <= 0)
+		resolution->width = ft_atoi(strs[1]);
+		resolution->height = ft_atoi(strs[2]);
+		if (resolution->width <= 0 || resolution->height <= 0)
 			error_and_exit_settings(settings, "Error\nOnly positive values for x and y are valid for resolution.");
 		else
 			settings->res = resolution;

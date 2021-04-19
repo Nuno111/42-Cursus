@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 11:42:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:33:29 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct	s_img
 {
     void		*img;
-    char		*addr;
+    int			*addr;
     int			bits_per_pixel;
     int			line_length;
     int			endian;
@@ -34,12 +34,11 @@ typedef struct	s_img
 
 typedef struct s_wall
 {
-	t_img texture;
-	int		x;
-	int		y;
-	double	size;
-	double	ang;
-	unsigned int		color;
+	t_img			texture;
+	int				x;
+	int				y;
+	double			size;
+	unsigned int	color;
 }			t_wall;
 
 typedef struct s_walls
@@ -62,8 +61,8 @@ typedef struct s_color
 
 typedef struct		s_res
 {
-	int				x;
-	int				y;
+	int				width;
+	int				height;
 }					t_res;
 
 typedef	struct		s_rgb
@@ -134,7 +133,6 @@ typedef struct s_ray
 	bool	facing_right;
 	bool	hrzt_hit;
 	bool	vrtc_hit;
-	void	*texture;
 	double	texture_pixel;
 }				t_ray;
 
@@ -151,7 +149,6 @@ typedef struct s_player
 	bool strafe;
 	t_ray		**rays;
 	int			num_rays;
-	int			height;
 	double		dtpp;
 	double		ang_increment;
 }				t_player;
@@ -210,10 +207,10 @@ bool	validate_string(char *str);
 /*
 Drawing
 */
-void	draw_inner_circle(t_img *img, t_circle circle);
-void	draw_line(t_img *img, t_line line);
-void	draw_circle(t_img *img, t_circle circle);
-void	draw_square(t_img *img, t_square square);
+void	draw_inner_circle(t_img *img, t_circle circle, int res_height);
+void	draw_line(t_img *img, t_line line, int res_height);
+void	draw_circle(t_img *img, t_circle circle, int res_height);
+void	draw_square(t_img *img, t_square square, int res_height);
 
 /*
 MLX Events
@@ -221,7 +218,6 @@ MLX Events
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		handle_key_press(int keycode, t_vars *vars);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /*
 Draw game functions

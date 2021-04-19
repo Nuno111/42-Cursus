@@ -6,11 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/04/18 23:17:22 by ngregori         ###   ########.fr       */
-=======
-/*   Updated: 2021/04/18 12:20:59 by ngregori         ###   ########.fr       */
->>>>>>> df2a38fb72c476b4819dc292cd41daf0d9502396
+/*   Updated: 2021/04/19 15:45:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +90,9 @@ void	init_player(t_game *game)
 	game->player.line.size = game->player.circle.radius * 4;
 	game->player.strafe = false;
 	game->player.fov_ang = deg_to_rad(60);
-	game->player.num_rays = game->settings.res->x;
+	game->player.num_rays = game->settings.res->width;
 	game->player.rays = malloc(sizeof (t_ray *) * game->player.num_rays);
-	game->player.height = game->cube_size / 2;
-	game->player.dtpp = (game->settings.res->x / 2) / tan(game->player.fov_ang / 2);
+	game->player.dtpp = (game->settings.res->width / 2) / tan(game->player.fov_ang / 2);
 	game->player.ang_increment = game->player.fov_ang / game->player.num_rays;
 	if (!game->player.rays)
 		error_and_exit_game(game, "Error\nUnable to allocate memory for rays");

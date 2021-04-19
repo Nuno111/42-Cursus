@@ -6,25 +6,27 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 19:48:12 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 11:47:27 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:34:36 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_inner_circle(t_img *img, t_circle circle)
+void	draw_inner_circle(t_img *img, t_circle circle, int res_height)
 {
 	while (circle.radius > 0)
 	{
 		circle.radius--;
-		draw_inner_circle(img, circle);
-		draw_circle(img, circle);
+		draw_inner_circle(img, circle, res_height);
+		draw_circle(img, circle, res_height);
 	}
 }
 
-void	draw_line(t_img *img, t_line line)
+void	draw_line(t_img *img, t_line line, int res_height)
 {
 	int		i;
+	int		x;
+	int		y;
 	double	dir_x;
 	double	dir_y;
 
@@ -32,27 +34,33 @@ void	draw_line(t_img *img, t_line line)
 	dir_y = sin(line.direction);
 	i = -1;
 	while (++i <= line.size)
-		my_mlx_pixel_put(img, dir_x * i + line.x, dir_y * i + line.y, line.color);
+	{
+		x = dir_x * i + line.x;
+		y = dir_y * i + line.y;
+		img->addr[x + y * res_height] = line.color;
+	}
 }
 
-void	draw_circle(t_img *img, t_circle circle)
+void	draw_circle(t_img *img, t_circle circle, int res_height)
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 
 	while (circle.ang < 360)
 	{
 		x = circle.radius * cos(deg_to_rad(circle.ang)) + circle.x;
 		y = circle.radius * sin(deg_to_rad(circle.ang)) + circle.y;
-		my_mlx_pixel_put(img, x, y, circle.color);
+		img->addr[x + y * res_height] = circle.color;
 		circle.ang++;
 	}
 }
 
-void	draw_square(t_img *img, t_square square)
+void	draw_square(t_img *img, t_square square, int resolution_height)
 {
-	size_t width;
-	size_t height;
+	size_t	width;
+	size_t	height;
+	int		x;
+	int		y;
 
 	height = 0;
 	while (height <= square.size)
@@ -60,7 +68,9 @@ void	draw_square(t_img *img, t_square square)
 		width = 0;
 		while (width <= square.size)
 		{
-			my_mlx_pixel_put(img , square.x + width, square.y + height, square.color);
+			x = square.x + width;
+			y = square.y + height;
+			img->addr[x + y * resolution_height] = square.color;
 			width++;
 		}
 		height++;
