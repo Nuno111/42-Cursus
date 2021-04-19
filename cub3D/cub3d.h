@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 18:33:29 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 19:09:56 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,10 +207,10 @@ bool	validate_string(char *str);
 /*
 Drawing
 */
-void	draw_inner_circle(t_img *img, t_circle circle, int res_height);
-void	draw_line(t_img *img, t_line line, int res_height);
-void	draw_circle(t_img *img, t_circle circle, int res_height);
-void	draw_square(t_img *img, t_square square, int res_height);
+void	draw_inner_circle(t_img *img, t_circle circle, int res_width);
+void	draw_line(t_img *img, t_line line, int res_width);
+void	draw_circle(t_img *img, t_circle circle, int res_width);
+void	draw_square(t_img *img, t_square square, int res_width);
 
 /*
 MLX Events

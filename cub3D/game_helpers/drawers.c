@@ -6,23 +6,23 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 19:48:12 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 18:34:36 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 19:09:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_inner_circle(t_img *img, t_circle circle, int res_height)
+void	draw_inner_circle(t_img *img, t_circle circle, int res_width)
 {
 	while (circle.radius > 0)
 	{
 		circle.radius--;
-		draw_inner_circle(img, circle, res_height);
-		draw_circle(img, circle, res_height);
+		draw_inner_circle(img, circle, res_width);
+		draw_circle(img, circle, res_width);
 	}
 }
 
-void	draw_line(t_img *img, t_line line, int res_height)
+void	draw_line(t_img *img, t_line line, int res_width)
 {
 	int		i;
 	int		x;
@@ -37,11 +37,11 @@ void	draw_line(t_img *img, t_line line, int res_height)
 	{
 		x = dir_x * i + line.x;
 		y = dir_y * i + line.y;
-		img->addr[x + y * res_height] = line.color;
+		img->addr[x + y * res_width] = line.color;
 	}
 }
 
-void	draw_circle(t_img *img, t_circle circle, int res_height)
+void	draw_circle(t_img *img, t_circle circle, int res_width)
 {
 	int	x;
 	int	y;
@@ -50,12 +50,12 @@ void	draw_circle(t_img *img, t_circle circle, int res_height)
 	{
 		x = circle.radius * cos(deg_to_rad(circle.ang)) + circle.x;
 		y = circle.radius * sin(deg_to_rad(circle.ang)) + circle.y;
-		img->addr[x + y * res_height] = circle.color;
+		img->addr[x + y * res_width] = circle.color;
 		circle.ang++;
 	}
 }
 
-void	draw_square(t_img *img, t_square square, int resolution_height)
+void	draw_square(t_img *img, t_square square, int res_width)
 {
 	size_t	width;
 	size_t	height;
@@ -70,7 +70,7 @@ void	draw_square(t_img *img, t_square square, int resolution_height)
 		{
 			x = square.x + width;
 			y = square.y + height;
-			img->addr[x + y * resolution_height] = square.color;
+			img->addr[x + y * res_width] = square.color;
 			width++;
 		}
 		height++;

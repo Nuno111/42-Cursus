@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 18:39:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 19:11:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void    update_game(t_game *game)
 	update_rays(game);
 	draw_walls(game);
 	draw_minimap(&game->settings, game);
-	draw_circle(&game->main_img, game->player.circle, game->settings.res->height);
-	draw_inner_circle(&game->main_img, game->player.circle, game->settings.res->height);
+	draw_circle(&game->main_img, game->player.circle, game->settings.res->width);
+	draw_inner_circle(&game->main_img, game->player.circle, game->settings.res->width);
 	draw_rays(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->main_img.img, 0, 0);
 }
@@ -41,8 +41,8 @@ void    render_game(t_game *game)
 	create_rays(game);
 	draw_walls(game);
 	draw_minimap(&game->settings, game);
-	draw_circle(&game->main_img, game->player.circle, game->settings.res->height);
-	draw_inner_circle(&game->main_img, game->player.circle, game->settings.res->height);
+	draw_circle(&game->main_img, game->player.circle, game->settings.res->width);
+	draw_inner_circle(&game->main_img, game->player.circle, game->settings.res->width);
 	draw_rays(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->main_img.img, 0, 0);
 	mlx_hook(game->vars.win, 2, 1L<<0, key_press, game);

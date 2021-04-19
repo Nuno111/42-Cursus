@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 18:33:06 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 19:12:13 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	draw_minimap(t_scene *settings, t_game *game)
 				game->minimap_tile.color = 0x000000;
 			game->minimap_tile.x = width * game->minimap_tile.size;
 			game->minimap_tile.y = height * game->minimap_tile.size;
-			draw_square(&game->main_img, game->minimap_tile, game->settings.res->height);
+			draw_square(&game->main_img, game->minimap_tile, game->settings.res->width);
 			width++;
 		}
 		height++;
@@ -96,5 +96,5 @@ void	draw_rays(t_game *game)
 
 	i = -1;
 	while (++i < game->player.num_rays)
-		draw_line(&game->main_img, game->player.rays[i]->line, game->settings.res->height);
+		draw_line(&game->main_img, game->player.rays[i]->line, game->settings.res->width);
 }
