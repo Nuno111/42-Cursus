@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 11:40:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:46:36 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	draw_walls(t_game *game)
 	double height;
 
 	i = 0;
-	wall.ang = (M_PI / 2);
 	while (i < game->player.num_rays)
 	{
 		height = get_wall_height(game, game->player.rays[i]);

@@ -6,12 +6,35 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/17 14:31:57 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/18 10:33:14 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+void	draw_test(t_game *game)
+{
+	int y = 0;
+	t_color color;
+	int posy = game->settings.res->y / 2;
+	while (y < 64)
+	{
+		int x = 0;
+		int posx = game->settings.res->x / 2;
+		while (x < 64 * 4)
+		{
+			color.t = game->walls.no.addr[x + 3 + y * game->walls.no.line_length];
+			color.r = game->walls.no.addr[x + 2 + y * game->walls.no.line_length];
+			color.g = game->walls.no.addr[x + 1 + y * game->walls.no.line_length];
+			color.b = game->walls.no.addr[x + y * game->walls.no.line_length];
+			color.trgb = create_trgb(color.t, color.r, color.b, color.b);
+			my_mlx_pixel_put(&game->main_img, posx, posy, color.trgb);
+			x+=4;
+			posx++;
+		}
+		y++;
+		posy++;
+	}
+}
 void    update_game(t_game *game)
 {
 	mlx_destroy_image(game->vars.mlx, game->main_img.img);
@@ -25,6 +48,7 @@ void    update_game(t_game *game)
 	draw_circle(&game->main_img, game->player.circle);
 	draw_inner_circle(&game->main_img, game->player.circle);
 	draw_rays(game);
+	draw_test(game);
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->main_img.img, 0, 0);
 }
 
