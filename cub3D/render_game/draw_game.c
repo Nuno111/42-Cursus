@@ -6,25 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 21:25:05 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 21:36:43 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static int		get_bitmap_offset(t_game *game, int i, int bitmap_width)
-{
-	/*
-	double	remainder;
-	int		offset;
-
-	remainder = game->player.rays[i]->texture_pixel - floor(game->player.rays[i]->texture_pixel);
-	offset = bitmap_width * remainder;
-
-	return (offset);
-	*/
-	return (fmod((game->player.rays[i]->texture_pixel / game->minimap_tile.size) * game->cube_size, bitmap_width - 1));
-}
 
 static	void	draw_wall_line(t_game *game, t_wall wall,int ray_index)
 {
@@ -36,9 +22,9 @@ static	void	draw_wall_line(t_game *game, t_wall wall,int ray_index)
 
 	step = 1.0 * wall.texture.height / wall.size;
 	tex_pox = (wall.y - game->settings.res->height / 2 + wall.size / 2) * step;
-	x_tex = get_bitmap_offset(game, ray_index, wall.texture.width);
+	x_tex = fmod((game->player.rays[ray_index]->texture_pixel / game->minimap_tile.size) * game->cube_size, wall.texture.width - 1);
 	y = -1;
-	while (++y < wall.size && y < game->settings.res->height)
+	while (++y < wall.size - 50 && y < game->settings.res->height)
 	{
 		y_tex = (int)tex_pox & (wall.texture.height - 1);
 		game->main_img.addr[wall.x + (wall.y + y) * game->settings.res->width] = wall.texture.addr[y_tex * wall.texture.height + x_tex];
