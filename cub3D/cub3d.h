@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/17 20:56:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:42:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct	s_img
 typedef struct s_wall
 {
 	t_img texture;
-	double	x;
-	double	y;
+	int		x;
+	int		y;
 	double	size;
 	double	ang;
 	unsigned int		color;

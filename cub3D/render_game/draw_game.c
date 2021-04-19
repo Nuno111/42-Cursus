@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/17 23:27:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/19 11:40:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 unsigned int	get_wall_pixel(t_game *game, t_wall wall, int height, int i)
 {
 	int	x;
+	int scaled_x;
 	t_color color;
 
-	x = (int)fmod(game->player.rays[i]->texture_pixel, wall.texture.width);
+	scaled_x = (game->player.rays[i]->texture_pixel / game->minimap_tile.size) * game->cube_size;
+	x = (int)fmod(scaled_x, wall.texture.width);
 	if (wall.texture.endian == 1)
 	{
 		color.t = wall.texture.addr[x + height * wall.texture.line_length];
@@ -36,37 +38,34 @@ unsigned int	get_wall_pixel(t_game *game, t_wall wall, int height, int i)
 	return (color.trgb);
 }
 
-static	void	draw_wall_line(t_game *game, t_wall wall, double height, int ray_index)
+static int		get_bitmap_offset(t_game *game, int i, int bitmap_width)
 {
-	int	repeat_pixel;
-	int		i;
-	int		y;
+	double	remainder;
 	int		offset;
 
-	repeat_pixel = (int)floor(height / game->cube_size);
-	y = 0;
-	offset = 0;
-	while (y * 2 < wall.size)
+	remainder = game->player.rays[i]->texture_pixel - floor(game->player.rays[i]->texture_pixel);
+	offset = bitmap_width * remainder;
+	return (offset);
+}
+
+static	void	draw_wall_line(t_game *game, t_wall wall,int ray_index)
+{
+	int		y;
+	int		y_tex;
+	int		x_tex;
+	double	step;
+	double	tex_pox;
+
+	step = 1.0 * wall.texture.height / wall.size;
+	tex_pox = (wall.y - game->settings.res->y / 2 + wall.size / 2) * step;
+	x_tex = get_bitmap_offset(game, ray_index, wall.texture.width);
+	y = -1;
+	while (++y < wall.size && y < game->settings.res->y)
 	{
-		i = 0;
-		while (i < repeat_pixel)
-		{
-			// Draw pixel above middle of the wall
-			if (wall.y - y < 0)
-				return ;
-			wall.color = get_wall_pixel(game, wall, game->cube_size / 2 - (offset % 31), ray_index);
-			my_mlx_pixel_put(&game->main_img, wall.x, wall.y - y, wall.color);
-			// Draw pixel below middle of the wall
-			if (wall.y + y > game->settings.res->y)
-				return ;
-			wall.color = get_wall_pixel(game, wall, game->cube_size / 2 + (offset % 31), ray_index);
-			my_mlx_pixel_put(&game->main_img, wall.x, wall.y + y, wall.color);
-			i++;
-			y++;
-		}
-		offset++;
-		if (i == 0)
-			break ;
+		y_tex = (int)tex_pox & (wall.texture.height - 1);
+		tex_pox += step;
+		game->main_img.addr[(wall.y * game->settings.res->x) + (y * game->settings.res->x)
+			+ wall.x] = 0xffffff;//wall.texture.addr[y_tex * wall.texture.height + x_tex];
 	}
 }
 
@@ -82,14 +81,12 @@ void	draw_walls(t_game *game)
 	{
 		height = get_wall_height(game, game->player.rays[i]);
 		wall.size = height;
-		if (wall.size > game->settings.res->y)
-			wall.size = game->settings.res->y;
+		wall.x = i;
+		wall.y = (game->settings.res->y / 2) - (wall.size / 2);
 		if (wall.y < 0)
 			wall.y = 0;
-		wall.x = i;
-		wall.y = (game->settings.res->y / 2); //- (wall.size / 2);
 		wall.texture = assign_wall_texture(game, *game->player.rays[i]);
-		draw_wall_line(game, wall, height, i);
+		draw_wall_line(game, wall, i);
 		i++;
 	}
 }

@@ -4,7 +4,7 @@ MACNAME = cub3dmac
 
 CC = gcc
 
-ERR_FLAGS = -Wall -Werror -Wextra
+ERR_FLAGS = -Wall -Wextra
 
 LIB_FLAGS = -rcs
 
