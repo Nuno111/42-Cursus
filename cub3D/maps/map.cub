@@ -1,4 +1,4 @@
-R 800 600
+R 1280 900
 NO ./assets/redbrick.xpm
 SO ./assets/sand.xpm
 WE ./assets/stone.xpm

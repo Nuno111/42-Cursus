@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/21 22:40:19 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 00:48:49 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	validate_r(t_scene *settings, char **strs)
 	{
 		resolution->width = ft_atoi(strs[1]);
 		resolution->height = ft_atoi(strs[2]);
-		if (resolution->width <= 0 && resolution->width > 5120 || resolution->height <= 0 && resolution->height > 2880)
+		if (resolution->width <= 0 || resolution->width > 1920 || resolution->height <= 0 || resolution->height > 1080)
 			error_and_exit_settings(settings, "Error\nInvalid input for window resolution.");
 		else
 			settings->res = resolution;

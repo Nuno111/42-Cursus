@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/21 20:11:00 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 00:50:20 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 
 # define deg_to_rad(degrees) ((degrees) * M_PI / 180.0)
 # define rad_to_deg(radians) ((radians) * 180.0 / M_PI)
+# define W 13
+# define D 2
+# define S 1
+# define A 0
+# define ESC 53
+# define ARR_LEFT 123
+# define ARR_RIGHT 124
 
 typedef struct	s_img
 {
@@ -233,7 +240,6 @@ Game functions
 */
 void    render_game(t_game *game);
 void	init_player(t_game *game);
-void    update_game(t_game *game);
 bool	is_wall(double x, double y, t_game *game);
 void	create_rays(t_game *game);
 void	cast_ray(t_game *game, t_ray *ray);

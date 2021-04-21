@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_helpers.c                                      :+:      :+:    :+:   */
+/*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:11:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/21 22:33:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 00:53:42 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,38 @@ int		handle_destroy(t_game *game)
 
 int		key_press(int keycode, t_game *game)
 {
-	printf("%d\n", keycode);
-	if (keycode == 65307 || keycode == 53)
+	if (keycode == 65307 || keycode == ESC)
 		exit_game(game, NULL);
-	if (keycode == 119 || keycode == 13)
+	if (keycode == 119 || keycode == W)
 		game->player.walk_dir = 1;
-	else if (keycode == 100 || keycode == 2)
+	else if (keycode == 100 || keycode == D)
 	{
 		game->player.walk_dir = 1;
 		game->player.strafe = true;
 	}
-	else if (keycode == 115 || keycode == 1)
+	else if (keycode == 115 || keycode == S)
 		game->player.walk_dir = -1;
-	else if (keycode == 97 || keycode == 0)
+	else if (keycode == 97 || keycode == A)
 	{
 		game->player.strafe = true;
 		game->player.walk_dir = -1;
 	}
-	else if (keycode == 65361 || keycode == 123)
+	else if (keycode == 65361 || keycode == ARR_LEFT)
 		game->player.turn_dir = -1;
-	else if (keycode == 65363 || keycode == 124)
+	else if (keycode == 65363 || keycode == ARR_RIGHT)
 		game->player.turn_dir = 1;
-	update_game(game);
 	return (1);
 }
 
 int		key_release(int keycode, t_game *game)
 {
 	if (keycode == 119 || keycode == 100 || keycode == 115 || keycode == 97
-		|| keycode == 13 || keycode == 2 || keycode == 1 || keycode == 0)
+		|| keycode == W || keycode == D || keycode == S || keycode == A)
 	{
 		game->player.walk_dir = 0;
 		game->player.strafe = false;
 	}
-	else if (keycode == 65363 || keycode == 65361 || keycode == 123 || keycode == 124)
+	else if (keycode == 65363 || keycode == 65361 || keycode == ARR_LEFT || keycode == ARR_RIGHT)
 		game->player.turn_dir = 0;
 	return (1);
 }

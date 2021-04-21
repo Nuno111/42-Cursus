@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/21 20:06:42 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 00:30:18 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,23 @@ void    update_player(t_game *game)
 	double tmp_x;
 	double tmp_y;
 
-	game->player.rotation_angle += game->player.turn_dir * game->player.rotation_speed;
-	move_step = game->player.walk_dir * game->player.move_speed;
-	if (game->player.strafe)
+	if (game->player.turn_dir != 0)
+		game->player.rotation_angle += game->player.turn_dir * game->player.rotation_speed;
+	if (game->player.walk_dir != 0)
 	{
-		tmp_x = game->player.circle.x + sin(game->player.rotation_angle) * -move_step;
-		tmp_y = game->player.circle.y + cos(game->player.rotation_angle) * move_step;
-	}
-	else
-	{
+		move_step = game->player.walk_dir * game->player.move_speed;
 		tmp_x = game->player.circle.x + cos(game->player.rotation_angle) * move_step;
 		tmp_y = game->player.circle.y + sin(game->player.rotation_angle) * move_step;
-	}
-	if (!is_wall(tmp_x, tmp_y, game))
-	{
-		game->player.circle.x = tmp_x;
-		game->player.circle.y = tmp_y;
+		if (game->player.strafe)
+		{
+			tmp_x = game->player.circle.x + sin(game->player.rotation_angle) * -move_step;
+			tmp_y = game->player.circle.y + cos(game->player.rotation_angle) * move_step;
+		}
+		if (!is_wall(tmp_x, tmp_y, game))
+		{
+			game->player.circle.x = tmp_x;
+			game->player.circle.y = tmp_y;
+		}
 	}
 }
 
@@ -81,13 +82,8 @@ void	init_player(t_game *game)
 	game->player.circle.ang = 0;
 	game->player.turn_dir = 0;
 	game->player.walk_dir = 0;
-	game->player.move_speed = game->minimap_tile.size / 3;
-	game->player.rotation_speed = (M_PI / 10);
-	game->player.line.x = game->player.circle.x;
-	game->player.line.y = game->player.circle.y;
-	game->player.line.color = 0x008000;
-	game->player.line.direction = game->player.rotation_angle;
-	game->player.line.size = game->player.circle.radius * 4;
+	game->player.move_speed = 1;
+	game->player.rotation_speed = deg_to_rad(3);
 	game->player.strafe = false;
 	game->player.fov_ang = deg_to_rad(60);
 	game->player.num_rays = game->settings.res->width;
