@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 21:36:43 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/20 09:52:16 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	void	draw_wall_line(t_game *game, t_wall wall,int ray_index)
+static	void	draw_wall_line(t_game *game, t_wall wall, int ray_index)
 {
 	int		y;
 	int		y_tex;
@@ -20,11 +20,11 @@ static	void	draw_wall_line(t_game *game, t_wall wall,int ray_index)
 	double	step;
 	double	tex_pox;
 
-	step = 1.0 * wall.texture.height / wall.size;
+	step = wall.texture.height / wall.size;
 	tex_pox = (wall.y - game->settings.res->height / 2 + wall.size / 2) * step;
 	x_tex = fmod((game->player.rays[ray_index]->texture_pixel / game->minimap_tile.size) * game->cube_size, wall.texture.width - 1);
 	y = -1;
-	while (++y < wall.size - 50 && y < game->settings.res->height)
+	while (++y < wall.size && y < game->settings.res->height)
 	{
 		y_tex = (int)tex_pox & (wall.texture.height - 1);
 		game->main_img.addr[wall.x + (wall.y + y) * game->settings.res->width] = wall.texture.addr[y_tex * wall.texture.height + x_tex];
