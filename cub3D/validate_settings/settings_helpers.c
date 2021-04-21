@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 21:21:32 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/16 22:11:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/21 20:05:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,6 @@ bool	validate_string(char *str)
 	}
 	return (true);
 
-}
-
-void			error_and_exit_settings(t_scene *settings, char *error_log)
-{
-	printf("%s\n", error_log);
-	free_settings(settings);
-	exit(ERR);
 }
 
 void	init_settings(t_scene *settings)

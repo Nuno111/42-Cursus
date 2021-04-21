@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/23 18:32:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/21 20:16:55 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define OK 1
 # define ERR -1
 # define EOFILE 0
+# define SUCCESS 0
 
 # define MAX_FD 1025
 #ifndef BUFFER_SIZE

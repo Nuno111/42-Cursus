@@ -6,16 +6,41 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:11:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 18:33:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/21 22:33:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	error_and_exit_settings(t_scene *settings, char *err_msg)
+{
+	free_settings(settings);
+	printf("%s\n", err_msg);
+	exit(ERR);
+}
+
+void	exit_game(t_game *game, char *err_msg)
+{
+	free_settings(&game->settings);
+	if (err_msg)
+	{
+		printf("%s\n", err_msg);
+		exit(ERR);
+	}
+	exit(SUCCESS);
+}
+
+int		handle_destroy(t_game *game)
+{
+	exit_game(game, NULL);
+	return (1);
+}
+
 int		key_press(int keycode, t_game *game)
 {
-	if (keycode == 65307)
-		mlx_destroy_window(game->vars.mlx, game->vars.win);
+	printf("%d\n", keycode);
+	if (keycode == 65307 || keycode == 53)
+		exit_game(game, NULL);
 	if (keycode == 119 || keycode == 13)
 		game->player.walk_dir = 1;
 	else if (keycode == 100 || keycode == 2)

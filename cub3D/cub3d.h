@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/21 15:28:05 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/21 20:11:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ int	get_b(int trgb);
 /*
 validate_settings
 */
-void	error_and_exit_settings(t_scene *settings, char *error_log);
+void	error_and_exit_settings(t_scene *settings, char *err_msg);
 void	init_settings(t_scene *settings);
 void	free_settings(t_scene *settings);
 void	validate_map(t_scene *settings);
@@ -218,6 +218,7 @@ MLX Events
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 int		handle_key_press(int keycode, t_vars *vars);
+int		handle_click(int btn, int x, int y, t_game *game);
 
 /*
 Draw game functions
@@ -233,7 +234,6 @@ Game functions
 void    render_game(t_game *game);
 void	init_player(t_game *game);
 void    update_game(t_game *game);
-void    error_and_exit_game(t_game *game, char *error_log);
 bool	is_wall(double x, double y, t_game *game);
 void	create_rays(t_game *game);
 void	cast_ray(t_game *game, t_ray *ray);
@@ -247,5 +247,7 @@ void	update_rays(t_game *game);
 t_img	assign_wall_texture(t_game *game, t_ray ray);
 void	init_walls(t_game *game);
 void	reset_rays(t_game *game);
+void	exit_game(t_game *game, char *err_msg);
+int		handle_destroy(t_game *game);
 
 #endif

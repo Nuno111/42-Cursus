@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/21 17:21:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/21 20:18:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void    render_game(t_game *game)
 	mlx_put_image_to_window(game->vars.mlx, game->vars.win, game->main_img.img, 0, 0);
 	mlx_hook(game->vars.win, 2, 1L<<0, key_press, game);
 	mlx_hook(game->vars.win, 3, 1L<<1, key_release, game);
+	mlx_hook(game->vars.win, 17,1L<<17, handle_destroy, game);
 	mlx_loop(game->vars.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 15:41:19 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/21 20:06:56 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
-		error_and_exit_game(game, "Error\nUnable to allocate memory for ray.");
+		exit_game(game, "Error\nUnable to allocate memory for ray.");
 	ray->line.x = game->player.circle.x;
 	ray->line.y = game->player.circle.y;
 	ray->line.direction = normalize_angle(ray_ang);
