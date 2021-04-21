@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 19:09:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/21 15:28:05 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ Draw game functions
 void	draw_minimap(t_scene *settings, t_game *game);
 void	draw_rays(t_game *game);
 void	draw_walls(t_game *game);
+void	draw_floor_ceil(t_game *game, t_rgb colour, bool floor);
 
 /*
 Game functions

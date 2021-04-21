@@ -6,12 +6,37 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/20 09:52:16 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/21 17:27:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	draw_floor_ceil(t_game *game, t_rgb colour, bool floor)
+{
+	int	x;
+	int	y;
+	int max;
+	t_color	color;
+
+	if (floor)
+	{
+		max = game->settings.res->height / 2;
+		y = -1;	
+	}
+	else
+	{
+		max = game->settings.res->height;
+		y = game->settings.res->height / 2 - 1;
+	}
+	color.trgb = create_trgb(0, colour.r, colour.g, colour.b);
+	while (++y < max)
+	{
+		x = -1;
+		while (++x < game->settings.res->width)
+			game->main_img.addr[x + y * game->settings.res->width] = color.trgb;
+	}
+}
 static	void	draw_wall_line(t_game *game, t_wall wall, int ray_index)
 {
 	int		y;
@@ -56,11 +81,11 @@ void	draw_minimap(t_scene *settings, t_game *game)
 	int width;
 	int height;
 
-	height = 0;
-	while (settings->map[height])
+	height = 1;
+	while (settings->map[height + 1])
 	{
-		width = 0;
-		while (settings->map[height][width])
+		width = 1;
+		while (settings->map[height][width + 1])
 		{
 			if (settings->map[height][width] == '1')
 				game->minimap_tile.color = 0x000080;
