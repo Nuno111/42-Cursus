@@ -35,8 +35,8 @@ void	calc_wall_dist(t_game *game, t_ray *ray)
 	double hrzt_dist;
 	double vrtc_dist;
 
-	get_horizontal_intercection(game, ray);
-	get_vertical_intercection(game, ray);
+	get_horizontal_intercection(game, ray, true);
+	get_vertical_intercection(game, ray, true);
 	if (ray->w_hrzt_hit)
 		hrzt_dist = get_distance(ray->line.x, ray->line.y, ray->w_hrzt_x, ray->w_hrzt_y);
 	else
