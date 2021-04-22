@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:11:01 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:16:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static	void	get_player_rotation(char c, t_game *game)
 {
 	if (c == 'N')
-		game->player.rotation_angle = -(M_PI / 2);
+		game->player.rot_ang = -(M_PI / 2);
 	else if (c == 'E')
-		game->player.rotation_angle = 0;
+		game->player.rot_ang = 0;
 	else if (c == 'S')
-		game->player.rotation_angle = M_PI / 2;
+		game->player.rot_ang = M_PI / 2;
 	else if (c == 'W')
-		game->player.rotation_angle = M_PI;
+		game->player.rot_ang = M_PI;
 }
 
 static	void	get_player_pos(t_game *game)
@@ -55,16 +55,16 @@ void    update_player(t_game *game)
 	double tmp_y;
 
 	if (game->player.turn_dir != 0)
-		game->player.rotation_angle += game->player.turn_dir * game->player.rotation_speed;
+		game->player.rot_ang += game->player.turn_dir * game->player.rot_speed;
 	if (game->player.walk_dir != 0)
 	{
 		move_step = game->player.walk_dir * game->player.move_speed;
-		tmp_x = game->player.circle.x + cos(game->player.rotation_angle) * move_step;
-		tmp_y = game->player.circle.y + sin(game->player.rotation_angle) * move_step;
+		tmp_x = game->player.circle.x + cos(game->player.rot_ang) * move_step;
+		tmp_y = game->player.circle.y + sin(game->player.rot_ang) * move_step;
 		if (game->player.strafe)
 		{
-			tmp_x = game->player.circle.x + sin(game->player.rotation_angle) * -move_step;
-			tmp_y = game->player.circle.y + cos(game->player.rotation_angle) * move_step;
+			tmp_x = game->player.circle.x + sin(game->player.rot_ang) * -move_step;
+			tmp_y = game->player.circle.y + cos(game->player.rot_ang) * move_step;
 		}
 		if (!is_wall(tmp_x, tmp_y, game) && !is_sprite(tmp_x, tmp_y, game))
 		{
@@ -83,7 +83,7 @@ void	init_player(t_game *game)
 	game->player.turn_dir = 0;
 	game->player.walk_dir = 0;
 	game->player.move_speed = 1;
-	game->player.rotation_speed = deg_to_rad(3);
+	game->player.rot_speed = deg_to_rad(3);
 	game->player.strafe = false;
 	game->player.fov_ang = deg_to_rad(60);
 	game->player.num_rays = game->settings.width;

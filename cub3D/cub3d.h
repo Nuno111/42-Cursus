@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:04:55 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:15:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,13 +129,13 @@ typedef struct s_player
 {
 	t_circle	circle;
 	t_line		line;
-	double rotation_angle;
-	double move_speed;
-	double rotation_speed;
+	double		rot_ang;
+	double		move_speed;
+	double		rot_speed;
 	double		fov_ang;
-	int turn_dir;
-	int walk_dir;
-	bool strafe;
+	int			turn_dir;
+	int			walk_dir;
+	bool		strafe;
 	t_ray		**rays;
 	int			num_rays;
 	double		dtpp;

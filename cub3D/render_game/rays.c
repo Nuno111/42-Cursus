@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 01:43:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:17:36 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	update_rays(t_game *game)
 	double ray_ang;
 
 	i = -1;
-	ray_ang = game->player.rotation_angle - (game->player.fov_ang / 2);
+	ray_ang = game->player.rot_ang - (game->player.fov_ang / 2);
 	while (++i < game->player.num_rays)
 	{
 		game->player.rays[i]->line.x = game->player.circle.x;
@@ -117,7 +117,7 @@ void	create_rays(t_game *game)
 	int		i;
 
 	i = -1;
-	ray_ang = game->player.rotation_angle - (game->player.fov_ang / 2);
+	ray_ang = game->player.rot_ang - (game->player.fov_ang / 2);
 	while (++i < game->player.num_rays)
 	{
 		game->player.rays[i] = create_ray(game, ray_ang);

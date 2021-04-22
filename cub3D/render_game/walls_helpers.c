@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 20:07:47 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 11:56:57 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:17:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ double	get_wall_height(t_game *game, t_ray *ray)
 	double distance;
 	double fishbowl_adjust;
 
-	fishbowl_adjust = cos(ray->line.direction - game->player.rotation_angle);
+	fishbowl_adjust = cos(ray->line.direction - game->player.rot_ang);
 	distance = (ray->line.size / game->minimap_tile.size) * game->cube_size * fishbowl_adjust;
 	height = (game->cube_size / distance) * game->player.dtpp;
 	return (height);
