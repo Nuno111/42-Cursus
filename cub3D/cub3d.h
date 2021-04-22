@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 11:52:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:04:55 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,45 +59,29 @@ typedef struct s_walls
 
 typedef struct s_color
 {
-	unsigned int t;
-	unsigned int r;
-	unsigned int g;
-	unsigned int b;
-	unsigned int trgb;
+	int t;
+	int r;
+	int g;
+	int b;
+	int trgb;
 }	t_color;
-
-typedef struct		s_res
-{
-	int				width;
-	int				height;
-}					t_res;
-
-typedef	struct		s_rgb
-{
-	int				r;
-	int				g;
-	int				b;
-}					t_rgb;
-
-typedef struct  s_vars
-{
-}               t_vars;
 
 typedef struct		s_scene
 {
-	t_res	*res;
 	char	*no;
 	char	*so;
 	char	*we;
 	char	*ea;
 	char	*sprite;
 	char	*line;
-	t_rgb	*floor;
-	t_rgb	*ceil;
+	t_color	*floor;
+	t_color	*ceil;
 	t_list	*tmp_map;
 	char	**map;
 	size_t	map_width;
 	size_t	map_size;
+	int				width;
+	int				height;
 }					t_scene;
 
 typedef struct	s_circle
@@ -176,7 +160,6 @@ typedef struct s_game
 	t_player	player;
 	t_square	minimap_tile;
 	t_scene		settings;
-	t_vars		vars;
 	t_img		main_img;
 	t_walls		walls;
 	int			cube_size;
@@ -203,7 +186,7 @@ void	verify_position(t_scene *settings);
 bool	verify_str(char *str, bool whole);
 char	*replace_tabs(char *str);
 bool    validate_name(char *file);
-void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs);
+void	validate_floor_ceil(t_scene *settings, t_color **floor_or_ceil, char **strs);
 void	validate_r(t_scene *settings, char **strs);
 void	validate_textures(t_scene *settings, char **path, char **strs);
 void	parse_settings(t_scene *settings, char *file);
@@ -224,7 +207,6 @@ MLX Events
 */
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
-int		handle_key_press(int keycode, t_vars *vars);
 int		handle_click(int btn, int x, int y, t_game *game);
 
 /*
@@ -233,7 +215,7 @@ Draw game functions
 void	draw_minimap(t_scene *settings, t_game *game);
 void	draw_rays(t_game *game);
 void	draw_walls(t_game *game);
-void	draw_floor_ceil(t_game *game, t_rgb colour, bool floor);
+void	draw_floor_ceil(t_game *game, t_color color, bool floor);
 
 /*
 Game functions

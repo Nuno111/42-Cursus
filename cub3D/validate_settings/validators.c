@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 01:34:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:08:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,22 @@
 
 void	validate_r(t_scene *settings, char **strs)
 {
-	t_res *resolution;
-
-	resolution = NULL;
-	if (!strs[1] || !strs[2] || strs[3] || settings->res)
+	if (!strs[1] || !strs[2] || strs[3] || settings->width)
 		error_and_exit_settings(settings, "Error\nProblem when handling resolution.");
 	if (ft_str_is_numeric(strs[1]) && ft_str_is_numeric(strs[2]))
-		resolution = malloc(sizeof(t_res));
-	if (resolution)
 	{
-		resolution->width = ft_atoi(strs[1]);
-		resolution->height = ft_atoi(strs[2]);
-		if (resolution->width <= 0 || resolution->width > 1920 || resolution->height <= 0 || resolution->height > 1080)
+		settings->width = ft_atoi(strs[1]);
+		settings->height = ft_atoi(strs[2]);
+		if (settings->width <= 0 || settings->width > 1920 || settings->height <= 0 || settings->height > 1080)
 			error_and_exit_settings(settings, "Error\nInvalid input for window resolution.");
-		else
-			settings->res = resolution;
 	}
 	else
 		error_and_exit_settings(settings, "Error\nInvalid string format when checking resolution values.");
 }
 
-void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs)
+void	validate_floor_ceil(t_scene *settings, t_color **floor_or_ceil, char **strs)
 {
-	t_rgb	*tmp;
+	t_color	*tmp;
 	char	**tmp_strs;
 
 	tmp = NULL;
@@ -46,7 +39,7 @@ void	validate_floor_ceil(t_scene *settings, t_rgb **floor_or_ceil, char **strs)
 	if (!tmp_strs[0] || !tmp_strs[1] || !tmp_strs[2])
 		error_and_exit_settings(settings, "Error\nProblem found when handling floor or ceiling, 3 color values are needed.");
 	if (ft_str_is_numeric(tmp_strs[0]) && ft_str_is_numeric(tmp_strs[1]) && ft_str_is_numeric(tmp_strs[2]))
-		tmp = malloc(sizeof(t_rgb));
+		tmp = malloc(sizeof(t_color));
 	if (tmp)
 	{
 		tmp->r = ft_atoi(tmp_strs[0]);

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 21:21:32 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/21 20:05:26 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:06:36 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ bool	validate_string(char *str)
 
 void	init_settings(t_scene *settings)
 {
-	settings->res = NULL;
+	settings->height = 0;
+	settings->width = 0;
 	settings->no = NULL;
 	settings->so = NULL;
 	settings->we = NULL;
@@ -61,8 +62,6 @@ void	init_settings(t_scene *settings)
 
 void	free_settings(t_scene *settings)
 {
-	if (settings->res)
-		free(settings->res);
 	if (settings->no)
 		free(settings->no);
 	if (settings->so)
