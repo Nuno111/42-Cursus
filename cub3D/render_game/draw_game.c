@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:09:35 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:28:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static	void	draw_wall_line(t_game *game, t_wall wall, int ray_index)
 
 	step = wall.texture.height / wall.size;
 	tex_pox = (wall.y - game->settings.height / 2 + wall.size / 2) * step;
-	x_tex = fmod((game->player.rays[ray_index]->texture_pixel / game->minimap_tile.size) * game->cube_size, wall.texture.width - 1);
+	x_tex = fmod((game->player.rays[ray_index]->txt_pixel / game->minimap_tile.size) * game->cube_size, wall.texture.width - 1);
 	y = -1;
 	while (++y < wall.size && y < game->settings.height)
 	{

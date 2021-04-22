@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:19:31 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:28:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct	s_line
 {
 	double	x;
 	double	y;
-	double	direction;
+	double	dir;
 	double	size;
 	int		color;
 }				t_line;
@@ -113,16 +113,16 @@ typedef struct	s_line
 typedef struct s_ray
 {
 	t_line	line;
-	double	hrzt_hit_x;
-	double	hrzt_hit_y;
-	double	vrtc_hit_x;
-	double	vrtc_hit_y;
-	double	distance;
+	double	hrzt_x;
+	double	hrzt_y;
+	double	vrtc_x;
+	double	vrtc_y;
+	double	dist;
 	bool	facing_up;
 	bool	facing_right;
 	bool	hrzt_hit;
 	bool	vrtc_hit;
-	double	texture_pixel;
+	double	txt_pixel;
 }				t_ray;
 
 typedef struct s_player

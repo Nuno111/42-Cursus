@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 19:48:12 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/19 19:09:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:24:46 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	draw_line(t_img *img, t_line line, int res_width)
 	double	dir_x;
 	double	dir_y;
 
-	dir_x = cos(line.direction);
-	dir_y = sin(line.direction);
+	dir_x = cos(line.dir);
+	dir_y = sin(line.dir);
 	i = -1;
 	while (++i <= line.size)
 	{

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:20:09 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:30:00 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ void	reset_rays(t_game *game)
 	i = -1;
 	while (++i < game->player.num_rays)
 	{
-		game->player.rays[i]->distance = 0;
+		game->player.rays[i]->dist = 0;
 		game->player.rays[i]->facing_right = false;
 		game->player.rays[i]->facing_up = false;
 		game->player.rays[i]->hrzt_hit = false;
-		game->player.rays[i]->hrzt_hit_x = 0;
-		game->player.rays[i]->hrzt_hit_y = 0;
-		game->player.rays[i]->line.direction = 0;
+		game->player.rays[i]->hrzt_x = 0;
+		game->player.rays[i]->hrzt_y = 0;
+		game->player.rays[i]->line.dir= 0;
 		game->player.rays[i]->line.size = 0;
 		game->player.rays[i]->line.x = 0;
 		game->player.rays[i]->line.y = 0;
 		game->player.rays[i]->vrtc_hit = false;
-		game->player.rays[i]->vrtc_hit_x = 0;
-		game->player.rays[i]->vrtc_hit_y = 0;
+		game->player.rays[i]->vrtc_x = 0;
+		game->player.rays[i]->vrtc_y = 0;
 	}
 }
 
@@ -43,24 +43,24 @@ void	cast_ray(t_game *game, t_ray *ray)
 	get_horizontal_intercection(game, ray);
 	get_vertical_intercection(game, ray);
 	if (ray->hrzt_hit)
-		hrzt_dist = get_distance(ray->line.x, ray->line.y, ray->hrzt_hit_x, ray->hrzt_hit_y);
+		hrzt_dist = get_distance(ray->line.x, ray->line.y, ray->hrzt_x, ray->hrzt_y);
 	else
 		hrzt_dist = DBL_MAX;
 	if (ray->vrtc_hit)
-		vrtc_dist = get_distance(ray->line.x, ray->line.y, ray->vrtc_hit_x, ray->vrtc_hit_y);
+		vrtc_dist = get_distance(ray->line.x, ray->line.y, ray->vrtc_x, ray->vrtc_y);
 	else
 		vrtc_dist = DBL_MAX;
 	if (hrzt_dist < vrtc_dist)
 	{
 		ray->vrtc_hit = false;
 		ray->line.size = hrzt_dist;
-		ray->texture_pixel = ray->hrzt_hit_x;
+		ray->txt_pixel = ray->hrzt_x;
 	}
 	else
 	{
 		ray->hrzt_hit = false;
 		ray->line.size = vrtc_dist;
-		ray->texture_pixel = ray->vrtc_hit_y;
+		ray->txt_pixel = ray->vrtc_y;
 	}
 }
 
@@ -73,13 +73,13 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 		exit_game(game, "Error\nUnable to allocate memory for ray.");
 	ray->line.x = game->player.circle.x;
 	ray->line.y = game->player.circle.y;
-	ray->line.direction = normalize_angle(ray_ang);
+	ray->line.dir = normalize_angle(ray_ang);
 	ray->line.color = game->player.circle.color;
-	if (ray->line.direction > M_PI  && ray->line.direction < 2 * M_PI)
+	if (ray->line.dir > M_PI  && ray->line.dir < 2 * M_PI)
 		ray->facing_up = true;
 	else
 		ray->facing_up = false;
-	if (ray->line.direction < 0.5 * M_PI  || ray->line.direction > 1.5 * M_PI)
+	if (ray->line.dir < 0.5 * M_PI  || ray->line.dir > 1.5 * M_PI)
 		ray->facing_right = true;
 	else
 		ray->facing_right = false;
@@ -97,12 +97,12 @@ void	update_rays(t_game *game)
 	{
 		game->player.rays[i]->line.x = game->player.circle.x;
 		game->player.rays[i]->line.y = game->player.circle.y;
-		game->player.rays[i]->line.direction = normalize_angle(ray_ang);
-		if (game->player.rays[i]->line.direction > M_PI  && game->player.rays[i]->line.direction < 2 * M_PI)
+		game->player.rays[i]->line.dir = normalize_angle(ray_ang);
+		if (game->player.rays[i]->line.dir > M_PI  && game->player.rays[i]->line.dir < 2 * M_PI)
 			game->player.rays[i]->facing_up = true;
 		else
 			game->player.rays[i]->facing_up = false;
-		if (game->player.rays[i]->line.direction < 0.5 * M_PI  || game->player.rays[i]->line.direction > 1.5 * M_PI)
+		if (game->player.rays[i]->line.dir < 0.5 * M_PI  || game->player.rays[i]->line.dir > 1.5 * M_PI)
 			game->player.rays[i]->facing_right = true;
 		else
 			game->player.rays[i]->facing_right = false;
