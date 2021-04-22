@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:15:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:19:31 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ typedef struct s_ray
 typedef struct s_player
 {
 	t_circle	circle;
-	t_line		line;
 	double		rot_ang;
 	double		move_speed;
 	double		rot_speed;
@@ -139,7 +138,7 @@ typedef struct s_player
 	t_ray		**rays;
 	int			num_rays;
 	double		dtpp;
-	double		ang_increment;
+	double		ang_inc;
 }				t_player;
 
 typedef struct s_intercect
