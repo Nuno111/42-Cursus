@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:39:29 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 13:25:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_wall
 	t_img			texture;
 	int				x;
 	int				y;
-	double			size;
+	double			height;
 	unsigned int	color;
 }			t_wall;
 
@@ -113,16 +113,22 @@ typedef struct	s_line
 typedef struct s_ray
 {
 	t_line	line;
-	double	hrzt_x;
-	double	hrzt_y;
-	double	vrtc_x;
-	double	vrtc_y;
-	double	dist;
+	bool	w_hrzt_hit;
+	bool	w_vrtc_hit;
+	double	w_hrzt_x;
+	double	w_hrzt_y;
+	double	w_vrtc_x;
+	double	w_vrtc_y;
+	double	w_txt_pixel;
+	bool	s_hrzt_hit;
+	bool	s_vrtc_hit;
+	double	s_hrzt_x;
+	double	s_hrzt_y;
+	double	s_vrtc_x;
+	double	s_vrtc_y;
+	double	s_txt_pixel;
 	bool	facing_up;
 	bool	facing_right;
-	bool	hrzt_hit;
-	bool	vrtc_hit;
-	double	txt_pixel;
 }				t_ray;
 
 typedef struct s_player
@@ -220,22 +226,24 @@ void	draw_floor_ceil(t_game *game, t_color color, bool floor);
 Game functions
 */
 void    render_game(t_game *game);
-void	init_player(t_game *game);
 bool	is_wall(double x, double y, t_game *game);
 bool	is_sprite(double x, double y, t_game *game);
 void	create_rays(t_game *game);
-void	cast_ray(t_game *game, t_ray *ray);
-double		get_distance(double x, double y, double hit_x, double hit_y);
-double		normalize_angle(double ray_ang);
-void		get_horizontal_intercection(t_game *game, t_ray *ray);
-void		get_vertical_intercection(t_game *game, t_ray *ray);
+double	get_distance(double x, double y, double hit_x, double hit_y);
+double	normalize_angle(double ray_ang);
+void	get_horizontal_intercection(t_game *game, t_ray *ray);
+void	get_vertical_intercection(t_game *game, t_ray *ray);
 double	get_wall_height(t_game *game, t_ray *ray);
 void    update_player(t_game *game);
 void	update_rays(t_game *game);
 t_img	assign_wall_texture(t_game *game, t_ray ray);
-void	init_txts(t_game *game);
 void	reset_rays(t_game *game);
 void	exit_game(t_game *game, char *err_msg);
 int		handle_destroy(t_game *game);
+void    init_stuff(t_game *game);
+void	get_player_pos(t_game *game);
+void	calc_wall_dist(t_game *game, t_ray *ray);
+void	init_wall_vars(t_ray *ray);
+void	init_sprite_vars(t_ray *ray);
 
 #endif

@@ -14,7 +14,7 @@
 
 t_img	assign_wall_texture(t_game *game, t_ray ray)
 {
-	if (ray.hrzt_hit)
+	if (ray.w_hrzt_hit)
 	{
 		if (ray.facing_up)
 			return(game->txts.no);
@@ -30,16 +30,33 @@ t_img	assign_wall_texture(t_game *game, t_ray ray)
 	}
 }
 
-void	init_txts(t_game *game)
+void	calc_wall_dist(t_game *game, t_ray *ray)
 {
-	game->txts.no.img = mlx_xpm_file_to_image(game->mlx, game->settings.no, &game->txts.no.width, &game->txts.no.height);
-	game->txts.ea.img = mlx_xpm_file_to_image(game->mlx, game->settings.ea, &game->txts.ea.width, &game->txts.ea.height);
-	game->txts.so.img = mlx_xpm_file_to_image(game->mlx, game->settings.so, &game->txts.so.width, &game->txts.so.height);
-	game->txts.we.img = mlx_xpm_file_to_image(game->mlx, game->settings.we, &game->txts.we.width, &game->txts.we.height);
-	game->txts.no.addr = (int *)mlx_get_data_addr(game->txts.no.img, &game->txts.no.bits_per_pixel, &game->txts.no.line_length, &game->txts.no.endian);
-	game->txts.ea.addr = (int *)mlx_get_data_addr(game->txts.ea.img, &game->txts.ea.bits_per_pixel, &game->txts.ea.line_length, &game->txts.ea.endian);
-	game->txts.so.addr = (int *)mlx_get_data_addr(game->txts.so.img, &game->txts.so.bits_per_pixel, &game->txts.so.line_length, &game->txts.so.endian);
-	game->txts.we.addr = (int *)mlx_get_data_addr(game->txts.we.img, &game->txts.we.bits_per_pixel, &game->txts.we.line_length, &game->txts.we.endian);
+	double hrzt_dist;
+	double vrtc_dist;
+
+	get_horizontal_intercection(game, ray);
+	get_vertical_intercection(game, ray);
+	if (ray->w_hrzt_hit)
+		hrzt_dist = get_distance(ray->line.x, ray->line.y, ray->w_hrzt_x, ray->w_hrzt_y);
+	else
+		hrzt_dist = DBL_MAX;
+	if (ray->w_vrtc_hit)
+		vrtc_dist = get_distance(ray->line.x, ray->line.y, ray->w_vrtc_x, ray->w_vrtc_y);
+	else
+		vrtc_dist = DBL_MAX;
+	if (hrzt_dist < vrtc_dist)
+	{
+		ray->w_vrtc_hit = false;
+		ray->line.size = hrzt_dist;
+		ray->w_txt_pixel = ray->w_hrzt_x;
+	}
+	else
+	{
+		ray->w_hrzt_hit = false;
+		ray->line.size = vrtc_dist;
+		ray->w_txt_pixel = ray->w_vrtc_y;
+	}
 }
 
 double	get_wall_height(t_game *game, t_ray *ray)

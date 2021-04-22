@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:19:47 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 13:00:06 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	void	get_player_rotation(char c, t_game *game)
 		game->player.rot_ang = M_PI;
 }
 
-static	void	get_player_pos(t_game *game)
+void	get_player_pos(t_game *game)
 {
 	int h;
 	int w;
@@ -74,22 +74,3 @@ void    update_player(t_game *game)
 	}
 }
 
-void	init_player(t_game *game)
-{
-	get_player_pos(game);
-	game->player.circle.radius = game->minimap_tile.size / 4.0;
-	game->player.circle.color = 0x7F0000;
-	game->player.circle.ang = 0;
-	game->player.turn_dir = 0;
-	game->player.walk_dir = 0;
-	game->player.move_speed = 1;
-	game->player.rot_speed = deg_to_rad(3);
-	game->player.strafe = false;
-	game->player.fov_ang = deg_to_rad(60);
-	game->player.num_rays = game->settings.width;
-	game->player.rays = malloc(sizeof (t_ray *) * game->player.num_rays);
-	game->player.dtpp = (game->settings.width / 2) / tan(game->player.fov_ang / 2);
-	game->player.ang_inc = game->player.fov_ang / game->player.num_rays;
-	if (!game->player.rays)
-		exit_game(game, "Error\nUnable to allocate memory for rays");
-}

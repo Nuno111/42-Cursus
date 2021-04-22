@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/31 21:09:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:48:22 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,5 @@ int     main(int argc, char *argv[])
 		error_and_exit_settings(&game.settings, "Two arguments needed");
 	parse_settings(&game.settings, argv[1]);
 	render_game(&game);
-	free_settings(&game.settings);
-	printf("ok");
-	return (OK);
+	return (0);
 }

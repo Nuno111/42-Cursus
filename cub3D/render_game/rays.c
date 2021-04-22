@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:30:00 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 13:25:53 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,50 +19,29 @@ void	reset_rays(t_game *game)
 	i = -1;
 	while (++i < game->player.num_rays)
 	{
-		game->player.rays[i]->dist = 0;
 		game->player.rays[i]->facing_right = false;
 		game->player.rays[i]->facing_up = false;
-		game->player.rays[i]->hrzt_hit = false;
-		game->player.rays[i]->hrzt_x = 0;
-		game->player.rays[i]->hrzt_y = 0;
 		game->player.rays[i]->line.dir= 0;
 		game->player.rays[i]->line.size = 0;
 		game->player.rays[i]->line.x = 0;
 		game->player.rays[i]->line.y = 0;
-		game->player.rays[i]->vrtc_hit = false;
-		game->player.rays[i]->vrtc_x = 0;
-		game->player.rays[i]->vrtc_y = 0;
+		game->player.rays[i]->w_hrzt_hit = false;
+		game->player.rays[i]->w_hrzt_x = 0;
+		game->player.rays[i]->w_hrzt_y = 0;
+		game->player.rays[i]->w_vrtc_hit = false;
+		game->player.rays[i]->w_vrtc_x = 0;
+		game->player.rays[i]->w_vrtc_y = 0;
+		game->player.rays[i]->w_txt_pixel = 0;
+		game->player.rays[i]->s_hrzt_hit = false;
+		game->player.rays[i]->s_hrzt_x = 0;
+		game->player.rays[i]->s_hrzt_y = 0;
+		game->player.rays[i]->s_vrtc_hit = false;
+		game->player.rays[i]->s_vrtc_x = 0;
+		game->player.rays[i]->s_vrtc_y = 0;
+		game->player.rays[i]->s_txt_pixel = 0;
 	}
 }
 
-void	cast_ray(t_game *game, t_ray *ray)
-{
-	double hrzt_dist;
-	double vrtc_dist;
-
-	get_horizontal_intercection(game, ray);
-	get_vertical_intercection(game, ray);
-	if (ray->hrzt_hit)
-		hrzt_dist = get_distance(ray->line.x, ray->line.y, ray->hrzt_x, ray->hrzt_y);
-	else
-		hrzt_dist = DBL_MAX;
-	if (ray->vrtc_hit)
-		vrtc_dist = get_distance(ray->line.x, ray->line.y, ray->vrtc_x, ray->vrtc_y);
-	else
-		vrtc_dist = DBL_MAX;
-	if (hrzt_dist < vrtc_dist)
-	{
-		ray->vrtc_hit = false;
-		ray->line.size = hrzt_dist;
-		ray->txt_pixel = ray->hrzt_x;
-	}
-	else
-	{
-		ray->hrzt_hit = false;
-		ray->line.size = vrtc_dist;
-		ray->txt_pixel = ray->vrtc_y;
-	}
-}
 
 t_ray*   create_ray(t_game *game, double ray_ang)
 {
@@ -83,6 +62,8 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 		ray->facing_right = true;
 	else
 		ray->facing_right = false;
+	init_wall_vars(ray);
+	init_sprite_vars(ray);
 	return (ray);
 }
 
@@ -106,7 +87,8 @@ void	update_rays(t_game *game)
 			game->player.rays[i]->facing_right = true;
 		else
 			game->player.rays[i]->facing_right = false;
-		cast_ray(game, game->player.rays[i]);
+		calc_wall_dist(game, game->player.rays[i]);
+		//calc_sprite_dist(game, game->player.rays[i]);
 		ray_ang += game->player.ang_inc;
 	}
 }
@@ -121,7 +103,7 @@ void	create_rays(t_game *game)
 	while (++i < game->player.num_rays)
 	{
 		game->player.rays[i] = create_ray(game, ray_ang);
-		cast_ray(game, game->player.rays[i]);
+		calc_wall_dist(game, game->player.rays[i]);
 		ray_ang += game->player.ang_inc;
 	}
 }

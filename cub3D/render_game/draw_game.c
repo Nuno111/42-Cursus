@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:28:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 13:24:38 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static	void	draw_wall_line(t_game *game, t_wall wall, int ray_index)
 	double	step;
 	double	tex_pox;
 
-	step = wall.texture.height / wall.size;
-	tex_pox = (wall.y - game->settings.height / 2 + wall.size / 2) * step;
-	x_tex = fmod((game->player.rays[ray_index]->txt_pixel / game->minimap_tile.size) * game->cube_size, wall.texture.width - 1);
+	step = wall.texture.height / wall.height;
+	tex_pox = (wall.y - game->settings.height / 2 + wall.height / 2) * step;
+	x_tex = fmod((game->player.rays[ray_index]->w_txt_pixel / game->minimap_tile.size) * game->cube_size, wall.texture.width - 1);
 	y = -1;
-	while (++y < wall.size && y < game->settings.height)
+	while (++y < wall.height && y < game->settings.height)
 	{
 		y_tex = (int)tex_pox & (wall.texture.height - 1);
 		game->main_img.addr[wall.x + (wall.y + y) * game->settings.width] = wall.texture.addr[y_tex * wall.texture.height + x_tex];
@@ -64,9 +64,9 @@ void	draw_walls(t_game *game)
 	i = 0;
 	while (i < game->player.num_rays)
 	{
-		wall.size = get_wall_height(game, game->player.rays[i]);
+		wall.height = get_wall_height(game, game->player.rays[i]);
 		wall.x = i;
-		wall.y = (game->settings.height / 2) - (wall.size / 2);
+		wall.y = (game->settings.height / 2) - (wall.height / 2);
 		if (wall.y < 0)
 			wall.y = 0;
 		wall.texture = assign_wall_texture(game, *game->player.rays[i]);

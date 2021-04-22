@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 21:21:32 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:06:36 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:55:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,6 @@ bool	validate_string(char *str)
 
 }
 
-void	init_settings(t_scene *settings)
-{
-	settings->height = 0;
-	settings->width = 0;
-	settings->no = NULL;
-	settings->so = NULL;
-	settings->we = NULL;
-	settings->ea = NULL;
-	settings->sprite = NULL;
-	settings->floor = NULL;
-	settings->ceil = NULL;
-	settings->tmp_map = NULL;
-	settings->map = NULL;
-	settings->map_width = 0;
-	settings->map_size = 0;
-	settings->line = NULL;
-}
 
 void	free_settings(t_scene *settings)
 {

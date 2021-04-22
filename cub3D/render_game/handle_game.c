@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:39:16 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 12:52:04 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,8 @@ static	int    render_next_frame(t_game *game)
 
 void    render_game(t_game *game)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->settings.width, game->settings.height, "CUB3D");
-	game->cube_size = 64;
-	game->minimap_tile.size = (game->settings.width / game->settings.map_width) / 3;
+	init_stuff(game);
 	mlx_do_key_autorepeatoff(game->mlx);
-	init_player(game);
-	init_txts(game);
-	create_rays(game);
 	mlx_hook(game->win, 2, 1L<<0, key_press, game);
 	mlx_hook(game->win, 3, 1L<<1, key_release, game);
 	mlx_hook(game->win, 17,1L<<17, handle_destroy, game);
