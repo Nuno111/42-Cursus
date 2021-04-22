@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 00:50:20 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 02:17:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,7 @@ Game functions
 void    render_game(t_game *game);
 void	init_player(t_game *game);
 bool	is_wall(double x, double y, t_game *game);
+bool	is_sprite(double x, double y, t_game *game);
 void	create_rays(t_game *game);
 void	cast_ray(t_game *game, t_ray *ray);
 double		get_distance(double x, double y, double hit_x, double hit_y);

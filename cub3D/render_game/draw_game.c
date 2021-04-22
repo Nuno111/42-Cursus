@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/21 17:27:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 01:43:09 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	draw_minimap(t_scene *settings, t_game *game)
 		while (settings->map[height][width + 1])
 		{
 			if (settings->map[height][width] == '1')
-				game->minimap_tile.color = 0x000080;
+				game->minimap_tile.color = 0x293250;
 			else if (settings->map[height][width] == '0' || ft_strchr("NESW", settings->map[height][width]))
-				game->minimap_tile.color = 0xFFFF00;
+				game->minimap_tile.color = 0xFFD55A;
 			else
-				game->minimap_tile.color = 0x000000;
+				game->minimap_tile.color = 0x001FFF;
 			game->minimap_tile.x = width * game->minimap_tile.size;
 			game->minimap_tile.y = height * game->minimap_tile.size;
 			draw_square(&game->main_img, game->minimap_tile, game->settings.res->width);

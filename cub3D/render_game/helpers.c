@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:11:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 00:53:42 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 01:34:02 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error_and_exit_settings(t_scene *settings, char *err_msg)
 {
 	free_settings(settings);
 	printf("%s\n", err_msg);
-	exit(ERR);
+	exit(SUCCESS);
 }
 
 void	exit_game(t_game *game, char *err_msg)

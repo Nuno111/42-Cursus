@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 00:30:18 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 02:16:55 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void    update_player(t_game *game)
 			tmp_x = game->player.circle.x + sin(game->player.rotation_angle) * -move_step;
 			tmp_y = game->player.circle.y + cos(game->player.rotation_angle) * move_step;
 		}
-		if (!is_wall(tmp_x, tmp_y, game))
+		if (!is_wall(tmp_x, tmp_y, game) && !is_sprite(tmp_x, tmp_y, game))
 		{
 			game->player.circle.x = tmp_x;
 			game->player.circle.y = tmp_y;
