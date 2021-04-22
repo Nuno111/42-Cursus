@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 02:17:09 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/22 11:52:54 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ typedef	struct		s_rgb
 
 typedef struct  s_vars
 {
-        void    *mlx;
-        void    *win;
 }               t_vars;
 
 typedef struct		s_scene
@@ -173,6 +171,8 @@ typedef struct s_intercect
 
 typedef struct s_game
 {
+	void    *mlx;
+	void    *win;
 	t_player	player;
 	t_square	minimap_tile;
 	t_scene		settings;
