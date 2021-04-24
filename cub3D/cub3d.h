@@ -6,7 +6,11 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/04/24 13:03:36 by ngregori         ###   ########.fr       */
+=======
+/*   Updated: 2021/04/22 13:38:00 by ngregori         ###   ########.fr       */
+>>>>>>> 20a635cb54ce9a21dfbfd3f64d54fb2196883564
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,8 +245,8 @@ bool	is_sprite(double x, double y, t_game *game);
 void	create_rays(t_game *game);
 double	get_distance(double x, double y, double hit_x, double hit_y);
 double	normalize_angle(double ray_ang);
-void	get_horizontal_intercection(t_game *game, t_ray *ray);
-void	get_vertical_intercection(t_game *game, t_ray *ray);
+void	get_horizontal_intercection(t_game *game, t_ray *ray, bool wall);
+void	get_vertical_intercection(t_game *game, t_ray *ray, bool wall);
 double	get_wall_height(t_game *game, t_ray *ray);
 void    update_player(t_game *game);
 void	update_rays(t_game *game);
@@ -253,6 +257,8 @@ int		handle_destroy(t_game *game);
 void    init_stuff(t_game *game);
 void	get_player_pos(t_game *game);
 void	calc_wall_dist(t_game *game, t_ray *ray);
+void	calc_sprite_dist(t_game *game, t_ray *ray);
+void		did_ray_hit_sprite(t_game *game, t_ray *ray, t_intercect intercect, bool hrzt);
 void	init_wall_vars(t_ray *ray);
 void	init_sprite_vars(t_ray *ray);
 
