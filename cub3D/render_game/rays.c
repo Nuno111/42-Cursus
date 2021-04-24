@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 13:26:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:10:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 	else
 		ray->facing_right = false;
 	init_wall_vars(ray);
-	init_sprite_vars(ray);
 	return (ray);
 }
 
@@ -88,7 +87,6 @@ void	update_rays(t_game *game)
 		else
 			game->player.rays[i]->facing_right = false;
 		calc_wall_dist(game, game->player.rays[i]);
-		calc_sprite_dist(game, game->player.rays[i]);
 		ray_ang += game->player.ang_inc;
 	}
 }

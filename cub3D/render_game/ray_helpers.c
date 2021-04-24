@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:39:24 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 13:35:03 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:11:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		did_ray_hit_wall(t_game *game, t_ray *ray, t_intercect intercect, bool hrz
 	}
 }
 
-void		get_horizontal_intercection(t_game *game, t_ray *ray, bool wall)
+void		get_horizontal_intercection(t_game *game, t_ray *ray)
 {
 	t_intercect intercect;
 
@@ -78,13 +78,10 @@ void		get_horizontal_intercection(t_game *game, t_ray *ray, bool wall)
 		intercect.y-= 0.00001;
 	else
 		intercect.y_offset = 0;
-	if (wall)
-		did_ray_hit_wall(game, ray, intercect, true);
-	else
-		did_ray_hit_sprite(game, ray, intercect, true);
+	did_ray_hit_wall(game, ray, intercect, true);
 }
 
-void		get_vertical_intercection(t_game *game, t_ray *ray, bool wall)
+void		get_vertical_intercection(t_game *game, t_ray *ray)
 {
 	t_intercect intercect;
 
@@ -103,8 +100,5 @@ void		get_vertical_intercection(t_game *game, t_ray *ray, bool wall)
 		intercect.y_step *= -1;
 	if (!ray->facing_right)
 		intercect.x-= 0.00001;
-	if (wall)
-		did_ray_hit_wall(game, ray, intercect, false);
-	else
-		did_ray_hit_sprite(game, ray, intercect, false);
+	did_ray_hit_wall(game, ray, intercect, false);
 }
