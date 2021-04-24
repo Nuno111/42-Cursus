@@ -6,11 +6,27 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 15:05:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:33:39 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_sprite	**realloc_sprs(t_game *game, t_sprite **arr, t_sprite *new)
+{
+	t_sprite **new_arr;
+	int		i;
+
+	i = -1;
+	new_arr = malloc(sizeof(t_sprite *) * (game->sprs_num + 1));
+	if (!new_arr)
+		exit_game(game, "Error\nFailed to allocate memory for sprites array.");
+	while (++i < game->sprs_num)
+		new_arr[i] = arr[i];
+	new_arr[i] = new;
+	ft_freearrays(arr);
+	return (new_arr);
+}
 
 void    is_spr_visible(t_game *game, int i)
 {
@@ -21,9 +37,8 @@ void    is_spr_visible(t_game *game, int i)
 
     x = game->sprs[i]->x - game->player.circle.x;
     y = game->sprs[i]->y - game->player.circle.y;
-    ang_to_spr = normalize_ang(atan2(x, y));
-	ang_diff = normalize_ang(game->player.circle.ang - ang_to_spr);
-
+    ang_to_spr = normalize_angle(atan2(x, y));
+	ang_diff = normalize_angle(game->player.circle.ang - ang_to_spr);
 	if (ang_diff < game->player.fov_ang / 2)
 		game->sprs[i]->visible = true;
 	else
@@ -60,6 +75,5 @@ void	draw_sprites(t_game *game)
 		get_spr_distance(game, i);
 		get_spr_height(game, i);
 		get_spr_line_pos(game, i);
-
 	}
 }

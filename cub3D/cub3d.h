@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 14:46:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:33:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,5 +259,8 @@ void    init_stuff(t_game *game);
 void	get_player_pos(t_game *game);
 void	calc_wall_dist(t_game *game, t_ray *ray);
 void	init_wall_vars(t_ray *ray);
+void	init_sprites(t_game *game);
+void	init_sprite(t_game *game, int x, int y);
+t_sprite	**realloc_sprs(t_game *game, t_sprite **arr, t_sprite *new);
 
 #endif
