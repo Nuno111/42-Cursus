@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 12:49:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 13:46:04 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:08:02 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static	void	init_player(t_game *game)
 	game->player.rot_speed = deg_to_rad(3);
 	game->player.strafe = false;
 	game->player.fov_ang = deg_to_rad(60);
-	game->player.num_rays = 1;//game->settings.width;
+	game->player.num_rays = game->settings.width;
 	game->player.rays = malloc(sizeof (t_ray *) * game->player.num_rays);
 	game->player.dtpp = (game->settings.width / 2) / tan(game->player.fov_ang / 2);
 	game->player.ang_inc = game->player.fov_ang / game->player.num_rays;
@@ -72,16 +72,6 @@ void	init_wall_vars(t_ray *ray)
 	ray->w_txt_pixel = 0;
 }
 
-void	init_sprite_vars(t_ray *ray)
-{
-	ray->s_hrzt_hit = false;
-	ray->s_hrzt_x = 0;
-	ray->s_hrzt_y = 0;
-	ray->s_vrtc_hit = false;
-	ray->s_hrzt_x = 0;
-	ray->s_hrzt_y = 0;
-	ray->s_txt_pixel = 0;
-}
 void    init_stuff(t_game *game)
 {
 	game->mlx = mlx_init();
@@ -91,5 +81,4 @@ void    init_stuff(t_game *game)
 	init_player(game);
 	init_txts(game);
 	create_rays(game);
-
 }
