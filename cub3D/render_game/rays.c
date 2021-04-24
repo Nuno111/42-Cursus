@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 13:10:11 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 14:49:03 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ void	reset_rays(t_game *game)
 		game->player.rays[i]->w_vrtc_x = 0;
 		game->player.rays[i]->w_vrtc_y = 0;
 		game->player.rays[i]->w_txt_pixel = 0;
-		game->player.rays[i]->s_hrzt_hit = false;
-		game->player.rays[i]->s_hrzt_x = 0;
-		game->player.rays[i]->s_hrzt_y = 0;
-		game->player.rays[i]->s_vrtc_hit = false;
-		game->player.rays[i]->s_vrtc_x = 0;
-		game->player.rays[i]->s_vrtc_y = 0;
-		game->player.rays[i]->s_txt_pixel = 0;
 	}
 }
 
