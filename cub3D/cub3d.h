@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 13:25:35 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 13:03:36 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_wall
 	unsigned int	color;
 }			t_wall;
 
-typedef struct s_txts 
+typedef struct s_txts
 {
 	t_img no;
 	t_img ea;
@@ -157,6 +157,15 @@ typedef struct s_intercect
 	int		y_offset;
 }				t_intercect;
 
+typedef struct s_sprite
+{
+	double	x;
+	double	y;
+	t_img	txt;
+	double	dist;
+	double	ang;
+	bool	visible;
+}			t_sprite;
 
 typedef struct s_game
 {
@@ -167,6 +176,7 @@ typedef struct s_game
 	t_scene		settings;
 	t_img		main_img;
 	t_txts		txts;
+	t_sprite	**sprites;
 	int			cube_size;
 }				t_game;
 
