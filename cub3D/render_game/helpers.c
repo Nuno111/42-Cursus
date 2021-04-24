@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:11:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 01:34:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 17:28:40 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,20 @@ void	error_and_exit_settings(t_scene *settings, char *err_msg)
 	exit(SUCCESS);
 }
 
+void	free_sprites(t_game *game)
+{
+	int i;
+
+	i = -1;
+	while (++i < game->sprs_num)
+		free(game->sprs[i]);
+	free(game->sprs);
+}
+
 void	exit_game(t_game *game, char *err_msg)
 {
 	free_settings(&game->settings);
+	free_sprites(game);
 	if (err_msg)
 	{
 		printf("%s\n", err_msg);

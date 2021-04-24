@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 18:14:07 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/13 18:18:36 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:36:25 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_freearrays(char **array)
+void	ft_freearrays(void **array)
 {
 	size_t i;
 

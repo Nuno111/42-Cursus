@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/21 20:16:55 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 16:36:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void					ft_putstr(char *str);
 void					ft_putnbr(int nb);
 void					ft_putchar(char c);
 int						ft_strchrindex(const char *s, int c);
-void					ft_freearrays(char **array);
+void					ft_freearrays(void **array);
 char					*ft_strnew(size_t size);
 char					*ft_itoa(long n);
 char					*ft_strdup(const char *s);

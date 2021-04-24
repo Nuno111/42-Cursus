@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 16:33:39 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 17:30:53 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ t_sprite	**realloc_sprs(t_game *game, t_sprite **arr, t_sprite *new)
 	while (++i < game->sprs_num)
 		new_arr[i] = arr[i];
 	new_arr[i] = new;
-	ft_freearrays(arr);
+	while (++i < game->sprs_num)
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+	}
+	free(arr);
+	arr = NULL;
 	return (new_arr);
 }
 

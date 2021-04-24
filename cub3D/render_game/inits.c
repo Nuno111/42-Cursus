@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 12:49:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 13:32:00 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 17:10:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ static	void	init_txts(t_game *game)
 	game->txts.ea.img = mlx_xpm_file_to_image(game->mlx, game->settings.ea, &game->txts.ea.width, &game->txts.ea.height);
 	game->txts.so.img = mlx_xpm_file_to_image(game->mlx, game->settings.so, &game->txts.so.width, &game->txts.so.height);
 	game->txts.we.img = mlx_xpm_file_to_image(game->mlx, game->settings.we, &game->txts.we.width, &game->txts.we.height);
+	game->txts.spr.img = mlx_xpm_file_to_image(game->mlx, game->settings.sprite, &game->txts.spr.width, &game->txts.spr.height);
 	game->txts.no.addr = (int *)mlx_get_data_addr(game->txts.no.img, &game->txts.no.bits_per_pixel, &game->txts.no.line_length, &game->txts.no.endian);
 	game->txts.ea.addr = (int *)mlx_get_data_addr(game->txts.ea.img, &game->txts.ea.bits_per_pixel, &game->txts.ea.line_length, &game->txts.ea.endian);
 	game->txts.so.addr = (int *)mlx_get_data_addr(game->txts.so.img, &game->txts.so.bits_per_pixel, &game->txts.so.line_length, &game->txts.so.endian);
 	game->txts.we.addr = (int *)mlx_get_data_addr(game->txts.we.img, &game->txts.we.bits_per_pixel, &game->txts.we.line_length, &game->txts.we.endian);
+	game->txts.spr.addr = (int *)mlx_get_data_addr(game->txts.spr.img, &game->txts.spr.bits_per_pixel, &game->txts.spr.line_length, &game->txts.spr.endian);
 }
 
 void	init_wall_vars(t_ray *ray)
@@ -78,7 +80,10 @@ void    init_stuff(t_game *game)
 	game->win = mlx_new_window(game->mlx, game->settings.width, game->settings.height, "CUB3D");
 	game->cube_size = 64;
 	game->minimap_tile.size = (game->settings.width / game->settings.map_width) / 3;
+	game->sprs_num = 0;
+	game->sprs = malloc(sizeof(t_sprite *));
 	init_player(game);
 	init_txts(game);
 	create_rays(game);
+	init_sprites(game);
 }
