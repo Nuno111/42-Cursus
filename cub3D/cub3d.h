@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 13:11:36 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 14:46:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_txts
 	t_img ea;
 	t_img so;
 	t_img we;
+	t_img spr;
 }				t_txts;
 
 
@@ -164,6 +165,9 @@ typedef struct s_sprite
 	t_img	txt;
 	double	dist;
 	double	ang;
+	double	h;
+	double	start;
+	double	end;
 	bool	visible;
 }			t_sprite;
 
@@ -176,7 +180,8 @@ typedef struct s_game
 	t_scene		settings;
 	t_img		main_img;
 	t_txts		txts;
-	t_sprite	**sprites;
+	t_sprite	**sprs;
+	int			sprs_num;
 	int			cube_size;
 }				t_game;
 

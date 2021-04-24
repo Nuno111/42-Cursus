@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 14:50:38 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:05:23 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void    is_spr_visible(t_game *game, int i)
 		game->sprs[i]->visible = true;
 	else
 		game->sprs[i]->visible = false;
-	//move somewhere else
 }
 
 void	get_spr_distance(t_game *game, int i)
