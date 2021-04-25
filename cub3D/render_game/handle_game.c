@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:52:04 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/24 18:17:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static	void	draw_game(t_game *game)
 	draw_circle(&game->main_img, game->player.circle, game->settings.width);
 	draw_inner_circle(&game->main_img, game->player.circle, game->settings.width);
 	draw_rays(game);
+	draw_sprites(game);
 }
 
 static	int    render_next_frame(t_game *game)
