@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/26 15:33:34 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:54:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ double    get_spr_angle(t_game *game, double spr_x, double spr_y)
     x = spr_x - player_x;
     y = spr_y - player_y;
 	ang = normalize_angle(atan2(y, x) - game->player.rot_ang);
-	if (ang < -M_PI)
-		ang += 2.0 * M_PI;
-	if (ang > M_PI)
-		ang -= 2.0 * M_PI;
-	ang = fabs(ang);
 	return (ang);
 }
 
 bool	is_spr_visible(t_game *game, double ang)
 {
+	if (ang < -M_PI)
+		ang += 2.0 * M_PI;
+	if (ang > M_PI)
+		ang -= 2.0 * M_PI;
+	ang = fabs(ang);
 	return (ang < game->player.fov_ang / 2);
 }
 
@@ -72,15 +72,17 @@ double	get_spr_distance(t_game *game, double spr_x, double spr_y)
 
 void	get_spr_pos(t_game *game, int i)
 {
-	double	w_centre;
-	double	h_centre;
-	double	w_spr_centre;
+	double	x_centre;
+	double	y_centre;
+	double	x_spr_centre;
+	double	y_spr_centre;
 
-	w_centre = game->settings.width / 2;
-	h_centre = game->settings.height / 2;
-	w_spr_centre = tan(game->sprs[i]->ang) * game->player.dtpp;
-	game->sprs[i]->x_strt = w_centre + w_spr_centre - (game->sprs[i]->h / 2);
-	game->sprs[i]->y_strt = h_centre - (game->sprs[i]->h / 2);
+	x_centre = game->settings.width / 2;
+	x_spr_centre = tan(game->sprs[i]->ang) * game->player.dtpp;
+	y_centre = game->settings.height / 2;
+	y_spr_centre = game->sprs[i]->h / 2;
+	game->sprs[i]->x_strt = x_centre + x_spr_centre - (game->sprs[i]->h / 2);
+	game->sprs[i]->y_strt = y_centre - y_spr_centre;
 	if (game->sprs[i]->y_strt < 0)
 		game->sprs[i]->y_strt = 0;
 }
@@ -121,6 +123,7 @@ void	update_sprs(t_game *game)
 		spr->dist = get_spr_distance(game, spr->x, spr->y);
 		spr->ang = get_spr_angle(game, spr->x, spr->y);
 		spr->visible = is_spr_visible(game, spr->ang);
+		printf("Sprite is vibisble %d\n", spr->visible);
 		spr->h = (game->cube_size / spr->dist) * game->player.dtpp;
 		get_spr_pos(game, i);
 	}

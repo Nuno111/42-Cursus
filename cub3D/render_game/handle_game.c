@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/26 14:54:50 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/26 19:59:49 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static	void	draw_game(t_game *game)
 	draw_floor_ceil(game, *game->settings.floor, true);
 	draw_floor_ceil(game, *game->settings.ceil, false);
 	draw_walls(game);
+	draw_sprites(game);
 	draw_minimap(&game->settings, game);
 	draw_circle(&game->main_img, game->player.circle, game->settings.width);
 	draw_inner_circle(&game->main_img, game->player.circle, game->settings.width);
 	draw_rays(game);
-	draw_sprites(game);
 }
 
 static	int    render_next_frame(t_game *game)

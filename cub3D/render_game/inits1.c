@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:59 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/26 12:30:03 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/26 21:11:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	init_sprite(t_game *game, int x, int y)
 	if (!spr)
 		exit_game(game, "Error\nFailed to allocate memory for sprite.");
 	spr->txt = game->txts.spr;
-	spr->x =  game->cube_size * x;
-	spr->y =  game->cube_size * y;
+	spr->x =  game->cube_size * (x + 0.5);
+	spr->y =  game->cube_size * (y + 0.5);
 	if (game->sprs_num == 0)
 		game->sprs[game->sprs_num] = spr;
 	else
