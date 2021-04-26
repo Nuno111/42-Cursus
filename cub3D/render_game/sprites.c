@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/26 21:19:30 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/26 22:21:15 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	draw_sprt(t_game *game, t_sprite *spr)
 		while (++j < width)
 		{
 			x_pox = (int)(spr->x_strt + (i - 1) * width + j);
-			if (x_pox >= 0  && x_pox <= game->settings.width - 1 )
+			if (x_pox >= 0  && x_pox <= game->settings.width - 1 && spr->dist < game->player.rays[x_pox]->line.size)
 				draw_sprt_strip(game, spr, i, x_pox);
 		}
 	}
