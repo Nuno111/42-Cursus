@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 15:07:11 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/25 12:56:24 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	get_player_pos(t_game *game)
 		{
 			if (ft_strchr("NESW", game->settings.map[h][w]))
 			{
-				game->player.circle.x = (w * game->minimap_tile.size) + (game->minimap_tile.size / 2.0);
-				game->player.circle.y = (h * game->minimap_tile.size) + (game->minimap_tile.size/ 2.0);
+				game->player.circle.x = (w * game->minimap_tile.size);
+				game->player.circle.y = (h * game->minimap_tile.size);
 				get_player_rotation(game->settings.map[h][w], game);
 				return;
 			}
@@ -55,7 +55,7 @@ void    update_player(t_game *game)
 	double tmp_y;
 
 	if (game->player.turn_dir != 0)
-		game->player.rot_ang += game->player.turn_dir * game->player.rot_speed;
+		game->player.rot_ang = normalize_angle(game->player.rot_ang  + game->player.turn_dir * game->player.rot_speed);
 	if (game->player.walk_dir != 0)
 	{
 		move_step = game->player.walk_dir * game->player.move_speed;

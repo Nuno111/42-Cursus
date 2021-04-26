@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 18:17:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/26 14:54:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static	int    render_next_frame(t_game *game)
     update_player(game);
 	reset_rays(game);
 	update_rays(game);
+	update_sprs(game);
 	draw_game(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->main_img.img, 0, 0);
 	mlx_destroy_image(game->mlx, game->main_img.img);

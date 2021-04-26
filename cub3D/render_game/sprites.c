@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 22:42:59 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/26 15:01:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,44 +34,141 @@ t_sprite	**realloc_sprs(t_game *game, t_sprite **arr, t_sprite *new)
 	return (new_arr);
 }
 
-void    update_spr_ang(t_game *game, int i)
+double    get_spr_angle(t_game *game, double spr_x, double spr_y)
 {
     double  x;
     double  y;
+	double	player_x;
+	double	player_y;
+	double	ang;
 
-    x = game->sprs[i]->x - (game->player.circle.x / game->minimap_tile.size) * game->cube_size;
-    y = game->sprs[i]->y - (game->player.circle.y / game->minimap_tile.size) * game->cube_size;
-    game->sprs[i]->ang = normalize_angle(atan2(x, y) - game->player.rot_ang);
+	player_x = (game->player.circle.x / game->minimap_tile.size) * game->cube_size;
+	player_y = (game->player.circle.y / game->minimap_tile.size) * game->cube_size;
+    x = spr_x - player_x;
+    y = spr_y - player_y;
+	ang = normalize_angle(atan2(y, x) - game->player.rot_ang);
+	if (ang < -M_PI)
+		ang += 2.0 * M_PI;
+	if (ang > M_PI)
+		ang -= 2.0 * M_PI;
+	ang = fabs(ang);
+	return (ang);
 }
 
-void	update_spr_visibility(t_game *game, int i)
+bool	is_spr_visible(t_game *game, double ang)
 {
-	if (game->sprs[i]->ang < -M_PI)
-		game->sprs[i]->ang += 2.0 * M_PI;
-	if(game->sprs[i]->ang > M_PI)
-		game->sprs[i]->ang -= 2.0 * M_PI;
-	game->sprs[i]->ang = fabs(game->sprs[i]->ang);
-	if (game->sprs[i]->ang < game->player.fov_ang / 2)
-		printf("Ray %d is visibile\n", i);
-}
-void	get_spr_distance(t_game *game, int i)
-{
-	game->sprs[i]->dist = get_distance(game->sprs[i]->x, game->sprs[i]->y,
-							game->player.circle.x, game->player.circle.y);
+	return (ang < game->player.fov_ang / 2);
 }
 
-void	get_spr_height(t_game *game, int i)
+double	get_spr_distance(t_game *game, double spr_x, double spr_y)
 {
-	double distance;
+	double player_x;
+	double player_y;
 
-	distance = (game->sprs[i]->dist / game->minimap_tile.size) * game->cube_size;
-	game->sprs[i]->h = (game->cube_size / distance) * game->player.dtpp;
+	player_x = (game->player.circle.x / game->minimap_tile.size) * game->cube_size;
+	player_y = (game->player.circle.y / game->minimap_tile.size) * game->cube_size;
+	return (get_distance(spr_x, spr_y, player_x, player_y));
 }
 
-void	get_spr_line_pos(t_game *game, int i)
+void	get_spr_pos(t_game *game, int i)
 {
-	game->sprs[i]->start = game->settings.height / 2 - game->sprs[i]->h / 2;
-	game->sprs[i]->end = game->sprs[i]->start + game->sprs[i]->h;
+	double	w_centre;
+	double	h_centre;
+	double	w_spr_centre;
+
+	w_centre = game->settings.width / 2;
+	h_centre = game->settings.height / 2;
+	w_spr_centre = tan(game->sprs[i]->ang) * game->player.dtpp;
+	game->sprs[i]->x_strt = w_centre + w_spr_centre - (game->sprs[i]->txt.width / 2);
+	game->sprs[i]->y_strt = h_centre - (game->sprs[i]->h / 2);
+	if (game->sprs[i]->y_strt < 0)
+		game->sprs[i]->y_strt = 0;
+}
+
+void	sort_sprs(t_game *game)
+{
+	int i;
+	bool sorted;
+	t_sprite *tmp;
+
+	sorted = false;
+	while (!sorted)
+	{
+		i = -1;
+		sorted = true;
+		while (++i < game->sprs_num - 1)
+		{
+			if (game->sprs[i]->dist < game->sprs[i + 1]->dist)
+			{
+				tmp = game->sprs[i];
+				game->sprs[i] = game->sprs[i + 1];
+				game->sprs[i + 1] = tmp;
+				sorted = false;
+			}
+		}
+	}
+}
+
+void	update_sprs(t_game *game)
+{
+	int i;
+	t_sprite *spr;
+
+	i = -1;
+	while (++i < game->sprs_num)
+	{
+		spr = game->sprs[i];
+		spr->dist = get_spr_distance(game, spr->x, spr->y);
+		spr->ang = get_spr_angle(game, spr->x, spr->y);
+		spr->visible = is_spr_visible(game, spr->ang);
+		spr->h = (game->cube_size / spr->dist) * game->player.dtpp;
+		get_spr_pos(game, i);
+	}
+	sort_sprs(game);
+}
+
+void	draw_sprt_strip(t_game *game, t_sprite *spr, int x_tex, int x_pox)
+{
+	int		y;
+	int		y_tex;
+	double	step;
+	double	tex_pox;
+	int		color;
+
+	step = spr->txt.height / spr->h;
+	tex_pox = (spr->y_strt - game->settings.height / 2 + spr->h / 2) * step;
+	y = -1;
+	while (++y < spr->h && y < game->settings.height)
+	{
+		y_tex = (int)tex_pox & (spr->txt.height - 1);
+		tex_pox += step;
+		color = spr->txt.addr[x_tex + y_tex * spr->txt.height];
+		if (color < 0)
+			continue ;
+		game->main_img.addr[x_pox + (spr->y_strt + y) * game->settings.width] = color;
+	}
+}
+
+void	draw_sprt(t_game *game, t_sprite *spr)
+{
+	double	width;
+	int		i;
+	int		j;
+	int x_pox;
+
+	i = -1;
+	width = spr->h / spr->txt.height;
+	while (++i < spr->txt.width)
+	{
+		j = -1;
+		while (++j < width)
+		{
+			x_pox = (int)(spr->x_strt + (i - 1) * width + j);
+			if (x_pox >= 0  && x_pox <= game->settings.width - 1 && spr->dist < game->player.rays[x_pox]->line.size)
+				draw_sprt_strip(game, spr, i, x_pox);
+		}
+	}
+
 }
 void	draw_sprites(t_game *game)
 {
@@ -80,10 +177,7 @@ void	draw_sprites(t_game *game)
 	i = -1;
 	while (++i < game->sprs_num)
 	{
-		update_spr_ang(game, i);
-		update_spr_visibility(game, i);
-		//get_spr_distance(game, i);
-		//get_spr_height(game, i);
-		//get_spr_line_pos(game, i);
+		if (game->sprs[i]->visible)
+			draw_sprt(game, game->sprs[i]);
 	}
 }
