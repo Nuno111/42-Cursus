@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/26 15:01:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/26 15:33:34 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	get_spr_pos(t_game *game, int i)
 	w_centre = game->settings.width / 2;
 	h_centre = game->settings.height / 2;
 	w_spr_centre = tan(game->sprs[i]->ang) * game->player.dtpp;
-	game->sprs[i]->x_strt = w_centre + w_spr_centre - (game->sprs[i]->txt.width / 2);
+	game->sprs[i]->x_strt = w_centre + w_spr_centre - (game->sprs[i]->h / 2);
 	game->sprs[i]->y_strt = h_centre - (game->sprs[i]->h / 2);
 	if (game->sprs[i]->y_strt < 0)
 		game->sprs[i]->y_strt = 0;
@@ -141,11 +141,9 @@ void	draw_sprt_strip(t_game *game, t_sprite *spr, int x_tex, int x_pox)
 	while (++y < spr->h && y < game->settings.height)
 	{
 		y_tex = (int)tex_pox & (spr->txt.height - 1);
-		tex_pox += step;
 		color = spr->txt.addr[x_tex + y_tex * spr->txt.height];
-		if (color < 0)
-			continue ;
 		game->main_img.addr[x_pox + (spr->y_strt + y) * game->settings.width] = color;
+		tex_pox += step;
 	}
 }
 
@@ -164,7 +162,7 @@ void	draw_sprt(t_game *game, t_sprite *spr)
 		while (++j < width)
 		{
 			x_pox = (int)(spr->x_strt + (i - 1) * width + j);
-			if (x_pox >= 0  && x_pox <= game->settings.width - 1 && spr->dist < game->player.rays[x_pox]->line.size)
+			if (x_pox >= 0  && x_pox <= game->settings.width - 1 )
 				draw_sprt_strip(game, spr, i, x_pox);
 		}
 	}

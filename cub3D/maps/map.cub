@@ -4,7 +4,7 @@ SO ./assets/sand.xpm
 WE ./assets/stone.xpm
 EA ./assets/wood.xpm
 
-S ./assets/sky.xpm
+S ./assets/mossy.xpm
 C 255,200,200
 F 122,122,122
 
