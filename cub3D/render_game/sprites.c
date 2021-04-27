@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/26 22:21:15 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/27 14:18:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,16 +157,19 @@ void	draw_sprt(t_game *game, t_sprite *spr)
 	int		i;
 	int		j;
 	int x_pox;
+	double scaled_dist;
 
 	i = -1;
 	width = spr->h / spr->txt.height;
-	while (++i < spr->txt.width)
+	while (++i < spr->txt.width - 1)
 	{
 		j = -1;
 		while (++j < width)
 		{
-			x_pox = (int)(spr->x_strt + (i - 1) * width + j);
-			if (x_pox >= 0  && x_pox <= game->settings.width - 1 && spr->dist < game->player.rays[x_pox]->line.size)
+			x_pox = (int)(spr->x_strt + i * width + j);
+			if (x_pox >= 0  && x_pox <= game->settings.width - 1
+			&& spr->dist < (game->player.rays[x_pox]->line.size / game->minimap_tile.size)
+			 * game->cube_size)
 				draw_sprt_strip(game, spr, i, x_pox);
 		}
 	}
