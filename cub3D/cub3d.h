@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/28 13:15:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:26:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,5 +271,6 @@ double	get_spr_distance(t_game *game, double spr_x, double spr_y);
 double    get_spr_angle(t_game *game, double spr_x, double spr_y);
 bool	is_spr_visible(t_game *game, double ang);
 void	update_sprs(t_game *game);
+void    save_and_exit(t_game *game);
 
 #endif

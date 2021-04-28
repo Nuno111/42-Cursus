@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/28 13:15:04 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:26:53 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static	int    render_next_frame(t_game *game)
 	update_rays(game);
 	update_sprs(game);
 	draw_game(game);
-	//if (screenshot)
-		//save_and_exit(game);
+	if (game->screenshot)
+		save_and_exit(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->main_img.img, 0, 0);
 	mlx_destroy_image(game->mlx, game->main_img.img);
 	game->main_img.img = NULL;
