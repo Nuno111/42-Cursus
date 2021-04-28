@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 12:49:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/26 20:58:30 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 09:39:07 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static	void	init_player(t_game *game)
 	game->player.walk_dir = 0;
 	game->player.move_speed = 1;
 	game->player.rot_speed = deg_to_rad(3);
-	game->player.strafe = false;
 	game->player.fov_ang = deg_to_rad(60);
 	game->player.num_rays = game->settings.width;
 	game->player.rays = malloc(sizeof (t_ray *) * game->player.num_rays);

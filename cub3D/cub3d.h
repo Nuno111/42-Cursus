@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/28 09:28:50 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 09:32:43 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ typedef struct s_player
 	double		fov_ang;
 	int			turn_dir;
 	int			walk_dir;
-	bool		strafe;
 	t_ray		**rays;
 	int			num_rays;
 	double		dtpp;
