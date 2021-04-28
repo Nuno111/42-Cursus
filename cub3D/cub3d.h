@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/28 09:32:43 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:15:17 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ typedef struct s_game
 	t_sprite	**sprs;
 	int			sprs_num;
 	int			cube_size;
+	bool		screenshot;
 }				t_game;
 
 /*

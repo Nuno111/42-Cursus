@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:11:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/28 09:32:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 13:23:02 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	free_sprites(t_game *game)
 	i = -1;
 	while (++i < game->sprs_num)
 		free(game->sprs[i]);
-	free(game->sprs);
+	if (game->sprs)
+		free(game->sprs);
 }
 
 void	exit_game(t_game *game, char *err_msg)
