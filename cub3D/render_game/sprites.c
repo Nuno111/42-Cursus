@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/27 14:18:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 09:30:17 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ void	draw_sprt(t_game *game, t_sprite *spr)
 	int		i;
 	int		j;
 	int x_pox;
-	double scaled_dist;
 
 	i = -1;
 	width = spr->h / spr->txt.height;

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:08:33 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 09:30:32 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,4 @@ void	validate_map(t_scene *settings)
 	verify_position(settings);
 	create_fake_map(settings);
 	verify_walls(settings, settings->map);
-	for (int i = 0; settings->map[i] != 0; i++)
-		printf("%s\n", settings->map[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/26 12:55:23 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 09:28:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # define D 2
 # define S 1
 # define A 0
+# define UP 1
+# define RIGHT 2
+# define DOWN 3
+# define LEFT 4
 # define ESC 53
 # define ARR_LEFT 123
 # define ARR_RIGHT 124

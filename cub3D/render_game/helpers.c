@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 11:11:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 17:28:40 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/04/28 09:29:07 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,13 @@ int		key_press(int keycode, t_game *game)
 	if (keycode == 65307 || keycode == ESC)
 		exit_game(game, NULL);
 	if (keycode == 119 || keycode == W)
-		game->player.walk_dir = 1;
+		game->player.walk_dir = UP;
 	else if (keycode == 100 || keycode == D)
-	{
-		game->player.walk_dir = 1;
-		game->player.strafe = true;
-	}
+		game->player.walk_dir = RIGHT;
 	else if (keycode == 115 || keycode == S)
-		game->player.walk_dir = -1;
+		game->player.walk_dir = DOWN;
 	else if (keycode == 97 || keycode == A)
-	{
-		game->player.strafe = true;
-		game->player.walk_dir = -1;
-	}
+		game->player.walk_dir = LEFT;
 	else if (keycode == 65361 || keycode == ARR_LEFT)
 		game->player.turn_dir = -1;
 	else if (keycode == 65363 || keycode == ARR_RIGHT)
