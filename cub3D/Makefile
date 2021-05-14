@@ -20,7 +20,7 @@ DEP_FLAGS = -I. -Ilibs/libft/libft
 
 LIBFT = libs/libft/libft.a
 
-SRC0 = $(wildcard validate_settings/*.c)
+SRC0 = $(wildcard validate_stg/*.c)
 
 DST0 = $(SRC0:.c=.o)
 
@@ -54,7 +54,7 @@ $(CUB3DLIB) : $(DST0) $(DST1) $(DST2)
 libft:
 	cd libs/libft && $(MAKE)
 
-validate_settings/%.o : validate_settings/%.c cub3d.h
+validate_stg/%.o : validate_stg/%.c cub3d.h
 	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) -c $(DEP_FLAGS)  $< -o $@
 
 render_game/%.o : render_game/%.c cub3d.h

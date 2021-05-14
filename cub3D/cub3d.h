@@ -36,7 +36,7 @@ typedef struct	s_img
 {
     void		*img;
     int			*addr;
-    int			bits_per_pixel;
+    int			bpp;
     int			line_length;
     int			endian;
 	int			width;

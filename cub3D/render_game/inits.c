@@ -55,11 +55,11 @@ static	void	init_txts(t_game *game)
 	game->txts.so.img = mlx_xpm_file_to_image(game->mlx, game->stg.so, &game->txts.so.width, &game->txts.so.height);
 	game->txts.we.img = mlx_xpm_file_to_image(game->mlx, game->stg.we, &game->txts.we.width, &game->txts.we.height);
 	game->txts.spr.img = mlx_xpm_file_to_image(game->mlx, game->stg.sprite, &game->txts.spr.width, &game->txts.spr.height);
-	game->txts.no.addr = (int *)mlx_get_data_addr(game->txts.no.img, &game->txts.no.bits_per_pixel, &game->txts.no.line_length, &game->txts.no.endian);
-	game->txts.ea.addr = (int *)mlx_get_data_addr(game->txts.ea.img, &game->txts.ea.bits_per_pixel, &game->txts.ea.line_length, &game->txts.ea.endian);
-	game->txts.so.addr = (int *)mlx_get_data_addr(game->txts.so.img, &game->txts.so.bits_per_pixel, &game->txts.so.line_length, &game->txts.so.endian);
-	game->txts.we.addr = (int *)mlx_get_data_addr(game->txts.we.img, &game->txts.we.bits_per_pixel, &game->txts.we.line_length, &game->txts.we.endian);
-	game->txts.spr.addr = (int *)mlx_get_data_addr(game->txts.spr.img, &game->txts.spr.bits_per_pixel, &game->txts.spr.line_length, &game->txts.spr.endian);
+	game->txts.no.addr = (int *)mlx_get_data_addr(game->txts.no.img, &game->txts.no.bpp, &game->txts.no.line_length, &game->txts.no.endian);
+	game->txts.ea.addr = (int *)mlx_get_data_addr(game->txts.ea.img, &game->txts.ea.bpp, &game->txts.ea.line_length, &game->txts.ea.endian);
+	game->txts.so.addr = (int *)mlx_get_data_addr(game->txts.so.img, &game->txts.so.bpp, &game->txts.so.line_length, &game->txts.so.endian);
+	game->txts.we.addr = (int *)mlx_get_data_addr(game->txts.we.img, &game->txts.we.bpp, &game->txts.we.line_length, &game->txts.we.endian);
+	game->txts.spr.addr = (int *)mlx_get_data_addr(game->txts.spr.img, &game->txts.spr.bpp, &game->txts.spr.line_length, &game->txts.spr.endian);
 }
 
 void	init_wall_vars(t_ray *ray)

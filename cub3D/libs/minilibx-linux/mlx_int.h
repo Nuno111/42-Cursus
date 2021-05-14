@@ -11,7 +11,7 @@
 
 
 /*
-** Internal settings for MiniLibX
+** Internal stg for MiniLibX
 */
 
 #ifndef MLX_INT_H

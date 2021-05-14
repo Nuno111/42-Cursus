@@ -27,7 +27,7 @@ static	void	draw_game(t_game *game)
 static	int	render_next_frame(t_game *game)
 {
 	game->img.img = mlx_new_image(game->mlx, game->stg.w, game->stg.h);
-	game->img.addr = (int *)mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
+	game->img.addr = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, &game->img.line_length, &game->img.endian);
     update_player(game);
 	reset_rays(game);
 	update_rays(game);
