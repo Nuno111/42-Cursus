@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:20:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 12:05:31 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:53:38 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	void	parse_line(t_scene *settings)
 
 	if (*settings->line == '\0')
 		return ;
-	if (settings->width && settings->height && settings->no && settings->ea && settings->we
+	if (settings->w && settings->h && settings->no && settings->ea && settings->we
 	&& settings->so && settings->sprite && settings->floor && settings->ceil)
 		parse_map(settings->line, settings);
 	else

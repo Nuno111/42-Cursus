@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 16:37:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:58:49 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	get_spr_pos(t_game *game, int i)
 	double	x_spr_centre;
 	double	y_spr_centre;
 
-	x_centre = game->settings.width / 2;
+	x_centre = game->settings.w / 2;
 	x_spr_centre = tan(game->sprs[i]->ang) * game->player.dtpp;
-	y_centre = game->settings.height / 2;
+	y_centre = game->settings.h / 2;
 	y_spr_centre = game->sprs[i]->h / 2;
 	game->sprs[i]->x_strt = x_centre + x_spr_centre - (game->sprs[i]->h / 2);
 	game->sprs[i]->y_strt = y_centre - y_spr_centre;
@@ -138,16 +138,16 @@ void	draw_sprt_strip(t_game *game, t_sprite *spr, int x_tex, int x_pox)
 	int		color;
 
 	step = spr->txt.height / spr->h;
-	tex_pox = (spr->y_strt - game->settings.height / 2 + spr->h / 2) * step;
+	tex_pox = (spr->y_strt - game->settings.h / 2 + spr->h / 2) * step;
 	y = -1;
-	while (++y < spr->h && y < game->settings.height)
+	while (++y < spr->h && y < game->settings.h)
 	{
 		y_tex = (int)tex_pox & (spr->txt.height - 1);
 		tex_pox += step;
 		color = spr->txt.addr[x_tex + y_tex * spr->txt.height];
 		if (color < 0)
 			continue ;
-		game->img.addr[x_pox + (spr->y_strt + y) * game->settings.width] = color;
+		game->img.addr[x_pox + (spr->y_strt + y) * game->settings.w] = color;
 	}
 }
 
@@ -166,7 +166,7 @@ void	draw_sprt(t_game *game, t_sprite *spr)
 		while (++j < width)
 		{
 			x_pox = (int)(spr->x_strt + i * width + j);
-			if (x_pox >= 0  && x_pox <= game->settings.width - 1
+			if (x_pox >= 0  && x_pox <= game->settings.w - 1
 			&& spr->dist < (game->player.rays[x_pox]->line.size / game->minimap_tile.size)
 			 * game->cube_size)
 				draw_sprt_strip(game, spr, i, x_pox);

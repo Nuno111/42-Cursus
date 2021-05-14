@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:17:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/28 14:26:07 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:56:01 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    save_and_exit(t_game *game)
 	fd = open("rendered_image.bmp", O_RDWR);
 	ft_putchar_fd('B', fd);
 	ft_putchar_fd('M', fd);
-	ft_putnbr_fd(game->settings.width * game->settings.height + 40, fd);
+	ft_putnbr_fd(game->settings.w * game->settings.h + 40, fd);
 	close(fd);
 	exit_game(game, NULL);
 }

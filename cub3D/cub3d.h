@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 16:34:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:50:11 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ typedef struct		s_scene
 	char	**map;
 	size_t	map_width;
 	size_t	map_size;
-	int				width;
-	int				height;
+	int				w;
+	int				h;
 }					t_scene;
 
 typedef struct	s_circle

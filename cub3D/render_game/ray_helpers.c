@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 13:39:24 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 13:11:21 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:58:23 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ double		normalize_angle(double ray_ang)
 
 void		did_ray_hit_wall(t_game *game, t_ray *ray, t_intercect intercect, bool hrzt)
 {
-	while (intercect.x < game->settings.width && intercect.y < game->settings.height &&
+	while (intercect.x < game->settings.w && intercect.y < game->settings.h &&
 			intercect.x > 0 && intercect.y > 0)
 	{
 		if (is_wall(intercect.x, intercect.y, game))
