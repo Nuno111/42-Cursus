@@ -35,12 +35,12 @@ void	init_sprites(t_game *game)
 	int y;
 
 	y = 0;
-	while (game->settings.map[y])
+	while (game->stg.map[y])
 	{
 		x = 0;
-		while (game->settings.map[y][x])
+		while (game->stg.map[y][x])
 		{
-			if (game->settings.map[y][x] == '2')
+			if (game->stg.map[y][x] == '2')
 				init_sprite(game, x, y);
 			x++;
 		}

@@ -180,7 +180,7 @@ typedef struct s_game
 	void    *win;
 	t_player	player;
 	t_square	minimap_tile;
-	t_scene		stg;
+	t_scene		settings;
 	t_img		img;
 	t_txts		txts;
 	t_sprite	**sprs;
@@ -199,23 +199,23 @@ int	get_g(int trgb);
 int	get_b(int trgb);
 
 /*
-validate_stg
+validate_settings
 */
-void	error_and_exit_stg(t_scene *stg, char *err_msg);
-void	init_stg(t_scene *stg);
-void	free_stg(t_scene *stg);
-void	validate_map(t_scene *stg);
-char	**linked_to_array(t_scene *stg, t_list *head);
-void	verify_position(t_scene *stg);
+void	error_and_exit_settings(t_scene *settings, char *err_msg);
+void	init_settings(t_scene *settings);
+void	free_settings(t_scene *settings);
+void	validate_map(t_scene *settings);
+char	**linked_to_array(t_scene *settings, t_list *head);
+void	verify_position(t_scene *settings);
 bool	verify_str(char *str, bool whole);
 char	*replace_tabs(char *str);
 bool    validate_name(char *file);
-void	validate_floor_ceil(t_scene *stg, t_color **floor_or_ceil, char **strs);
-void	validate_r(t_scene *stg, char **strs);
-void	validate_textures(t_scene *stg, char **path, char **strs);
-void	parse_stg(t_scene *stg, char *file);
-void	create_fake_map(t_scene *stg);
-void	verify_walls(t_scene *stg, char **m);
+void	validate_floor_ceil(t_scene *settings, t_color **floor_or_ceil, char **strs);
+void	validate_r(t_scene *settings, char **strs);
+void	validate_textures(t_scene *settings, char **path, char **strs);
+void	parse_settings(t_scene *settings, char *file);
+void	create_fake_map(t_scene *settings);
+void	verify_walls(t_scene *settings, char **m);
 bool	validate_string(char *str);
 
 /*
@@ -236,7 +236,7 @@ int		handle_click(int btn, int x, int y, t_game *game);
 /*
 Draw game functions
 */
-void	draw_minimap(t_scene *stg, t_game *game);
+void	draw_minimap(t_scene *settings, t_game *game);
 void	draw_rays(t_game *game);
 void	draw_walls(t_game *game);
 void	draw_floor_ceil(t_game *game, t_color color, bool floor);

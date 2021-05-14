@@ -30,7 +30,7 @@ double		normalize_angle(double ray_ang)
 
 void		did_ray_hit_wall(t_game *game, t_ray *ray, t_intercect intercect, bool hrzt)
 {
-	while (intercect.x < game->settings.w && intercect.y < game->settings.h &&
+	while (intercect.x < game->stg.w && intercect.y < game->stg.h &&
 			intercect.x > 0 && intercect.y > 0)
 	{
 		if (is_wall(intercect.x, intercect.y, game))

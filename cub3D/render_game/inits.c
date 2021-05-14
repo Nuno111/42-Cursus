@@ -12,22 +12,22 @@
 
 #include "cub3d.h"
 
-void	init_settings(t_scene *settings)
+void	init_stg(t_scene *stg)
 {
-	settings->h = 0;
-	settings->w = 0;
-	settings->no = NULL;
-	settings->so = NULL;
-	settings->we = NULL;
-	settings->ea = NULL;
-	settings->sprite = NULL;
-	settings->floor = NULL;
-	settings->ceil = NULL;
-	settings->tmp_map = NULL;
-	settings->map = NULL;
-	settings->map_width = 0;
-	settings->map_size = 0;
-	settings->line = NULL;
+	stg->h = 0;
+	stg->w = 0;
+	stg->no = NULL;
+	stg->so = NULL;
+	stg->we = NULL;
+	stg->ea = NULL;
+	stg->sprite = NULL;
+	stg->floor = NULL;
+	stg->ceil = NULL;
+	stg->tmp_map = NULL;
+	stg->map = NULL;
+	stg->map_width = 0;
+	stg->map_size = 0;
+	stg->line = NULL;
 }
 
 static	void	init_player(t_game *game)
@@ -41,20 +41,20 @@ static	void	init_player(t_game *game)
 	game->player.move_speed = 1;
 	game->player.rot_speed = deg_to_rad(3);
 	game->player.fov_ang = deg_to_rad(60);
-	game->player.num_rays = game->settings.w;
+	game->player.num_rays = game->stg.w;
 	game->player.rays = malloc(sizeof (t_ray *) * game->player.num_rays);
-	game->player.dtpp = (game->settings.w / 2) / tan(game->player.fov_ang / 2);
+	game->player.dtpp = (game->stg.w / 2) / tan(game->player.fov_ang / 2);
 	game->player.ang_inc = game->player.fov_ang / game->player.num_rays;
 	if (!game->player.rays)
 		exit_game(game, "Error\nUnable to allocate memory for rays");
 }
 static	void	init_txts(t_game *game)
 {
-	game->txts.no.img = mlx_xpm_file_to_image(game->mlx, game->settings.no, &game->txts.no.width, &game->txts.no.height);
-	game->txts.ea.img = mlx_xpm_file_to_image(game->mlx, game->settings.ea, &game->txts.ea.width, &game->txts.ea.height);
-	game->txts.so.img = mlx_xpm_file_to_image(game->mlx, game->settings.so, &game->txts.so.width, &game->txts.so.height);
-	game->txts.we.img = mlx_xpm_file_to_image(game->mlx, game->settings.we, &game->txts.we.width, &game->txts.we.height);
-	game->txts.spr.img = mlx_xpm_file_to_image(game->mlx, game->settings.sprite, &game->txts.spr.width, &game->txts.spr.height);
+	game->txts.no.img = mlx_xpm_file_to_image(game->mlx, game->stg.no, &game->txts.no.width, &game->txts.no.height);
+	game->txts.ea.img = mlx_xpm_file_to_image(game->mlx, game->stg.ea, &game->txts.ea.width, &game->txts.ea.height);
+	game->txts.so.img = mlx_xpm_file_to_image(game->mlx, game->stg.so, &game->txts.so.width, &game->txts.so.height);
+	game->txts.we.img = mlx_xpm_file_to_image(game->mlx, game->stg.we, &game->txts.we.width, &game->txts.we.height);
+	game->txts.spr.img = mlx_xpm_file_to_image(game->mlx, game->stg.sprite, &game->txts.spr.width, &game->txts.spr.height);
 	game->txts.no.addr = (int *)mlx_get_data_addr(game->txts.no.img, &game->txts.no.bits_per_pixel, &game->txts.no.line_length, &game->txts.no.endian);
 	game->txts.ea.addr = (int *)mlx_get_data_addr(game->txts.ea.img, &game->txts.ea.bits_per_pixel, &game->txts.ea.line_length, &game->txts.ea.endian);
 	game->txts.so.addr = (int *)mlx_get_data_addr(game->txts.so.img, &game->txts.so.bits_per_pixel, &game->txts.so.line_length, &game->txts.so.endian);
@@ -76,9 +76,9 @@ void	init_wall_vars(t_ray *ray)
 void    init_stuff(t_game *game)
 {
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->settings.w, game->settings.h, "CUB3D");
+	game->win = mlx_new_window(game->mlx, game->stg.w, game->stg.h, "CUB3D");
 	game->cube_size = 64;
-	game->minimap_tile.size = (game->settings.w / game->settings.map_width) / 3;
+	game->minimap_tile.size = (game->stg.w / game->stg.map_width) / 3;
 	game->sprs_num = 0;
 	game->sprs = malloc(sizeof(t_sprite *));
 	init_player(game);

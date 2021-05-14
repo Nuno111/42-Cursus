@@ -19,7 +19,7 @@ void    save_and_exit(t_game *game)
 	fd = open("rendered_image.bmp", O_RDWR);
 	ft_putchar_fd('B', fd);
 	ft_putchar_fd('M', fd);
-	ft_putnbr_fd(game->settings.w * game->settings.h + 40, fd);
+	ft_putnbr_fd(game->stg.w * game->stg.h + 40, fd);
 	close(fd);
 	exit_game(game, NULL);
 }

@@ -20,20 +20,20 @@ void	draw_floor_ceil(t_game *game, t_color color, bool floor)
 
 	if (floor)
 	{
-		max = game->settings.h / 2;
+		max = game->stg.h / 2;
 		y = -1;
 	}
 	else
 	{
-		max = game->settings.h;
-		y = game->settings.h / 2 - 1;
+		max = game->stg.h;
+		y = game->stg.h / 2 - 1;
 	}
 	color.trgb = create_trgb(0, color.r, color.g, color.b);
 	while (++y < max)
 	{
 		x = -1;
-		while (++x < game->settings.w)
-			game->img.addr[x + y * game->settings.w] = color.trgb;
+		while (++x < game->stg.w)
+			game->img.addr[x + y * game->stg.w] = color.trgb;
 	}
 }
 
@@ -46,14 +46,14 @@ static	void	draw_wall_line(t_game *game, t_wall wall, int i)
 	double	tex_pox;
 
 	step = wall.tex.height / wall.height;
-	tex_pox = (wall.y - game->settings.h / 2 + wall.height / 2) * step;
+	tex_pox = (wall.y - game->stg.h / 2 + wall.height / 2) * step;
 	x_tex = fmod((game->player.rays[i]->w_txt_pixel / game->minimap_tile.size)
 			* game->cube_size, wall.tex.width - 1);
 	y = -1;
-	while (++y < wall.height && y < game->settings.h)
+	while (++y < wall.height && y < game->stg.h)
 	{
 		y_tex = (int)tex_pox & (wall.tex.height - 1);
-		game->img.addr[wall.x + (wall.y + y) * game->settings.w]
+		game->img.addr[wall.x + (wall.y + y) * game->stg.w]
 			= wall.tex.addr[y_tex * wall.tex.height + x_tex];
 		tex_pox += step;
 	}
@@ -69,7 +69,7 @@ void	draw_walls(t_game *game)
 	{
 		wall.height = get_wall_height(game, game->player.rays[i]);
 		wall.x = i;
-		wall.y = (game->settings.h / 2) - (wall.height / 2);
+		wall.y = (game->stg.h / 2) - (wall.height / 2);
 		if (wall.y < 0)
 			wall.y = 0;
 		wall.tex = assign_wall_texture(game, *game->player.rays[i]);
@@ -78,27 +78,27 @@ void	draw_walls(t_game *game)
 	}
 }
 
-void	draw_minimap(t_scene *settings, t_game *game)
+void	draw_minimap(t_scene *stg, t_game *game)
 {
 	int	width;
 	int	height;
 
 	height = 1;
-	while (settings->map[height + 1])
+	while (stg->map[height + 1])
 	{
 		width = 1;
-		while (settings->map[height][width + 1])
+		while (stg->map[height][width + 1])
 		{
-			if (settings->map[height][width] == '1')
+			if (stg->map[height][width] == '1')
 				game->minimap_tile.color = 0x293250;
-			else if (settings->map[height][width] == '0'
-				|| ft_strchr("NESW", settings->map[height][width]))
+			else if (stg->map[height][width] == '0'
+				|| ft_strchr("NESW", stg->map[height][width]))
 				game->minimap_tile.color = 0xFFD55A;
 			else
 				game->minimap_tile.color = 0x001FFF;
 			game->minimap_tile.x = width * game->minimap_tile.size;
 			game->minimap_tile.y = height * game->minimap_tile.size;
-			draw_square(&game->img, game->minimap_tile, game->settings.w);
+			draw_square(&game->img, game->minimap_tile, game->stg.w);
 			width++;
 		}
 		height++;
@@ -111,5 +111,5 @@ void	draw_rays(t_game *game)
 
 	i = -1;
 	while (++i < game->player.num_rays)
-		draw_line(&game->img, game->player.rays[i]->line, game->settings.w);
+		draw_line(&game->img, game->player.rays[i]->line, game->stg.w);
 }

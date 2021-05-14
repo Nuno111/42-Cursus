@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-void	error_and_exit_settings(t_scene *settings, char *err_msg)
+void	error_and_exit_stg(t_scene *stg, char *err_msg)
 {
-	free_settings(settings);
+	free_stg(stg);
 	printf("%s\n", err_msg);
 	exit(SUCCESS);
 }
@@ -32,7 +32,7 @@ void	free_sprites(t_game *game)
 
 void	exit_game(t_game *game, char *err_msg)
 {
-	free_settings(&game->settings);
+	free_stg(&game->stg);
 	free_sprites(game);
 	if (err_msg)
 	{

@@ -14,19 +14,19 @@
 
 static	void	draw_game(t_game *game)
 {
-	draw_floor_ceil(game, *game->settings.floor, true);
-	draw_floor_ceil(game, *game->settings.ceil, false);
+	draw_floor_ceil(game, *game->stg.floor, true);
+	draw_floor_ceil(game, *game->stg.ceil, false);
 	draw_walls(game);
 	draw_sprites(game);
-	draw_minimap(&game->settings, game);
-	draw_circle(&game->img, game->player.circle, game->settings.w);
-	draw_inner_circle(&game->img, game->player.circle, game->settings.w);
+	draw_minimap(&game->stg, game);
+	draw_circle(&game->img, game->player.circle, game->stg.w);
+	draw_inner_circle(&game->img, game->player.circle, game->stg.w);
 	draw_rays(game);
 }
 
 static	int	render_next_frame(t_game *game)
 {
-	game->img.img = mlx_new_image(game->mlx, game->settings.w, game->settings.h);
+	game->img.img = mlx_new_image(game->mlx, game->stg.w, game->stg.h);
 	game->img.addr = (int *)mlx_get_data_addr(game->img.img, &game->img.bits_per_pixel, &game->img.line_length, &game->img.endian);
     update_player(game);
 	reset_rays(game);

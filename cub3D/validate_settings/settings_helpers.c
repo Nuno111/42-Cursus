@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings_helpers.c                                 :+:      :+:    :+:   */
+/*   stg_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -43,26 +43,26 @@ bool	validate_string(char *str)
 }
 
 
-void	free_settings(t_scene *settings)
+void	free_stg(t_scene *stg)
 {
-	if (settings->no)
-		free(settings->no);
-	if (settings->so)
-		free(settings->so);
-	if (settings->we)
-		free(settings->we);
-	if (settings->ea)
-		free(settings->ea);
-	if (settings->sprite)
-		free(settings->sprite);
-	if (settings->floor)
-		free(settings->floor);
-	if (settings->ceil)
-		free(settings->ceil);
-	if (settings->tmp_map)
-		ft_free_list(&settings->tmp_map);
-	if (settings->map)
-		ft_freearrays(settings->map);
-	if (settings->line)
-		free(settings->line);
+	if (stg->no)
+		free(stg->no);
+	if (stg->so)
+		free(stg->so);
+	if (stg->we)
+		free(stg->we);
+	if (stg->ea)
+		free(stg->ea);
+	if (stg->sprite)
+		free(stg->sprite);
+	if (stg->floor)
+		free(stg->floor);
+	if (stg->ceil)
+		free(stg->ceil);
+	if (stg->tmp_map)
+		ft_free_list(&stg->tmp_map);
+	if (stg->map)
+		ft_freearrays(stg->map);
+	if (stg->line)
+		free(stg->line);
 }

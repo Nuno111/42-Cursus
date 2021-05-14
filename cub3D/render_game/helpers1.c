@@ -20,9 +20,9 @@ bool	is_wall(double x, double y, t_game *game)
 
 	index_w = x / game->minimap_tile.size;
 	index_h = y / game->minimap_tile.size;
-	if (index_w >= game->settings.map_width || index_h >= game->settings.map_size)
+	if (index_w >= game->stg.map_width || index_h >= game->stg.map_size)
 		return (false);
-	c = game->settings.map[index_h][index_w];
+	c = game->stg.map[index_h][index_w];
 	if (c == '1')
 		return (true);
 	return (false);
@@ -36,9 +36,9 @@ bool	is_sprite(double x, double y, t_game *game)
 
 	index_w = x / game->minimap_tile.size;
 	index_h = y / game->minimap_tile.size;
-	if (index_w >= game->settings.map_width || index_h >= game->settings.map_size)
+	if (index_w >= game->stg.map_width || index_h >= game->stg.map_size)
 		return (false);
-	c = game->settings.map[index_h][index_w];
+	c = game->stg.map[index_h][index_w];
 	if (c == '2')
 		return (true);
 	return (false);

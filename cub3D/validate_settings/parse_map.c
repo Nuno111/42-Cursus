@@ -36,7 +36,7 @@ char	*replace_tabs(char *str)
 	return (new);
 }
 
-void	verify_position(t_scene *settings)
+void	verify_position(t_scene *stg)
 {
 	int		i;
 	int		j;
@@ -45,25 +45,25 @@ void	verify_position(t_scene *settings)
 
 	position_found = false;
 	i = 0;
-	while (settings->map[i])
+	while (stg->map[i])
 	{
 		j = 0;
-		while (settings->map[i][j])
+		while (stg->map[i][j])
 		{
-			valid_char = ft_strchr("NESW", settings->map[i][j]);
+			valid_char = ft_strchr("NESW", stg->map[i][j]);
 			if (valid_char && !position_found)
 				position_found = true;
 			else if (valid_char)
-				error_and_exit_settings(settings, "Error\nOnly one starting postion must be given.");
+				error_and_exit_stg(stg, "Error\nOnly one starting postion must be given.");
 			j++;
 		}
 		i++;
 	}
 	if (!position_found)
-		error_and_exit_settings(settings, "Error\nNo player starting position has been given");
+		error_and_exit_stg(stg, "Error\nNo player starting position has been given");
 }
 
-void	verify_walls(t_scene *settings, char **m)
+void	verify_walls(t_scene *stg, char **m)
 {
 	size_t i;
 	size_t j;
@@ -73,10 +73,10 @@ void	verify_walls(t_scene *settings, char **m)
 	charset = "NESW02";
 	valid = "1+ ";
 	i = 1;
-	while (i < settings->map_size)
+	while (i < stg->map_size)
 	{
 		j = 1;
-		while (j < settings->map_width - 1)
+		while (j < stg->map_width - 1)
 		{
 			if (m[i][j] == ' ')
 			{
@@ -89,7 +89,7 @@ void	verify_walls(t_scene *settings, char **m)
 				|| !ft_strchr(valid, m[i + 1][j])
 				|| !ft_strchr(valid, m[i + 1][j + 1])
 				)
-					error_and_exit_settings(settings, "Error\nMap is not properly surrounded by walls.");
+					error_and_exit_stg(stg, "Error\nMap is not properly surrounded by walls.");
 			}
 			if (ft_strchr(charset, m[i][j]))
 			{
@@ -102,7 +102,7 @@ void	verify_walls(t_scene *settings, char **m)
 				|| m[i + 1][j] == '+'
 				|| m[i + 1][j + 1] == '+'
 				)
-					error_and_exit_settings(settings, "Error\nMap is not properly surrounded by walls.");
+					error_and_exit_stg(stg, "Error\nMap is not properly surrounded by walls.");
 			}
 			j++;
 		}
@@ -110,7 +110,7 @@ void	verify_walls(t_scene *settings, char **m)
 	}
 }
 
-char	**linked_to_array(t_scene *settings, t_list *head)
+char	**linked_to_array(t_scene *stg, t_list *head)
 {
 	int		size;
 	char	**arr;
@@ -120,7 +120,7 @@ char	**linked_to_array(t_scene *settings, t_list *head)
 	i = 0;
 	size = ft_lstsize(head);
 	if (size <= 0)
-		error_and_exit_settings(settings, "Error\nScene description incomplete, RTFM.");
+		error_and_exit_stg(stg, "Error\nScene description incomplete, RTFM.");
 	arr = malloc(sizeof(char *) * (size + 1));
 	if (!arr)
 		return (NULL);

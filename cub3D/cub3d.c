@@ -16,9 +16,9 @@ int	main(int argc, char *argv[])
 {
 	t_game	game;
 
-	init_settings(&game.settings);
+	init_stg(&game.stg);
 	if (argc < 2 || argc > 3)
-		error_and_exit_settings(&game.settings,
+		error_and_exit_stg(&game.stg,
 			"Error\nTwo or three arguments needed.");
 	game.screenshot = false;
 	if (argc == 3)
@@ -26,10 +26,10 @@ int	main(int argc, char *argv[])
 		if (ft_strcmp("--save", argv[2]) == 0)
 			game.screenshot = true;
 		else
-			error_and_exit_settings(&game.settings,
+			error_and_exit_stg(&game.stg,
 				"Error\nThird argument not properly formatted.");
 	}
-	parse_settings(&game.settings, argv[1]);
+	parse_stg(&game.stg, argv[1]);
 	render_game(&game);
 	return (0);
 }

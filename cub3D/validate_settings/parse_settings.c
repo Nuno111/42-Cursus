@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_settings.c                                   :+:      :+:    :+:   */
+/*   parse_stg.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static	void	parse_map(char *line, t_scene *settings)
+static	void	parse_map(char *line, t_scene *stg)
 {
 	int		i;
 	char	*valid;
@@ -28,78 +28,78 @@ static	void	parse_map(char *line, t_scene *settings)
 	if (valid)
 	{
 		node = ft_lstnew(ft_strdup(line));
-		ft_lstadd_back(&settings->tmp_map, node);
+		ft_lstadd_back(&stg->tmp_map, node);
 	}
 	else
-		error_and_exit_settings(settings, "Error\nForbidden character found when parsing map.");
+		error_and_exit_stg(stg, "Error\nForbidden character found when parsing map.");
 }
 
-static	void	verify_identifiers(char **strs, t_scene *settings)
+static	void	verify_identifiers(char **strs, t_scene *stg)
 {
 	char *identifier;
 
 	identifier = strs[0];
 	if (!identifier || !strs[1])
-		error_and_exit_settings(settings, "Error\nProblem found when handling paths.");
+		error_and_exit_stg(stg, "Error\nProblem found when handling paths.");
 	if (ft_strcmp(identifier, "R") == 0)
-		validate_r(settings, strs);
+		validate_r(stg, strs);
 	else if (ft_strcmp(identifier, "NO") == 0)
-		validate_textures(settings, &settings->no, strs);
+		validate_textures(stg, &stg->no, strs);
 	else if (ft_strcmp(identifier, "SO") == 0)
-		validate_textures(settings, &settings->so, strs);
+		validate_textures(stg, &stg->so, strs);
 	else if (ft_strcmp(identifier, "EA") == 0)
-		validate_textures(settings, &settings->ea, strs);
+		validate_textures(stg, &stg->ea, strs);
 	else if (ft_strcmp(identifier, "WE") == 0)
-		validate_textures(settings, &settings->we, strs);
+		validate_textures(stg, &stg->we, strs);
 	else if (ft_strcmp(identifier, "S") == 0)
-		validate_textures(settings, &settings->sprite, strs);
+		validate_textures(stg, &stg->sprite, strs);
 	else if (ft_strcmp(identifier, "F") == 0)
-		validate_floor_ceil(settings, &settings->floor, strs);
+		validate_floor_ceil(stg, &stg->floor, strs);
 	else if (ft_strcmp(identifier, "C") == 0)
-		validate_floor_ceil(settings, &settings->ceil, strs);
+		validate_floor_ceil(stg, &stg->ceil, strs);
 	else
-		error_and_exit_settings(settings, "Error\nInvalid string found when parsing map settings.");
+		error_and_exit_stg(stg, "Error\nInvalid string found when parsing map stg.");
 }
 
-static	void	parse_line(t_scene *settings)
+static	void	parse_line(t_scene *stg)
 {
 	char **strs;
 	char	*trimmed;
 
-	if (*settings->line == '\0')
+	if (*stg->line == '\0')
 		return ;
-	if (settings->w && settings->h && settings->no && settings->ea && settings->we
-	&& settings->so && settings->sprite && settings->floor && settings->ceil)
-		parse_map(settings->line, settings);
+	if (stg->w && stg->h && stg->no && stg->ea && stg->we
+	&& stg->so && stg->sprite && stg->floor && stg->ceil)
+		parse_map(stg->line, stg);
 	else
 	{
-		trimmed = ft_strtrim(settings->line, " \n\t\v\f\r");
-		free(settings->line);
-		settings->line = trimmed;
-		strs = ft_split(settings->line, ' ');
-		verify_identifiers(strs, settings);
+		trimmed = ft_strtrim(stg->line, " \n\t\v\f\r");
+		free(stg->line);
+		stg->line = trimmed;
+		strs = ft_split(stg->line, ' ');
+		verify_identifiers(strs, stg);
 		ft_freearrays(strs);
 	}
 }
 
-void    parse_settings(t_scene *settings, char *file)
+void    parse_stg(t_scene *stg, char *file)
 {
 	int ret;
 	int fd;
 
 	if (!validate_name(file))
-		error_and_exit_settings(settings, "Error\nInvalid name. File must end with .cub.");
+		error_and_exit_stg(stg, "Error\nInvalid name. File must end with .cub.");
 	ret = 1;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		error_and_exit_settings(settings, "Error\nCould not open the file for reading.");
+		error_and_exit_stg(stg, "Error\nCould not open the file for reading.");
 	while (ret > 0)
 	{
-		ret = get_next_line(fd, &settings->line);
-		parse_line(settings);
-		free(settings->line);
-		settings->line = NULL;
+		ret = get_next_line(fd, &stg->line);
+		parse_line(stg);
+		free(stg->line);
+		stg->line = NULL;
 	}
-	validate_map(settings);
+	validate_map(stg);
 	close(fd);
 }

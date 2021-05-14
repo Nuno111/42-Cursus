@@ -12,32 +12,32 @@
 
 #include "cub3d.h"
 
-void	validate_r(t_scene *settings, char **strs)
+void	validate_r(t_scene *stg, char **strs)
 {
-	if (!strs[1] || !strs[2] || strs[3] || settings->w)
-		error_and_exit_settings(settings, "Error\nProblem when handling resolution.");
+	if (!strs[1] || !strs[2] || strs[3] || stg->w)
+		error_and_exit_stg(stg, "Error\nProblem when handling resolution.");
 	if (ft_str_is_numeric(strs[1]) && ft_str_is_numeric(strs[2]))
 	{
-		settings->w = ft_atoi(strs[1]);
-		settings->h = ft_atoi(strs[2]);
-		if (settings->w <= 0 || settings->w > 1920 || settings->h <= 0 || settings->h > 1080)
-			error_and_exit_settings(settings, "Error\nInvalid input for window resolution.");
+		stg->w = ft_atoi(strs[1]);
+		stg->h = ft_atoi(strs[2]);
+		if (stg->w <= 0 || stg->w > 1920 || stg->h <= 0 || stg->h > 1080)
+			error_and_exit_stg(stg, "Error\nInvalid input for window resolution.");
 	}
 	else
-		error_and_exit_settings(settings, "Error\nInvalid string format when checking resolution values.");
+		error_and_exit_stg(stg, "Error\nInvalid string format when checking resolution values.");
 }
 
-void	validate_floor_ceil(t_scene *settings, t_color **floor_or_ceil, char **strs)
+void	validate_floor_ceil(t_scene *stg, t_color **floor_or_ceil, char **strs)
 {
 	t_color	*tmp;
 	char	**tmp_strs;
 
 	tmp = NULL;
 	if (*floor_or_ceil || !validate_string(strs[1]) || strs[2])
-		error_and_exit_settings(settings, "Error\nString is not properly formatted.");
+		error_and_exit_stg(stg, "Error\nString is not properly formatted.");
 	tmp_strs = ft_split(strs[1], ',');
 	if (!tmp_strs[0] || !tmp_strs[1] || !tmp_strs[2])
-		error_and_exit_settings(settings, "Error\nProblem found when handling floor or ceiling, 3 color values are needed.");
+		error_and_exit_stg(stg, "Error\nProblem found when handling floor or ceiling, 3 color values are needed.");
 	if (ft_str_is_numeric(tmp_strs[0]) && ft_str_is_numeric(tmp_strs[1]) && ft_str_is_numeric(tmp_strs[2]))
 		tmp = malloc(sizeof(t_color));
 	if (tmp)
@@ -48,14 +48,14 @@ void	validate_floor_ceil(t_scene *settings, t_color **floor_or_ceil, char **strs
 		if (tmp->r >= 0 && tmp->r <= 255 && tmp->g >= 0 && tmp->g <= 255 &&tmp->b >= 0 && tmp->b <= 255)
 			*floor_or_ceil = tmp;
 		else
-			error_and_exit_settings(settings, "Error\nOnly values between 0 and 255 are valid.");
+			error_and_exit_stg(stg, "Error\nOnly values between 0 and 255 are valid.");
 	}
 	else
-		error_and_exit_settings(settings, "Error\nInvalid string format when checking floor/ceiling values.");
+		error_and_exit_stg(stg, "Error\nInvalid string format when checking floor/ceiling values.");
 	ft_freearrays(tmp_strs);
 }
 
-void	validate_textures(t_scene *settings, char **path, char **strs)
+void	validate_textures(t_scene *stg, char **path, char **strs)
 {
 	char	*tmp;
 	size_t	len;
@@ -63,22 +63,22 @@ void	validate_textures(t_scene *settings, char **path, char **strs)
 	char	*trimmed;
 
 	if (!strs[1] || *path)
-		error_and_exit_settings(settings, "Error\nProblem found when handling path to textures.");
+		error_and_exit_stg(stg, "Error\nProblem found when handling path to textures.");
 	tmp = ft_strdup(strs[1]);
 	if (!tmp)
-		error_and_exit_settings(settings, "Error\nProblem found when handling path to textures.");
+		error_and_exit_stg(stg, "Error\nProblem found when handling path to textures.");
 	*path = tmp;
 	trimmed = ft_strtrim(*path, " \n\t\v\f\r");
 	len = ft_strlen(trimmed);
 	if (trimmed[len - 1] != 'm' || trimmed[len - 2] != 'p' || trimmed[len - 3] != 'x' || tmp[len - 4] != '.')
 	{
 		free(trimmed);
-		error_and_exit_settings(settings, "Error\nProblem found when handling path to textures.");
+		error_and_exit_stg(stg, "Error\nProblem found when handling path to textures.");
 	}
 	validate_file = open(trimmed, O_RDONLY);
 	free(trimmed);
 	if (validate_file == -1)
-		error_and_exit_settings(settings, "Error\nProblem found with texture path, could not open file for reading");
+		error_and_exit_stg(stg, "Error\nProblem found with texture path, could not open file for reading");
 	close(validate_file);
 }
 
@@ -95,10 +95,10 @@ bool    validate_name(char *file)
 	return (false);
 }
 
-void	validate_map(t_scene *settings)
+void	validate_map(t_scene *stg)
 {
-	settings->map = linked_to_array(settings, settings->tmp_map);
-	verify_position(settings);
-	create_fake_map(settings);
-	verify_walls(settings, settings->map);
+	stg->map = linked_to_array(stg, stg->tmp_map);
+	verify_position(stg);
+	create_fake_map(stg);
+	verify_walls(stg, stg->map);
 }

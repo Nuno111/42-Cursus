@@ -12,87 +12,87 @@
 
 #include "cub3d.h"
 
-static	void	get_max_width(t_scene *settings)
+static	void	get_max_width(t_scene *stg)
 {
 	int		i;
 	size_t	curr_width;
 
 	i = 0;
-	while (settings->map[i])
+	while (stg->map[i])
 	{
-		curr_width = ft_strlen(settings->map[i]);
-		if (curr_width > settings->map_width)
-			settings->map_width = curr_width;
+		curr_width = ft_strlen(stg->map[i]);
+		if (curr_width > stg->map_width)
+			stg->map_width = curr_width;
 		i++;
 	}
 }
 
-static	void	adjust_line_to_width(t_scene *settings)
+static	void	adjust_line_to_width(t_scene *stg)
 {
 	size_t	i;
 	int		diff;
 
 	i = 0;
-	while (settings->map[i])
+	while (stg->map[i])
 	{
-		diff = settings->map_width - ft_strlen(settings->map[i]);
+		diff = stg->map_width - ft_strlen(stg->map[i]);
 		while (diff > 0)
 		{
-			ft_add_letter(' ', &settings->map[i], false);
+			ft_add_letter(' ', &stg->map[i], false);
 			diff--;
 		}
 		i++;
 	}
 	i = 0;
-	while (settings->map[i])
+	while (stg->map[i])
 	{
-		ft_add_letter('+', &settings->map[i], true);
-		ft_add_letter('+', &settings->map[i], false);
+		ft_add_letter('+', &stg->map[i], true);
+		ft_add_letter('+', &stg->map[i], false);
 		i++;
 	}
 }
 
-static	void	create_fake_line(t_scene *settings, char **fake_map, int i)
+static	void	create_fake_line(t_scene *stg, char **fake_map, int i)
 {
-	fake_map[i] = malloc(sizeof(char) * (settings->map_width + 1));
+	fake_map[i] = malloc(sizeof(char) * (stg->map_width + 1));
 	if (!fake_map[i])
-		error_and_exit_settings(settings, "Error\nThere was a problem when allocating memory for the map.");
-	ft_memset(fake_map[i], '+', settings->map_width);
-	fake_map[i][settings->map_width] = '\0';
+		error_and_exit_stg(stg, "Error\nThere was a problem when allocating memory for the map.");
+	ft_memset(fake_map[i], '+', stg->map_width);
+	fake_map[i][stg->map_width] = '\0';
 }
 
-static	void	finish_fake_map(t_scene *settings, char **fake_map)
+static	void	finish_fake_map(t_scene *stg, char **fake_map)
 {
 	size_t i;
 
-	get_max_width(settings);
-	create_fake_line(settings, fake_map, 0);
-	create_fake_line(settings, fake_map, settings->map_size + 1);
-	fake_map[settings->map_size + 2] = NULL;
+	get_max_width(stg);
+	create_fake_line(stg, fake_map, 0);
+	create_fake_line(stg, fake_map, stg->map_size + 1);
+	fake_map[stg->map_size + 2] = NULL;
 	i = 0;
-	while (settings->map[i])
+	while (stg->map[i])
 	{
-		fake_map[i + 1] = ft_strdup(settings->map[i]);
+		fake_map[i + 1] = ft_strdup(stg->map[i]);
 		i++;
 	}
 }
 
-void	create_fake_map(t_scene *settings)
+void	create_fake_map(t_scene *stg)
 {
 	char		**fake_map;
 
-	get_max_width(settings);
-	adjust_line_to_width(settings);
-	while (settings->map[settings->map_size])
-		(settings->map_size)++;
-	if (settings->map_size == 0)
-		error_and_exit_settings(settings, "Error\nMap doesn't exist.");
-	fake_map = malloc(sizeof(char *) * (settings->map_size + 3));
+	get_max_width(stg);
+	adjust_line_to_width(stg);
+	while (stg->map[stg->map_size])
+		(stg->map_size)++;
+	if (stg->map_size == 0)
+		error_and_exit_stg(stg, "Error\nMap doesn't exist.");
+	fake_map = malloc(sizeof(char *) * (stg->map_size + 3));
 	if (!fake_map)
-		error_and_exit_settings(settings, "Error\nThere was a problem when allocating memory for the map.");
-	finish_fake_map(settings, fake_map);
-	ft_freearrays(settings->map);
-	settings->map = fake_map;
-	while (settings->map[settings->map_size])
-		settings->map_size++;
+		error_and_exit_stg(stg, "Error\nThere was a problem when allocating memory for the map.");
+	finish_fake_map(stg, fake_map);
+	ft_freearrays(stg->map);
+	stg->map = fake_map;
+	while (stg->map[stg->map_size])
+		stg->map_size++;
 }

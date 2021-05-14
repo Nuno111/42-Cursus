@@ -30,16 +30,16 @@ void	get_player_pos(t_game *game)
 	int w;
 
 	h = 0;
-	while (game->settings.map[h])
+	while (game->stg.map[h])
 	{
 		w = 0;
-		while (game->settings.map[h][w])
+		while (game->stg.map[h][w])
 		{
-			if (ft_strchr("NESW", game->settings.map[h][w]))
+			if (ft_strchr("NESW", game->stg.map[h][w]))
 			{
 				game->player.circle.x = (w * game->minimap_tile.size);
 				game->player.circle.y = (h * game->minimap_tile.size);
-				get_player_rotation(game->settings.map[h][w], game);
+				get_player_rotation(game->stg.map[h][w], game);
 				return;
 			}
 			w++;
