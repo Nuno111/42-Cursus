@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/22 13:24:38 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:33:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	draw_floor_ceil(t_game *game, t_color color, bool floor)
 {
 	int	x;
 	int	y;
-	int max;
+	int	max;
 
 	if (floor)
 	{
 		max = game->settings.height / 2;
-		y = -1;	
+		y = -1;
 	}
 	else
 	{
@@ -36,7 +36,8 @@ void	draw_floor_ceil(t_game *game, t_color color, bool floor)
 			game->main_img.addr[x + y * game->settings.width] = color.trgb;
 	}
 }
-static	void	draw_wall_line(t_game *game, t_wall wall, int ray_index)
+
+static	void	draw_wall_line(t_game *game, t_wall wall, int i)
 {
 	int		y;
 	int		y_tex;
@@ -44,14 +45,15 @@ static	void	draw_wall_line(t_game *game, t_wall wall, int ray_index)
 	double	step;
 	double	tex_pox;
 
-	step = wall.texture.height / wall.height;
+	step = wall.tex.height / wall.height;
 	tex_pox = (wall.y - game->settings.height / 2 + wall.height / 2) * step;
-	x_tex = fmod((game->player.rays[ray_index]->w_txt_pixel / game->minimap_tile.size) * game->cube_size, wall.texture.width - 1);
+	x_tex = fmod((game->player.rays[i]->w_txt_pixel / game->minimap_tile.size)
+			* game->cube_size, wall.tex.width - 1);
 	y = -1;
 	while (++y < wall.height && y < game->settings.height)
 	{
-		y_tex = (int)tex_pox & (wall.texture.height - 1);
-		game->main_img.addr[wall.x + (wall.y + y) * game->settings.width] = wall.texture.addr[y_tex * wall.texture.height + x_tex];
+		y_tex = (int)tex_pox & (wall.tex.height - 1);
+		game->main_img.addr[wall.x + (wall.y + y) * game->settings.width] = wall.tex.addr[y_tex * wall.tex.height + x_tex];
 		tex_pox += step;
 	}
 }
@@ -69,7 +71,7 @@ void	draw_walls(t_game *game)
 		wall.y = (game->settings.height / 2) - (wall.height / 2);
 		if (wall.y < 0)
 			wall.y = 0;
-		wall.texture = assign_wall_texture(game, *game->player.rays[i]);
+		wall.tex = assign_wall_texture(game, *game->player.rays[i]);
 		draw_wall_line(game, wall, i);
 		i++;
 	}

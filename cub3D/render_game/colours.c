@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/20 12:06:47 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/20 12:11:31 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 13:56:40 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	create_trgb(int t, int r, int g, int b)
 {
-	return ( t << 24 | r << 16 | g << 8 | b);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 int	get_t(int trgb)
