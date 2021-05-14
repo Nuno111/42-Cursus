@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:49 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 16:33:48 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:35:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	draw_floor_ceil(t_game *game, t_color color, bool floor)
 	{
 		x = -1;
 		while (++x < game->settings.width)
-			game->main_img.addr[x + y * game->settings.width] = color.trgb;
+			game->img.addr[x + y * game->settings.width] = color.trgb;
 	}
 }
 
@@ -53,7 +53,7 @@ static	void	draw_wall_line(t_game *game, t_wall wall, int i)
 	while (++y < wall.height && y < game->settings.height)
 	{
 		y_tex = (int)tex_pox & (wall.tex.height - 1);
-		game->main_img.addr[wall.x + (wall.y + y) * game->settings.width] = wall.tex.addr[y_tex * wall.tex.height + x_tex];
+		game->img.addr[wall.x + (wall.y + y) * game->settings.width] = wall.tex.addr[y_tex * wall.tex.height + x_tex];
 		tex_pox += step;
 	}
 }
@@ -96,7 +96,7 @@ void	draw_minimap(t_scene *settings, t_game *game)
 				game->minimap_tile.color = 0x001FFF;
 			game->minimap_tile.x = width * game->minimap_tile.size;
 			game->minimap_tile.y = height * game->minimap_tile.size;
-			draw_square(&game->main_img, game->minimap_tile, game->settings.width);
+			draw_square(&game->img, game->minimap_tile, game->settings.width);
 			width++;
 		}
 		height++;
@@ -109,5 +109,5 @@ void	draw_rays(t_game *game)
 
 	i = -1;
 	while (++i < game->player.num_rays)
-		draw_line(&game->main_img, game->player.rays[i]->line, game->settings.width);
+		draw_line(&game->img, game->player.rays[i]->line, game->settings.width);
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 14:06:02 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:34:41 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ typedef struct s_game
 	t_player	player;
 	t_square	minimap_tile;
 	t_scene		settings;
-	t_img		main_img;
+	t_img		img;
 	t_txts		txts;
 	t_sprite	**sprs;
 	int			sprs_num;

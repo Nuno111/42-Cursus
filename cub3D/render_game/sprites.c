@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 13:24:29 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/28 09:30:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 16:37:48 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	draw_sprt_strip(t_game *game, t_sprite *spr, int x_tex, int x_pox)
 		color = spr->txt.addr[x_tex + y_tex * spr->txt.height];
 		if (color < 0)
 			continue ;
-		game->main_img.addr[x_pox + (spr->y_strt + y) * game->settings.width] = color;
+		game->img.addr[x_pox + (spr->y_strt + y) * game->settings.width] = color;
 	}
 }
 
