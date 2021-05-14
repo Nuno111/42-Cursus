@@ -32,42 +32,41 @@ t_img	assign_wall_texture(t_game *game, t_ray ray)
 
 void	calc_wall_dist(t_game *game, t_ray *ray)
 {
-	double	h_dist;
-	double	v_dist;
+	double	hd;
+	double	vd;
 
 	get_horizontal_intercection(game, ray);
 	get_vertical_intercection(game, ray);
 	if (ray->w_hrzt_hit)
-		h_dist = get_dist(ray->line.x, ray->line.y, ray->w_hrzt_x, ray->w_hrzt_y);
+		hd = get_dist(ray->line.x, ray->line.y, ray->w_hrzt_x, ray->w_hrzt_y);
 	else
-		h_dist = DBL_MAX;
+		hd = DBL_MAX;
 	if (ray->w_vrtc_hit)
-		v_dist = get_dist(ray->line.x, ray->line.y, ray->w_vrtc_x, ray->w_vrtc_y);
+		vd = get_dist(ray->line.x, ray->line.y, ray->w_vrtc_x, ray->w_vrtc_y);
 	else
-		v_dist = DBL_MAX;
-	if (h_dist < v_dist)
+		vd = DBL_MAX;
+	if (hd < vd)
 	{
 		ray->w_vrtc_hit = false;
-		ray->line.size = h_dist;
+		ray->line.size = hd;
 		ray->w_txt_pixel = ray->w_hrzt_x;
 	}
 	else
 	{
 		ray->w_hrzt_hit = false;
-		ray->line.size = v_dist;
+		ray->line.size = vd;
 		ray->w_txt_pixel = ray->w_vrtc_y;
 	}
 }
 
 double	get_wall_height(t_game *game, t_ray *ray)
 {
-	double height;
-	double distance;
-	double fishbowl_adjust;
+	double	height;
+	double	dist;
+	double	fishbowl_adj;
 
-	fishbowl_adjust = cos(ray->line.dir - game->player.rot_ang);
-	distance = (ray->line.size / game->mmt.size) * game->cube_size * fishbowl_adjust;
-	height = (game->cube_size / distance) * game->player.dtpp;
+	fishbowl_adj = cos(ray->line.dir - game->player.rot_ang);
+	dist = (ray->line.size / game->mmt.size) * game->cube_size * fishbowl_adj;
+	height = (game->cube_size / dist) * game->player.dtpp;
 	return (height);
 }
-
