@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-double	get_distance(double x, double y, double hit_x, double hit_y)
+double	get_dist(double x, double y, double hit_x, double hit_y)
 {
 	double	distance;
 

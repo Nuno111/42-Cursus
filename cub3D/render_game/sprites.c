@@ -67,7 +67,7 @@ double	get_spr_distance(t_game *game, double spr_x, double spr_y)
 
 	player_x = (game->player.circle.x / game->mmt.size) * game->cube_size;
 	player_y = (game->player.circle.y / game->mmt.size) * game->cube_size;
-	return (get_distance(spr_x, spr_y, player_x, player_y));
+	return (get_dist(spr_x, spr_y, player_x, player_y));
 }
 
 void	get_spr_pos(t_game *game, int i)

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 16:50:11 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/14 18:06:35 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,7 @@ void    render_game(t_game *game);
 bool	is_wall(double x, double y, t_game *game);
 bool	is_sprite(double x, double y, t_game *game);
 void	create_rays(t_game *game);
-double	get_distance(double x, double y, double hit_x, double hit_y);
+double	get_dist(double x, double y, double hit_x, double hit_y);
 double	normalize_angle(double ray_ang);
 void	get_horizontal_intercection(t_game *game, t_ray *ray);
 void	get_vertical_intercection(t_game *game, t_ray *ray);
@@ -272,5 +272,6 @@ double    get_spr_angle(t_game *game, double spr_x, double spr_y);
 bool	is_spr_visible(t_game *game, double ang);
 void	update_sprs(t_game *game);
 void    save_and_exit(t_game *game);
+void	get_spr_pos(t_game *game, int i);
 
 #endif

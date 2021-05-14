@@ -17,44 +17,44 @@ t_img	assign_wall_texture(t_game *game, t_ray ray)
 	if (ray.w_hrzt_hit)
 	{
 		if (ray.facing_up)
-			return(game->txts.no);
+			return (game->txts.no);
 		else
-			return(game->txts.so);
+			return (game->txts.so);
 	}
 	else
 	{
 		if (ray.facing_right)
-			return(game->txts.ea);
+			return (game->txts.ea);
 		else
-			return(game->txts.we);
+			return (game->txts.we);
 	}
 }
 
 void	calc_wall_dist(t_game *game, t_ray *ray)
 {
-	double hrzt_dist;
-	double vrtc_dist;
+	double	h_dist;
+	double	v_dist;
 
 	get_horizontal_intercection(game, ray);
 	get_vertical_intercection(game, ray);
 	if (ray->w_hrzt_hit)
-		hrzt_dist = get_distance(ray->line.x, ray->line.y, ray->w_hrzt_x, ray->w_hrzt_y);
+		h_dist = get_dist(ray->line.x, ray->line.y, ray->w_hrzt_x, ray->w_hrzt_y);
 	else
-		hrzt_dist = DBL_MAX;
+		h_dist = DBL_MAX;
 	if (ray->w_vrtc_hit)
-		vrtc_dist = get_distance(ray->line.x, ray->line.y, ray->w_vrtc_x, ray->w_vrtc_y);
+		v_dist = get_dist(ray->line.x, ray->line.y, ray->w_vrtc_x, ray->w_vrtc_y);
 	else
-		vrtc_dist = DBL_MAX;
-	if (hrzt_dist < vrtc_dist)
+		v_dist = DBL_MAX;
+	if (h_dist < v_dist)
 	{
 		ray->w_vrtc_hit = false;
-		ray->line.size = hrzt_dist;
+		ray->line.size = h_dist;
 		ray->w_txt_pixel = ray->w_hrzt_x;
 	}
 	else
 	{
 		ray->w_hrzt_hit = false;
-		ray->line.size = vrtc_dist;
+		ray->line.size = v_dist;
 		ray->w_txt_pixel = ray->w_vrtc_y;
 	}
 }
