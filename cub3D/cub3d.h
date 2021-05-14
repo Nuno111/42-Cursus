@@ -179,7 +179,7 @@ typedef struct s_game
 	void    *mlx;
 	void    *win;
 	t_player	player;
-	t_square	minimap_tile;
+	t_square	mmt;
 	t_scene		stg;
 	t_img		img;
 	t_txts		txts;

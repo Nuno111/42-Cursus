@@ -47,7 +47,7 @@ static	void	draw_wall_line(t_game *game, t_wall wall, int i)
 
 	step = wall.tex.height / wall.height;
 	tex_pox = (wall.y - game->stg.h / 2 + wall.height / 2) * step;
-	x_tex = fmod((game->player.rays[i]->w_txt_pixel / game->minimap_tile.size)
+	x_tex = fmod((game->player.rays[i]->w_txt_pixel / game->mmt.size)
 			* game->cube_size, wall.tex.width - 1);
 	y = -1;
 	while (++y < wall.height && y < game->stg.h)
@@ -90,15 +90,15 @@ void	draw_minimap(t_scene *stg, t_game *game)
 		while (stg->map[height][width + 1])
 		{
 			if (stg->map[height][width] == '1')
-				game->minimap_tile.color = 0x293250;
+				game->mmt.color = 0x293250;
 			else if (stg->map[height][width] == '0'
 				|| ft_strchr("NESW", stg->map[height][width]))
-				game->minimap_tile.color = 0xFFD55A;
+				game->mmt.color = 0xFFD55A;
 			else
-				game->minimap_tile.color = 0x001FFF;
-			game->minimap_tile.x = width * game->minimap_tile.size;
-			game->minimap_tile.y = height * game->minimap_tile.size;
-			draw_square(&game->img, game->minimap_tile, game->stg.w);
+				game->mmt.color = 0x001FFF;
+			game->mmt.x = width * game->mmt.size;
+			game->mmt.y = height * game->mmt.size;
+			draw_square(&game->img, game->mmt, game->stg.w);
 			width++;
 		}
 		height++;

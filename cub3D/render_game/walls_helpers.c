@@ -66,7 +66,7 @@ double	get_wall_height(t_game *game, t_ray *ray)
 	double fishbowl_adjust;
 
 	fishbowl_adjust = cos(ray->line.dir - game->player.rot_ang);
-	distance = (ray->line.size / game->minimap_tile.size) * game->cube_size * fishbowl_adjust;
+	distance = (ray->line.size / game->mmt.size) * game->cube_size * fishbowl_adjust;
 	height = (game->cube_size / distance) * game->player.dtpp;
 	return (height);
 }

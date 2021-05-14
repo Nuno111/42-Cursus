@@ -33,7 +33,7 @@ void	init_stg(t_scene *stg)
 static	void	init_player(t_game *game)
 {
 	get_player_pos(game);
-	game->player.circle.radius = game->minimap_tile.size / 4.0;
+	game->player.circle.radius = game->mmt.size / 4.0;
 	game->player.circle.color = 0x7F0000;
 	game->player.circle.ang = 0;
 	game->player.turn_dir = 0;
@@ -78,7 +78,7 @@ void    init_stuff(t_game *game)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->stg.w, game->stg.h, "CUB3D");
 	game->cube_size = 64;
-	game->minimap_tile.size = (game->stg.w / game->stg.map_width) / 3;
+	game->mmt.size = (game->stg.w / game->stg.map_width) / 3;
 	game->sprs_num = 0;
 	game->sprs = malloc(sizeof(t_sprite *));
 	init_player(game);

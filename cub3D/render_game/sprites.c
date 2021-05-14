@@ -42,8 +42,8 @@ double    get_spr_angle(t_game *game, double spr_x, double spr_y)
 	double	player_y;
 	double	ang;
 
-	player_x = (game->player.circle.x / game->minimap_tile.size) * game->cube_size;
-	player_y = (game->player.circle.y / game->minimap_tile.size) * game->cube_size;
+	player_x = (game->player.circle.x / game->mmt.size) * game->cube_size;
+	player_y = (game->player.circle.y / game->mmt.size) * game->cube_size;
     x = spr_x - player_x;
     y = spr_y - player_y;
 	ang = normalize_angle(atan2(y, x) - game->player.rot_ang);
@@ -65,8 +65,8 @@ double	get_spr_distance(t_game *game, double spr_x, double spr_y)
 	double player_x;
 	double player_y;
 
-	player_x = (game->player.circle.x / game->minimap_tile.size) * game->cube_size;
-	player_y = (game->player.circle.y / game->minimap_tile.size) * game->cube_size;
+	player_x = (game->player.circle.x / game->mmt.size) * game->cube_size;
+	player_y = (game->player.circle.y / game->mmt.size) * game->cube_size;
 	return (get_distance(spr_x, spr_y, player_x, player_y));
 }
 
@@ -167,7 +167,7 @@ void	draw_sprt(t_game *game, t_sprite *spr)
 		{
 			x_pox = (int)(spr->x_strt + i * width + j);
 			if (x_pox >= 0  && x_pox <= game->stg.w - 1
-			&& spr->dist < (game->player.rays[x_pox]->line.size / game->minimap_tile.size)
+			&& spr->dist < (game->player.rays[x_pox]->line.size / game->mmt.size)
 			 * game->cube_size)
 				draw_sprt_strip(game, spr, i, x_pox);
 		}
