@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/17 12:20:25 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/17 22:15:31 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define ARR_LEFT 123
 # define ARR_RIGHT 124
 
-typedef uint8_t  BYTE;
 typedef uint16_t WORD;
 typedef int32_t  LONG;
 typedef uint32_t DWORD;
@@ -218,6 +217,8 @@ typedef struct s_game
 	int			sprs_num;
 	int			cube_size;
 	bool		screenshot;
+	t_file_header bpm_header;
+	t_info_header bpm_info_header;
 }				t_game;
 
 /*
