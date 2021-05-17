@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:17:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/17 12:20:30 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/17 12:24:08 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void    save_and_exit(t_game *game)
 	bm_info_header.bi_width = game->stg.w;
 	bm_info_header.bi_height = game->stg.h;
 	bm_info_header.bi_planes = 1;
-	bm_info_header.bi_bitcount = game->img.bbp;
+	bm_info_header.bi_bitcount = game->img.bpp;
 	fd = open("rendered_image.bmp", O_CREAT);
 	close(fd);
 	exit_game(game, NULL);
