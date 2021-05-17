@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 18:06:35 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/17 12:20:25 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <math.h>
 # include <float.h>
 # include "libft.h"
+# include <stdint.h>
 
 # define deg_to_rad(degrees) ((degrees) * M_PI / 180.0)
 # define rad_to_deg(radians) ((radians) * 180.0 / M_PI)
@@ -31,6 +32,36 @@
 # define ESC 53
 # define ARR_LEFT 123
 # define ARR_RIGHT 124
+
+typedef uint8_t  BYTE;
+typedef uint16_t WORD;
+typedef int32_t  LONG;
+typedef uint32_t DWORD;
+
+typedef struct	s_file_header
+{
+    WORD   bf_type;
+    DWORD  bf_size;
+    WORD   bf_reserved1;
+    WORD   bf_reserved2;
+    DWORD  bf_offbits;
+}				t_file_header;
+
+typedef struct	s_info_header
+{
+    DWORD  bi_size;
+    LONG   bi_width;
+    LONG   bi_height;
+    WORD   bi_planes;
+    WORD   bi_bitcount;
+    DWORD  bi_compression;
+    DWORD  bi_sizeimage;
+    LONG   bi_xpelspermeter;
+    LONG   bi_ypelspermeter;
+    DWORD  bi_clrused;
+    DWORD  bi_clrimportant;
+}				t_info_header;
+
 
 typedef struct	s_img
 {

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:17:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 16:56:01 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/17 12:20:30 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,21 @@
 
 void    save_and_exit(t_game *game)
 {
-	int fd;
+	int				fd;
+	t_file_header	bm_header;
+	t_info_header	bm_info_header;
 
-	fd = open("rendered_image.bmp", O_RDWR);
-	ft_putchar_fd('B', fd);
-	ft_putchar_fd('M', fd);
-	ft_putnbr_fd(game->stg.w * game->stg.h + 40, fd);
+	bm_header.bf_type = "BM";
+	bm_header.bf_size = game->stg.h * game->stg.w;
+	bm_header.bf_reserved1 = 0;
+	bm_header.bf_reserved2 = 0;
+	bm_header.bf_offbits = 54;
+	bm_info_header.bi_size = 40;
+	bm_info_header.bi_width = game->stg.w;
+	bm_info_header.bi_height = game->stg.h;
+	bm_info_header.bi_planes = 1;
+	bm_info_header.bi_bitcount = game->img.bbp;
+	fd = open("rendered_image.bmp", O_CREAT);
 	close(fd);
 	exit_game(game, NULL);
 }
