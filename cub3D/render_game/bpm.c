@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:17:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/17 22:59:49 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/18 21:11:45 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ static	void	write_image_data(t_game *game, int fd)
 		exit_game(game, "Error\nCoulnd't allocate memory for new image");
 	while (size > 0)
 	{
-
+		inverse_img[i] = game->img.addr[size];
+		write(fd, &inverse_img[i], 4);
+		size--;
+		i++;
 	}
-
+	//write(fd, inverse_img, size);
+	free(inverse_img);
 }
 
 static	void	write_header_data(t_game *game, int fd)
@@ -54,7 +58,8 @@ void    save_and_exit(t_game *game)
 {
 	int				fd;
 
-	game->bpm_header.bf_type = "BM";
+	game->bpm_header.bf_type[0] = 'B';
+	game->bpm_header.bf_type[1] = 'M';
 	game->bpm_header.bf_size = game->stg.h * game->stg.w + 54;
 	game->bpm_header.bf_reserved1 = 0;
 	game->bpm_header.bf_reserved2 = 0;
@@ -74,6 +79,7 @@ void    save_and_exit(t_game *game)
 	if (fd == -1)
 		exit_game(game, "Error\nCouldn't open a bmp file for writing.");
 	write_header_data(game, fd);
+	write_image_data(game, fd);
 	close(fd);
 	exit_game(game, NULL);
 }

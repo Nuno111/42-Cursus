@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/17 22:15:31 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/18 19:14:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef uint32_t DWORD;
 
 typedef struct	s_file_header
 {
-    WORD   bf_type;
+    char	bf_type[2];
     DWORD  bf_size;
     WORD   bf_reserved1;
     WORD   bf_reserved2;
