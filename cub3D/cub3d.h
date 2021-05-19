@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 16:06:05 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 18:14:37 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,8 @@ void	parse_stg(t_scene *stg, char *file);
 void	create_fake_map(t_scene *stg);
 void	verify_walls(t_scene *stg, char **m);
 bool	validate_string(char *str);
+bool	plus_found(int i, int j, char **m);
+bool	char_not_valid(int i, int j, char **m);
 
 /*
 Drawing

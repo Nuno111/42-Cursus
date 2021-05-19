@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 16:54:51 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 18:21:44 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	validate_r(t_scene *stg, char **strs)
 		stg->w = ft_atoi(strs[1]);
 		stg->h = ft_atoi(strs[2]);
 		if (stg->w <= 0 || stg->w > 1920 || stg->h <= 0 || stg->h > 1080)
-			error_and_exit_stg(stg, "Error\nInvalid input for window resolution.");
+			error_and_exit_stg(stg, "Error\nInvalid input for resolution.");
 	}
 	else
-		error_and_exit_stg(stg, "Error\nInvalid string format when checking resolution values.");
+		error_and_exit_stg(stg, "Error\nInvalid string format");
 }
 
 void	validate_floor_ceil(t_scene *stg, t_color **floor_or_ceil, char **strs)
@@ -37,21 +37,23 @@ void	validate_floor_ceil(t_scene *stg, t_color **floor_or_ceil, char **strs)
 		error_and_exit_stg(stg, "Error\nString is not properly formatted.");
 	tmp_strs = ft_split(strs[1], ',');
 	if (!tmp_strs[0] || !tmp_strs[1] || !tmp_strs[2])
-		error_and_exit_stg(stg, "Error\nProblem found when handling floor or ceiling, 3 color values are needed.");
-	if (ft_str_is_numeric(tmp_strs[0]) && ft_str_is_numeric(tmp_strs[1]) && ft_str_is_numeric(tmp_strs[2]))
+		error_and_exit_stg(stg, "Error\n3 color values are needed.");
+	if (ft_str_is_numeric(tmp_strs[0]) && ft_str_is_numeric(tmp_strs[1])
+		&& ft_str_is_numeric(tmp_strs[2]))
 		tmp = malloc(sizeof(t_color));
 	if (tmp)
 	{
 		tmp->r = ft_atoi(tmp_strs[0]);
 		tmp->g = ft_atoi(tmp_strs[1]);
 		tmp->b = ft_atoi(tmp_strs[2]);
-		if (tmp->r >= 0 && tmp->r <= 255 && tmp->g >= 0 && tmp->g <= 255 &&tmp->b >= 0 && tmp->b <= 255)
+		if (tmp->r >= 0 && tmp->r <= 255 && tmp->g >= 0 && tmp->g <= 255
+			&& tmp->b >= 0 && tmp->b <= 255)
 			*floor_or_ceil = tmp;
 		else
-			error_and_exit_stg(stg, "Error\nOnly values between 0 and 255 are valid.");
+			error_and_exit_stg(stg, "Error\nValues must be between 0 and 255");
 	}
 	else
-		error_and_exit_stg(stg, "Error\nInvalid string format when checking floor/ceiling values.");
+		error_and_exit_stg(stg, "Error\nInvalid string format.");
 	ft_freearrays(tmp_strs);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:25:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/14 23:05:12 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 18:19:15 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,20 @@ void	verify_position(t_scene *stg)
 			if (valid_char && !position_found)
 				position_found = true;
 			else if (valid_char)
-				error_and_exit_stg(stg, "Error\nOnly one starting postion must be given.");
+				error_and_exit_stg(stg, "Error\nOnly one starting postion.");
 			j++;
 		}
 		i++;
 	}
 	if (!position_found)
-		error_and_exit_stg(stg, "Error\nNo player starting position has been given");
+		error_and_exit_stg(stg, "Error\nNo starting position has been given");
 }
 
 void	verify_walls(t_scene *stg, char **m)
 {
-	size_t i;
-	size_t j;
-	char *valid;
-	char	*charset;
+	size_t	i;
+	size_t	j;
 
-	charset = "NESW02";
-	valid = "1+ ";
 	i = 1;
 	while (i < stg->map_size)
 	{
@@ -80,30 +76,11 @@ void	verify_walls(t_scene *stg, char **m)
 		{
 			if (m[i][j] == ' ')
 			{
-				if (!ft_strchr(valid, m[i - 1][j - 1])
-				|| !ft_strchr(valid, m[i - 1][j])
-				|| !ft_strchr(valid, m[i - 1][j + 1])
-				|| !ft_strchr(valid, m[i][j - 1])
-				|| !ft_strchr(valid, m[i][j + 1])
-				|| !ft_strchr(valid, m[i + 1][j - 1])
-				|| !ft_strchr(valid, m[i + 1][j])
-				|| !ft_strchr(valid, m[i + 1][j + 1])
-				)
-					error_and_exit_stg(stg, "Error\nMap is not properly surrounded by walls.");
+				if (char_not_valid(i, j, m))
+					error_and_exit_stg(stg, "Error\nMust be enclosed by wall");
 			}
-			if (ft_strchr(charset, m[i][j]))
-			{
-				if (m[i - 1][j - 1] == '+'
-				|| m[i - 1][j] == '+'
-				|| m[i - 1][j + 1] == '+'
-				|| m[i][j - 1] == '+'
-				|| m[i][j + 1] == '+'
-				|| m[i + 1][j - 1] == '+'
-				|| m[i + 1][j] == '+'
-				|| m[i + 1][j + 1] == '+'
-				)
-					error_and_exit_stg(stg, "Error\nMap is not properly surrounded by walls.");
-			}
+			if (plus_found(i, j, m))
+				error_and_exit_stg(stg, "Error\nMust be enclosed by wall");
 			j++;
 		}
 		i++;
@@ -135,5 +112,5 @@ char	**linked_to_array(t_scene *stg, t_list *head)
 		i++;
 	}
 	arr[i] = NULL;
-	return(arr);
+	return (arr);
 }
