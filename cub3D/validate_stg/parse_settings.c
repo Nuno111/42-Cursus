@@ -17,12 +17,13 @@ static	void	parse_map(char *line, t_scene *stg)
 	int		i;
 	char	*valid;
 	t_list	*node;
+
 	i = 0;
 	while (line[i])
 	{
 		valid = ft_strchr("012NSEW\t ", line[i]);
 		if (!valid)
-			break;
+			break ;
 		i++;
 	}
 	if (valid)
@@ -31,12 +32,12 @@ static	void	parse_map(char *line, t_scene *stg)
 		ft_lstadd_back(&stg->tmp_map, node);
 	}
 	else
-		error_and_exit_stg(stg, "Error\nForbidden character found when parsing map.");
+		error_and_exit_stg(stg, "Error\nForbidden character found.");
 }
 
 static	void	verify_identifiers(char **strs, t_scene *stg)
 {
-	char *identifier;
+	char	*identifier;
 
 	identifier = strs[0];
 	if (!identifier || !strs[1])
@@ -58,18 +59,18 @@ static	void	verify_identifiers(char **strs, t_scene *stg)
 	else if (ft_strcmp(identifier, "C") == 0)
 		validate_floor_ceil(stg, &stg->ceil, strs);
 	else
-		error_and_exit_stg(stg, "Error\nInvalid string found when parsing map stg.");
+		error_and_exit_stg(stg, "Error\nInvalid string found.");
 }
 
 static	void	parse_line(t_scene *stg)
 {
-	char **strs;
+	char	**strs;
 	char	*trimmed;
 
 	if (*stg->line == '\0')
 		return ;
 	if (stg->w && stg->h && stg->no && stg->ea && stg->we
-	&& stg->so && stg->sprite && stg->floor && stg->ceil)
+		&& stg->so && stg->sprite && stg->floor && stg->ceil)
 		parse_map(stg->line, stg);
 	else
 	{
@@ -82,10 +83,10 @@ static	void	parse_line(t_scene *stg)
 	}
 }
 
-void    parse_stg(t_scene *stg, char *file)
+void	parse_stg(t_scene *stg, char *file)
 {
-	int ret;
-	int fd;
+	int	ret;
+	int	fd;
 
 	if (!validate_name(file))
 		error_and_exit_stg(stg, "Error\nInvalid name. File must end with .cub.");

@@ -14,9 +14,9 @@
 
 bool	validate_string(char *str)
 {
-	int i;
+	int	i;
 	int	num;
-	int comma;
+	int	comma;
 
 	if (!str)
 		return (false);
@@ -39,9 +39,7 @@ bool	validate_string(char *str)
 		i++;
 	}
 	return (true);
-
 }
-
 
 void	free_stg(t_scene *stg)
 {
@@ -65,4 +63,27 @@ void	free_stg(t_scene *stg)
 		ft_freearrays(stg->map);
 	if (stg->line)
 		free(stg->line);
+}
+
+void	validate_floor_or_ceil2(t_scene *stg,
+	t_color **floor_or_ceil, char **strs, char **tmp_strs)
+{
+	t_color	*tmp;
+
+	if (ft_str_is_numeric(tmp_strs[0]) && ft_str_is_numeric(tmp_strs[1])
+		&& ft_str_is_numeric(tmp_strs[2]))
+		tmp = malloc(sizeof(t_color));
+	if (tmp)
+	{
+		tmp->r = ft_atoi(tmp_strs[0]);
+		tmp->g = ft_atoi(tmp_strs[1]);
+		tmp->b = ft_atoi(tmp_strs[2]);
+		if (tmp->r >= 0 && tmp->r <= 255 && tmp->g >= 0 && tmp->g <= 255
+			&& tmp->b >= 0 && tmp->b <= 255)
+			*floor_or_ceil = tmp;
+		else
+			error_and_exit_stg(stg, "Error\nValues must be between 0 and 255");
+	}
+	else
+		error_and_exit_stg(stg, "Error\nInvalid string format.");
 }

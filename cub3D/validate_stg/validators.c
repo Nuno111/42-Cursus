@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 18:21:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 19:34:52 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,7 @@ void	validate_floor_ceil(t_scene *stg, t_color **floor_or_ceil, char **strs)
 	tmp_strs = ft_split(strs[1], ',');
 	if (!tmp_strs[0] || !tmp_strs[1] || !tmp_strs[2])
 		error_and_exit_stg(stg, "Error\n3 color values are needed.");
-	if (ft_str_is_numeric(tmp_strs[0]) && ft_str_is_numeric(tmp_strs[1])
-		&& ft_str_is_numeric(tmp_strs[2]))
-		tmp = malloc(sizeof(t_color));
-	if (tmp)
-	{
-		tmp->r = ft_atoi(tmp_strs[0]);
-		tmp->g = ft_atoi(tmp_strs[1]);
-		tmp->b = ft_atoi(tmp_strs[2]);
-		if (tmp->r >= 0 && tmp->r <= 255 && tmp->g >= 0 && tmp->g <= 255
-			&& tmp->b >= 0 && tmp->b <= 255)
-			*floor_or_ceil = tmp;
-		else
-			error_and_exit_stg(stg, "Error\nValues must be between 0 and 255");
-	}
-	else
-		error_and_exit_stg(stg, "Error\nInvalid string format.");
+	validate_floor_ceil2(stg, floor_or_ceil, strs, tmp_strs);
 	ft_freearrays(tmp_strs);
 }
 
@@ -61,30 +46,31 @@ void	validate_textures(t_scene *stg, char **path, char **strs)
 {
 	char	*tmp;
 	size_t	len;
-	int	validate_file;
+	int		validate_file;
 	char	*trimmed;
 
 	if (!strs[1] || *path)
-		error_and_exit_stg(stg, "Error\nProblem found when handling path to textures.");
+		error_and_exit_stg(stg, "Error\nProblem found when handling path.");
 	tmp = ft_strdup(strs[1]);
 	if (!tmp)
-		error_and_exit_stg(stg, "Error\nProblem found when handling path to textures.");
+		error_and_exit_stg(stg, "Error\nProblem found when handling path.");
 	*path = tmp;
 	trimmed = ft_strtrim(*path, " \n\t\v\f\r");
 	len = ft_strlen(trimmed);
-	if (trimmed[len - 1] != 'm' || trimmed[len - 2] != 'p' || trimmed[len - 3] != 'x' || tmp[len - 4] != '.')
+	if (trimmed[len - 1] != 'm' || trimmed[len - 2] != 'p'
+		|| trimmed[len - 3] != 'x' || tmp[len - 4] != '.')
 	{
 		free(trimmed);
-		error_and_exit_stg(stg, "Error\nProblem found when handling path to textures.");
+		error_and_exit_stg(stg, "Error\nProblem found when handling path.");
 	}
 	validate_file = open(trimmed, O_RDONLY);
 	free(trimmed);
 	if (validate_file == -1)
-		error_and_exit_stg(stg, "Error\nProblem found with texture path, could not open file for reading");
+		error_and_exit_stg(stg, "Error\Could not open file for reading");
 	close(validate_file);
 }
 
-bool    validate_name(char *file)
+bool	validate_name(char *file)
 {
 	size_t	len;
 
@@ -92,7 +78,7 @@ bool    validate_name(char *file)
 	if (len <= 4)
 		return (false);
 	if (file[len - 1] == 'b' && file[len - 2] == 'u'
-	&& file[len - 3] == 'c' && file[len - 4] == '.')
+		&& file[len - 3] == 'c' && file[len - 4] == '.')
 		return (true);
 	return (false);
 }

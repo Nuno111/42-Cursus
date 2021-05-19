@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 18:03:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 18:13:11 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 19:36:51 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	char_not_valid(int i, int j, char **m)
 {
-	char *valid;
+	char	*valid;
 
 	valid = "1+ ";
 	if (!ft_strchr(valid, m[i - 1][j - 1])
