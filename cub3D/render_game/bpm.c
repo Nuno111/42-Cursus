@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:17:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/18 21:11:45 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:02:42 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,20 @@
 
 static	void	write_image_data(t_game *game, int fd)
 {
-	int	*inverse_img;
 	int	i;
-	int size;
+	int j;
 
-	size = game->stg.h * game->stg.w;
-	i = 0;
-	inverse_img = malloc(sizeof(int) * size);
-	if (!inverse_img)
-		exit_game(game, "Error\nCoulnd't allocate memory for new image");
-	while (size > 0)
+	i = game->stg.h;
+	while (i > 0)
 	{
-		inverse_img[i] = game->img.addr[size];
-		write(fd, &inverse_img[i], 4);
-		size--;
-		i++;
+		j = 0;
+		while (j < game->stg.w)
+		{
+			write(fd, &game->img.addr[i * game->stg.w + j], 4);
+			j++;
+		}
+		i--;
 	}
-	//write(fd, inverse_img, size);
-	free(inverse_img);
 }
 
 static	void	write_header_data(t_game *game, int fd)
@@ -75,7 +71,7 @@ void    save_and_exit(t_game *game)
 	game->bpm_info_header.bi_ypelspermeter = 2835;
 	game->bpm_info_header.bi_clrused = 0;
 	game->bpm_info_header.bi_clrimportant = 0;
-	fd = open("rendered_image.bmp", O_CREAT | O_WRONLY);
+	fd = open("rendered_image.bmp", O_CREAT | O_WRONLY, 0644);
 	if (fd == -1)
 		exit_game(game, "Error\nCouldn't open a bmp file for writing.");
 	write_header_data(game, fd);

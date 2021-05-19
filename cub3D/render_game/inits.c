@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 12:49:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 16:57:53 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:16:08 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,29 @@ static	void	init_player(t_game *game)
 	if (!game->player.rays)
 		exit_game(game, "Error\nUnable to allocate memory for rays");
 }
+
 static	void	init_txts(t_game *game)
 {
-	game->txts.no.img = mlx_xpm_file_to_image(game->mlx, game->stg.no, &game->txts.no.width, &game->txts.no.height);
-	game->txts.ea.img = mlx_xpm_file_to_image(game->mlx, game->stg.ea, &game->txts.ea.width, &game->txts.ea.height);
-	game->txts.so.img = mlx_xpm_file_to_image(game->mlx, game->stg.so, &game->txts.so.width, &game->txts.so.height);
-	game->txts.we.img = mlx_xpm_file_to_image(game->mlx, game->stg.we, &game->txts.we.width, &game->txts.we.height);
-	game->txts.spr.img = mlx_xpm_file_to_image(game->mlx, game->stg.sprite, &game->txts.spr.width, &game->txts.spr.height);
-	game->txts.no.addr = (int *)mlx_get_data_addr(game->txts.no.img, &game->txts.no.bpp, &game->txts.no.line_length, &game->txts.no.endian);
-	game->txts.ea.addr = (int *)mlx_get_data_addr(game->txts.ea.img, &game->txts.ea.bpp, &game->txts.ea.line_length, &game->txts.ea.endian);
-	game->txts.so.addr = (int *)mlx_get_data_addr(game->txts.so.img, &game->txts.so.bpp, &game->txts.so.line_length, &game->txts.so.endian);
-	game->txts.we.addr = (int *)mlx_get_data_addr(game->txts.we.img, &game->txts.we.bpp, &game->txts.we.line_length, &game->txts.we.endian);
-	game->txts.spr.addr = (int *)mlx_get_data_addr(game->txts.spr.img, &game->txts.spr.bpp, &game->txts.spr.line_length, &game->txts.spr.endian);
+	game->txts.no.img = mlx_xpm_file_to_image(game->mlx, game->stg.no,
+			&game->txts.no.width, &game->txts.no.height);
+	game->txts.ea.img = mlx_xpm_file_to_image(game->mlx, game->stg.ea,
+			&game->txts.ea.width, &game->txts.ea.height);
+	game->txts.so.img = mlx_xpm_file_to_image(game->mlx, game->stg.so,
+			&game->txts.so.width, &game->txts.so.height);
+	game->txts.we.img = mlx_xpm_file_to_image(game->mlx, game->stg.we,
+			&game->txts.we.width, &game->txts.we.height);
+	game->txts.spr.img = mlx_xpm_file_to_image(game->mlx, game->stg.sprite,
+			&game->txts.spr.width, &game->txts.spr.height);
+	game->txts.no.addr = (int *)mlx_get_data_addr(game->txts.no.img,
+			&game->txts.no.bpp, &game->txts.no.line_length, &game->txts.no.endian);
+	game->txts.ea.addr = (int *)mlx_get_data_addr(game->txts.ea.img,
+			&game->txts.ea.bpp, &game->txts.ea.line_length, &game->txts.ea.endian);
+	game->txts.so.addr = (int *)mlx_get_data_addr(game->txts.so.img,
+			&game->txts.so.bpp, &game->txts.so.line_length, &game->txts.so.endian);
+	game->txts.we.addr = (int *)mlx_get_data_addr(game->txts.we.img,
+			&game->txts.we.bpp, &game->txts.we.line_length, &game->txts.we.endian);
+	game->txts.spr.addr = (int *)mlx_get_data_addr(game->txts.spr.img,
+			&game->txts.spr.bpp, &game->txts.spr.line_length, &game->txts.spr.endian);
 }
 
 void	init_wall_vars(t_ray *ray)

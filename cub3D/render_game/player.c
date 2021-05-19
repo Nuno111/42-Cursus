@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/28 09:32:25 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:14:17 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static	void	get_player_rotation(char c, t_game *game)
 
 void	get_player_pos(t_game *game)
 {
-	int h;
-	int w;
+	int	h;
+	int	w;
 
 	h = 0;
 	while (game->stg.map[h])
@@ -40,7 +40,7 @@ void	get_player_pos(t_game *game)
 				game->player.circle.x = (w * game->mmt.size);
 				game->player.circle.y = (h * game->mmt.size);
 				get_player_rotation(game->stg.map[h][w], game);
-				return;
+				return ;
 			}
 			w++;
 		}
@@ -80,8 +80,8 @@ static	void	update_player_ang(t_game *game)
 {
 	if (game->player.turn_dir == 0)
 		return ;
-	game->player.rot_ang = normalize_angle(game->player.rot_ang +
-		game->player.turn_dir * game->player.rot_speed);
+	game->player.rot_ang = normalize_angle(game->player.rot_ang
+			+ game->player.turn_dir * game->player.rot_speed);
 }
 
 void	update_player(t_game *game)

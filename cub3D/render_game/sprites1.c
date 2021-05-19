@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 18:02:21 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 18:04:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:09:06 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	sort_sprs(t_game *game)
 {
-    int         i;
-	bool        sorted;
-	t_sprite    *tmp;
+	int			i;
+	bool		sorted;
+	t_sprite	*tmp;
 
 	sorted = false;
 	while (!sorted)
@@ -38,8 +38,8 @@ void	sort_sprs(t_game *game)
 
 void	update_sprs(t_game *game)
 {
-	int i;
-	t_sprite *spr;
+	int			i;
+	t_sprite	*spr;
 
 	i = -1;
 	while (++i < game->sprs_num)
@@ -81,7 +81,7 @@ void	draw_sprt(t_game *game, t_sprite *spr)
 	double	width;
 	int		i;
 	int		j;
-	int x_pox;
+	int		x_pox;
 
 	i = -1;
 	width = spr->h / spr->txt.height;
@@ -91,17 +91,17 @@ void	draw_sprt(t_game *game, t_sprite *spr)
 		while (++j < width)
 		{
 			x_pox = (int)(spr->x_strt + i * width + j);
-			if (x_pox >= 0  && x_pox <= game->stg.w - 1
-			&& spr->dist < (game->player.rays[x_pox]->line.size / game->mmt.size)
-			 * game->cube_size)
+			if (x_pox >= 0 && x_pox <= game->stg.w - 1
+				&& spr->dist < (game->player.rays[x_pox]->line.size
+					/ game->mmt.size) * game->cube_size)
 				draw_sprt_strip(game, spr, i, x_pox);
 		}
 	}
-
 }
+
 void	draw_sprites(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < game->sprs_num)

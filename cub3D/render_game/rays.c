@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:21:00 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 14:49:03 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:11:28 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	reset_rays(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < game->player.num_rays)
 	{
 		game->player.rays[i]->facing_right = false;
 		game->player.rays[i]->facing_up = false;
-		game->player.rays[i]->line.dir= 0;
+		game->player.rays[i]->line.dir = 0;
 		game->player.rays[i]->line.size = 0;
 		game->player.rays[i]->line.x = 0;
 		game->player.rays[i]->line.y = 0;
@@ -35,10 +35,9 @@ void	reset_rays(t_game *game)
 	}
 }
 
-
-t_ray*   create_ray(t_game *game, double ray_ang)
+t_ray	*create_ray(t_game *game, double ray_ang)
 {
-	t_ray *ray;
+	t_ray	*ray;
 
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
@@ -47,11 +46,11 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 	ray->line.y = game->player.circle.y;
 	ray->line.dir = normalize_angle(ray_ang);
 	ray->line.color = game->player.circle.color;
-	if (ray->line.dir > M_PI  && ray->line.dir < 2 * M_PI)
+	if (ray->line.dir > M_PI && ray->line.dir < 2 * M_PI)
 		ray->facing_up = true;
 	else
 		ray->facing_up = false;
-	if (ray->line.dir < 0.5 * M_PI  || ray->line.dir > 1.5 * M_PI)
+	if (ray->line.dir < 0.5 * M_PI || ray->line.dir > 1.5 * M_PI)
 		ray->facing_right = true;
 	else
 		ray->facing_right = false;
@@ -61,8 +60,8 @@ t_ray*   create_ray(t_game *game, double ray_ang)
 
 void	update_rays(t_game *game)
 {
-	int	i;
-	double ray_ang;
+	int		i;
+	double	ray_ang;
 
 	i = -1;
 	ray_ang = game->player.rot_ang - (game->player.fov_ang / 2);
@@ -71,11 +70,13 @@ void	update_rays(t_game *game)
 		game->player.rays[i]->line.x = game->player.circle.x;
 		game->player.rays[i]->line.y = game->player.circle.y;
 		game->player.rays[i]->line.dir = normalize_angle(ray_ang);
-		if (game->player.rays[i]->line.dir > M_PI  && game->player.rays[i]->line.dir < 2 * M_PI)
+		if (game->player.rays[i]->line.dir > M_PI
+			&& game->player.rays[i]->line.dir < 2 * M_PI)
 			game->player.rays[i]->facing_up = true;
 		else
 			game->player.rays[i]->facing_up = false;
-		if (game->player.rays[i]->line.dir < 0.5 * M_PI  || game->player.rays[i]->line.dir > 1.5 * M_PI)
+		if (game->player.rays[i]->line.dir < 0.5 * M_PI
+			|| game->player.rays[i]->line.dir > 1.5 * M_PI)
 			game->player.rays[i]->facing_right = true;
 		else
 			game->player.rays[i]->facing_right = false;

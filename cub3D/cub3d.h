@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/18 19:14:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:06:05 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct	s_info_header
     DWORD  bi_clrused;
     DWORD  bi_clrimportant;
 }				t_info_header;
-
 
 typedef struct	s_img
 {
