@@ -80,10 +80,10 @@ void	*mlx_new_image(void *mlx_ptr,int width,int height);
 **  return void *0 if failed
 */
 char	*mlx_get_data_addr(void *img_ptr, int *bpp,
-			   int *size_line, int *endian);
+			   int *size_line, int *end);
 /*
-**  endian : 0 = sever X is little endian, 1 = big endian
-**  endian : useless on macos, client and graphical framework have the same endian
+**  end : 0 = sever X is little end, 1 = big end
+**  end : useless on macos, client and graphical framework have the same end
 */
 int	mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr,
 				int x, int y);

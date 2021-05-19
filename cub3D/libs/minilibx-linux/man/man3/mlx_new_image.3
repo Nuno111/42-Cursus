@@ -16,7 +16,7 @@ MiniLibX - Manipulating images
 .fi
 .B mlx_get_data_addr
 (
-.I void *img_ptr, int *bpp, int *size_line, int *endian
+.I void *img_ptr, int *bpp, int *size_line, int *end
 );
 
 .nf
@@ -105,12 +105,12 @@ will be filled with the number of bits needed to represent a pixel color
 .I size_line
 is the number of bytes used to store one line of the image in memory.
 This information is needed to move from one line to another in the image.
-.I endian
+.I end
 tells you wether the pixel color in the image needs to be stored in
-little endian (
-.I endian
-== 0), or big endian (
-.I endian
+little end (
+.I end
+== 0), or big end (
+.I end
 == 1).
 
 .B mlx_get_data_addr
@@ -154,8 +154,8 @@ The
 least significant bits of this value can be stored in the image.
 
 Keep in mind that the least significant bits position depends on the local
-computer's endian. If the endian of the image (in fact the endian of
-the X-Server's computer) differs from the local endian, then the value should
+computer's end. If the end of the image (in fact the end of
+the X-Server's computer) differs from the local end, then the value should
 be transformed before being used.
 
 .SH XPM IMAGES

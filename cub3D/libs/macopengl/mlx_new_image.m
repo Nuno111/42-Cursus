@@ -93,13 +93,13 @@ void    mlx_put_image_to_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, mlx
   win_ptr->nb_flush ++;
 }
 
-// assume here 32bpp little endian
+// assume here 32bpp little end
 
-char    *mlx_get_data_addr(mlx_img_list_t *img_ptr, int *bpp, int *size_line, int *endian)
+char    *mlx_get_data_addr(mlx_img_list_t *img_ptr, int *bpp, int *size_line, int *end)
 {
   *bpp = UNIQ_BPP*8;
   *size_line = img_ptr->width*UNIQ_BPP;
-  *endian = 0; // little endian for now on mac-intel
+  *end = 0; // little end for now on mac-intel
   return (img_ptr->buffer);
 }
 

@@ -14,10 +14,10 @@
 
 
 char	*mlx_get_data_addr(t_img *img,int *bpp,
-			   int *size_line,int *endian)
+			   int *size_line,int *end)
 {
   *bpp = img->bpp;
   *size_line = img->size_line;
-  *endian = img->image->byte_order;
+  *end = img->image->byte_order;
   return (img->data);
 }

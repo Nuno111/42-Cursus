@@ -25,10 +25,10 @@ int	sl1;
 int	sl2;
 int	sl3;
 int	sl4;
-int	endian1;
-int	endian2;
-int	endian3;
-int	endian4;
+int	end1;
+int	end2;
+int	end3;
+int	end4;
 char	*data1;
 char	*data2;
 char	*data3;
@@ -36,10 +36,10 @@ char	*data4;
 int	xpm1_x;
 int	xpm1_y;
 
-int	local_endian;
+int	local_end;
 
 int	color_map_1(void *win,int w,int h);
-int	color_map_2(unsigned char *data,int bpp,int sl,int w,int h,int endian, int type);
+int	color_map_2(unsigned char *data,int bpp,int sl,int w,int h,int end, int type);
 
 int	expose_win1(void *p)
 {
@@ -96,10 +96,10 @@ int	main()
   printf("MinilibX Test Program\n");
   a = 0x11223344;
   if (((unsigned char *)&a)[0] == 0x11)
-    local_endian = 1;
+    local_end = 1;
   else
-    local_endian = 0;
-  printf(" => Local Endian : %d\n",local_endian);
+    local_end = 0;
+  printf(" => Local Endian : %d\n",local_end);
 
   printf(" => Connection ...");
   if (!(mlx = mlx_init()))
@@ -133,12 +133,12 @@ int	main()
       printf(" !! KO !!\n");
       exit(1);
     }
-  data1 = mlx_get_data_addr(im1,&bpp1,&sl1,&endian1);
-  printf("OK (bpp1: %d, sizeline1: %d endian: %d type: %d)\n",bpp1,sl1,endian1,
+  data1 = mlx_get_data_addr(im1,&bpp1,&sl1,&end1);
+  printf("OK (bpp1: %d, sizeline1: %d end: %d type: %d)\n",bpp1,sl1,end1,
 	 ((t_img *)im1)->type);
 
   printf(" => Fill Image1 ...");
-  color_map_2(data1,bpp1,sl1,IM1_SX,IM1_SY,endian1, 1);
+  color_map_2(data1,bpp1,sl1,IM1_SX,IM1_SY,end1, 1);
   printf("OK (pixmap : %d)\n",(int)((t_img *)im1)->pix);
 
   printf(" => Put Image1 ...");
@@ -157,12 +157,12 @@ int	main()
       printf(" !! KO !!\n");
       exit(1);
     }
-  data3 = mlx_get_data_addr(im3,&bpp3,&sl3,&endian3);
-  printf("OK (bpp3 %d, sizeline3 %d endian3 %d type %d)\n",bpp3,sl3,endian3,
+  data3 = mlx_get_data_addr(im3,&bpp3,&sl3,&end3);
+  printf("OK (bpp3 %d, sizeline3 %d end3 %d type %d)\n",bpp3,sl3,end3,
 	 ((t_img *)im3)->type);
 
   printf(" => Fill Image3 ...");
-  color_map_2(data3,bpp3,sl3,IM3_SX,IM3_SY,endian3, 1);
+  color_map_2(data3,bpp3,sl3,IM3_SX,IM3_SY,end3, 1);
   printf("OK (pixmap : %d)\n",(int)((t_img *)im3)->pix);
 
   printf(" => Put Image3 ...");
@@ -182,9 +182,9 @@ int	main()
       printf(" !! KO !!\n");
       exit(1);
     }
-  data2 = mlx_get_data_addr(im2,&bpp2,&sl2,&endian2);
-  printf("OK (xpm %dx%d)(img bpp2: %d, sizeline2: %d endian: %d type: %d)\n",
-	 xpm1_x,xpm1_y,bpp2,sl2,endian2,((t_img *)im2)->type);
+  data2 = mlx_get_data_addr(im2,&bpp2,&sl2,&end2);
+  printf("OK (xpm %dx%d)(img bpp2: %d, sizeline2: %d end: %d type: %d)\n",
+	 xpm1_x,xpm1_y,bpp2,sl2,end2,((t_img *)im2)->type);
   sleep(2);
 
   printf(" => Put xpm ...");
@@ -200,8 +200,8 @@ int	main()
       printf(" !! KO !!\n");
       exit(1);
     }
-  data4 = mlx_get_data_addr(im4,&bpp4,&sl4,&endian4);
-  color_map_2(data4,bpp4,sl4,IM3_SX,IM3_SY,endian4, 2);
+  data4 = mlx_get_data_addr(im4,&bpp4,&sl4,&end4);
+  color_map_2(data4,bpp4,sl4,IM3_SX,IM3_SY,end4, 2);
 
   printf(" 3rd window, Installing hooks ...");
   win3 = mlx_new_window(mlx,WIN1_SX,WIN1_SY,"Title3");
@@ -240,7 +240,7 @@ int	color_map_1(void *win,int w,int h)
 }
 
 
-int	color_map_2(unsigned char *data,int bpp,int sl,int w,int h,int endian, int type)
+int	color_map_2(unsigned char *data,int bpp,int sl,int w,int h,int end, int type)
 {
   int	x;
   int	y;
@@ -267,16 +267,16 @@ int	color_map_2(unsigned char *data,int bpp,int sl,int w,int h,int endian, int t
           color2 = mlx_get_color_value(mlx,color);
 	  dec = opp;
 	  while (dec--)
-	    if (endian==local_endian)
+	    if (end==local_end)
 	      {
-		if (endian)
+		if (end)
 		  *(ptr+x*opp+dec) = ((unsigned char *)(&color2))[4-opp+dec];
 		else
 		  *(ptr+x*opp+dec) = ((unsigned char *)(&color2))[dec];
 	      }
 	    else
 	      {
-		if (endian)
+		if (end)
 		  *(ptr+x*opp+dec) = ((unsigned char *)(&color2))[opp-1-dec];
 		else
 		  *(ptr+x*opp+dec) = ((unsigned char *)(&color2))[3-dec];

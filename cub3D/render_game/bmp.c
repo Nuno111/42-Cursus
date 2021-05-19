@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:17:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 16:02:42 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:39:42 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static	void	write_image_data(t_game *game, int fd)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = game->stg.h;
 	while (i > 0)
@@ -50,10 +50,8 @@ static	void	write_header_data(t_game *game, int fd)
 	write(fd, &game->bpm_info_header.bi_clrimportant, 4);
 }
 
-void    save_and_exit(t_game *game)
+static	void	define_header_data(t_game *game)
 {
-	int				fd;
-
 	game->bpm_header.bf_type[0] = 'B';
 	game->bpm_header.bf_type[1] = 'M';
 	game->bpm_header.bf_size = game->stg.h * game->stg.w + 54;
@@ -71,9 +69,16 @@ void    save_and_exit(t_game *game)
 	game->bpm_info_header.bi_ypelspermeter = 2835;
 	game->bpm_info_header.bi_clrused = 0;
 	game->bpm_info_header.bi_clrimportant = 0;
+}
+
+void	save_and_exit(t_game *game)
+{
+	int				fd;
+
 	fd = open("rendered_image.bmp", O_CREAT | O_WRONLY, 0644);
 	if (fd == -1)
 		exit_game(game, "Error\nCouldn't open a bmp file for writing.");
+	define_header_data(game);
 	write_header_data(game, fd);
 	write_image_data(game, fd);
 	close(fd);

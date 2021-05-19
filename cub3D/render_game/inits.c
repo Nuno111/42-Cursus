@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 12:49:50 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 16:16:08 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:35:26 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,16 @@ static	void	init_txts(t_game *game)
 	game->txts.spr.img = mlx_xpm_file_to_image(game->mlx, game->stg.sprite,
 			&game->txts.spr.width, &game->txts.spr.height);
 	game->txts.no.addr = (int *)mlx_get_data_addr(game->txts.no.img,
-			&game->txts.no.bpp, &game->txts.no.line_length, &game->txts.no.endian);
+			&game->txts.no.bpp, &game->txts.no.line_length, &game->txts.no.end);
 	game->txts.ea.addr = (int *)mlx_get_data_addr(game->txts.ea.img,
-			&game->txts.ea.bpp, &game->txts.ea.line_length, &game->txts.ea.endian);
+			&game->txts.ea.bpp, &game->txts.ea.line_length, &game->txts.ea.end);
 	game->txts.so.addr = (int *)mlx_get_data_addr(game->txts.so.img,
-			&game->txts.so.bpp, &game->txts.so.line_length, &game->txts.so.endian);
+			&game->txts.so.bpp, &game->txts.so.line_length, &game->txts.so.end);
 	game->txts.we.addr = (int *)mlx_get_data_addr(game->txts.we.img,
-			&game->txts.we.bpp, &game->txts.we.line_length, &game->txts.we.endian);
+			&game->txts.we.bpp, &game->txts.we.line_length, &game->txts.we.end);
 	game->txts.spr.addr = (int *)mlx_get_data_addr(game->txts.spr.img,
-			&game->txts.spr.bpp, &game->txts.spr.line_length, &game->txts.spr.endian);
+			&game->txts.spr.bpp, &game->txts.spr.line_length,
+			&game->txts.spr.end);
 }
 
 void	init_wall_vars(t_ray *ray)
@@ -84,7 +85,7 @@ void	init_wall_vars(t_ray *ray)
 	ray->w_txt_pixel = 0;
 }
 
-void    init_stuff(t_game *game)
+void	init_stuff(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->stg.w, game->stg.h, "CUB3D");

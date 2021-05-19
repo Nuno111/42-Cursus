@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:34:11 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/14 17:45:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:37:07 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	int	render_next_frame(t_game *game)
 {
 	game->img.img = mlx_new_image(game->mlx, game->stg.w, game->stg.h);
 	game->img.addr = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp,
-			&game->img.line_length, &game->img.endian);
+			&game->img.line_length, &game->img.end);
 	update_player(game);
 	reset_rays(game);
 	update_rays(game);
@@ -47,9 +47,9 @@ void	render_game(t_game *game)
 {
 	init_stuff(game);
 	mlx_do_key_autorepeatoff(game->mlx);
-	mlx_hook(game->win, 2, 1L <<0, key_press, game);
-	mlx_hook(game->win, 3, 1L <<1, key_release, game);
-	mlx_hook(game->win, 17, 1L <<17, handle_destroy, game);
+	mlx_hook(game->win, 2, 1L << 0, key_press, game);
+	mlx_hook(game->win, 3, 1L << 1, key_release, game);
+	mlx_hook(game->win, 17, 1L << 17, handle_destroy, game);
 	mlx_loop_hook(game->mlx, render_next_frame, game);
 	mlx_loop(game->mlx);
 }
