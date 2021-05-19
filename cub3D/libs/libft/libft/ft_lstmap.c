@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 12:30:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/07 01:24:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:07:13 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *new;
-	t_list *head;
+	t_list	*new;
+	t_list	*head;
 
 	if (!f || !lst)
 		return (NULL);
 	head = NULL;
 	while (lst)
 	{
-		if (!(new = ft_lstnew(f(lst->content))))
+		new = ft_lstnew(f(lst->content));
+		if (!new)
 		{
 			ft_lstclear(&head, del);
 			return (NULL);

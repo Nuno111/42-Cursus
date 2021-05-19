@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 19:34:52 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:26:28 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@ void	validate_r(t_scene *stg, char **strs)
 
 void	validate_floor_ceil(t_scene *stg, t_color **floor_or_ceil, char **strs)
 {
-	t_color	*tmp;
 	char	**tmp_strs;
 
-	tmp = NULL;
 	if (*floor_or_ceil || !validate_string(strs[1]) || strs[2])
 		error_and_exit_stg(stg, "Error\nString is not properly formatted.");
 	tmp_strs = ft_split(strs[1], ',');
 	if (!tmp_strs[0] || !tmp_strs[1] || !tmp_strs[2])
 		error_and_exit_stg(stg, "Error\n3 color values are needed.");
-	validate_floor_ceil2(stg, floor_or_ceil, strs, tmp_strs);
+	validate_floor_ceil2(stg, floor_or_ceil, tmp_strs);
 	ft_freearrays(tmp_strs);
 }
 
@@ -66,7 +64,7 @@ void	validate_textures(t_scene *stg, char **path, char **strs)
 	validate_file = open(trimmed, O_RDONLY);
 	free(trimmed);
 	if (validate_file == -1)
-		error_and_exit_stg(stg, "Error\Could not open file for reading");
+		error_and_exit_stg(stg, "Error\nCould not open file for reading");
 	close(validate_file);
 }
 

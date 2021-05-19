@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:22:46 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/27 22:53:27 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:11:52 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	return ((c >= 32 && c < 127));
 }

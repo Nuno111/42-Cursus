@@ -6,19 +6,26 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:15:06 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 21:22:38 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:11:42 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int		isspace(int c)
+static	int	isspace(int c)
 {
-	return ((c == '\f' || c == '\n' || c == '\r'
-			|| c == '\t' || c == '\v' || c == ' ')) ? 1 : 0;
+	if ((c == '\f' || c == '\n' || c == '\r'
+			|| c == '\t' || c == '\v' || c == ' '))
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
 
-static	int		ft_convert(const char *nbr, int sign)
+static	int	ft_convert(const char *nbr, int sign)
 {
 	int			i;
 	long long	result;
@@ -33,10 +40,10 @@ static	int		ft_convert(const char *nbr, int sign)
 	return ((int)(result * sign));
 }
 
-int				ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-	int result;
-	int i;
+	int	result;
+	int	i;
 
 	i = 0;
 	while (isspace(nptr[i]))

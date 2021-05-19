@@ -6,13 +6,16 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:22:46 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/26 19:06:56 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:10:40 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
-	return ((c >= 'a' && c <= 'z') ? c - 32 : c);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	else
+		return (c);
 }

@@ -6,16 +6,16 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:17:54 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/12 00:29:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:09:58 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t i;
-	size_t length;
+	size_t	i;
+	size_t	length;
 
 	if (!src)
 		return (0);

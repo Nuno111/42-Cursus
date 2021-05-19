@@ -65,11 +65,12 @@ void	free_stg(t_scene *stg)
 		free(stg->line);
 }
 
-void	validate_floor_or_ceil2(t_scene *stg,
-	t_color **floor_or_ceil, char **strs, char **tmp_strs)
+void	validate_floor_ceil2(t_scene *stg,
+	t_color **floor_or_ceil, char **tmp_strs)
 {
 	t_color	*tmp;
 
+	tmp = NULL;
 	if (ft_str_is_numeric(tmp_strs[0]) && ft_str_is_numeric(tmp_strs[1])
 		&& ft_str_is_numeric(tmp_strs[2]))
 		tmp = malloc(sizeof(t_color));

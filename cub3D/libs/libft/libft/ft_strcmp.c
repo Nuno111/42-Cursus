@@ -6,15 +6,15 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 17:24:23 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/10 23:04:07 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:10:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s1[i] != '\0' && s1[i] == s2[i])

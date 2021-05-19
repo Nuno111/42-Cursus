@@ -6,13 +6,13 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 13:44:27 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/14 17:31:22 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:08:59 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int			read_file(int fd, char **arr, char *buffer)
+static	int	read_file(int fd, char **arr, char *buffer)
 {
 	ssize_t	read_bytes;
 	char	*tmp;
@@ -36,7 +36,7 @@ static	int			read_file(int fd, char **arr, char *buffer)
 	return (OK);
 }
 
-static	int			update_line(int fd, char **arr, char **line)
+static	int	update_line(int fd, char **arr, char **line)
 {
 	char	*index;
 	char	*tmp;
@@ -64,7 +64,7 @@ static	int			update_line(int fd, char **arr, char **line)
 	return (EOFILE);
 }
 
-int				get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*arr[MAX_FD];
 	int			status;

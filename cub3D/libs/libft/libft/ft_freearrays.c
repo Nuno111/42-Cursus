@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 18:14:07 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 18:18:44 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 19:59:14 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_freearrays(char **array)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (array[i])

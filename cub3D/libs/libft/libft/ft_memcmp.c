@@ -6,15 +6,15 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 11:53:52 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/13 23:35:25 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:06:22 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	if (!n)
 		return (0);

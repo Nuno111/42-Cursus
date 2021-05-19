@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 23:00:07 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/15 19:33:41 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:10:12 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free_list(t_list **lst)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	if (*lst)
 	{

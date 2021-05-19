@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 00:04:07 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/03 22:05:50 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:22:56 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	if (!s || !f)
 		return (NULL);
-	if (!(newstr = malloc(sizeof(char) * ft_strlen(s) + 1)))
+	newstr = malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!newstr)
 		return (NULL);
 	index = 0;
 	while (s[index])

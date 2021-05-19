@@ -6,13 +6,15 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 13:22:46 by ngregori          #+#    #+#             */
-/*   Updated: 2021/01/26 19:06:15 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:07:50 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isascii(int c)
+int	ft_isascii(int c)
 {
-	return ((c >= 0 && c <= 127) ? 1 : 0);
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }

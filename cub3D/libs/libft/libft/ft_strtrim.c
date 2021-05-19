@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 14:18:12 by ngregori          #+#    #+#             */
-/*   Updated: 2021/02/16 00:27:07 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 19:59:33 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t end_length;
+	size_t	end_length;
 
 	if (!s1 || !set)
 		return (NULL);

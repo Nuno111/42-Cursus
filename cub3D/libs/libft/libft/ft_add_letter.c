@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_addletter.c                                     :+:      :+:    :+:   */
+/*   ft_add_letter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/23 17:35:30 by ngregori          #+#    #+#             */
-/*   Updated: 2021/03/23 17:35:54 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:00:36 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    ft_add_letter(char c, char **buffer, bool start)
+void	ft_add_letter(char c, char **buffer, bool start)
 {
-	char *new;
+	char	*new;
 
 	new = malloc(sizeof(char) * 2);
 	if (!new)
@@ -25,6 +25,6 @@ void    ft_add_letter(char c, char **buffer, bool start)
 		*buffer = new;
 	else if (!start)
 		*buffer = str_join_free(buffer, &new);
-    else
+	else
 		*buffer = str_join_free(&new, buffer);
 }

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:32:51 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 18:14:37 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:26:38 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,5 +306,7 @@ bool	is_spr_visible(t_game *game, double ang);
 void	update_sprs(t_game *game);
 void    save_and_exit(t_game *game);
 void	get_spr_pos(t_game *game, int i);
+void	validate_floor_ceil2(t_scene *stg,
+			t_color **floor_or_ceil, char **tmp_strs);
 
 #endif

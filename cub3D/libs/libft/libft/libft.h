@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 17:51:15 by ngregori          #+#    #+#             */
-/*   Updated: 2021/04/24 18:20:58 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/19 20:22:25 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@
 # define ERR -1
 # define EOFILE 0
 # define SUCCESS 0
-
 # define MAX_FD 1025
-#ifndef BUFFER_SIZE
 # define BUFFER_SIZE 10000
-#endif
 
-typedef struct			s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
@@ -56,11 +53,11 @@ char					**ft_split(char const *s, char c);
 char					*ft_strtrim(char const *s1, char const *set);
 char					*ft_strjoin(char const *s1, char const *s2);
 char					*ft_strmapi(char const *s,
-						char (*f)(unsigned int, char));
+							char (*f)(unsigned int, char));
 char					*ft_substr(char const *s,
-						unsigned int start, size_t len);
+							unsigned int start, size_t len);
 char					*ft_strnstr(const char *big,
-						const char *little, size_t len);
+							const char *little, size_t len);
 int						ft_toupper(int c);
 int						ft_tolower(int c);
 int						ft_isprint(int c);
@@ -91,7 +88,7 @@ void					ft_lstclear(t_list **lst, void (*del)(void*));
 void					ft_lstdelone(t_list *lst, void (*del)(void*));
 void					*ft_memmove(void *dest, const void *src, size_t n);
 void					*ft_memccpy(void *dest, const void *src,
-						int c, size_t n);
+							int c, size_t n);
 void					*ft_memcpy(void *dest, const void *src, size_t n);
 size_t					ft_strlen(const char *s);
 size_t					ft_strlcat(char *dst, const char *src, size_t size);
@@ -99,7 +96,7 @@ size_t					ft_strlcpy(char *dst, const char *src, size_t size);
 t_list					*ft_lstlast(t_list *lst);
 t_list					*ft_lstnew(void *content);
 t_list					*ft_lstmap(t_list *lst, void *(*f)(void *),
-						void (*del)(void *));
+							void (*del)(void *));
 void					ft_add_letter(char c, char **buffer, bool start);
 char					*str_join_free(char **beg, char **end);
 
