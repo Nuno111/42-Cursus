@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 20:26:28 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/20 12:06:30 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ void	validate_r(t_scene *stg, char **strs)
 	{
 		stg->w = ft_atoi(strs[1]);
 		stg->h = ft_atoi(strs[2]);
-		if (stg->w <= 0 || stg->w > 1920 || stg->h <= 0 || stg->h > 1080)
+		if (stg->w <= 0 || stg->h <= 0)
 			error_and_exit_stg(stg, "Error\nInvalid input for resolution.");
+		if (stg->w > 2560)
+			stg->w = 2560;
+		if (stg->h > 1440)
+			stg->h = 1400;
 	}
 	else
 		error_and_exit_stg(stg, "Error\nInvalid string format");
@@ -55,8 +59,10 @@ void	validate_textures(t_scene *stg, char **path, char **strs)
 	*path = tmp;
 	trimmed = ft_strtrim(*path, " \n\t\v\f\r");
 	len = ft_strlen(trimmed);
-	if (trimmed[len - 1] != 'm' || trimmed[len - 2] != 'p'
-		|| trimmed[len - 3] != 'x' || tmp[len - 4] != '.')
+	if ((trimmed[len - 1] != 'm' || trimmed[len - 2] != 'p'
+		|| trimmed[len - 3] != 'x' || tmp[len - 4] != '.') &&
+	(trimmed[len - 1] != 'g' || trimmed[len - 2] != 'n' || trimmed[len - 3] != 'p' || trimmed[len - 4] != '.'
+		))
 	{
 		free(trimmed);
 		error_and_exit_stg(stg, "Error\nProblem found when handling path.");

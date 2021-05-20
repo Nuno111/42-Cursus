@@ -1,6 +1,6 @@
 NAME = cub3D
 
-MACNAME = cub3dmac
+LINUXNAME = cub3DL
 
 CC = gcc
 
@@ -32,20 +32,20 @@ SRC2 = $(wildcard game_helpers/*.c)
 
 DST2 = $(SRC2:.c=.o)
 
-all : libft $(NAME)
+all : libft mac
 
 macr : mac
-	./cub3dmac maps/map.cub
+	./cub3D maps/map.cub
 
-mac : libft mlx $(MACNAME)
+mac : libft mlx $(NAME)
 
 mlx :
 	cd libs/macopengl && $(MAKE)
 
-$(MACNAME) : $(CUB3DLIB)
-	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(LIBFT) $(MACFLAGS) $(DEP_FLAGS) -o $(MACNAME)
+$(NAME) : $(CUB3DLIB)
+	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(LIBFT) $(MACFLAGS) $(DEP_FLAGS) -o $(NAME)
 
-$(NAME): $(CUB3DLIB)
+$(LINUXNAME): $(CUB3DLIB)
 	$(CC) $(ERR_FLAGS) $(DEBUG_FLAGS) cub3d.c $(CUB3DLIB) $(LIBFT) $(LINUXFLAGS) $(DEP_FLAGS) -o $(NAME)
 
 $(CUB3DLIB) : $(DST0) $(DST1) $(DST2)

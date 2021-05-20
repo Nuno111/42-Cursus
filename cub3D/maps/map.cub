@@ -1,12 +1,11 @@
-R 800 600
-NO ./assets/redbrick.xpm
+R 1080 720
+           NO       ./assets/redbrick.xpm
 SO ./assets/sand.xpm
 WE ./assets/stone.xpm
-EA ./assets/wood.xpm
-
-S ./assets/ammo.xpm
-C 255,200,200
-F 122,122,122
+EA  ./assets/wood.xpm
+ S ./assets/ammo.xpm
+    C  255                                                       ,200,160
+    F  122,122,  122
 
 11111111111111111
 11111110000000011

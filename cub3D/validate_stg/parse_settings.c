@@ -12,6 +12,23 @@
 
 #include "cub3d.h"
 
+static	char	*remove_spaces(char **line)
+{
+	int i;
+	char *new;
+
+	new = NULL;
+	i = 1;
+	while (line[0][i])
+	{
+		if (line[0][i] != ' ')
+			ft_add_letter(line[0][i], &new, false);
+		i++;
+	}
+	printf("%s\n", *line);
+	return (new);
+}
+
 static	void	parse_map(char *line, t_scene *stg)
 {
 	int		i;
@@ -66,6 +83,7 @@ static	void	parse_line(t_scene *stg)
 {
 	char	**strs;
 	char	*trimmed;
+	char	letter;
 
 	if (*stg->line == '\0')
 		return ;
@@ -77,6 +95,13 @@ static	void	parse_line(t_scene *stg)
 		trimmed = ft_strtrim(stg->line, " \n\t\v\f\r");
 		free(stg->line);
 		stg->line = trimmed;
+		if (stg->line[0] == 'C' || stg->line[0] == 'F')
+		{
+			letter = stg->line[0];
+			stg->line = remove_spaces(&stg->line);
+			ft_add_letter(' ', &stg->line, true);
+			ft_add_letter(letter, &stg->line, true);
+		}
 		strs = ft_split(stg->line, ' ');
 		verify_identifiers(strs, stg);
 		ft_freearrays(strs);
