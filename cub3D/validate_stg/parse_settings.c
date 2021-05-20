@@ -14,8 +14,8 @@
 
 static	char	*remove_spaces(char **line)
 {
-	int i;
-	char *new;
+	int		i;
+	char	*new;
 
 	new = NULL;
 	i = 1;

@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 23:22:37 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/20 12:06:30 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:59:15 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	validate_textures(t_scene *stg, char **path, char **strs)
 	char	*tmp;
 	size_t	len;
 	int		validate_file;
-	char	*trimmed;
+	char	*tr;
 
 	if (!strs[1] || *path)
 		error_and_exit_stg(stg, "Error\nProblem found when handling path.");
@@ -57,18 +57,17 @@ void	validate_textures(t_scene *stg, char **path, char **strs)
 	if (!tmp)
 		error_and_exit_stg(stg, "Error\nProblem found when handling path.");
 	*path = tmp;
-	trimmed = ft_strtrim(*path, " \n\t\v\f\r");
-	len = ft_strlen(trimmed);
-	if ((trimmed[len - 1] != 'm' || trimmed[len - 2] != 'p'
-		|| trimmed[len - 3] != 'x' || tmp[len - 4] != '.') &&
-	(trimmed[len - 1] != 'g' || trimmed[len - 2] != 'n' || trimmed[len - 3] != 'p' || trimmed[len - 4] != '.'
-		))
+	tr = ft_strtrim(*path, " \n\t\v\f\r");
+	len = ft_strlen(tr);
+	if ((tr[len - 1] != 'm' || tr[len - 2] != 'p' || tr[len - 3] != 'x'
+			|| tmp[len - 4] != '.') && (tr[len - 1] != 'g' || tr[len - 2] != 'n'
+			|| tr[len - 3] != 'p' || tr[len - 4] != '.'))
 	{
-		free(trimmed);
+		free(tr);
 		error_and_exit_stg(stg, "Error\nProblem found when handling path.");
 	}
-	validate_file = open(trimmed, O_RDONLY);
-	free(trimmed);
+	validate_file = open(tr, O_RDONLY);
+	free(tr);
 	if (validate_file == -1)
 		error_and_exit_stg(stg, "Error\nCould not open file for reading");
 	close(validate_file);
