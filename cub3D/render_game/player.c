@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 13:30:45 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 16:14:17 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/20 16:53:22 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static	void	update_player_pos(t_game *game)
 	step = game->player.move_speed;
 	tmp_x = game->player.circle.x + cos(ang) * step;
 	tmp_y = game->player.circle.y + sin(ang) * step;
-	if (!is_wall(tmp_x, tmp_y, game))
+	if (!is_wall(tmp_x, tmp_y, game) && !is_sprite(tmp_x, tmp_y, game))
 	{
 		game->player.circle.x = tmp_x;
 		game->player.circle.y = tmp_y;
