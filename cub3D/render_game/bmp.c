@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bpm.c                                              :+:      :+:    :+:   */
+/*   bmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:17:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/19 16:39:42 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/20 10:37:18 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static	void	write_image_data(t_game *game, int fd)
 	int	i;
 	int	j;
 
-	i = game->stg.h;
-	while (i > 0)
+	i = game->stg.h - 1;
+	while (i >= 0)
 	{
 		j = 0;
 		while (j < game->stg.w)
@@ -36,7 +36,7 @@ static	void	write_header_data(t_game *game, int fd)
 	write(fd, &game->bpm_header.bf_size, 4);
 	write(fd, &game->bpm_header.bf_reserved1, 2);
 	write(fd, &game->bpm_header.bf_reserved2, 2);
-	write(fd, &game->bpm_header.bf_type, 4);
+	write(fd, &game->bpm_header.bf_offbits, 4);
 	write(fd, &game->bpm_info_header.bi_size, 4);
 	write(fd, &game->bpm_info_header.bi_width, 4);
 	write(fd, &game->bpm_info_header.bi_height, 4);
@@ -62,7 +62,7 @@ static	void	define_header_data(t_game *game)
 	game->bpm_info_header.bi_width = game->stg.w;
 	game->bpm_info_header.bi_height = game->stg.h;
 	game->bpm_info_header.bi_planes = 1;
-	game->bpm_info_header.bi_bitcount = game->img.bpp;
+	game->bpm_info_header.bi_bitcount = (WORD)game->img.bpp;
 	game->bpm_info_header.bi_compression = 0;
 	game->bpm_info_header.bi_sizeimage = 0;
 	game->bpm_info_header.bi_xpelspermeter = 2835;
