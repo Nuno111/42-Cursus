@@ -88,3 +88,8 @@ void	validate_floor_ceil2(t_scene *stg,
 	else
 		error_and_exit_stg(stg, "Error\nInvalid string format.");
 }
+
+double	deg_to_rad(int deg)
+{
+	return ((deg * M_PI) / 180.0);
+}

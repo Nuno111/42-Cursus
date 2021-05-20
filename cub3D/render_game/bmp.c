@@ -6,7 +6,7 @@
 /*   By: ngregori <ngregori@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 14:17:40 by ngregori          #+#    #+#             */
-/*   Updated: 2021/05/20 10:37:18 by ngregori         ###   ########.fr       */
+/*   Updated: 2021/05/20 11:09:21 by ngregori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static	void	define_header_data(t_game *game)
 	game->bpm_info_header.bi_width = game->stg.w;
 	game->bpm_info_header.bi_height = game->stg.h;
 	game->bpm_info_header.bi_planes = 1;
-	game->bpm_info_header.bi_bitcount = (WORD)game->img.bpp;
+	game->bpm_info_header.bi_bitcount = game->img.bpp;
 	game->bpm_info_header.bi_compression = 0;
 	game->bpm_info_header.bi_sizeimage = 0;
 	game->bpm_info_header.bi_xpelspermeter = 2835;
