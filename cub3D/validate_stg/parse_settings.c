@@ -25,7 +25,6 @@ static	char	*remove_spaces(char **line)
 			ft_add_letter(line[0][i], &new, false);
 		i++;
 	}
-	printf("%s\n", *line);
 	return (new);
 }
 
